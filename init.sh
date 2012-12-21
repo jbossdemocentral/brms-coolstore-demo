@@ -58,7 +58,7 @@ fi
 echo Unpacking JBoss Enterprise BRMS $VERSION...
 echo
 cd installs
-unzip -q brms-p-5.3.1.GA-deployable-ee6.zip
+unzip -q $BRMS
 
 echo "  - deploying JBoss Enterprise BRMS Manager WAR..."
 echo
@@ -81,7 +81,7 @@ rm jboss-brms-engine.zip
 # Setup jboss-eap-6 maven repo locally.
 echo "  - extracting jboss eap 6 maven repo locally into /tmp/${EAP_REPO}..."
 echo
-unzip -q -u -d /tmp/$EAP_REPO $EAP_REPO.zip
+unzip -q -u -d /tmp $EAP_REPO.zip
 
 echo Rounding up, setting permissions and copying support files...
 echo
