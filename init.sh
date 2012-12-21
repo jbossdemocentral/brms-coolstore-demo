@@ -95,6 +95,15 @@ echo "  - enabling demo accounts role setup in brms-roles.properties file..."
 echo
 cp support/brms-roles.properties $SERVER_CONF
 
+echo "  - adding dodeploy files to deploy all brms components..."
+echo 
+touch $SERVER_DIR/business-central-server.war.dodeploy
+touch $SERVER_DIR/business-central.war.dodeploy
+touch $SERVER_DIR/designer.war.dodeploy
+touch $SERVER_DIR/jboss-brms.war.dodeploy
+
+# touch $SERVER_DIR/jbpm-human-task.war   ## uncomment to deploy if needed.
+
 # Add execute permissions to the standalone.sh script.
 echo "  - making sure standalone.sh for server is executable..."
 echo
@@ -108,7 +117,6 @@ echo
 echo "Once you have done this, you can run 'mvn eclipse:eclipse' from the project root, where"
 echo "you find the pom.xml file."
 echo
-
 
 echo "JBoss Enterprise EAP 6 ${DEMO} Setup Complete."
 echo
