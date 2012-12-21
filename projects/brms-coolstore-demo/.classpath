@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" output="target/classes" path="src/main/java"/>
-	<classpathentry excluding="**" kind="src" output="target/classes" path="src/main/resources"/>
 	<classpathentry kind="src" output="target/test-classes" path="src/test/java"/>
 	<classpathentry excluding="**" kind="src" output="target/test-classes" path="src/test/resources"/>
 	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
@@ -9,18 +8,12 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/cdiutils-1.0.0.jar"/>
-	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/drools-compiler-5.3.0.BRMS.jar"/>
-	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/drools-core-5.3.0.BRMS.jar"/>
-	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/drools-decisiontables-5.3.0.BRMS.jar"/>
-	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/drools-templates-5.3.0.BRMS.jar"/>
-	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/jbpm-bpmn2-5.3.0.BRMS.jar"/>
-	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/jbpm-flow-5.3.0.BRMS.jar"/>
-	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/jbpm-flow-builder-5.3.0.BRMS.jar"/>
-	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/knowledge-api-5.3.0.BRMS.jar"/>
-	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/mvel2-2.1.0.drools16.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.jboss.ide.eclipse.as.core.server.runtime.runtimeTarget/jboss-eap-6.0 Runtime">
+		<attributes>
+			<attribute name="owner.project.facets" value="jst.jsf;#system#;jst.web"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.jboss.ide.eclipse.as.core.server.runtime.runtimeTarget/jboss-eap-6.0 Runtime"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
