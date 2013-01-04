@@ -101,8 +101,15 @@ touch $SERVER_DIR/business-central-server.war.dodeploy
 touch $SERVER_DIR/business-central.war.dodeploy
 touch $SERVER_DIR/designer.war.dodeploy
 touch $SERVER_DIR/jboss-brms.war.dodeploy
-
 # touch $SERVER_DIR/jbpm-human-task.war.dodeploy   ## uncomment to deploy if needed.
+
+echo "  - configuring security authentication, copying updated components.xml file to jboss-brms.war..."
+echo
+cp support/components.xml $SERVER_DIR/jboss-brms.war/WEB-INF/
+
+echo "  - configuring deployment timeout extention and added security domain brms in standalone.xml..."
+echo
+cp support/standalone.xml $SERVER_CONF
 
 # Add execute permissions to the standalone.sh script.
 echo "  - making sure standalone.sh for server is executable..."
