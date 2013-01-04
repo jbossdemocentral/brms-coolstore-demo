@@ -102,7 +102,7 @@ touch $SERVER_DIR/business-central.war.dodeploy
 touch $SERVER_DIR/designer.war.dodeploy
 touch $SERVER_DIR/jboss-brms.war.dodeploy
 
-# touch $SERVER_DIR/jbpm-human-task.war   ## uncomment to deploy if needed.
+# touch $SERVER_DIR/jbpm-human-task.war.dodeploy   ## uncomment to deploy if needed.
 
 # Add execute permissions to the standalone.sh script.
 echo "  - making sure standalone.sh for server is executable..."
