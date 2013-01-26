@@ -14,7 +14,7 @@ echo "Setting up the JBoss Enterprise EAP 6 ${DEMO} environment..."
 echo
 
 # make some checks first before proceeding.	
-if [[ -x $SRC_DIR/$EAP || -L $SRC_DIR/$EAP ]]; then
+if [[ -r $SRC_DIR/$EAP || -L $SRC_DIR/$EAP ]]; then
 	echo EAP sources are present...
 	echo
 else
