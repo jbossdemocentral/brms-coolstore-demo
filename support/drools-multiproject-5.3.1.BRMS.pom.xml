@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.drools</groupId>
+    <artifactId>droolsjbpm-parent</artifactId>
+    <version>5.3.1.BRMS</version>
+    <!-- relativePath causes out-of-date problems on hudson slaves -->
+    <!--<relativePath>../droolsjbpm-build-bootstrap/pom.xml</relativePath>-->
+  </parent>
+
+  <groupId>org.drools</groupId>
+  <!-- TODO rename to drools once parent pom has been moved -->
+  <artifactId>drools-multiproject</artifactId>
+  <packaging>pom</packaging>
+
+  <name>Drools multiproject</name>
+  <description>
+    Drools Expert is the rule engine and Drools Fusion does complex event processing (CEP).
+  </description>
+
+  <modules>
+    <module>drools-core</module>
+    <module>drools-compiler</module>
+    <module>drools-jsr94</module>
+    <module>drools-clips</module>
+    <module>drools-verifier</module>
+    <module>drools-persistence-jpa</module>
+    <module>drools-templates</module>
+    <module>drools-decisiontables</module>
+    <module>drools-examples</module>
+  </modules>
+
+  <profiles>
+    <profile>
+      <id>fullProfile</id>
+      <activation>
+        <property>
+          <name>full</name>
+        </property>
+      </activation>
+      <modules>
+        <module>drools-docs</module>
+        <module>drools-distribution</module>
+      </modules>
+    </profile>
+  </profiles>
+
+</project>

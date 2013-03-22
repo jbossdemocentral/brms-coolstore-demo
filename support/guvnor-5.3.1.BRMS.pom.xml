@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.drools</groupId>
+    <artifactId>droolsjbpm-parent</artifactId>
+    <version>5.3.1.BRMS</version>
+    <!-- relativePath causes out-of-date problems on hudson slaves -->
+    <!--<relativePath>../droolsjbpm-build-bootstrap/pom.xml</relativePath>-->
+  </parent>
+
+  <groupId>org.drools</groupId>
+  <artifactId>guvnor</artifactId>
+  <packaging>pom</packaging>
+
+  <name>Guvnor multiproject</name>
+  <description>
+    Guvnor is the web application and repository to govern Drools and jBPM assets.
+  </description>
+
+  <modules>
+    <module>guvnor-repository-connector</module>
+    <module>guvnor-repository</module>
+    <module>droolsjbpm-ide-common</module>
+    <module>guvnor-webapp</module>
+    <module>guvnor-bulk-importer</module>
+    <module>guvnor-examples</module>
+  </modules>
+
+  <profiles>
+    <profile>
+      <id>fullProfile</id>
+      <activation>
+        <property>
+          <name>full</name>
+        </property>
+      </activation>
+      <modules>
+        <module>guvnor-docs</module>
+        <module>guvnor-distribution-wars</module>
+        <module>guvnor-distribution</module>
+      </modules>
+    </profile>
+  </profiles>
+
+</project>
