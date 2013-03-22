@@ -20,4 +20,3 @@ Released versions
 See the tagged releases for the following versions of the product:
 
 - v1.0 is BRMS 5.3.1 deployable, running on JBoss EAP 6.
-

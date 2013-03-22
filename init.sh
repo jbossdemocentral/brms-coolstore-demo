@@ -1,5 +1,5 @@
 #!/bin/sh 
-DEMO="Red Hat Cool Store Demo"
+DEMO="JBoss BRMS Red Hat Cool Store Demo"
 JBOSS_HOME=./target/jboss-eap-6.0
 SERVER_DIR=$JBOSS_HOME/standalone/deployments/
 SERVER_CONF=$JBOSS_HOME/standalone/configuration/
@@ -11,7 +11,7 @@ EAP_REPO=jboss-eap-6.0.1-maven-repository
 VERSION=5.3.1
 
 echo
-echo "Setting up the JBoss Enterprise EAP 6 ${DEMO} environment..."
+echo "Setting up the ${DEMO} environment..."
 echo
 
 # make some checks first before proceeding.	
@@ -118,14 +118,21 @@ echo
 chmod u+x $JBOSS_HOME/bin/standalone.sh
 
 echo
-echo "You willl need to apply the settings.xml found in the projects/maven/settings.xml file"
-echo "to your personal ~/.m2/settings.xml. These are setup to point maven to the local eap 6"
-echo "maven artefacts in the /tmp repo we just extracted for you."
-echo 
-echo "Once you have done this, you can run 'mvn eclipse:eclipse' from the project root, where"
-echo "you find the pom.xml file."
+echo You will need to add to your personal ~/.m2/settings.xml the settings provided in the file:
 echo
-
-echo "JBoss Enterprise EAP 6 ${DEMO} Setup Complete."
+echo "  projects/brms-coolstore-demo/maven/settings.xml" 
+echo
+echo These are setup to point maven to the local JBoss EAP6 maven artefacts in the /tmp directory
+echo repository just extracted for you.
+echo 
+echo Once you have done this, you can run 'mvn eclipse:eclipse' from the project root, where
+echo you find the pom.xml file.
+echo
+echo ============================================================
+cat README.md
+echo ============================================================
+echo
+echo
+echo "${DEMO} Setup Complete."
 echo
 

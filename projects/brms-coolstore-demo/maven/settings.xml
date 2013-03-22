@@ -7,7 +7,7 @@
         <repository>
           <id>jboss-eap-6-0-0-maven-repository</id>
           <name>JBoss EAP Maven Repository</name>
-					<url>file:/tmp/jboss-eap-6.0.0-maven-repository</url>
+          <url>file:/tmp/jboss-eap-6.0.0-maven-repository</url>
           <layout>default</layout>
           <releases>
             <enabled>true</enabled>
@@ -23,7 +23,7 @@
         <pluginRepository>
           <id>jboss-eap-6-0-0-maven-repository</id>
           <name>JBoss EAP Maven Repository</name>
-					<url>file:/tmp/jboss-eap-6.0.0-maven-repository</url>
+          <url>file:/tmp/jboss-eap-6.0.0-maven-repository</url>
           <layout>default</layout>
           <releases>
             <enabled>true</enabled>
