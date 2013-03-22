@@ -25,7 +25,8 @@
     <container qualifier="jboss" default="true">
         <!-- If you want to use the JBOSS_HOME environment variable, just delete the jbossHome property -->
         <configuration>
-					<property name="jbossHome">${project.baseDir}/../../target/jboss-eap-6.0/</property>
+					<property name="jbossHome">${project.baseDir}/../target/jboss-eap-6.0/</property>
+					<!-- <property name="jbossHome">/home/jmilliro/brms-coolstore-demo/target/jboss-eap-6.0</property> -->
         </configuration>
     </container>
 

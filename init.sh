@@ -3,10 +3,11 @@ DEMO="Red Hat Cool Store Demo"
 JBOSS_HOME=./target/jboss-eap-6.0
 SERVER_DIR=$JBOSS_HOME/standalone/deployments/
 SERVER_CONF=$JBOSS_HOME/standalone/configuration/
+LIB_DIR=./support/lib
 SRC_DIR=./installs
-EAP=jboss-eap-6.0.0.zip
+EAP=jboss-eap-6.0.1.zip
 BRMS=brms-p-5.3.1.GA-deployable-ee6.zip
-EAP_REPO=jboss-eap-6.0.0-maven-repository
+EAP_REPO=jboss-eap-6.0.1-maven-repository
 VERSION=5.3.1
 
 echo
