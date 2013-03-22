@@ -83,8 +83,8 @@ public class BRMSUtil {
 		//System.out.println("Guvnor IP: " + guvnorIPOverride);
 		//System.out.println("Guvnor Port: " + guvnorPortOverride);  
 		
-		String guvnorIP = "192.168.122.104";
-		String guvnorPort = "8180";
+		String guvnorIP = "localhost";
+		String guvnorPort = "8080";
 		
 		if ( guvnorIPOverride != null ) {
 			
