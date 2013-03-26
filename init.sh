@@ -14,6 +14,8 @@ echo
 echo "Setting up the JBoss Enterprise EAP 6 ${DEMO} environment..."
 echo
 
+command -v mvn -q >/dev/null 2>&1 || { echo >&2 "Maven is required but not installed yet... aborting."; exit 1; }
+
 # make some checks first before proceeding.	
 if [[ -r $SRC_DIR/$EAP || -L $SRC_DIR/$EAP ]]; then
 	echo EAP sources are present...
@@ -84,9 +86,37 @@ echo "  - extracting jboss eap 6 maven repo locally into /tmp/${EAP_REPO}..."
 echo
 unzip -q -u -d /tmp $EAP_REPO.zip
 
+echo "  - adding BRMS and additional jars info local maven repo /tmp/${EAP_REPO}"
+
+cd ../
+
+LOCAL_REPOSITORY_PATH=/tmp/$EAP_REPO
+BRMS_LIBS=./target/jboss-eap-6.0/standalone/deployments/jboss-brms.war/WEB-INF/lib/
+MAVEN_BRMS_VERSION=$VERSION.BRMS
+SUPPORT_LIBS=./support/libs/
+ 
+mvn install:install-file -Dfile=$SUPPORT_LIBS/cdiutils-1.0.0.jar -DgroupId=org.vaadin.virkki -DartifactId=cdiutils -Dversion=1.0.0 -Dpackaging=jar -DlocalRepositoryPath=$LOCAL_REPOSITORY_PATH
+
+mvn install:install-file -Dfile=$BRMS_LIBS/drools-core-$MAVEN_BRMS_VERSION.jar -DgroupId=org.drools -DartifactId=drools-core -Dversion=$MAVEN_BRMS_VERSION -Dpackaging=jar -DlocalRepositoryPath=$LOCAL_REPOSITORY_PATH
+
+mvn install:install-file -Dfile=$BRMS_LIBS/drools-compiler-$MAVEN_BRMS_VERSION.jar -DgroupId=ort.drools -DartifactId=drools-compiler -Dversion=$MAVEN_BRMS_VERSION -Dpackaging=jar -DlocalRepositoryPath=$LOCAL_REPOSITORY_PATH
+
+mvn install:install-file -Dfile=$BRMS_LIBS/drools-decisiontables-$MAVEN_BRMS_VERSION.jar -DgroupId=org.drools -DartifactId=drools-decisiontables -Dversion=$MAVEN_BRMS_VERSION -Dpackaging=jar -DlocalRepositoryPath=$LOCAL_REPOSITORY_PATH
+
+mvn install:install-file -Dfile=$BRMS_LIBS/drools-templates-$MAVEN_BRMS_VERSION.jar -DgroupId=org.drools -DartifactId=drools-templates -Dversion=$MAVEN_BRMS_VERSION -Dpackaging=jar -DlocalRepositoryPath=$LOCAL_REPOSITORY_PATH
+
+mvn install:install-file -Dfile=$BRMS_LIBS/jbpm-bpmn2-$MAVEN_BRMS_VERSION.jar -DgroupId=org.jbpm -DartifactId=jbpm-bpmn2 -Dversion=$MAVEN_BRMS_VERSION -Dpackaging=jar -DlocalRepositoryPath=$LOCAL_REPOSITORY_PATH
+
+mvn install:install-file -Dfile=$BRMS_LIBS/jbpm-flow-$MAVEN_BRMS_VERSION.jar -DgroupId=org.jbpm -DartifactId=jbpm-flow -Dversion=$MAVEN_BRMS_VERSION -Dpackaging=jar -DlocalRepositoryPath=$LOCAL_REPOSITORY_PATH
+
+mvn install:install-file -Dfile=$BRMS_LIBS/jbpm-flow-builder-$MAVEN_BRMS_VERSION.jar -DgroupId=org.jbpm -DartifactId=jbpm-flow-builder -Dversion=$MAVEN_BRMS_VERSION -Dpackaging=jar -DlocalRepositoryPath=$LOCAL_REPOSITORY_PATH
+
+mvn install:install-file -Dfile=$BRMS_LIBS/knowledge-api-$MAVEN_BRMS_VERSION.jar -DgroupId=org.drools -DartifactId=knowledge-api -Dversion=$MAVEN_BRMS_VERSION -Dpackaging=jar -DlocalRepositoryPath=$LOCAL_REPOSITORY_PATH
+
+mvn install:install-file -Dfile=$BRMS_LIBS/mvel2-2.1.3.Final.jar -DgroupId=org.mvel2 -DartifactId=mvel2 -Dversion=2.1.3.Final -Dpackaging=jar -DlocalRepositoryPath=$LOCAL_REPOSITORY_PATH
+
 echo Rounding up, setting permissions and copying support files...
 echo
-cd ../
 
 echo "  - enabling demo accounts logins in brms-users.properties file..."
 echo
