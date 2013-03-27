@@ -2,12 +2,12 @@
 <settings xmlns="http://maven.apache.org/SETTINGS/1.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.1.0 http://maven.apache.org/xsd/settings-1.1.0.xsd">
   <profiles>
     <profile>
-      <id>jboss-eap-6-0-0-maven-repository</id>
+      <id>jboss-eap-6-0-1-maven-repository</id>
       <repositories>
         <repository>
-          <id>jboss-eap-6-0-0-maven-repository</id>
+          <id>jboss-eap-6-0-1-maven-repository</id>
           <name>JBoss EAP Maven Repository</name>
-          <url>file:/tmp/jboss-eap-6.0.0-maven-repository</url>
+          <url>file:/tmp/jboss-eap-6.0.1-maven-repository/</url>
           <layout>default</layout>
           <releases>
             <enabled>true</enabled>
@@ -21,9 +21,9 @@
       </repositories>
       <pluginRepositories>
         <pluginRepository>
-          <id>jboss-eap-6-0-0-maven-repository</id>
+          <id>jboss-eap-6-0-1-maven-repository</id>
           <name>JBoss EAP Maven Repository</name>
-          <url>file:/tmp/jboss-eap-6.0.0-maven-repository</url>
+          <url>file:/tmp/jboss-eap-6.0.1-maven-repository/</url>
           <layout>default</layout>
           <releases>
             <enabled>true</enabled>
@@ -38,6 +38,6 @@
     </profile>
   </profiles>
   <activeProfiles>
-    <activeProfile>jboss-eap-6-0-0-maven-repository</activeProfile>
+    <activeProfile>jboss-eap-6-0-1-maven-repository</activeProfile>
   </activeProfiles>
 </settings>

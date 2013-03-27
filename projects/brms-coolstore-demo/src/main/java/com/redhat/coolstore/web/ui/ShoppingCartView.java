@@ -149,6 +149,7 @@ public class ShoppingCartView extends Panel {
 		checkoutButton = new Button("Checkout");
 		checkoutButton.addListener((ClickListener) app);		
 		checkoutButton.setWidth(buttonWidth);
+		checkoutButton.setEnabled(false);
 		hl.addComponent(checkoutButton);
 		
 		clearButton = new Button("Clear");
