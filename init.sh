@@ -106,7 +106,7 @@ mvn install:install-file -Dfile=$BRMS_LIBS/drools-core-$MAVEN_BRMS_VERSION.jar -
 
 cp $BRMS_LIBS/drools-core-$MAVEN_BRMS_VERSION.jar $WEB_INF_LIB
 
-mvn install:install-file -Dfile=$BRMS_LIBS/drools-compiler-$MAVEN_BRMS_VERSION.jar -DgroupId=ort.drools -DartifactId=drools-compiler -Dversion=$MAVEN_BRMS_VERSION -Dpackaging=jar -DlocalRepositoryPath=$LOCAL_REPOSITORY_PATH
+mvn install:install-file -Dfile=$BRMS_LIBS/drools-compiler-$MAVEN_BRMS_VERSION.jar -DgroupId=org.drools -DartifactId=drools-compiler -Dversion=$MAVEN_BRMS_VERSION -Dpackaging=jar -DlocalRepositoryPath=$LOCAL_REPOSITORY_PATH
 
 cp $BRMS_LIBS/drools-compiler-$MAVEN_BRMS_VERSION.jar $WEB_INF_LIB
 
