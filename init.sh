@@ -103,8 +103,16 @@ echo
 unzip -q -u -d /tmp $EAP_REPO.zip
 
 echo "  - adding BRMS and additional jars info local maven repo /tmp/${EAP_REPO}"
+echo
 
 cd ../
+
+# ensure project lib dir exists.
+if [ ! -d $WEB_INF_LIB ]; then
+	echo "  - missing web inf lib directory in project being created..."
+	echo
+	mkdir -p $WEB_INF_LIB
+fi
 
 mvn install:install-file -Dfile=$SUPPORT_LIBS/cdiutils-1.0.0.jar -DgroupId=org.vaadin.virkki -DartifactId=cdiutils -Dversion=1.0.0 -Dpackaging=jar -DlocalRepositoryPath=$LOCAL_REPOSITORY_PATH
 
