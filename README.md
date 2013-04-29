@@ -6,13 +6,31 @@ Demo based on JBoss BRMS products.
 Setup and Configuration
 -----------------------
 
-See Quick Start Guide in project as ODT and PDF for details on installation.
+See Quick Start Guide in project as ODT and PDF for details on installation. For those that can't wait:
 
-1. Clone this project.
+- see README in 'installs' directory
 
-2. see README in 'installs' directory for products needed prior to running demo.
+- add products 
 
-3. run 'init.sh' for setup.
+- run 'init.sh' & read output
+
+- read Quick Start Guide
+
+- run 'mvn clean install' on project to build
+
+- copy projects/brms-coolstore-demo/target/brms-coolstore-demo.war deployments directory of installed server
+
+- start JBoss EAP server
+
+- login to BRM (http://localhost:8080/jboss-brms)
+
+- import repository-export from support dir
+
+- build and deploy project in BRM
+
+- open shopping cart and demo away (http://localhost:8080/brms-coolstore-demo)
+
+Windows users see support/windows/README for installation.
 
 Released versions
 -----------------

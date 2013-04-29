@@ -1,0 +1,14 @@
+WINDOWS INSTALLATION:
+====================
+This directory contains a Windows Batch file and a corresponding VBScript file which is used as a
+utility to unzip files (since Windows has no native unzip functionality within Batch files). 
+
+init.bat  - the script to run for installing the project.
+unzip.vsb - utility to unzip files.
+
+Notes and tips:
+- the init.bat and unzip.vbs files are intended to be located in the root of the project.
+- you might run into some issues while extracting some of the BRMS components because the 
+  file path of the extracted file became greater than 255 chars (yet another windows 
+  headache). By putting the project in a higher directory (c:\demo), the issue can be
+  resolved.
