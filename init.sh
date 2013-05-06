@@ -17,6 +17,9 @@ DESIGNER=designer-patched.war
 MVN_VERSION=5.3.1.BRMS
 VERSION=5.3.1
 
+# wipe screen.
+clear 
+
 echo
 echo "Setting up the ${DEMO} environment..."
 echo
