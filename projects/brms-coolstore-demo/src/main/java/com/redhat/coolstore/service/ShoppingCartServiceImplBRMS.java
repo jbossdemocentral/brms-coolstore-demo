@@ -20,13 +20,13 @@ public class ShoppingCartServiceImplBRMS implements ShoppingCartService, Seriali
 	private static final long serialVersionUID = 6821952169434330759L;
 
 	@Inject
-	private BRMSUtil brmsUtil; // = new BRMSUtil();
+	private BRMSUtil brmsUtil; 
 	
 	@Inject
-	private PromoService promoService; // = new PromoService();
+	private PromoService promoService; 
 	
 	public ShoppingCartServiceImplBRMS() {
-		//System.out.println("ShoppingCartServiceImplBRMS()");
+		
 	}
 		
 	public void priceShoppingCart(ShoppingCart sc) {
@@ -80,8 +80,6 @@ public class ShoppingCartServiceImplBRMS implements ShoppingCartService, Seriali
 				sc.setShippingTotal(factShoppingCart.getShippingTotal());
 				sc.setShippingPromoSavings(factShoppingCart.getShippingPromoSavings());
 				sc.setCartTotal(factShoppingCart.getCartTotal());
-				
-				//System.out.println(sc);
 											
 			} finally {
 				

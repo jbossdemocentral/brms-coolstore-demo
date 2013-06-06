@@ -48,7 +48,6 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 			
 			sc.setCartTotal(sc.getCartItemTotal() + sc.getShippingTotal());
 		
-			//System.out.println(sc);
 		}
 		
 	}

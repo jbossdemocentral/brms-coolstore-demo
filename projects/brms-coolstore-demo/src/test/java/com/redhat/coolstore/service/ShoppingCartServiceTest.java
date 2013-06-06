@@ -12,6 +12,7 @@ import junit.framework.Assert;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -36,10 +37,17 @@ public class ShoppingCartServiceTest {
 	private ShoppingCartService shoppingCartService;	
 	
 	@Inject 
-	PromoService promoService; // = new PromoService();
+	PromoService promoService; 
 	
 	@Inject
-	ProductService productService; // = new ProductService();
+	ProductService productService; 
+	
+	@Before
+	public void clearPromos() {
+		
+		promoService.setPromotions(new HashSet<Promotion>());
+		
+	}
 				
 	@Test
 	public void priceShoppingCartEmpty() {

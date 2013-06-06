@@ -43,7 +43,6 @@ public class DefaultDeployment {
                  .addAsLibraries(new File(webInf + "knowledge-api-5.3.1.BRMS.jar"))
                  .addAsLibraries(new File(webInf + "mvel2-2.1.3.Final.jar"))
                  .addAsWebInfResource(new File("src/main/webapp/WEB-INF/beans.xml"), ArchivePaths.create("beans.xml"));
-                 //.addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
 
     }
 

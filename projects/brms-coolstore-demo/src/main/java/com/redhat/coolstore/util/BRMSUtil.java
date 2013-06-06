@@ -27,9 +27,7 @@ public class BRMSUtil {
 
 	public BRMSUtil() {
 
-		//System.out.println("BRMSUtil()");
-		
-		kagent = KnowledgeAgentFactory.newKnowledgeAgent( "BRMS Agent");
+		kagent = KnowledgeAgentFactory.newKnowledgeAgent("BRMS Agent");
 		
 		ChangeSetImpl changeSet = new ChangeSetImpl();
 		changeSet.setResourcesAdded( buildResourceURLCollection() );
@@ -79,10 +77,7 @@ public class BRMSUtil {
 		
 		String guvnorIPOverride = System.getProperty("guvnor-ip");
 		String guvnorPortOverride = System.getProperty("guvnor-port");
-		
-		//System.out.println("Guvnor IP: " + guvnorIPOverride);
-		//System.out.println("Guvnor Port: " + guvnorPortOverride);  
-		
+
 		String guvnorIP = "localhost";
 		String guvnorPort = "8080";
 		
@@ -101,8 +96,6 @@ public class BRMSUtil {
 		urlArrayList.add("http://" + guvnorIP + ":" + guvnorPort +"/jboss-brms/org.drools.guvnor.Guvnor/package/com.redhat.coolstore/LATEST");
 		
 		for (String url : urlArrayList){
-			
-			//System.out.println(url);
 			
 			UrlResource standardUrlResource = (UrlResource) ResourceFactory.newUrlResource(url);
 			
@@ -138,9 +131,7 @@ public class BRMSUtil {
 		session.fireAllRules();
 		
 		session.dispose();
-		
-		//System.out.println(sc);	
-		
+	
 		b.stopResourceChangeScannerServices();
 						
 		System.exit(0);
