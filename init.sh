@@ -1,5 +1,7 @@
 #!/bin/sh 
 DEMO="JBoss BRMS Red Hat Cool Store Demo"
+AUTHORS="Jason Milliron, Eric D. Schabell"
+PROJECT="git@github.com:eschabell/brms-coolstore-demo.git"
 JBOSS_HOME=./target/jboss-eap-6.0
 SERVER_DIR=$JBOSS_HOME/standalone/deployments
 SERVER_CONF=$JBOSS_HOME/standalone/configuration
@@ -21,7 +23,24 @@ VERSION=5.3.1
 clear 
 
 echo
-echo "Setting up the ${DEMO} environment..."
+echo "#########################################################"
+echo "##                                                     ##"   
+echo "##  Setting up the ${DEMO}  ##"
+echo "##                                                     ##"   
+echo "##                                                     ##"   
+echo "##             ####   ####    #   #    ###             ##"
+echo "##             #   #  #   #  # # # #  #                ##"
+echo "##             ####   ####   #  #  #   ##              ##"
+echo "##             #   #  #  #   #     #     #             ##"
+echo "##             ####   #   #  #     #  ###              ##"
+echo "##                                                     ##"   
+echo "##                                                     ##"   
+echo "##  brought to you by,                                 ##"   
+echo "##             ${AUTHORS}        ##"
+echo "##                                                     ##"   
+echo "##  ${PROJECT}   ##"
+echo "##                                                     ##"   
+echo "#########################################################"
 echo
 
 command -v mvn -q >/dev/null 2>&1 || { echo >&2 "Maven is required but not installed yet... aborting."; exit 1; }
@@ -258,6 +277,12 @@ echo Installation of binaries "for" BRMS $MVN_VERSION complete.
 echo
 
 echo
+echo "######################################################################"
+echo "##                                                                  ##"
+echo "## NOTE: THIS NEXT STEP IS REQUIRED, DEMO WILL NOT WORK WITHOUT IT! ##"
+echo "##                                                                  ##"
+echo "######################################################################"
+echo
 echo You will need to add to your personal ~/.m2/settings.xml the settings provided in the file:
 echo
 echo "  projects/brms-coolstore-demo/maven/settings.xml" 
@@ -265,9 +290,6 @@ echo
 echo These are setup to point maven to the local JBoss EAP6 maven artefacts in the /tmp directory
 echo repository just extracted for you.
 echo 
-echo Once you have done this, you can run 'mvn eclipse:eclipse' from the project root, where
-echo you find the pom.xml file.
-echo
 echo ============================================================
 cat README.md
 echo ============================================================
