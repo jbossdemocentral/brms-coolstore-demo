@@ -70,10 +70,37 @@
                 <append value="true"/>
             </periodic-rotating-file-handler>
             <logger category="com.arjuna">
-                <level name="WARN"/>
+                <level name="INFO"/>
+            </logger>
+            <logger category="org.jbpm.integration.console.shared.GuvnorConnectionUtils">
+                <level name="ERROR"/>
+            </logger>
+            <logger category="org.jboss.bpm.console.server.plugin.PluginMgr">
+                <level name="ERROR"/>
             </logger>
             <logger category="org.apache.tomcat.util.modeler">
                 <level name="WARN"/>
+            </logger>
+						<logger category="org.jboss.as.server.deployment">
+							  <level name="ERROR"/>
+						</logger>
+						<logger category="org.jboss.as.ejb3.deployment">
+							  <level name="ERROR"/>
+						</logger>
+						<logger category="org.jboss.resteasy.spi.ResteasyDeployment">
+							  <level name="ERROR"/>
+						</logger>
+						<logger category="org.hornetq.core.server.impl.HornetQServerImpl">
+                <level name="ERROR"/>
+            </logger>
+            <logger category="org.hibernate">
+                <level name="ERROR"/>
+            </logger>
+						<logger category="java.sql.DatabaseMetaData">
+                <level name="ERROR"/>
+            </logger>
+						<logger category="org.jboss.as.ee">
+                <level name="ERROR"/>
             </logger>
             <logger category="sun.rmi">
                 <level name="WARN"/>

@@ -1,10 +1,11 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.redhat</groupId>
-  <artifactId>brms-coolstore-demo</artifactId>
-  <version>1.0.0-Final</version>
-  <packaging>war</packaging>
-  <name>Red Hat Cool Store</name>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.redhat</groupId>
+    <artifactId>brms-coolstore-demo</artifactId>
+    <version>1.0.0-Final</version>
+    <packaging>war</packaging>
+    <name>Red Hat Cool Store</name>
 
     <build>
         <!-- Maven will append the version to the finalName (which is the 
@@ -36,7 +37,7 @@
             <plugin>
                 <groupId>org.jboss.as.plugins</groupId>
                 <artifactId>jboss-as-maven-plugin</artifactId>
-                <version>7.1.1.Final</version>
+                <version>7.3.Final</version>
             </plugin>
         </plugins>
     </build>
@@ -119,17 +120,17 @@
 
     </profiles>
     <dependencyManagement>
-    	<dependencies>
-    		<dependency>
-    			<groupId>org.jboss.bom</groupId>
-    			<artifactId>jboss-javaee-6.0-with-tools</artifactId>
-    			<type>pom</type>
-    			<scope>import</scope>
-    			<version>${javaee6.with.tools.version}</version>
-    		</dependency>
-    	</dependencies>
+        <dependencies>
+            <dependency>
+                <groupId>org.jboss.bom</groupId>
+                <artifactId>jboss-javaee-6.0-with-tools</artifactId>
+                <type>pom</type>
+                <scope>import</scope>
+                <version>${javaee6.with.tools.version}</version>
+            </dependency>
+        </dependencies>
     </dependencyManagement>
-   <properties>
+    <properties>
         <!-- Explicitly declaring the source encoding eliminates the following 
             message: -->
         <!-- [WARNING] Using platform encoding (UTF-8 actually) to copy filtered 
@@ -142,10 +143,10 @@
 
         <!-- Define the version of JBoss' Java EE 6 APIs and Tools we want 
             to import. -->
-        <javaee6.with.tools.version>1.0.2.Final-redhat-1</javaee6.with.tools.version>
+        <javaee6.with.tools.version>1.0.4.Final-redhat-4</javaee6.with.tools.version>
 
-    </properties>   
-  <dependencies>
+    </properties>
+    <dependencies>
 
         <!-- Import the CDI API, we use provided scope as the API is included 
             in JBoss AS 7 -->
@@ -189,116 +190,113 @@
             <artifactId>arquillian-protocol-servlet</artifactId>
             <scope>test</scope>
         </dependency>
-        
-        <dependency>
-		    <groupId>com.vaadin</groupId>
-		    <artifactId>vaadin</artifactId>
-		    <version>6.8.3</version>
-		    <scope>compile</scope>
-		</dependency>
-		
-		<dependency>
-	      <groupId>com.google.gwt</groupId>
-	      <artifactId>gwt-user</artifactId>
-	      <version>2.3.0</version>
-	      <scope>compile</scope>
-    	</dependency>
-    	
-    	<dependency>
-		<groupId>com.google.gwt</groupId>
-		<artifactId>gwt-dev</artifactId>
-		<version>2.3.0</version>
-	</dependency>
-		
-		<dependency>
-		<groupId>javax.validation</groupId>
-		<artifactId>validation-api</artifactId>
-		<scope>provided</scope>
-	</dependency>
 
-	<dependency>
-		<groupId>javax</groupId>
-		<artifactId>javaee-web-api</artifactId>
-		<version>6.0</version>
-		<scope>provided</scope>
-	</dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin</artifactId>
+            <version>6.8.3</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-user</artifactId>
+            <version>2.3.0</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-dev</artifactId>
+            <version>2.3.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-web-api</artifactId>
+            <version>6.0</version>
+            <scope>provided</scope>
+        </dependency>
 
 <!--BRMS libs -->
 
-	<dependency>
-		<groupId>org.vaadin.virkki</groupId>
-		<artifactId>cdiutils</artifactId>
-		<version>1.0.0</version>
-		<scope>compile</scope>
-	</dependency>
+        <dependency>
+            <groupId>org.vaadin.virkki</groupId>
+            <artifactId>cdiutils</artifactId>
+            <version>1.0.0</version>
+            <scope>compile</scope>
+        </dependency>
 
-	<dependency>
-		<groupId>org.drools</groupId>
-		<artifactId>drools-core</artifactId>
-		<version>5.3.1.BRMS</version>
-		<scope>compile</scope>
-	</dependency>
+        <dependency>
+            <groupId>org.drools</groupId>
+            <artifactId>drools-core</artifactId>
+            <version>5.3.1.BRMS</version>
+            <scope>compile</scope>
+        </dependency>
 
-	<dependency>
-		<groupId>org.drools</groupId>
-		<artifactId>drools-decisiontables</artifactId>
-		<version>5.3.1.BRMS</version>
-		<scope>compile</scope>
-	</dependency>
+        <dependency>
+            <groupId>org.drools</groupId>
+            <artifactId>drools-decisiontables</artifactId>
+            <version>5.3.1.BRMS</version>
+            <scope>compile</scope>
+        </dependency>
 
-	<dependency>
-		<groupId>org.drools</groupId>
-		<artifactId>drools-templates</artifactId>
-		<version>5.3.1.BRMS</version>
-		<scope>compile</scope>
-	</dependency>
+        <dependency>
+            <groupId>org.drools</groupId>
+            <artifactId>drools-templates</artifactId>
+            <version>5.3.1.BRMS</version>
+            <scope>compile</scope>
+        </dependency>
 
-	<dependency>
-		<groupId>org.jbpm</groupId>
-		<artifactId>jbpm-bpmn2</artifactId>
-		<version>5.3.1.BRMS</version>
-		<scope>compile</scope>
-	</dependency>
+        <dependency>
+            <groupId>org.jbpm</groupId>
+            <artifactId>jbpm-bpmn2</artifactId>
+            <version>5.3.1.BRMS</version>
+            <scope>compile</scope>
+        </dependency>
 
-	<dependency>
-		<groupId>org.jbpm</groupId>
-		<artifactId>jbpm-flow</artifactId>
-		<version>5.3.1.BRMS</version>
-		<scope>compile</scope>
-	</dependency>
+        <dependency>
+            <groupId>org.jbpm</groupId>
+            <artifactId>jbpm-flow</artifactId>
+            <version>5.3.1.BRMS</version>
+            <scope>compile</scope>
+        </dependency>
 
-	<dependency>
-		<groupId>org.jbpm</groupId>
-		<artifactId>jbpm-flow-builder</artifactId>
-		<version>5.3.1.BRMS</version>
-		<scope>compile</scope>
-	</dependency>
+        <dependency>
+            <groupId>org.jbpm</groupId>
+            <artifactId>jbpm-flow-builder</artifactId>
+            <version>5.3.1.BRMS</version>
+            <scope>compile</scope>
+        </dependency>
 
-	<dependency>
-		<groupId>org.drools</groupId>
-		<artifactId>knowledge-api</artifactId>
-		<version>5.3.1.BRMS</version>
-		<scope>compile</scope>
-	</dependency>
+        <dependency>
+            <groupId>org.drools</groupId>
+            <artifactId>knowledge-api</artifactId>
+            <version>5.3.1.BRMS</version>
+            <scope>compile</scope>
+        </dependency>
 
-	<dependency>
-		<groupId>org.mvel2</groupId>
-		<artifactId>mvel2</artifactId>
-		<version>2.1.3.Final</version>
-		<scope>compile</scope>
-	</dependency>
+        <dependency>
+            <groupId>org.mvel</groupId>
+            <artifactId>mvel2</artifactId>
+            <version>2.1.3.Final</version>
+            <scope>compile</scope>
+        </dependency>
 
-	<dependency>
-		<groupId>org.jboss.logging</groupId>
-		<artifactId>jboss-logging</artifactId>
-	</dependency>
-	<dependency>
-		<groupId>org.jboss.spec.javax.transaction</groupId>
-		<artifactId>jboss-transaction-api_1.1_spec</artifactId>
-	</dependency>
-	<dependency>
-		<groupId>org.jboss.remoting3</groupId>
-		<artifactId>jboss-remoting</artifactId>
-	</dependency>
-  </dependencies>
+        <dependency>
+            <groupId>org.jboss.spec.javax.transaction</groupId>
+            <artifactId>jboss-transaction-api_1.1_spec</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.remoting3</groupId>
+            <artifactId>jboss-remoting</artifactId>
+            <version>3.2.16.GA-redhat-1</version>
+        </dependency>
+    </dependencies>
 </project>
