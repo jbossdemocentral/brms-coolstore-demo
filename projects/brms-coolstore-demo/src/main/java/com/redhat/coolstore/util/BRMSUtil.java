@@ -1,3 +1,19 @@
+/*
+ * JBoss, Home of Professional Open Source
+ * Copyright 2013, Red Hat, Inc. and/or its affiliates, and individual
+ * contributors by the @authors tag. See the copyright.txt in the
+ * distribution for a full listing of individual contributors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.redhat.coolstore.util;
 
 import java.util.ArrayList;
@@ -26,7 +42,7 @@ public class BRMSUtil {
 
     private KnowledgeAgent kagent = null;
 
-    public BRMSUtil() {		
+    public BRMSUtil() {
     }
 
     @PostConstruct
@@ -35,16 +51,16 @@ public class BRMSUtil {
         kagent.addEventListener(new LogKnowledgeAgentListener());
 
         ChangeSetImpl changeSet = new ChangeSetImpl();
-        changeSet.setResourcesAdded( buildResourceURLCollection() );
+        changeSet.setResourcesAdded(buildResourceURLCollection());
 
-        // resource to the change-set xml for the resources to add                                                                  
-        kagent.applyChangeSet( changeSet );
+        // resource to the change-set xml for the resources to add
+        kagent.applyChangeSet(changeSet);
 
         ResourceChangeScannerConfiguration changeScannerConfiguration = ResourceFactory.getResourceChangeScannerService().newResourceChangeScannerConfiguration();
 
         changeScannerConfiguration.setProperty("drools.resource.scanner.interval", Integer.toString(1));
 
-        ResourceFactory.getResourceChangeScannerService().configure(changeScannerConfiguration); 
+        ResourceFactory.getResourceChangeScannerService().configure(changeScannerConfiguration);
 
         ResourceFactory.getResourceChangeNotifierService().start();
 
@@ -86,21 +102,21 @@ public class BRMSUtil {
         String guvnorIP = "localhost";
         String guvnorPort = "8080";
 
-        if ( guvnorIPOverride != null ) {
+        if (guvnorIPOverride != null) {
 
             guvnorIP = guvnorIPOverride;
 
         }
 
-        if ( guvnorPortOverride != null ) {
+        if (guvnorPortOverride != null) {
 
             guvnorPort = guvnorPortOverride;
 
         }
 
-        urlArrayList.add("http://" + guvnorIP + ":" + guvnorPort +"/jboss-brms/org.drools.guvnor.Guvnor/package/com.redhat.coolstore/LATEST");
+        urlArrayList.add("http://" + guvnorIP + ":" + guvnorPort + "/jboss-brms/org.drools.guvnor.Guvnor/package/com.redhat.coolstore/LATEST");
 
-        for (String url : urlArrayList){
+        for (String url : urlArrayList) {
 
             UrlResource standardUrlResource = (UrlResource) ResourceFactory.newUrlResource(url);
 
@@ -129,7 +145,7 @@ public class BRMSUtil {
         sci.setShoppingCart(sc);
 
         session.insert(sc);
-        session.insert(sci);	
+        session.insert(sci);
 
         session.startProcess("com.redhat.coolstore.PriceProcess");
 

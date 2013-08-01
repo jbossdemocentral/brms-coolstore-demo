@@ -1,3 +1,19 @@
+/*
+ * JBoss, Home of Professional Open Source
+ * Copyright 2013, Red Hat, Inc. and/or its affiliates, and individual
+ * contributors by the @authors tag. See the copyright.txt in the
+ * distribution for a full listing of individual contributors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.redhat.coolstore.service;
 
 import java.io.FileNotFoundException;
@@ -25,231 +41,230 @@ import com.redhat.coolstore.model.ShoppingCartItem;
 @RunWith(Arquillian.class)
 public class ShoppingCartServiceTest {
 
-	@Deployment
+    @Deployment
     public static WebArchive deployment() throws IllegalArgumentException, FileNotFoundException {
         return DefaultDeployment.deployment();
     }
-	
-	@Inject
-	private ShoppingCart shoppingCart;
-		
-	@Inject
-	private ShoppingCartService shoppingCartService;	
-	
-	@Inject 
-	PromoService promoService; 
-	
-	@Inject
-	ProductService productService; 
-	
-	@Before
-	public void clearPromos() {
-		
-		promoService.setPromotions(new HashSet<Promotion>());
-		
-	}
-				
-	@Test
-	public void priceShoppingCartEmpty() {
-		
-		Assert.assertEquals(0, shoppingCart.getCartItemTotal(), 0);
-		Assert.assertEquals(0, shoppingCart.getShippingTotal(), 0);
-		Assert.assertEquals(0, shoppingCart.getCartTotal(), 0);
-		
-		shoppingCartService.priceShoppingCart(shoppingCart);
-		
-		Assert.assertEquals(0, shoppingCart.getCartItemTotal(), 0);
-		Assert.assertEquals(0, shoppingCart.getShippingTotal(), 0);
-		Assert.assertEquals(0, shoppingCart.getCartTotal(), 0);
-		
-	}
-	
-	@Test
-	public void priceShoppingCartOneItem() {
-		
-		Assert.assertEquals(0, shoppingCart.getCartItemTotal(), 0);
-		Assert.assertEquals(0, shoppingCart.getShippingTotal(), 0);
-		Assert.assertEquals(0, shoppingCart.getCartTotal(), 0);
-		
-		ShoppingCartItem sci = new ShoppingCartItem();
-		Product p = new Product();
-		p.setItemId("123");
-		p.setPrice(10.00);
-		sci.setQuanity(2);
-		sci.setProduct(p);
-		
-		productService.setProducts(Arrays.asList(p));
-		
-		shoppingCart.addShoppingCartItem(sci);
-		
-		shoppingCartService.priceShoppingCart(shoppingCart);
-		
-		Assert.assertEquals(20, shoppingCart.getCartItemTotal(), 0);
-		Assert.assertEquals(2.99, shoppingCart.getShippingTotal(), 0);
-		Assert.assertEquals(22.99, shoppingCart.getCartTotal(), 0.001);
-				
-	}
-		
-	@Test
-	public void priceShoppingCartMultipleItem() {
-		
-		Assert.assertEquals(0, shoppingCart.getCartItemTotal(), 0);
-		Assert.assertEquals(0, shoppingCart.getShippingTotal(), 0);
-		Assert.assertEquals(0, shoppingCart.getCartTotal(), 0);
-		
-		ShoppingCartItem sci1 = new ShoppingCartItem();
-		Product p1 = new Product();
-		p1.setItemId("123");
-		p1.setPrice(9.99);
-		sci1.setQuanity(3);
-		sci1.setProduct(p1);
-		
-		ShoppingCartItem sci2 = new ShoppingCartItem();
-		Product p2 = new Product();
-		p2.setItemId("234");
-		p2.setPrice(6.77);
-		sci2.setQuanity(1);
-		sci2.setProduct(p2);
-		
-		ShoppingCartItem sci3 = new ShoppingCartItem();
-		Product p3 = new Product();
-		p3.setItemId("345");
-		p3.setPrice(2.00);		
-		sci3.setQuanity(2);
-		sci3.setProduct(p3);
-		
-		shoppingCart.addShoppingCartItem(sci1);
-		shoppingCart.addShoppingCartItem(sci2);
-		shoppingCart.addShoppingCartItem(sci3);
-		
-		productService.setProducts(Arrays.asList(p1, p2, p3));
-		
-		shoppingCartService.priceShoppingCart(shoppingCart);
-		
-		Assert.assertEquals(40.74, shoppingCart.getCartItemTotal(), 0.001);
-		Assert.assertEquals(4.99, shoppingCart.getShippingTotal(), 0);
-		Assert.assertEquals(45.73, shoppingCart.getCartTotal(), 0.001);
-				
-	}
 
-	@Test
-	public void priceShoppingCartMultipleTimes() {
-		
-		Assert.assertEquals(0, shoppingCart.getCartItemTotal(), 0);
-		Assert.assertEquals(0, shoppingCart.getShippingTotal(), 0);
-		Assert.assertEquals(0, shoppingCart.getCartTotal(), 0);
-		
-		ShoppingCartItem sci = new ShoppingCartItem();
-		Product p = new Product();
-		p.setItemId("123");
-		p.setPrice(10.00);
-		sci.setQuanity(2);
-		sci.setProduct(p);
-		
-		shoppingCart.addShoppingCartItem(sci);
-		
-		productService.setProducts(Arrays.asList(p));
-		
-		shoppingCartService.priceShoppingCart(shoppingCart);
-		
-		Assert.assertEquals(20, shoppingCart.getCartItemTotal(), 0);
-		Assert.assertEquals(2.99, shoppingCart.getShippingTotal(), 0);
-		Assert.assertEquals(22.99, shoppingCart.getCartTotal(), 0.001);
-		
-		shoppingCartService.priceShoppingCart(shoppingCart);
-		
-		Assert.assertEquals(20, shoppingCart.getCartItemTotal(), 0);
-		Assert.assertEquals(2.99, shoppingCart.getShippingTotal(), 0);
-		Assert.assertEquals(22.99, shoppingCart.getCartTotal(), 0.001);
-				
-	}
-	
-	@Test
-	public void priceShoppingCartWithCartPromoTest() {
-		
-		//cart total 0
-		Assert.assertEquals(0, shoppingCart.getCartItemTotal(), 0);
-		
-		shoppingCartService.priceShoppingCart(shoppingCart);
-		
-		Assert.assertEquals(0, shoppingCart.getCartItemPromoSavings(), 0);
-		
-		//TODO: uncomment and fix.  reguardless of promotionSet passed in constructor overrides for promotionSet
-		Set<Promotion> promotionSet = new HashSet<Promotion>();
-		
-		Promotion p1 = new Promotion("123", .25);
-		
-		promotionSet.add(p1);
-		
-		promoService.setPromotions(promotionSet);
-		
-		ShoppingCartItem sci = new ShoppingCartItem();
-		sci.setQuanity(1);
-		
-		Product p = new Product();
-		p.setItemId("234");
-		p.setPrice(10.00);
-		
-		sci.setProduct(p);
-		
-		shoppingCart.addShoppingCartItem(sci);
-		
-		productService.setProducts(Arrays.asList(p));
-						
-		Assert.assertEquals(0, shoppingCart.getCartItemTotal(), 0);
-		Assert.assertEquals(0, shoppingCart.getCartItemPromoSavings(), 0);
-						
-		shoppingCartService.priceShoppingCart(shoppingCart);
-		
-		Assert.assertEquals(10, shoppingCart.getCartItemTotal(), 0);
-		Assert.assertEquals(0, shoppingCart.getCartItemPromoSavings(), 0);
-		
-		p.setItemId("123");
-		sci.setProduct(p);
-				
-		shoppingCartService.priceShoppingCart(shoppingCart);	
-			
-		Assert.assertEquals(7.5, shoppingCart.getCartItemTotal(), 0);
-		Assert.assertEquals(-2.5, shoppingCart.getCartItemPromoSavings(), 0);
-				
-		shoppingCartService.priceShoppingCart(shoppingCart);	
-						
-		Assert.assertEquals(7.5, shoppingCart.getCartItemTotal(), 0);
-		Assert.assertEquals(-2.5, shoppingCart.getCartItemPromoSavings(), 0);
-		
-	}
-	
-	@Test
-	public void priceShoppingCartWithShippingPromoTest() {
-				
-		ShoppingCartItem sci = new ShoppingCartItem();
-		sci.setQuanity(1);
-		
-		Product p = new Product();
-		p.setItemId("456");
-		p.setPrice(74.99);
-		
-		sci.setProduct(p);
-		
-		shoppingCart.addShoppingCartItem(sci);
-		
-		productService.setProducts(Arrays.asList(p));
-						
-		Assert.assertEquals(0, shoppingCart.getShippingTotal(), 0);
-		Assert.assertEquals(0, shoppingCart.getShippingPromoSavings(), 0);
-						
-		shoppingCartService.priceShoppingCart(shoppingCart);
+    @Inject
+    private ShoppingCart shoppingCart;
 
-		Assert.assertEquals(6.99, shoppingCart.getShippingTotal(), 0);
-		Assert.assertEquals(0, shoppingCart.getShippingPromoSavings(), 0);
-		
-		p.setPrice(75.00);
-		
-		shoppingCartService.priceShoppingCart(shoppingCart);	
-					
-		Assert.assertEquals(0, shoppingCart.getShippingTotal(), 0);
-		Assert.assertEquals(-8.99, shoppingCart.getShippingPromoSavings(), 0);
-			
-		
-	}
+    @Inject
+    private ShoppingCartService shoppingCartService;
+
+    @Inject
+    PromoService promoService;
+
+    @Inject
+    ProductService productService;
+
+    @Before
+    public void clearPromos() {
+
+        promoService.setPromotions(new HashSet<Promotion>());
+
+    }
+
+    @Test
+    public void priceShoppingCartEmpty() {
+
+        Assert.assertEquals(0, shoppingCart.getCartItemTotal(), 0);
+        Assert.assertEquals(0, shoppingCart.getShippingTotal(), 0);
+        Assert.assertEquals(0, shoppingCart.getCartTotal(), 0);
+
+        shoppingCartService.priceShoppingCart(shoppingCart);
+
+        Assert.assertEquals(0, shoppingCart.getCartItemTotal(), 0);
+        Assert.assertEquals(0, shoppingCart.getShippingTotal(), 0);
+        Assert.assertEquals(0, shoppingCart.getCartTotal(), 0);
+
+    }
+
+    @Test
+    public void priceShoppingCartOneItem() {
+
+        Assert.assertEquals(0, shoppingCart.getCartItemTotal(), 0);
+        Assert.assertEquals(0, shoppingCart.getShippingTotal(), 0);
+        Assert.assertEquals(0, shoppingCart.getCartTotal(), 0);
+
+        ShoppingCartItem sci = new ShoppingCartItem();
+        Product p = new Product();
+        p.setItemId("123");
+        p.setPrice(10.00);
+        sci.setQuanity(2);
+        sci.setProduct(p);
+
+        productService.setProducts(Arrays.asList(p));
+
+        shoppingCart.addShoppingCartItem(sci);
+
+        shoppingCartService.priceShoppingCart(shoppingCart);
+
+        Assert.assertEquals(20, shoppingCart.getCartItemTotal(), 0);
+        Assert.assertEquals(2.99, shoppingCart.getShippingTotal(), 0);
+        Assert.assertEquals(22.99, shoppingCart.getCartTotal(), 0.001);
+
+    }
+
+    @Test
+    public void priceShoppingCartMultipleItem() {
+
+        Assert.assertEquals(0, shoppingCart.getCartItemTotal(), 0);
+        Assert.assertEquals(0, shoppingCart.getShippingTotal(), 0);
+        Assert.assertEquals(0, shoppingCart.getCartTotal(), 0);
+
+        ShoppingCartItem sci1 = new ShoppingCartItem();
+        Product p1 = new Product();
+        p1.setItemId("123");
+        p1.setPrice(9.99);
+        sci1.setQuanity(3);
+        sci1.setProduct(p1);
+
+        ShoppingCartItem sci2 = new ShoppingCartItem();
+        Product p2 = new Product();
+        p2.setItemId("234");
+        p2.setPrice(6.77);
+        sci2.setQuanity(1);
+        sci2.setProduct(p2);
+
+        ShoppingCartItem sci3 = new ShoppingCartItem();
+        Product p3 = new Product();
+        p3.setItemId("345");
+        p3.setPrice(2.00);
+        sci3.setQuanity(2);
+        sci3.setProduct(p3);
+
+        shoppingCart.addShoppingCartItem(sci1);
+        shoppingCart.addShoppingCartItem(sci2);
+        shoppingCart.addShoppingCartItem(sci3);
+
+        productService.setProducts(Arrays.asList(p1, p2, p3));
+
+        shoppingCartService.priceShoppingCart(shoppingCart);
+
+        Assert.assertEquals(40.74, shoppingCart.getCartItemTotal(), 0.001);
+        Assert.assertEquals(4.99, shoppingCart.getShippingTotal(), 0);
+        Assert.assertEquals(45.73, shoppingCart.getCartTotal(), 0.001);
+
+    }
+
+    @Test
+    public void priceShoppingCartMultipleTimes() {
+
+        Assert.assertEquals(0, shoppingCart.getCartItemTotal(), 0);
+        Assert.assertEquals(0, shoppingCart.getShippingTotal(), 0);
+        Assert.assertEquals(0, shoppingCart.getCartTotal(), 0);
+
+        ShoppingCartItem sci = new ShoppingCartItem();
+        Product p = new Product();
+        p.setItemId("123");
+        p.setPrice(10.00);
+        sci.setQuanity(2);
+        sci.setProduct(p);
+
+        shoppingCart.addShoppingCartItem(sci);
+
+        productService.setProducts(Arrays.asList(p));
+
+        shoppingCartService.priceShoppingCart(shoppingCart);
+
+        Assert.assertEquals(20, shoppingCart.getCartItemTotal(), 0);
+        Assert.assertEquals(2.99, shoppingCart.getShippingTotal(), 0);
+        Assert.assertEquals(22.99, shoppingCart.getCartTotal(), 0.001);
+
+        shoppingCartService.priceShoppingCart(shoppingCart);
+
+        Assert.assertEquals(20, shoppingCart.getCartItemTotal(), 0);
+        Assert.assertEquals(2.99, shoppingCart.getShippingTotal(), 0);
+        Assert.assertEquals(22.99, shoppingCart.getCartTotal(), 0.001);
+
+    }
+
+    @Test
+    public void priceShoppingCartWithCartPromoTest() {
+
+        // cart total 0
+        Assert.assertEquals(0, shoppingCart.getCartItemTotal(), 0);
+
+        shoppingCartService.priceShoppingCart(shoppingCart);
+
+        Assert.assertEquals(0, shoppingCart.getCartItemPromoSavings(), 0);
+
+        // TODO: uncomment and fix. reguardless of promotionSet passed in constructor overrides for promotionSet
+        Set<Promotion> promotionSet = new HashSet<Promotion>();
+
+        Promotion p1 = new Promotion("123", .25);
+
+        promotionSet.add(p1);
+
+        promoService.setPromotions(promotionSet);
+
+        ShoppingCartItem sci = new ShoppingCartItem();
+        sci.setQuanity(1);
+
+        Product p = new Product();
+        p.setItemId("234");
+        p.setPrice(10.00);
+
+        sci.setProduct(p);
+
+        shoppingCart.addShoppingCartItem(sci);
+
+        productService.setProducts(Arrays.asList(p));
+
+        Assert.assertEquals(0, shoppingCart.getCartItemTotal(), 0);
+        Assert.assertEquals(0, shoppingCart.getCartItemPromoSavings(), 0);
+
+        shoppingCartService.priceShoppingCart(shoppingCart);
+
+        Assert.assertEquals(10, shoppingCart.getCartItemTotal(), 0);
+        Assert.assertEquals(0, shoppingCart.getCartItemPromoSavings(), 0);
+
+        p.setItemId("123");
+        sci.setProduct(p);
+
+        shoppingCartService.priceShoppingCart(shoppingCart);
+
+        Assert.assertEquals(7.5, shoppingCart.getCartItemTotal(), 0);
+        Assert.assertEquals(-2.5, shoppingCart.getCartItemPromoSavings(), 0);
+
+        shoppingCartService.priceShoppingCart(shoppingCart);
+
+        Assert.assertEquals(7.5, shoppingCart.getCartItemTotal(), 0);
+        Assert.assertEquals(-2.5, shoppingCart.getCartItemPromoSavings(), 0);
+
+    }
+
+    @Test
+    public void priceShoppingCartWithShippingPromoTest() {
+
+        ShoppingCartItem sci = new ShoppingCartItem();
+        sci.setQuanity(1);
+
+        Product p = new Product();
+        p.setItemId("456");
+        p.setPrice(74.99);
+
+        sci.setProduct(p);
+
+        shoppingCart.addShoppingCartItem(sci);
+
+        productService.setProducts(Arrays.asList(p));
+
+        Assert.assertEquals(0, shoppingCart.getShippingTotal(), 0);
+        Assert.assertEquals(0, shoppingCart.getShippingPromoSavings(), 0);
+
+        shoppingCartService.priceShoppingCart(shoppingCart);
+
+        Assert.assertEquals(6.99, shoppingCart.getShippingTotal(), 0);
+        Assert.assertEquals(0, shoppingCart.getShippingPromoSavings(), 0);
+
+        p.setPrice(75.00);
+
+        shoppingCartService.priceShoppingCart(shoppingCart);
+
+        Assert.assertEquals(0, shoppingCart.getShippingTotal(), 0);
+        Assert.assertEquals(-8.99, shoppingCart.getShippingPromoSavings(), 0);
+
+    }
 }
