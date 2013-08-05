@@ -87,8 +87,6 @@ In this section, you will import all of the JBoss Enterprise BRMS artifacts into
 - Lastly, select the Import button.  Select OK to confirm that you want to import the artifacts.
 - Build the package by selecting from the left navigation Knowledge Bases → Packages → com → redhat →coolstore → Edit tab → Build Package button. 
 
-
-
 Build and Deploy the Quickstart
 -------------------------
 
@@ -109,6 +107,15 @@ Access the running application in a browser at the following URL:  <http://local
 You are presented with a simple form to add items to a Shopping Cart.
 
 When you insert a item to , notice that when you insert an item on the Shopping Cart, the Promotions are calculated according to the rules imported on [Importing Project Repository into BRMS](#importing-project-repository-into-brms) section
+
+Undeploy the Archive
+--------------------
+
+1. Make sure you have started the JBoss Server as described above.
+2. Open a command line and navigate to the root directory of this quickstart.
+3. When you are finished testing, type this command to undeploy the archive:
+
+        mvn jboss-as:undeploy
 
 Run the tests
 -------------
