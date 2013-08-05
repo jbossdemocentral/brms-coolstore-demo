@@ -2,17 +2,15 @@
 DEMO="JBoss BRMS Red Hat Cool Store Demo"
 AUTHORS="Jason Milliron, Eric D. Schabell"
 PROJECT="git@github.com:eschabell/brms-coolstore-demo.git"
-JBOSS_HOME=./target/jboss-eap-6.0
+JBOSS_HOME=./target/jboss-eap-6.1
 SERVER_DIR=$JBOSS_HOME/standalone/deployments
 SERVER_CONF=$JBOSS_HOME/standalone/configuration
 LIB_DIR=./support/lib
 SUPPORT_DIR=./support
 SRC_DIR=./installs
-EAP=jboss-eap-6.0.1.zip
+EAP=jboss-eap-6.1.0.zip
 BRMS=brms-p-5.3.1.GA-deployable-ee6.zip
-EAP_REPO=jboss-eap-6.0.1-maven-repository
-LOCAL_REPOSITORY_PATH=/tmp/$EAP_REPO
-BRMS_LIBS=./target/jboss-eap-6.0/standalone/deployments/jboss-brms.war/WEB-INF/lib
+BRMS_LIBS=./target/jboss-eap-6.1/standalone/deployments/jboss-brms.war/WEB-INF/lib
 SUPPORT_LIBS=./support/libs/
 WEB_INF_LIB=./projects/brms-coolstore-demo/src/main/webapp/WEB-INF/lib/
 DESIGNER=designer-patched.war
@@ -119,14 +117,6 @@ rm jboss-jbpm-engine.zip
 rm -rf *.jar modeshape.zip *.RSA lib
 rm jboss-brms-engine.zip
 
-# Setup jboss-eap-6 maven repo locally.
-echo "  - extracting jboss eap 6 maven repo locally into /tmp/${EAP_REPO}..."
-echo
-unzip -q -u -d /tmp $EAP_REPO.zip
-
-echo "  - adding BRMS and additional jars info local maven repo /tmp/${EAP_REPO}"
-echo
-
 cd ../
 
 # ensure project lib dir exists.
@@ -136,43 +126,25 @@ if [ ! -d $WEB_INF_LIB ]; then
 	mkdir -p $WEB_INF_LIB
 fi
 
-mvn install:install-file -Dfile=$SUPPORT_LIBS/cdiutils-1.0.0.jar -DgroupId=org.vaadin.virkki -DartifactId=cdiutils -Dversion=1.0.0 -Dpackaging=jar -DlocalRepositoryPath=$LOCAL_REPOSITORY_PATH
+mvn install:install-file -Dfile=$SUPPORT_LIBS/cdiutils-1.0.0.jar -DgroupId=org.vaadin.virkki -DartifactId=cdiutils -Dversion=1.0.0 -Dpackaging=jar
 
 cp $SUPPORT_LIBS/cdiutils-1.0.0.jar $WEB_INF_LIB
 
-mvn install:install-file -Dfile=$BRMS_LIBS/drools-core-$MVN_VERSION.jar -DgroupId=org.drools -DartifactId=drools-core -Dversion=$MVN_VERSION -Dpackaging=jar -DlocalRepositoryPath=$LOCAL_REPOSITORY_PATH
-
 cp $BRMS_LIBS/drools-core-$MVN_VERSION.jar $WEB_INF_LIB
-
-mvn install:install-file -Dfile=$BRMS_LIBS/drools-compiler-$MVN_VERSION.jar -DgroupId=ort.drools -DartifactId=drools-compiler -Dversion=$MVN_VERSION -Dpackaging=jar -DlocalRepositoryPath=$LOCAL_REPOSITORY_PATH
 
 cp $BRMS_LIBS/drools-compiler-$MVN_VERSION.jar $WEB_INF_LIB
 
-mvn install:install-file -Dfile=$BRMS_LIBS/drools-decisiontables-$MVN_VERSION.jar -DgroupId=org.drools -DartifactId=drools-decisiontables -Dversion=$MVN_VERSION -Dpackaging=jar -DlocalRepositoryPath=$LOCAL_REPOSITORY_PATH
-
 cp $BRMS_LIBS/drools-decisiontables-$MVN_VERSION.jar $WEB_INF_LIB
-
-mvn install:install-file -Dfile=$BRMS_LIBS/drools-templates-$MVN_VERSION.jar -DgroupId=org.drools -DartifactId=drools-templates -Dversion=$MVN_VERSION -Dpackaging=jar -DlocalRepositoryPath=$LOCAL_REPOSITORY_PATH
 
 cp $BRMS_LIBS/drools-templates-$MVN_VERSION.jar $WEB_INF_LIB
 
-mvn install:install-file -Dfile=$BRMS_LIBS/jbpm-bpmn2-$MVN_VERSION.jar -DgroupId=org.jbpm -DartifactId=jbpm-bpmn2 -Dversion=$MVN_VERSION -Dpackaging=jar -DlocalRepositoryPath=$LOCAL_REPOSITORY_PATH
-
 cp $BRMS_LIBS/jbpm-bpmn2-$MVN_VERSION.jar $WEB_INF_LIB
-
-mvn install:install-file -Dfile=$BRMS_LIBS/jbpm-flow-$MVN_VERSION.jar -DgroupId=org.jbpm -DartifactId=jbpm-flow -Dversion=$MVN_VERSION -Dpackaging=jar -DlocalRepositoryPath=$LOCAL_REPOSITORY_PATH
 
 cp $BRMS_LIBS/jbpm-flow-$MVN_VERSION.jar $WEB_INF_LIB
 
-mvn install:install-file -Dfile=$BRMS_LIBS/jbpm-flow-builder-$MVN_VERSION.jar -DgroupId=org.jbpm -DartifactId=jbpm-flow-builder -Dversion=$MVN_VERSION -Dpackaging=jar -DlocalRepositoryPath=$LOCAL_REPOSITORY_PATH
-
 cp $BRMS_LIBS/jbpm-flow-builder-$MVN_VERSION.jar $WEB_INF_LIB
 
-mvn install:install-file -Dfile=$BRMS_LIBS/knowledge-api-$MVN_VERSION.jar -DgroupId=org.drools -DartifactId=knowledge-api -Dversion=$MVN_VERSION -Dpackaging=jar -DlocalRepositoryPath=$LOCAL_REPOSITORY_PATH
-
 cp $BRMS_LIBS/knowledge-api-$MVN_VERSION.jar $WEB_INF_LIB
-
-mvn install:install-file -Dfile=$BRMS_LIBS/mvel2-2.1.3.Final.jar -DgroupId=org.mvel2 -DartifactId=mvel2 -Dversion=2.1.3.Final -Dpackaging=jar -DlocalRepositoryPath=$LOCAL_REPOSITORY_PATH
 
 cp $BRMS_LIBS/mvel2-2.1.3.Final.jar $WEB_INF_LIB
 
@@ -203,7 +175,7 @@ touch $SERVER_DIR/business-central-server.war.dodeploy
 touch $SERVER_DIR/business-central.war.dodeploy
 touch $SERVER_DIR/designer.war.dodeploy
 touch $SERVER_DIR/jboss-brms.war.dodeploy
-# touch $SERVER_DIR/jbpm-human-task.war.dodeploy   ## uncomment to deploy if needed.
+touch $SERVER_DIR/jbpm-human-task.war.dodeploy
 
 echo "  - configuring security authentication, copying updated components.xml file to jboss-brms.war..."
 echo
@@ -218,10 +190,21 @@ echo "  - making sure standalone.sh for server is executable..."
 echo
 chmod u+x $JBOSS_HOME/bin/standalone.sh
 
+echo "  - enabling demo users for human tasks in jbpm-human-task.war web.xml file..."
+echo
+cp support/jbpm-human-task-war-web.xml $SERVER_DIR/jbpm-human-task.war/WEB-INF/web.xml
+
+echo "  - adding netty dep to business-central-server.war and jbpm-human-task.war..."
+echo
+cp support/MANIFEST.MF $SERVER_DIR/business-central-server.war/WEB-INF/classes/META-INF/
+cp support/MANIFEST.MF $SERVER_DIR/jbpm-human-task.war/WEB-INF/classes/META-INF/
+
+
+echo "  - mavenizing your repo with BRMS components."
+echo
 echo
 echo Installing the BRMS binaries into the Maven repository...
 echo
-
 unzip -q $SRC_DIR/$BRMS jboss-brms-engine.zip
 unzip -q jboss-brms-engine.zip binaries/*
 unzip -q $SRC_DIR/$BRMS jboss-jbpm-engine.zip
