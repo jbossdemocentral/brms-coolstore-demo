@@ -67,12 +67,55 @@ Start JBoss Enterprise Application Platform 6.1
 - Lastly, select the Import button. Select OK to confirm that you want to import the artifacts.
 - Build the package by selecting from the left navigation Knowledge Bases → Packages → com￼→ redhat →coolstore → Edit tab → Build Package button.
 
-Build and Run the Quickstart
-----------------------------
+Importing Project Repository into BRMS
+--------------------------------------
+
+In this section, you will import all of the JBoss Enterprise BRMS artifacts into the Business Rules Manager.
+
+- Open up your Web browser of choice and navigate to <http://localhost:8080/jboss-brms/>
+- Use the default credentials of admin/admin
+- Upon logging in, you will see the following prompt:
+
+        This looks like a brand new repository.
+        Would you like to install a sample repository?
+        
+    Important: Please be sure to select No thanks.
+
+- Select the Administration section on the left hand side
+- From the Administration list select Import Export. This will open the Import Export window.
+- Now select Browse... 	and navigate to brms-coolstore-demo/support folder and select the repository_export.zip file.
+- Lastly, select the Import button.  Select OK to confirm that you want to import the artifacts.
+- Build the package by selecting from the left navigation Knowledge Bases → Packages → com → redhat →coolstore → Edit tab → Build Package button. 
+
+
+
+Build and Deploy the Quickstart
+-------------------------
+
+_NOTE: The following build command assumes you have configured your Maven user settings. If you have not, you must include Maven setting arguments on the command line. 
+
+1. Make sure you have started the JBoss Server as described above.
+2. Open a command line and navigate to the root directory of this quickstart.
+3. Type this command to build and deploy the archive:
+
+        mvn clean package jboss-as:deploy
+4. This will deploy `target/brms-coolstore-demo.war` to the running instance of the server.
+
+Access the application
+---------------------
+
+Access the running application in a browser at the following URL:  <http://localhost:8080/brms-coolstore-demo>
+
+You are presented with a simple form to add items to a Shopping Cart.
+
+When you insert a item to , notice that when you insert an item on the Shopping Cart, the Promotions are calculated according to the rules imported on [Importing Project Repository into BRMS](#importing-project-repository-into-brms) section
+
+Run the tests
+-------------
 
 _NOTE: The following build command assumes you have configured your Environment._
 
-1. Open a command line and navigate to the root directory of this quickstart (<repo_root>/projects/brms-customer-evaluation-demo).
+1. Open a command line and navigate to the root directory of this quickstart (<repo_root>/projects/brms-coolstore-demo).
 2. Type this command to build and runt the tests:
 
         mvn clean test -Parq-jbossas-remote
