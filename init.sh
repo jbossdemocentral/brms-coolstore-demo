@@ -175,7 +175,7 @@ touch $SERVER_DIR/business-central-server.war.dodeploy
 touch $SERVER_DIR/business-central.war.dodeploy
 touch $SERVER_DIR/designer.war.dodeploy
 touch $SERVER_DIR/jboss-brms.war.dodeploy
-# touch $SERVER_DIR/jbpm-human-task.war.dodeploy   ## uncomment to deploy if needed.
+touch $SERVER_DIR/jbpm-human-task.war.dodeploy
 
 echo "  - configuring security authentication, copying updated components.xml file to jboss-brms.war..."
 echo
@@ -190,10 +190,21 @@ echo "  - making sure standalone.sh for server is executable..."
 echo
 chmod u+x $JBOSS_HOME/bin/standalone.sh
 
+echo "  - enabling demo users for human tasks in jbpm-human-task.war web.xml file..."
+echo
+cp support/jbpm-human-task-war-web.xml $SERVER_DIR/jbpm-human-task.war/WEB-INF/web.xml
+
+echo "  - adding netty dep to business-central-server.war and jbpm-human-task.war..."
+echo
+cp support/MANIFEST.MF $SERVER_DIR/business-central-server.war/WEB-INF/classes/META-INF/
+cp support/MANIFEST.MF $SERVER_DIR/jbpm-human-task.war/WEB-INF/classes/META-INF/
+
+
+echo "  - mavenizing your repo with BRMS components."
+echo
 echo
 echo Installing the BRMS binaries into the Maven repository...
 echo
-
 unzip -q $SRC_DIR/$BRMS jboss-brms-engine.zip
 unzip -q jboss-brms-engine.zip binaries/*
 unzip -q $SRC_DIR/$BRMS jboss-jbpm-engine.zip
