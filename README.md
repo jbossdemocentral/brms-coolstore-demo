@@ -1,38 +1,45 @@
-JBoss BRMS (jBPM) Cool Store Demo Quickstart Guide
-============================================================
+brms-coolstore-demo: BRMS Cool Store demo
+=========================================
+Author: Eric D. Schabell
+Level: Beginner
+Technologies: BRMS
+Summary: Demonstrates the use of BRMS consuming rules from a server
+Prerequisites: 
+Target Product: BRMS
+Source: <https://github.com/eschabell/brms-coolstore-demo>
 
-Demo based on JBoss BRMS products.
+What is it?
+-----------
 
+This quickstarts shows an solution for an online shopping cart. Many rules are available online in a BRMS server.
 
-Setup and Configuration
------------------------
+Some products are placed on the Shopping Cart and them some Shipping rules are used to calculate a discount.
 
-See Quick Start Guide in project as ODT and PDF for details on installation. For those that can't wait:
+Configure and Run the Quickstart
+-------------------
 
-- see README in 'installs' directory
+This quickstart has more complex setup and configuration requirements than many of the other quickstarts. Please see the `Quick Start Guide` located in the `docs/` folder for complete instructions on how to configrre and run this quickstart. The file is provided in both PDF and ODT formats.
 
-- add products 
+The following is a brief summary of the steps you will take to configure and run the quickstart. _Note: These steps are not meant to replace the complete instructions contained in the `docs/Quick Start Guide.odt` or `docs/Quick Start Guide.pdf` files!_
 
-- run 'init.sh' & read output
+1. Download the following from the JBoss Customer Portal at <https://access.redhat.com/jbossnetwork/restricted/listSoftware.html> into the quickstart `installs/` directory:
+    * BRMS (brms-p-5.3.1.GA-deployable-ee6.zip)	
+    * EAP (jboss-eap-6.1.0.zip)
+2. Run `init.sh` to install EAP 6 and deploy BRMS. Verify the output and make sure the command completes successfully.
+3. Configure JBoss Developer Studio (JBDS).
+    * Install the SOA tools.
+    * Add the BRMS platform server runtime.
+    * Import the project.
+4. Run 'mvn clean install' on the project to ensure it builds successfully.
+5. Start the JBoss EAP server.
+6. Run 'mvn jboss-as:deploy' on the project to deploy to the server
+7. Login to BRM (http://localhost:8080/jboss-brms).
+8. Import the project repository `repository-export.zip` file from the `support/` directory.
+9. Build and deploy project in BRM.
+9. Login to Coolstore application (localhost:8080/brms-coolstore-demo).
+10. Add Items to Cart.
 
-- read Quick Start Guide
-
-- run 'mvn clean install' on project to build
-
-- copy projects/brms-coolstore-demo/target/brms-coolstore-demo.war deployments directory of installed server
-
-- start JBoss EAP server
-
-- login to BRM (http://localhost:8080/jboss-brms)
-
-- import repository-export from support dir
-
-- build and deploy project in BRM
-
-- open shopping cart and demo away (http://localhost:8080/brms-coolstore-demo)
-
-Windows users see support/windows/README for installation.
-
+_Note: Windows users should see `support/windows/README` for installation procedures._
 
 Supporting Articles
 -------------------
@@ -56,4 +63,3 @@ See the tagged releases for the following versions of the product:
 - v1.1 new welcome screen and doc fixes.
 
 - v1.0 is BRMS 5.3.1 deployable, running on JBoss EAP 6.
-
