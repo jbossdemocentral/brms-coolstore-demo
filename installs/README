@@ -1,12 +1,6 @@
-Download the following from the JBoss Customer Portal
+Download the following files from the JBoss Customer Portal into this directory.
 
- * EAP6 (jboss-eap-6.1.0.zip)
- * BRMS deployable (brms-p-5.3.1.GA-deployable-ee6.zip)
+ * BRMS (brms-p-5.3.1.GA-deployable-ee6.zip)	
+ * EAP (jboss-eap-6.1.0.zip)
 
-and copy to this directory for the init.sh script to work.
-
-Ensure that this file is executable by running:
-
-chmod +x <path-to-project>/installs/jboss-eap-6.1.0.zip
-chmod +x <path-to-project>/installs/brms-p-5.3.1.GA-deployable-ee6.zip
-
+The JBoss EAP server will be installed and configured in this directory.

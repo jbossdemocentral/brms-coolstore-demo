@@ -11,9 +11,7 @@ Source: <https://github.com/eschabell/brms-coolstore-demo>
 What is it?
 -----------
 
-This quickstarts shows an solution for an online shopping cart. Many rules are available online in a BRMS server.
-
-Some products are placed on the Shopping Cart and them some Shipping rules are used to calculate a discount.
+This quickstart shows how to use BRMS to create a solution for an online shopping cart. As products are placed in the shopping cart, the shipping rules calculate the shipping cost. You can modify the shipping rules, then run the tests again to see changes in to the shipping total.
 
 Configure and Run the Quickstart
 -------------------
@@ -30,14 +28,14 @@ The following is a brief summary of the steps you will take to configure and run
     * Install the SOA tools.
     * Add the BRMS platform server runtime.
     * Import the project.
-4. Run 'mvn clean install' on the project to ensure it builds successfully.
+4. Run `mvn clean install` on the project to ensure it builds successfully.
 5. Start the JBoss EAP server.
 6. Run 'mvn jboss-as:deploy' on the project to deploy to the server
-7. Login to BRM (http://localhost:8080/jboss-brms).
+7. Login to BRM at <http://localhost:8080/jboss-brms>.
 8. Import the project repository `repository-export.zip` file from the `support/` directory.
 9. Build and deploy project in BRM.
-9. Login to Coolstore application (localhost:8080/brms-coolstore-demo).
-10. Add Items to Cart.
+9. Login to the Coolstore Demo application at <localhost:8080/brms-coolstore-demo>.
+10. Add Items to the cart and watch the shopping cart `Shipping` and `Cart Total` costs change.
 
 _Note: Windows users should see `support/windows/README` for installation procedures._
 
