@@ -1,7 +1,7 @@
 brms-coolstore-demo: BRMS Cool Store demo
 =========================================
 Author: Eric D. Schabell
-Level: Beginner
+Level: Intermediate
 Technologies: BRMS
 Summary: Demonstrates the use of BRMS consuming rules from a server
 Prerequisites: 
