@@ -2,17 +2,17 @@
 DEMO="JBoss BRMS Red Hat Cool Store Demo"
 AUTHORS="Jason Milliron, Eric D. Schabell"
 PROJECT="git@github.com:eschabell/brms-coolstore-demo.git"
-JBOSS_HOME=./target/jboss-eap-6.1
-SERVER_DIR=$JBOSS_HOME/standalone/deployments
-SERVER_CONF=$JBOSS_HOME/standalone/configuration
-LIB_DIR=./support/lib
-SUPPORT_DIR=./support
 SRC_DIR=./installs
+SUPPORT_DIR=./support
+JBOSS_HOME=$SRC_DIR/jboss-eap-6.1
+SERVER_DIR=$JBOSS_HOME/standalone/deployments/
+SERVER_CONF=$JBOSS_HOME/standalone/configuration/
+PRJ_DIR=./
 EAP=jboss-eap-6.1.0.zip
 BRMS=brms-p-5.3.1.GA-deployable-ee6.zip
-BRMS_LIBS=./target/jboss-eap-6.1/standalone/deployments/jboss-brms.war/WEB-INF/lib
+BRMS_LIBS=$JBOSS_HOME/standalone/deployments/jboss-brms.war/WEB-INF/lib
 SUPPORT_LIBS=./support/libs/
-WEB_INF_LIB=./projects/brms-coolstore-demo/src/main/webapp/WEB-INF/lib/
+WEB_INF_LIB=./src/main/webapp/WEB-INF/lib/
 DESIGNER=designer-patched.war
 MVN_VERSION=5.3.1.BRMS
 VERSION=5.3.1
@@ -54,49 +54,42 @@ installBinary() {
 
 # make some checks first before proceeding.	
 if [[ -r $SRC_DIR/$EAP || -L $SRC_DIR/$EAP ]]; then
-	echo EAP sources are present...
-	echo
+		echo EAP sources are present...
+		echo
 else
-	echo Need to download $EAP package from the Customer Support Portal 
-	echo and place it in the $SRC_DIR directory to proceed...
-	echo
-	exit
-fi
-
-# Create the target directory if it does not already exist.
-if [ ! -x target ]; then
-	echo "  - creating the target directory..."
-	echo
-  mkdir target
-else
-	echo "  - detected target directory, moving on..."
-	echo
+		echo Need to download $EAP package from the Customer Support Portal 
+		echo and place it in the $SRC_DIR directory to proceed...
+		echo
+		exit
 fi
 
 # Move the old JBoss instance, if it exists, to the OLD position.
 if [ -x $JBOSS_HOME ]; then
-	echo "  - existing JBoss Enterprise EAP 6 detected..."
-	echo
-	echo "  - moving existing JBoss Enterprise EAP 6 aside..."
-	echo
-  rm -rf $JBOSS_HOME.OLD
-  mv $JBOSS_HOME $JBOSS_HOME.OLD
+		echo "  - existing JBoss Enterprise EAP 6 detected..."
+		echo
+		echo "  - moving existing JBoss Enterprise EAP 6 aside..."
+		echo
+		rm -rf $JBOSS_HOME.OLD
+		mv $JBOSS_HOME $JBOSS_HOME.OLD
 
-	# Unzip the JBoss EAP instance.
-	echo Unpacking JBoss Enterprise EAP 6...
-	echo
-	unzip -q -d target $SRC_DIR/$EAP
+		# Unzip the JBoss EAP instance.
+		echo Unpacking JBoss Enterprise EAP 6...
+		echo
+		chmod +x $SRC_DIR/$EAP
+		unzip -q -d $SRC_DIR $SRC_DIR/$EAP
 else
-	# Unzip the JBoss EAP instance.
-	echo Unpacking new JBoss Enterprise EAP 6...
-	echo
-	unzip -q -d target $SRC_DIR/$EAP
+		# Unzip the JBoss EAP instance.
+		echo Unpacking new JBoss Enterprise EAP 6...
+		echo
+		chmod +x $SRC_DIR/$EAP
+		unzip -q -d $SRC_DIR $SRC_DIR/$EAP
 fi
 
 # Unzip the required files from JBoss BRMS Deployable
 echo Unpacking JBoss Enterprise BRMS $VERSION...
 echo
 cd installs
+chmod +x $BRMS
 unzip -q $BRMS
 
 echo "  - deploying JBoss Enterprise BRMS Manager WAR..."
@@ -126,7 +119,7 @@ if [ ! -d $WEB_INF_LIB ]; then
 	mkdir -p $WEB_INF_LIB
 fi
 
-mvn install:install-file -Dfile=$SUPPORT_LIBS/cdiutils-1.0.0.jar -DgroupId=org.vaadin.virkki -DartifactId=cdiutils -Dversion=1.0.0 -Dpackaging=jar
+mvn -s maven/settings.xml install:install-file -Dfile=$SUPPORT_LIBS/cdiutils-1.0.0.jar -DgroupId=org.vaadin.virkki -DartifactId=cdiutils -Dversion=1.0.0 -Dpackaging=jar
 
 cp $SUPPORT_LIBS/cdiutils-1.0.0.jar $WEB_INF_LIB
 
@@ -268,15 +261,11 @@ echo "######################################################################"
 echo
 echo You will need to add to your personal ~/.m2/settings.xml the settings provided in the file:
 echo
-echo "  projects/brms-coolstore-demo/maven/settings.xml" 
+echo "  maven/settings.xml" 
 echo
 echo These are setup to point maven to the local JBoss EAP6 maven artefacts in the /tmp directory
 echo repository just extracted for you.
 echo 
-echo ============================================================
-cat README.md
-echo ============================================================
-echo
 echo
 echo "${DEMO} Setup Complete."
 echo

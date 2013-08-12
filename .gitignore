@@ -1,3 +1,4 @@
 *.zip
 target/
 WEB-INF/
+installs/jboss-eap*
