@@ -3,4 +3,4 @@ target/
 WEB-INF/
 .DS_Store
 *.classpath
-
+*.settings
