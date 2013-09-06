@@ -53,7 +53,7 @@ Released versions
 
 See the tagged releases for the following versions of the product:
 
-- v1.3 is BRMS 5.3.1 deployable, running on JBoss EAP 6.1.1, mavenized using JBoss repo. 
+- v1.3 is BRMS 5.3.1 deployable, running on JBoss EAP 6.1.1, and added Forge Laptop Sticker to store.
 
 - v1.2 is BRMS 5.3.1 deployable, running on JBoss EAP 6.1, mavenized using JBoss repo. 
 
