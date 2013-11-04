@@ -17,10 +17,6 @@ See Quick Start Guide in project as ODT and PDF for details on installation. For
 
 - read Quick Start Guide
 
-- run 'mvn clean install' on project to build
-
-- copy projects/brms-coolstore-demo/target/brms-coolstore-demo.war deployments directory of installed server
-
 - start JBoss EAP server
 
 - login to BRM (http://localhost:8080/jboss-brms)
@@ -52,6 +48,9 @@ Released versions
 -----------------
 
 See the tagged releases for the following versions of the product:
+
+- v1.4 is BRMS 5.3.1 deployable, running on JBoss EAP 6.1.1, integrated BRMS maven repo into project so no longer need to add to
+	personal settings configuration which fully automates project build.
 
 - v1.3 is BRMS 5.3.1 deployable, running on JBoss EAP 6.1.1, and added Forge Laptop Sticker to store.
 

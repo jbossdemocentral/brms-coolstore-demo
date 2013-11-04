@@ -146,6 +146,41 @@
         <javaee6.with.tools.version>1.0.4.Final-redhat-4</javaee6.with.tools.version>
 
     </properties>
+
+    <repositories>
+			<repository>
+				<id>jboss-eap-6-1-0-maven-repository</id>
+				<name>JBoss EAP Maven Repository</name>
+				<url>http://maven.repository.redhat.com/techpreview/all/</url>
+				<layout>default</layout>
+				<releases>
+					<enabled>true</enabled>
+					<updatePolicy>never</updatePolicy>
+				</releases>
+				<snapshots>
+					<enabled>false</enabled>
+					<updatePolicy>never</updatePolicy>
+				</snapshots>
+			</repository>
+		</repositories>
+		
+		<pluginRepositories>
+			<pluginRepository>
+				<id>jboss-eap-6-1-0-maven-repository</id>
+				<name>JBoss EAP Maven Repository</name>
+				<url>http://maven.repository.redhat.com/techpreview/all/</url>
+				<layout>default</layout>
+				<releases>
+					<enabled>true</enabled>
+					<updatePolicy>never</updatePolicy>
+				</releases>
+				<snapshots>
+					<enabled>false</enabled>
+					<updatePolicy>never</updatePolicy>
+				</snapshots>
+			</pluginRepository>
+		</pluginRepositories>
+
     <dependencies>
 
         <!-- Import the CDI API, we use provided scope as the API is included 

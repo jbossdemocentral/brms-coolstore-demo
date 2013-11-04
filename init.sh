@@ -8,6 +8,7 @@ SERVER_CONF=$JBOSS_HOME/standalone/configuration
 LIB_DIR=./support/lib
 SUPPORT_DIR=./support
 SRC_DIR=./installs
+PRJ_DIR=./projects/brms-coolstore-demo
 EAP=jboss-eap-6.1.1.zip
 BRMS=brms-p-5.3.1.GA-deployable-ee6.zip
 BRMS_LIBS=./target/jboss-eap-6.1/standalone/deployments/jboss-brms.war/WEB-INF/lib
@@ -259,20 +260,12 @@ rm jboss-jbpm-engine.zip
 echo Installation of binaries "for" BRMS $MVN_VERSION complete.
 echo
 
+echo Building and installing Cool Store web shop app into BRMS.
 echo
-echo "######################################################################"
-echo "##                                                                  ##"
-echo "## NOTE: THIS NEXT STEP IS REQUIRED, DEMO WILL NOT WORK WITHOUT IT! ##"
-echo "##                                                                  ##"
-echo "######################################################################"
-echo
-echo You will need to add to your personal ~/.m2/settings.xml the settings provided in the file:
-echo
-echo "  projects/brms-coolstore-demo/maven/settings.xml" 
-echo
-echo These are setup to point maven to the local JBoss EAP6 maven artefacts in the /tmp directory
-echo repository just extracted for you.
-echo 
+cd $PRJ_DIR
+mvn clean install
+cp -v target/brms-coolstore-demo.war ../../$SERVER_DIR
+
 echo ============================================================
 cat README.md
 echo ============================================================
