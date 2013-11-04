@@ -12,3 +12,5 @@ Notes and tips:
   file path of the extracted file became greater than 255 chars (yet another windows 
   headache). By putting the project in a higher directory (c:\demo), the issue can be
   resolved.
+- if you find errors with the installation, please fix and push back to project, we don't have
+  a windows environment to test and keep these scripts updated.
