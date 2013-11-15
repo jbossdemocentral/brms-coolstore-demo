@@ -265,6 +265,7 @@ echo
 cd $PRJ_DIR
 mvn clean install
 cp -v target/brms-coolstore-demo.war ../../$SERVER_DIR
+cd ../..
 
 echo ============================================================
 cat README.md
