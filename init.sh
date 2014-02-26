@@ -98,10 +98,10 @@ echo "  - enabling management accounts login setup in mgmt-users.properties file
 echo
 cp $SUPPORT_DIR/mgmt-users.properties $SERVER_CONF
 
-#echo "  - setting up demo projects..."
-#echo
-#cp -r $SUPPORT_DIR/bpm-suite-demo-niogit $SERVER_BIN/.niogit
-#cp -r $SUPPORT_DIR/bpm-suite-demo-index $SERVER_BIN/.index
+echo "  - setting up demo projects..."
+echo
+cp -r $SUPPORT_DIR/bpm-suite-demo-niogit $SERVER_BIN/.niogit
+cp -r $SUPPORT_DIR/bpm-suite-demo-index $SERVER_BIN/.index
 
 echo "  - setting up standalone.xml configuration adjustments..."
 echo
@@ -121,24 +121,6 @@ fi
 mvn install:install-file -Dfile=$SUPPORT_LIBS/cdiutils-1.0.0.jar -DgroupId=org.vaadin.virkki -DartifactId=cdiutils -Dversion=1.0.0 -Dpackaging=jar
 
 cp $SUPPORT_LIBS/cdiutils-1.0.0.jar $WEB_INF_LIB
-
-#cp $BRMS_LIBS/drools-core-$MVN_VERSION.jar $WEB_INF_LIB
-
-#cp $BRMS_LIBS/drools-compiler-$MVN_VERSION.jar $WEB_INF_LIB
-
-#cp $BRMS_LIBS/drools-decisiontables-$MVN_VERSION.jar $WEB_INF_LIB
-
-#cp $BRMS_LIBS/drools-templates-$MVN_VERSION.jar $WEB_INF_LIB
-
-#cp $BRMS_LIBS/jbpm-bpmn2-$MVN_VERSION.jar $WEB_INF_LIB
-
-#cp $BRMS_LIBS/jbpm-flow-$MVN_VERSION.jar $WEB_INF_LIB
-
-#cp $BRMS_LIBS/jbpm-flow-builder-$MVN_VERSION.jar $WEB_INF_LIB
-
-#cp $BRMS_LIBS/knowledge-api-$MVN_VERSION.jar $WEB_INF_LIB
-
-#cp $BRMS_LIBS/mvel2-2.1.3.Final.jar $WEB_INF_LIB
 
 cd $PRJ_DIR
 mvn clean install
