@@ -1,6 +1,5 @@
 package com.redhat.coolstore.util;
 
-import org.apache.log4j.Logger;
 import org.drools.event.knowledgeagent.AfterChangeSetAppliedEvent;
 import org.drools.event.knowledgeagent.AfterChangeSetProcessedEvent;
 import org.drools.event.knowledgeagent.AfterResourceProcessedEvent;
@@ -10,11 +9,13 @@ import org.drools.event.knowledgeagent.BeforeResourceProcessedEvent;
 import org.drools.event.knowledgeagent.KnowledgeAgentEventListener;
 import org.drools.event.knowledgeagent.KnowledgeBaseUpdatedEvent;
 import org.drools.event.knowledgeagent.ResourceCompilationFailedEvent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class LogKnowledgeAgentListener implements KnowledgeAgentEventListener {
     
-    Logger log = Logger.getLogger(LogKnowledgeAgentListener.class);
-
+	Logger log = LoggerFactory.getLogger(KnowledgeAgentEventListener.class);
+	
     @Override
     public void beforeChangeSetApplied(BeforeChangeSetAppliedEvent event) {
         // TODO Auto-generated method stub

@@ -5,6 +5,7 @@ PROJECT="git@github.com:eschabell/brms-coolstore-demo.git"
 JBOSS_HOME=./target/jboss-eap-6.1
 SERVER_DIR=$JBOSS_HOME/standalone/deployments
 SERVER_CONF=$JBOSS_HOME/standalone/configuration
+SERVER_BIN=$JBOSS_HOME/bin
 LIB_DIR=./support/lib
 SUPPORT_DIR=./support
 SRC_DIR=./installs
@@ -22,24 +23,24 @@ VERSION=6.0.0.GA
 clear 
 
 echo
-echo "#########################################################"
-echo "##                                                     ##"   
-echo "##  Setting up the ${DEMO}  ##"
-echo "##                                                     ##"   
-echo "##                                                     ##"   
-echo "##             ####   ####    #   #    ###             ##"
-echo "##             #   #  #   #  # # # #  #                ##"
-echo "##             ####   ####   #  #  #   ##              ##"
-echo "##             #   #  #  #   #     #     #             ##"
-echo "##             ####   #   #  #     #  ###              ##"
-echo "##                                                     ##"   
-echo "##                                                     ##"   
-echo "##  brought to you by,                                 ##"   
-echo "##             ${AUTHORS}        ##"
-echo "##                                                     ##"   
-echo "##  ${PROJECT}   ##"
-echo "##                                                     ##"   
-echo "#########################################################"
+echo "#################################################################"
+echo "##                                                             ##"   
+echo "##  Setting up the ${DEMO}     ##"
+echo "##                                                             ##"   
+echo "##                                                             ##"   
+echo "##     ####  ####   #   #      ### #   # ##### ##### #####     ##"
+echo "##     #   # #   # # # # #    #    #   #   #     #   #         ##"
+echo "##     ####  ####  #  #  #     ##  #   #   #     #   ###       ##"
+echo "##     #   # #     #     #       # #   #   #     #   #         ##"
+echo "##     ####  #     #     #    ###  ##### #####   #   #####     ##"
+echo "##                                                             ##"   
+echo "##                                                             ##"   
+echo "##  brought to you by,                                         ##"   
+echo "##             ${AUTHORS}                ##"
+echo "##                                                             ##"   
+echo "##  ${PROJECT}           ##"
+echo "##                                                             ##"   
+echo "#################################################################"
 echo
 
 command -v mvn -q >/dev/null 2>&1 || { echo >&2 "Maven is required but not installed yet... aborting."; exit 1; }
@@ -145,7 +146,7 @@ mvn clean install
 echo
 echo Copying BPM Suite Cool Store application into the JBoss BPM Suite.
 echo
-cp -v target/bpm-suite-coolstore-demo.war ../../$SERVER_DIR
+cp target/bpm-suite-coolstore-demo.war ../../$SERVER_DIR
 cd ../..
 
 echo

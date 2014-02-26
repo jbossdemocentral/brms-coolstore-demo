@@ -1,22 +1,24 @@
 package com.redhat.coolstore.util;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.io.File;
+import java.io.FilenameFilter;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
-import org.drools.agent.KnowledgeAgent;
-import org.drools.agent.KnowledgeAgentFactory;
-import org.drools.builder.ResourceType;
-import org.drools.io.Resource;
-import org.drools.io.ResourceChangeScannerConfiguration;
-import org.drools.io.ResourceFactory;
-import org.drools.io.impl.ChangeSetImpl;
-import org.drools.io.impl.UrlResource;
-import org.drools.runtime.StatefulKnowledgeSession;
-import org.drools.runtime.StatelessKnowledgeSession;
+import org.kie.api.KieServices;
+import org.kie.api.builder.KieScanner;
+import org.kie.api.builder.ReleaseId;
+import org.kie.api.runtime.KieContainer;
+import org.kie.api.runtime.KieSession;
+import org.kie.api.runtime.StatelessKieSession;
+import org.kie.api.runtime.manager.RuntimeEngine;
+import org.kie.api.runtime.manager.RuntimeEnvironmentBuilder;
+import org.kie.api.runtime.manager.RuntimeManager;
+import org.kie.api.runtime.manager.RuntimeManagerFactory;
+import org.kie.internal.runtime.manager.context.ProcessInstanceIdContext;
 
 import com.redhat.coolstore.factmodel.ShoppingCart;
 import com.redhat.coolstore.factmodel.ShoppingCartItem;
@@ -24,103 +26,66 @@ import com.redhat.coolstore.factmodel.ShoppingCartItem;
 @Singleton
 public class BRMSUtil {
 
-    private KnowledgeAgent kagent = null;
-
-    public BRMSUtil() {		
+    private static RuntimeEngine runtime;
+    private KieServices kieServices = null;
+    private ReleaseId releaseId = null;
+    private KieContainer kContainer = null;
+    private KieScanner kScanner = null;
+    private static KieSession session = null;
+    private static RuntimeManager manager = null;
+    
+    public BRMSUtil() {	    	    	
     }
 
     @PostConstruct
     public void postConstruct() {
-        kagent = KnowledgeAgentFactory.newKnowledgeAgent("BRMS Agent");
-        kagent.addEventListener(new LogKnowledgeAgentListener());
+        
+//        kieServices = KieServices.Factory.get();
+//        releaseId = kieServices.newReleaseId( "com.redhat", "bpm-suite-coolstore-demo", "2.0.0-Final" );
+//        kContainer = kieServices.newKieContainer( releaseId );
+//        kScanner = kieServices.newKieScanner( kContainer );
+//
+//
+//        // Start the KieScanner polling the Maven repository every 10 seconds
+//        kScanner.start( 10000L );
+    }
 
-        ChangeSetImpl changeSet = new ChangeSetImpl();
-        changeSet.setResourcesAdded( buildResourceURLCollection() );
+    
+    public StatelessKieSession getStatelessSession() {
 
-        // resource to the change-set xml for the resources to add                                                                  
-        kagent.applyChangeSet( changeSet );
-
-        ResourceChangeScannerConfiguration changeScannerConfiguration = ResourceFactory.getResourceChangeScannerService().newResourceChangeScannerConfiguration();
-
-        changeScannerConfiguration.setProperty("drools.resource.scanner.interval", Integer.toString(1));
-
-        ResourceFactory.getResourceChangeScannerService().configure(changeScannerConfiguration); 
-
-        ResourceFactory.getResourceChangeNotifierService().start();
-
-        ResourceFactory.getResourceChangeScannerService().start();
+        return runtime.getKieSession().getKieBase().newStatelessKieSession();
 
     }
 
-    public StatelessKnowledgeSession getStatelessSession() {
+    /*
+     * KieSession is the new StatefulKnowledgeSession from BRMS 5.3.
+     */
+    public KieSession getStatefulSession() {
 
-        return kagent.getKnowledgeBase().newStatelessKnowledgeSession();
-
-    }
-
-    public StatefulKnowledgeSession getStatefulSession() {
-
-        return kagent.getKnowledgeBase().newStatefulKnowledgeSession();
+        return runtime.getKieSession();
 
     }
 
-    public void stopResourceChangeScannerServices() {
 
-        ResourceFactory.getResourceChangeNotifierService().stop();
-
-        ResourceFactory.getResourceChangeScannerService().stop();
-
-        kagent = null;
-
+    private static RuntimeManager createRuntimeManager() {
+    	
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.h2database.h2");
+        RuntimeEnvironmentBuilder builder = RuntimeEnvironmentBuilder.Factory.get()
+            .newClasspathKmoduleDefaultBuilder()
+            .entityManagerFactory(emf);
+        return RuntimeManagerFactory.Factory.get()
+            .newSingletonRuntimeManager(builder.get(), "com.redhat.coolstore.PriceProcess:1.0");
     }
-
-    private Collection<Resource> buildResourceURLCollection() {
-
-        Collection<Resource> resources = new ArrayList<Resource>();
-
-        List<String> urlArrayList = new ArrayList<String>();
-
-        String guvnorIPOverride = System.getProperty("guvnor-ip");
-        String guvnorPortOverride = System.getProperty("guvnor-port");
-
-        String guvnorIP = "localhost";
-        String guvnorPort = "8080";
-
-        if ( guvnorIPOverride != null ) {
-
-            guvnorIP = guvnorIPOverride;
-
-        }
-
-        if ( guvnorPortOverride != null ) {
-
-            guvnorPort = guvnorPortOverride;
-
-        }
-
-        urlArrayList.add("http://" + guvnorIP + ":" + guvnorPort +"/jboss-brms/org.drools.guvnor.Guvnor/package/com.redhat.coolstore/LATEST");
-
-        for (String url : urlArrayList){
-
-            UrlResource standardUrlResource = (UrlResource) ResourceFactory.newUrlResource(url);
-
-            standardUrlResource.setBasicAuthentication("enabled");
-            standardUrlResource.setUsername("admin");
-            standardUrlResource.setPassword("admin");
-            standardUrlResource.setResourceType(ResourceType.PKG);
-            resources.add(standardUrlResource);
-
-        }
-
-        return resources;
-    }
-
+    
+    
     public static void main(String[] args) {
 
         BRMSUtil b = new BRMSUtil();
-
-        StatefulKnowledgeSession session = b.getStatefulSession();
-
+        
+        manager = createRuntimeManager();
+		runtime = manager.getRuntimeEngine(ProcessInstanceIdContext.get());
+		session = runtime.getKieSession();
+		
         ShoppingCart sc = new ShoppingCart();
 
         ShoppingCartItem sci = new ShoppingCartItem();
@@ -136,8 +101,6 @@ public class BRMSUtil {
         session.fireAllRules();
 
         session.dispose();
-
-        b.stopResourceChangeScannerServices();
 
         System.exit(0);
 

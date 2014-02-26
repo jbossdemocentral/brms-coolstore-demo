@@ -5,8 +5,8 @@ import java.io.Serializable;
 import javax.ejb.Stateful;
 import javax.inject.Inject;
 
-import org.drools.runtime.StatefulKnowledgeSession;
-import org.drools.runtime.rule.WorkingMemoryEntryPoint;
+import org.kie.api.runtime.KieSession;
+import org.kie.api.runtime.rule.EntryPoint;
 
 import com.redhat.coolstore.factmodel.PromoEvent;
 import com.redhat.coolstore.model.Promotion;
@@ -35,7 +35,7 @@ public class ShoppingCartServiceImplBRMS implements ShoppingCartService, Seriali
 						
 			com.redhat.coolstore.factmodel.ShoppingCart factShoppingCart = new com.redhat.coolstore.factmodel.ShoppingCart();
 			
-			StatefulKnowledgeSession ksession = null;
+			KieSession ksession = null;
 			
 			try {
 			
@@ -44,7 +44,7 @@ public class ShoppingCartServiceImplBRMS implements ShoppingCartService, Seriali
 				
 					ksession = brmsUtil.getStatefulSession();
 					
-					WorkingMemoryEntryPoint promoStream = ksession.getWorkingMemoryEntryPoint("Promo Stream");
+					EntryPoint promoStream = ksession.getEntryPoint("Promo Stream");
 					
 					for (Promotion promo : promoService.getPromotions()) {
 																	
