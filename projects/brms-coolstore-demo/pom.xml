@@ -294,44 +294,22 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.drools</groupId>
-			<artifactId>drools-core</artifactId>
+			<groupId>org.kie</groupId>
+			<artifactId>kie-internal</artifactId>
 			<version>6.0.1-redhat-2</version>
+			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
-			<groupId>org.drools</groupId>
-			<artifactId>drools-decisiontables</artifactId>
+			<groupId>org.kie</groupId>
+			<artifactId>kie-ci</artifactId>
 			<version>6.0.1-redhat-2</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.drools</groupId>
-			<artifactId>drools-templates</artifactId>
-			<version>6.0.1-redhat-2</version>
+			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jbpm</groupId>
 			<artifactId>jbpm-bpmn2</artifactId>
-			<version>6.0.1-redhat-2</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.jbpm</groupId>
-			<artifactId>jbpm-flow</artifactId>
-			<version>6.0.1-redhat-2</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.jbpm</groupId>
-			<artifactId>jbpm-flow-builder</artifactId>
-			<version>6.0.1-redhat-2</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.drools</groupId>
-			<artifactId>knowledge-api</artifactId>
 			<version>6.0.1-redhat-2</version>
 		</dependency>
 
@@ -351,24 +329,17 @@
 			<version>3.2.16.GA-redhat-1</version>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-api</artifactId>
-			<version>2.0-rc1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-core</artifactId>
-			<version>2.0-rc1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.kie</groupId>
-			<artifactId>kie-ci</artifactId>
-			<version>6.0.1-redhat-2</version>
-		</dependency>
-		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<version>1.7.6</version>
 		</dependency>
+		
+		<!-- KJar file from project. -->
+		<dependency>
+      <groupId>com.redhat</groupId>
+      <artifactId>coolstore</artifactId>
+      <version>2.0.0-Final</version>
+			<scope>compile</scope>
+    </dependency>
 	</dependencies>
 </project>
