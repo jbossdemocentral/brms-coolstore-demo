@@ -131,8 +131,6 @@ echo
 cp target/bpm-suite-coolstore-demo.war ../../$SERVER_DIR
 cd ../..
 
-echo
-echo
 echo "You can now start the $PRODUCT with $SERVER_BIN/standalone.sh"
 echo
 
