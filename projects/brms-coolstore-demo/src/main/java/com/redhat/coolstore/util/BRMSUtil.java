@@ -18,7 +18,7 @@ public class BRMSUtil {
     	
     	KieServices kServices = KieServices.Factory.get();
 
-		ReleaseId releaseId = kServices.newReleaseId( "com.redhat", "coolstore", "2.0.0-FINAL" );
+		ReleaseId releaseId = kServices.newReleaseId( "com.redhat", "coolstore", "2.0" );
 
 		kContainer = kServices.newKieContainer( releaseId );
 
