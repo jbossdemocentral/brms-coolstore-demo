@@ -17,10 +17,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.redhat.coolstore.DefaultDeployment;
-import com.redhat.coolstore.model.Product;
-import com.redhat.coolstore.model.Promotion;
-import com.redhat.coolstore.model.ShoppingCart;
-import com.redhat.coolstore.model.ShoppingCartItem;
+import com.redhat.coolstore.Product;
+import com.redhat.coolstore.PromoEvent;
+import com.redhat.coolstore.ShoppingCart;
+import com.redhat.coolstore.ShoppingCartItem;
 
 @RunWith(Arquillian.class)
 public class ShoppingCartServiceTest {
@@ -45,7 +45,7 @@ public class ShoppingCartServiceTest {
 	@Before
 	public void clearPromos() {
 		
-		promoService.setPromotions(new HashSet<Promotion>());
+		promoService.setPromotions(new HashSet<PromoEvent>());
 		
 	}
 				
@@ -75,12 +75,14 @@ public class ShoppingCartServiceTest {
 		Product p = new Product();
 		p.setItemId("123");
 		p.setPrice(10.00);
-		sci.setQuanity(2);
-		sci.setProduct(p);
+		sci.setQuantity(2);
+		sci.setItemId(p.getItemId());
+		sci.setPrice(p.getPrice());
 		
 		productService.setProducts(Arrays.asList(p));
 		
-		shoppingCart.addShoppingCartItem(sci);
+		shoppingCart.getShoppingCartItemList().add(sci);
+		shoppingCart.setCartItemTotal(shoppingCart.getCartItemTotal() + 1);
 		
 		shoppingCartService.priceShoppingCart(shoppingCart);
 		
@@ -101,26 +103,34 @@ public class ShoppingCartServiceTest {
 		Product p1 = new Product();
 		p1.setItemId("123");
 		p1.setPrice(9.99);
-		sci1.setQuanity(3);
-		sci1.setProduct(p1);
+		sci1.setQuantity(3);
+		sci1.setItemId(p1.getItemId());
+		sci1.setPrice(p1.getPrice());
 		
 		ShoppingCartItem sci2 = new ShoppingCartItem();
 		Product p2 = new Product();
 		p2.setItemId("234");
 		p2.setPrice(6.77);
-		sci2.setQuanity(1);
-		sci2.setProduct(p2);
+		sci2.setQuantity(1);
+		sci2.setItemId(p2.getItemId());
+		sci2.setPrice(p2.getPrice());
 		
 		ShoppingCartItem sci3 = new ShoppingCartItem();
 		Product p3 = new Product();
 		p3.setItemId("345");
 		p3.setPrice(2.00);		
-		sci3.setQuanity(2);
-		sci3.setProduct(p3);
+		sci3.setQuantity(2);
+		sci3.setItemId(p3.getItemId());
+		sci3.setPrice(p3.getPrice());
 		
-		shoppingCart.addShoppingCartItem(sci1);
-		shoppingCart.addShoppingCartItem(sci2);
-		shoppingCart.addShoppingCartItem(sci3);
+		shoppingCart.getShoppingCartItemList().add(sci1);
+		shoppingCart.setCartItemTotal(shoppingCart.getCartItemTotal() + 1);
+		
+		shoppingCart.getShoppingCartItemList().add(sci2);
+		shoppingCart.setCartItemTotal(shoppingCart.getCartItemTotal() + 1);
+		
+		shoppingCart.getShoppingCartItemList().add(sci3);
+		shoppingCart.setCartItemTotal(shoppingCart.getCartItemTotal() + 1);
 		
 		productService.setProducts(Arrays.asList(p1, p2, p3));
 		
@@ -143,10 +153,12 @@ public class ShoppingCartServiceTest {
 		Product p = new Product();
 		p.setItemId("123");
 		p.setPrice(10.00);
-		sci.setQuanity(2);
-		sci.setProduct(p);
+		sci.setQuantity(2);
+		sci.setItemId(p.getItemId());
+		sci.setPrice(p.getPrice());
 		
-		shoppingCart.addShoppingCartItem(sci);
+		shoppingCart.getShoppingCartItemList().add(sci);
+		shoppingCart.setCartItemTotal(shoppingCart.getCartItemTotal() + 1);
 		
 		productService.setProducts(Arrays.asList(p));
 		
@@ -174,25 +186,26 @@ public class ShoppingCartServiceTest {
 		
 		Assert.assertEquals(0, shoppingCart.getCartItemPromoSavings(), 0);
 		
-		//TODO: uncomment and fix.  reguardless of promotionSet passed in constructor overrides for promotionSet
-		Set<Promotion> promotionSet = new HashSet<Promotion>();
+		Set<PromoEvent> promotionSet = new HashSet<PromoEvent>();
 		
-		Promotion p1 = new Promotion("123", .25);
+		PromoEvent p1 = new PromoEvent("123", .25);
 		
 		promotionSet.add(p1);
 		
 		promoService.setPromotions(promotionSet);
 		
 		ShoppingCartItem sci = new ShoppingCartItem();
-		sci.setQuanity(1);
+		sci.setQuantity(1);
 		
 		Product p = new Product();
 		p.setItemId("234");
 		p.setPrice(10.00);
 		
-		sci.setProduct(p);
+		sci.setItemId(p.getItemId());
+		sci.setPrice(p.getPrice());
 		
-		shoppingCart.addShoppingCartItem(sci);
+		shoppingCart.getShoppingCartItemList().add(sci);
+		shoppingCart.setCartItemTotal(shoppingCart.getCartItemTotal() + 1);
 		
 		productService.setProducts(Arrays.asList(p));
 						
@@ -205,8 +218,8 @@ public class ShoppingCartServiceTest {
 		Assert.assertEquals(0, shoppingCart.getCartItemPromoSavings(), 0);
 		
 		p.setItemId("123");
-		sci.setProduct(p);
-				
+		sci.setItemId(p.getItemId());
+		
 		shoppingCartService.priceShoppingCart(shoppingCart);	
 			
 		Assert.assertEquals(7.5, shoppingCart.getCartItemTotal(), 0);
@@ -223,15 +236,18 @@ public class ShoppingCartServiceTest {
 	public void priceShoppingCartWithShippingPromoTest() {
 				
 		ShoppingCartItem sci = new ShoppingCartItem();
-		sci.setQuanity(1);
+		sci.setQuantity(1);
 		
 		Product p = new Product();
 		p.setItemId("456");
 		p.setPrice(74.99);
 		
-		sci.setProduct(p);
+		sci.setItemId(p.getItemId());
+		sci.setPrice(p.getPrice());
 		
-		shoppingCart.addShoppingCartItem(sci);
+		shoppingCart.getShoppingCartItemList().add(sci);
+		shoppingCart.setCartItemTotal(shoppingCart.getCartItemTotal() + 1);
+		
 		
 		productService.setProducts(Arrays.asList(p));
 						

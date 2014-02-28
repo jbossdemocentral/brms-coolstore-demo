@@ -7,7 +7,7 @@ import java.util.Map;
 
 import javax.ejb.Singleton;
 
-import com.redhat.coolstore.model.Product;
+import com.redhat.coolstore.Product;
 
 @Singleton
 public class ProductService {

@@ -11,9 +11,9 @@ import javax.servlet.annotation.WebServlet;
 import org.vaadin.virkki.cdiutils.application.AbstractCdiApplication;
 import org.vaadin.virkki.cdiutils.application.CdiApplicationServlet;
 
-import com.redhat.coolstore.model.Product;
-import com.redhat.coolstore.model.ShoppingCart;
-import com.redhat.coolstore.model.ShoppingCartItem;
+import com.redhat.coolstore.Product;
+import com.redhat.coolstore.ShoppingCart;
+import com.redhat.coolstore.ShoppingCartItem;
 import com.redhat.coolstore.service.ShoppingCartService;
 import com.redhat.coolstore.web.ui.ProductsView;
 import com.redhat.coolstore.web.ui.ShoppingCartView;
@@ -32,6 +32,11 @@ public class CoolStoreApplication extends AbstractCdiApplication implements Clic
 	@WebServlet(urlPatterns = "/*", initParams = @WebInitParam(name = "application", value = "com.redhat.coolstore.web.CoolStoreApplication"))
     public static class CoolStoreApplicationServlet extends
             CdiApplicationServlet {
+
+		/**
+		 * Default serialization.
+		 */
+		private static final long serialVersionUID = 1L;
     }
 	
 	private static final long serialVersionUID = 8436561253049378320L;
@@ -135,7 +140,7 @@ public class CoolStoreApplication extends AbstractCdiApplication implements Clic
 		
 		for (ShoppingCartItem sci : shoppingCart.getShoppingCartItemList() ) {
 			
-			shoppingCartItemMap.put(sci.getProduct().getItemId(), sci);
+			shoppingCartItemMap.put(sci.getItemId(), sci);
 			
 		}
 		
@@ -148,17 +153,20 @@ public class CoolStoreApplication extends AbstractCdiApplication implements Clic
 					
 					ShoppingCartItem sci = shoppingCartItemMap.get(p.getItemId());
 					
-					sci.setQuanity(sci.getQuanity() + 1);
+					sci.setQuantity(sci.getQuantity() + 1);
 					
 				} else {
 					
 					ShoppingCartItem sci = new ShoppingCartItem();
 					
-					sci.setProduct(p);
+					sci.setItemId(p.getItemId());
+					sci.setPrice(p.getPrice());
 					
-					sci.setQuanity(1);
+					sci.setQuantity(1);
 					
-					shoppingCart.addShoppingCartItem(sci);
+					shoppingCart.getShoppingCartItemList().add(sci);
+					shoppingCart.setCartItemTotal(shoppingCart.getCartItemTotal() + 1);
+					
 					
 					shoppingCartItemMap.put(p.getItemId(), sci);
 					

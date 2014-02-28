@@ -6,9 +6,9 @@ import javax.ejb.Stateless;
 import javax.enterprise.inject.Alternative;
 import javax.inject.Inject;
 
-import com.redhat.coolstore.model.Product;
-import com.redhat.coolstore.model.ShoppingCart;
-import com.redhat.coolstore.model.ShoppingCartItem;
+import com.redhat.coolstore.Product;
+import com.redhat.coolstore.ShoppingCart;
+import com.redhat.coolstore.ShoppingCartItem;
 
 @Alternative
 @Stateless
@@ -35,8 +35,8 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 				
 				for (ShoppingCartItem sci : sc.getShoppingCartItemList()) {
 					
-					sc.setCartItemPromoSavings(sc.getCartItemPromoSavings() + (sci.getPromoSavings() * sci.getQuanity()));
-					sc.setCartItemTotal(sc.getCartItemTotal() + (sci.getPrice() * sci.getQuanity()));
+					sc.setCartItemPromoSavings(sc.getCartItemPromoSavings() + (sci.getPromoSavings() * sci.getQuantity()));
+					sc.setCartItemTotal(sc.getCartItemTotal() + (sci.getPrice() * sci.getQuantity()));
 					
 				}
 				
@@ -54,26 +54,28 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
 	private void initShoppingCartForPricing(ShoppingCart sc) {
 
-		sc.setCartItemTotal(0);
-		sc.setCartItemPromoSavings(0);
-		sc.setShippingTotal(0);
-		sc.setShippingPromoSavings(0);
-		sc.setCartTotal(0);
+		sc.setCartItemTotal(0d);
+		sc.setCartItemPromoSavings(0d);
+		sc.setShippingTotal(0d);
+		sc.setShippingPromoSavings(0d);
+		sc.setCartTotal(0d);
 		
 		Map<String, Product> productMap = pp.getProductMap();
 		
 		for (ShoppingCartItem sci : sc.getShoppingCartItemList()) {
 			
-			Product p = productMap.get(sci.getProduct().getItemId());
+			Product p = productMap.get(sci.getItemId());
 			
 			//if product exist, create new product to reset price
 			if ( p != null ) {
 			
-				sci.setProduct(new Product(p.getItemId(), p.getName(), p.getDesc(), p.getPrice()));
+				sci.setItemId(p.getItemId());
+				sci.setName(p.getName());
 				sci.setPrice(p.getPrice());
+				sci.setQuantity(sci.getQuantity() + 1);
 			}
 			
-			sci.setPromoSavings(0);
+			sci.setPromoSavings(0d);
 			
 		}
 		

@@ -17,10 +17,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.redhat.coolstore.DefaultDeployment;
-import com.redhat.coolstore.model.Product;
-import com.redhat.coolstore.model.ShoppingCartItem;
-import com.redhat.coolstore.model.Promotion;
-import com.redhat.coolstore.model.ShoppingCart;
+import com.redhat.coolstore.Product;
+import com.redhat.coolstore.PromoEvent;
+import com.redhat.coolstore.ShoppingCart;
+import com.redhat.coolstore.ShoppingCartItem;
 
 @RunWith(Arquillian.class)
 public class PromoServiceTest {
@@ -65,7 +65,7 @@ public class PromoServiceTest {
 		Assert.assertEquals(4.99, shoppingCart.getShippingTotal(), 0);
 		
 		//cart total 75
-		shoppingCart.setCartItemTotal(75);
+		shoppingCart.setCartItemTotal(75d);
 		shoppingCart.setShippingTotal(4.99);
 		
 		promoService.applyShippingPromotions(shoppingCart);
@@ -85,38 +85,40 @@ public class PromoServiceTest {
 		
 		Assert.assertEquals(0, shoppingCart.getCartItemPromoSavings(), 0);
 		
-		Set<Promotion> promotionSet = new HashSet<Promotion>();
+		Set<PromoEvent> promotionSet = new HashSet<PromoEvent>();
 		
-		Promotion p1 = new Promotion("123", .25);
+		PromoEvent p1 = new PromoEvent("123", .25);
 		
 		promotionSet.add(p1);
 		
 		promoService.setPromotions(promotionSet);
 		
 		ShoppingCartItem sci = new ShoppingCartItem();
-		sci.setQuanity(1);
+		sci.setQuantity(1);
 		
 		Product p = new Product();
 		p.setItemId("234");
 		p.setPrice(10.00);
 		
-		sci.setProduct(p);
+		sci.setItemId(p.getItemId());
+		sci.setPrice(p.getPrice());
 		
-		shoppingCart.addShoppingCartItem(sci);
+		shoppingCart.getShoppingCartItemList().add(sci);
+		shoppingCart.setCartItemTotal(shoppingCart.getCartItemTotal() + 1);
 		
-		Assert.assertEquals(10, sci.getProduct().getPrice(), 0);
+		Assert.assertEquals(10, sci.getPrice(), 0);
 		Assert.assertEquals(0, sci.getPromoSavings(), 0);
 		
 		promoService.applyCartItemPromotions(shoppingCart);		
 		
-		Assert.assertEquals(10, sci.getProduct().getPrice(), 0);
+		Assert.assertEquals(10, sci.getPrice(), 0);
 		Assert.assertEquals(0, sci.getPromoSavings(), 0);
 		
 		p.setItemId("123");
 		
 		promoService.applyCartItemPromotions(shoppingCart);		
 					
-		Assert.assertEquals(10, sci.getProduct().getPrice(), 0);
+		Assert.assertEquals(10, sci.getPrice(), 0);
 		Assert.assertEquals(7.5, sci.getPrice(), 0);
 		Assert.assertEquals(-2.5, sci.getPromoSavings(), 0);
 		

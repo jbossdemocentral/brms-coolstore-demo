@@ -2,7 +2,7 @@ package com.redhat.coolstore.web.ui;
 
 import java.text.DecimalFormat;
 
-import com.redhat.coolstore.model.ShoppingCart;
+import com.redhat.coolstore.ShoppingCart;
 import com.redhat.coolstore.web.CoolStoreApplication;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;

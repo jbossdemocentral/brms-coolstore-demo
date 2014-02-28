@@ -15,7 +15,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.redhat.coolstore.DefaultDeployment;
-import com.redhat.coolstore.model.ShoppingCart;
+import com.redhat.coolstore.ShoppingCart;
 
 @RunWith(Arquillian.class)
 public class ShippingServiceTest {

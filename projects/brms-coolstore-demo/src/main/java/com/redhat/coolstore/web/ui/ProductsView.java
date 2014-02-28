@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.redhat.coolstore.model.Product;
+import com.redhat.coolstore.Product;
 import com.redhat.coolstore.service.ProductService;
 import com.redhat.coolstore.web.CoolStoreApplication;
 import com.vaadin.event.ShortcutAction.KeyCode;

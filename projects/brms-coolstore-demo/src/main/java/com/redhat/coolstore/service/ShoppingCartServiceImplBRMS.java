@@ -8,10 +8,9 @@ import javax.inject.Inject;
 import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.rule.EntryPoint;
 
-import com.redhat.coolstore.factmodel.PromoEvent;
-import com.redhat.coolstore.model.Promotion;
-import com.redhat.coolstore.model.ShoppingCart;
-import com.redhat.coolstore.model.ShoppingCartItem;
+import com.redhat.coolstore.PromoEvent;
+import com.redhat.coolstore.ShoppingCart;
+import com.redhat.coolstore.ShoppingCartItem;
 import com.redhat.coolstore.util.BRMSUtil;
 
 @Stateful
@@ -33,7 +32,7 @@ public class ShoppingCartServiceImplBRMS implements ShoppingCartService, Seriali
 						
 		if ( sc != null ) {
 						
-			com.redhat.coolstore.factmodel.ShoppingCart factShoppingCart = new com.redhat.coolstore.factmodel.ShoppingCart();
+			com.redhat.coolstore.ShoppingCart factShoppingCart = new com.redhat.coolstore.ShoppingCart();
 			
 			KieSession ksession = null;
 			
@@ -46,7 +45,7 @@ public class ShoppingCartServiceImplBRMS implements ShoppingCartService, Seriali
 					
 					EntryPoint promoStream = ksession.getEntryPoint("Promo Stream");
 					
-					for (Promotion promo : promoService.getPromotions()) {
+					for (PromoEvent promo : promoService.getPromotions()) {
 																	
 						PromoEvent pv = new PromoEvent(promo.getItemId(), promo.getPercentOff());
 						
@@ -58,11 +57,11 @@ public class ShoppingCartServiceImplBRMS implements ShoppingCartService, Seriali
 					
 					for (ShoppingCartItem sci : sc.getShoppingCartItemList()) {
 						
-						com.redhat.coolstore.factmodel.ShoppingCartItem factShoppingCartItem = new com.redhat.coolstore.factmodel.ShoppingCartItem();
-						factShoppingCartItem.setItemId(sci.getProduct().getItemId());
-						factShoppingCartItem.setName(sci.getProduct().getName());
-						factShoppingCartItem.setPrice(sci.getProduct().getPrice());
-						factShoppingCartItem.setQuantity(sci.getQuanity());
+						com.redhat.coolstore.ShoppingCartItem factShoppingCartItem = new com.redhat.coolstore.ShoppingCartItem();
+						factShoppingCartItem.setItemId(sci.getItemId());
+						factShoppingCartItem.setName(sci.getName());
+						factShoppingCartItem.setPrice(sci.getPrice());
+						factShoppingCartItem.setQuantity(sci.getQuantity());
 						factShoppingCartItem.setShoppingCart(factShoppingCart);
 						
 						ksession.insert(factShoppingCartItem);

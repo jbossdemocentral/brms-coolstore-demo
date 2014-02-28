@@ -8,9 +8,9 @@ import java.util.Set;
 
 import javax.ejb.Singleton;
 
-import com.redhat.coolstore.model.Promotion;
-import com.redhat.coolstore.model.ShoppingCart;
-import com.redhat.coolstore.model.ShoppingCartItem;
+import com.redhat.coolstore.PromoEvent;
+import com.redhat.coolstore.ShoppingCart;
+import com.redhat.coolstore.ShoppingCartItem;
 
 @Singleton
 public class PromoService implements Serializable {
@@ -19,13 +19,13 @@ public class PromoService implements Serializable {
 
 	private String name = null;
 	
-	private Set<Promotion> promotionSet = null;
+	private Set<PromoEvent> promotionSet = null;
 
 	public PromoService() {
 						
-		promotionSet = new HashSet<Promotion>();
+		promotionSet = new HashSet<PromoEvent>();
 		
-		promotionSet.add(new Promotion("329299", .25));
+		promotionSet.add(new PromoEvent("329299", .25));
 						
 	}
 			
@@ -33,9 +33,9 @@ public class PromoService implements Serializable {
 		
 		if ( shoppingCart != null && shoppingCart.getShoppingCartItemList().size() > 0 ) {
 			
-			Map<String, Promotion> promoMap = new HashMap<String, Promotion>(); 
+			Map<String, PromoEvent> promoMap = new HashMap<String, PromoEvent>(); 
 			
-			for (Promotion promo : getPromotions()) {
+			for (PromoEvent promo : getPromotions()) {
 				
 				promoMap.put(promo.getItemId(), promo);
 				
@@ -43,14 +43,14 @@ public class PromoService implements Serializable {
 			
 			for ( ShoppingCartItem sci : shoppingCart.getShoppingCartItemList() ) {
 				
-				String productId = sci.getProduct().getItemId();
+				String productId = sci.getItemId();
 				
-				Promotion promo = promoMap.get(productId);
+				PromoEvent promo = promoMap.get(productId);
 				
 				if ( promo != null ) {
 				
-					sci.setPromoSavings(sci.getProduct().getPrice() * promo.getPercentOff() * -1);
-					sci.setPrice(sci.getProduct().getPrice() * (1-promo.getPercentOff()));
+					sci.setPromoSavings(sci.getPrice() * promo.getPercentOff() * -1);
+					sci.setPrice(sci.getPrice() * (1-promo.getPercentOff()));
 					
 				}
 							
@@ -68,7 +68,7 @@ public class PromoService implements Serializable {
 			if ( shoppingCart.getCartItemTotal() >= 75) {
 				
 				shoppingCart.setShippingPromoSavings(shoppingCart.getShippingTotal() * -1);
-				shoppingCart.setShippingTotal(0);
+				shoppingCart.setShippingTotal(0d);
 				
 			}
 			
@@ -76,27 +76,27 @@ public class PromoService implements Serializable {
 		
 	}	
 		
-	public Set<Promotion> getPromotions() {
+	public Set<PromoEvent> getPromotions() {
 				
 		if ( promotionSet == null ) {
 			
-			promotionSet = new HashSet<Promotion>();
+			promotionSet = new HashSet<PromoEvent>();
 			
 		}
 		
-		return new HashSet<Promotion>(promotionSet);
+		return new HashSet<PromoEvent>(promotionSet);
 		
 	}
 	
-	public void setPromotions(Set<Promotion> promotionSet) {
+	public void setPromotions(Set<PromoEvent> promotionSet) {
 		
 		if ( promotionSet != null ) {
 		
-			this.promotionSet = new HashSet<Promotion>(promotionSet);
+			this.promotionSet = new HashSet<PromoEvent>(promotionSet);
 			
 		} else {
 			
-			this.promotionSet = new HashSet<Promotion>();
+			this.promotionSet = new HashSet<PromoEvent>();
 			
 		}
 						
