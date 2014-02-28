@@ -1,7 +1,7 @@
-JBoss BRMS (jBPM) Cool Store Demo Quickstart Guide
-============================================================
+JBoss BPM Suite Cool Store Demo Quickstart Guide
+================================================
 
-Demo based on JBoss BRMS products.
+Demo based on JBoss BPM Suite product.
 
 
 Setup and Configuration
@@ -17,17 +17,11 @@ See Quick Start Guide in project as ODT and PDF for details on installation. For
 
 - read Quick Start Guide
 
-- start JBoss EAP server
+- start JBoss EAP server, ./target/jboss-eap-6.1/bin/standalone.sh
 
-- login to BRM (http://localhost:8080/jboss-brms)
+- inspect project in BPM Suite, login http://localhost:8080/business central (u:erics / p:bpmsuite)
 
-- import repository-export from support dir
-
-- build and deploy project in BRM
-
-- open shopping cart and demo away (http://localhost:8080/brms-coolstore-demo)
-
-Windows users see support/windows/README for installation.
+- open shopping cart and demo away (http://localhost:8080/bpm-suite-coolstore-demo)
 
 
 Supporting Articles
@@ -49,6 +43,8 @@ Released versions
 
 See the tagged releases for the following versions of the product:
 
+- v2.0 JBoss BPM Suite 6.0.0.GA, JBoss EAP 6.1.1, cool store demo installed.
+
 - v1.4 is BRMS 5.3.1 deployable, running on JBoss EAP 6.1.1, integrated BRMS maven repo into project so no longer need to add to
 	personal settings configuration which fully automates project build.
 
@@ -60,3 +56,8 @@ See the tagged releases for the following versions of the product:
 
 - v1.0 is BRMS 5.3.1 deployable, running on JBoss EAP 6.
 
+![Install Console](https://github.com/eschabell/brms-coolstore-demo/blob/master/docs/demo-images/install-console.png?raw=true)
+
+![Decision Table](https://github.com/eschabell/brms-coolstore-demo/blob/master/docs/demo-images/coolstore-decision-table.png?raw=true)
+
+![Domain Model](https://github.com/eschabell/brms-coolstore-demo/blob/master/docs/demo-images/coolstore-model.png?raw=true)

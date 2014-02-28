@@ -4,3 +4,4 @@ WEB-INF/
 .DS_Store
 *.classpath
 *.settings
+.security/
