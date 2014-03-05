@@ -100,7 +100,7 @@ cp $SUPPORT_DIR/mgmt-users.properties $SERVER_CONF
 
 echo "  - setting up demo projects..."
 echo
-cp -r $SUPPORT_DIR/bpm-suite-demo-index $SERVER_BIN/.index
+cp -r $SUPPORT_DIR/bpm-suite-demo-niogit $SERVER_BIN/.niogit
 
 echo "  - setting up standalone.xml configuration adjustments..."
 echo
