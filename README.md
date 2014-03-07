@@ -1,7 +1,11 @@
-JBoss BPM Suite Cool Store Demo Quickstart Guide
-================================================
+JBoss BPM Suite Cool Store Demo 
+===============================
 
-Demo based on JBoss BPM Suite product.
+This is a retail web store demo where you will find rules, decision tables, events, and a process 
+that is leveraged by a web application. The web application is a WAR built using the JBoss BPM Suite 
+generated kjar as a dependency, providing an example project showing how developers can focus on the 
+application code while the business analysts can focus on the rules, event, and processed in the 
+JBoss BPM Suite product web user interface.
 
 
 Setup and Configuration
