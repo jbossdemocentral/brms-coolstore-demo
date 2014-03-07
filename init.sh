@@ -124,7 +124,7 @@ mvn clean install
 echo
 echo Copying BPM Suite Cool Store application into the JBoss BPM Suite.
 echo
-cp target/bpm-suite-coolstore-demo.war ../../$SERVER_DIR
+cp target/brms-coolstore-demo.war ../../$SERVER_DIR
 cd ../..
 
 echo "You can now start the $PRODUCT with $SERVER_BIN/standalone.sh"
