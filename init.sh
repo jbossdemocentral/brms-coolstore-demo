@@ -6,17 +6,13 @@ JBOSS_HOME=./target/jboss-eap-6.1
 SERVER_DIR=$JBOSS_HOME/standalone/deployments
 SERVER_CONF=$JBOSS_HOME/standalone/configuration
 SERVER_BIN=$JBOSS_HOME/bin
-LIB_DIR=./support/lib
 SUPPORT_DIR=./support
 SRC_DIR=./installs
 PRJ_DIR=./projects/brms-coolstore-demo
 EAP=jboss-eap-6.1.1.zip
-BPMS=jboss-bpms-6.0.0.GA-redhat-2-deployable-eap6.x.zip
-BPMS_REPO=bpms-brms-6.0.1.GA-redhat-1-maven-repository
-BPMS_LIBS=./target/jboss-eap-6.1/standalone/deployments/jboss-brms.war/WEB-INF/lib
+BRMS=jboss-brms-6.0.0.GA-redhat-2-deployable-eap6.x.zip
 SUPPORT_LIBS=./support/libs/
 WEB_INF_LIB=./projects/brms-coolstore-demo/src/main/webapp/WEB-INF/lib/
-#MVN_VERSION=5.3.1.BRMS
 VERSION=6.0.0.GA
 
 # wipe screen.
@@ -84,7 +80,7 @@ unzip -q -d target $SRC_DIR/$EAP
 # Unzip the required files from JBoss product deployable.
 echo Unpacking $PRODUCT $VERSION...
 echo
-unzip -q -o -d target $SRC_DIR/$BPMS
+unzip -q -o -d target $SRC_DIR/$BRMS
 
 echo "  - enabling demo accounts logins in application-users.properties file..."
 echo
@@ -100,7 +96,7 @@ cp $SUPPORT_DIR/mgmt-users.properties $SERVER_CONF
 
 echo "  - setting up demo projects..."
 echo
-cp -r $SUPPORT_DIR/bpm-suite-demo-niogit $SERVER_BIN/.niogit
+cp -r $SUPPORT_DIR/brms-demo-niogit $SERVER_BIN/.niogit
 
 echo "  - setting up standalone.xml configuration adjustments..."
 echo
