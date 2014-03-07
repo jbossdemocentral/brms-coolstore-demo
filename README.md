@@ -60,8 +60,8 @@ See the tagged releases for the following versions of the product:
 
 - v1.0 is BRMS 5.3.1 deployable, running on JBoss EAP 6.
 
-![Install Console](https://github.com/eschabell/brms-coolstore-demo/blob/master/docs/demo-images/install-console.png?raw=true)
+![Install Console](https://github.com/eschabell/brms-coolstore-demo/blob/brms6/docs/demo-images/install-console.png?raw=true)
 
-![Decision Table](https://github.com/eschabell/brms-coolstore-demo/blob/master/docs/demo-images/coolstore-decision-table.png?raw=true)
+![Decision Table](https://github.com/eschabell/brms-coolstore-demo/blob/brms6/docs/demo-images/coolstore-decision-table.png?raw=true)
 
-![Domain Model](https://github.com/eschabell/brms-coolstore-demo/blob/master/docs/demo-images/coolstore-model.png?raw=true)
+![Domain Model](https://github.com/eschabell/brms-coolstore-demo/blob/brms6/docs/demo-images/coolstore-model.png?raw=true)
