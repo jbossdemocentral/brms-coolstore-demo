@@ -7,6 +7,10 @@
 	<packaging>war</packaging>
 	<name>Red Hat Cool Store</name>
 
+	<properties>
+		<brms.version>6.0.2-redhat-4</brms.version>
+	</properties>
+
 	<build>
 		<!-- Maven will append the version to the finalName (which is the name 
 			given to the generated war, and hence the context root) -->
@@ -296,21 +300,21 @@
 		<dependency>
 			<groupId>org.kie</groupId>
 			<artifactId>kie-internal</artifactId>
-			<version>6.0.1-redhat-2</version>
+			<version>${brms.version}</version>
 			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.kie</groupId>
 			<artifactId>kie-ci</artifactId>
-			<version>6.0.1-redhat-2</version>
+			<version>${brms.version}</version>
 			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jbpm</groupId>
 			<artifactId>jbpm-bpmn2</artifactId>
-			<version>6.0.1-redhat-2</version>
+			<version>${brms.version}</version>
 		</dependency>
 
 		<dependency>
