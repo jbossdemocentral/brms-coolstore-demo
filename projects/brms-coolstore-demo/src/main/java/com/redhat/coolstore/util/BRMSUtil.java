@@ -18,16 +18,16 @@ public class BRMSUtil {
     	
     	KieServices kServices = KieServices.Factory.get();
 
-		ReleaseId releaseId = kServices.newReleaseId( "com.redhat", "coolstore", "2.0" );
+		ReleaseId releaseId = kServices.newReleaseId( "com.redhat", "coolstore", "LATEST" );
 
 		kContainer = kServices.newKieContainer( releaseId );
 
 		KieScanner kScanner = kServices.newKieScanner( kContainer );
 
 
-		// Start the KieScanner polling the maven repository every 1 seconds
+		// Start the KieScanner polling the maven repository every 10 seconds
 
-		kScanner.start( 1000L );
+		kScanner.start( 10000L );
     }
 
 
