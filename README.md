@@ -47,7 +47,9 @@ Released versions
 
 See the tagged releases for the following versions of the product:
 
-- v2.0 JBoss BPM Suite 6.0.0.GA, JBoss EAP 6.1.1, cool store demo installed.
+- v2.1 JBoss BPM Suite 6.0.1, JBoss EAP 6.1.1, cool store demo installed.
+
+- v2.0 JBoss BPM Suite 6.0.0, JBoss EAP 6.1.1, cool store demo installed.
 
 - v1.4 is BRMS 5.3.1 deployable, running on JBoss EAP 6.1.1, integrated BRMS maven repo into project so no longer need to add to
 	personal settings configuration which fully automates project build.
