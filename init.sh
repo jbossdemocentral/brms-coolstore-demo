@@ -10,10 +10,10 @@ SUPPORT_DIR=./support
 SRC_DIR=./installs
 PRJ_DIR=./projects/brms-coolstore-demo
 EAP=jboss-eap-6.1.1.zip
-BRMS=jboss-brms-6.0.0.GA-redhat-2-deployable-eap6.x.zip
+BRMS=jboss-brms-6.0.1.GA-redhat-2-deployable-eap6.x.zip
 SUPPORT_LIBS=./support/libs/
 WEB_INF_LIB=./projects/brms-coolstore-demo/src/main/webapp/WEB-INF/lib/
-VERSION=6.0.0.GA
+VERSION=6.0.1.ER2
 
 # wipe screen.
 clear 
