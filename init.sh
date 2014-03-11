@@ -13,7 +13,7 @@ EAP=jboss-eap-6.1.1.zip
 BRMS=jboss-brms-6.0.1.GA-redhat-2-deployable-eap6.x.zip
 SUPPORT_LIBS=./support/libs/
 WEB_INF_LIB=./projects/brms-coolstore-demo/src/main/webapp/WEB-INF/lib/
-VERSION=6.0.1.ER2
+VERSION=6.0.1
 
 # wipe screen.
 clear 
