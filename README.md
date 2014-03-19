@@ -25,7 +25,7 @@ See Quick Start Guide in project as ODT and PDF for details on installation. For
 
 - inspect project in BPM Suite, login http://localhost:8080/business central (u:erics / p:bpmsuite)
 
-- open shopping cart and demo away (http://localhost:8080/bpm-suite-coolstore-demo)
+- open shopping cart and demo away (http://localhost:8080/brms-coolstore-demo)
 
 
 Supporting Articles
