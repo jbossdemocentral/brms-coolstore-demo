@@ -118,14 +118,20 @@ mvn install:install-file -Dfile=$SUPPORT_LIBS/coolstore-2.0.0.jar -DgroupId=com.
 
 cp $SUPPORT_LIBS/cdiutils-1.0.0.jar $WEB_INF_LIB
 
-cd $PRJ_DIR
-mvn clean install
-
 echo
 echo Copying BPM Suite Cool Store application into the JBoss BPM Suite.
 echo
-cp target/brms-coolstore-demo.war ../../$SERVER_DIR
-cd ../..
+cp $SUPPORT_DIR/brms-coolstore-demo.war $SERVER_DIR
+
+# You can build the cool store web app by uncommenting.
+#cd $PRJ_DIR
+#mvn clean install
+#
+#echo
+#echo Copying BPM Suite Cool Store application into the JBoss BPM Suite.
+#echo
+#cp target/brms-coolstore-demo.war ../../$SERVER_DIR
+#cd ../..
 
 echo "You can now start the $PRODUCT with $SERVER_BIN/standalone.sh"
 echo
