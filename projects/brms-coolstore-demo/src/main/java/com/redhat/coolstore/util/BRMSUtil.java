@@ -1,6 +1,6 @@
 package com.redhat.coolstore.util;
 
-import javax.ejb.Singleton;
+import javax.enterprise.context.ApplicationScoped;
 
 import org.kie.api.KieServices;
 import org.kie.api.builder.KieScanner;
@@ -9,7 +9,7 @@ import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.StatelessKieSession;
 
-@Singleton
+@ApplicationScoped
 public class BRMSUtil {
 
     private KieContainer kContainer = null;
