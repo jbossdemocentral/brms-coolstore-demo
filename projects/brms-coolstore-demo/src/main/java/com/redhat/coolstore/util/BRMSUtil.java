@@ -1,6 +1,6 @@
 package com.redhat.coolstore.util;
 
-import javax.ejb.Singleton;
+import javax.faces.bean.ApplicationScoped;
 
 import org.kie.api.KieServices;
 import org.kie.api.builder.KieScanner;
