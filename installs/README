@@ -1,12 +1,12 @@
 Download the following from the JBoss Customer Portal
 
  * EAP6 (jboss-eap-6.1.1.zip)
- * BRMS deployable (jboss-brms-6.0.1.GA-redhat-3-deployable-eap6.x.zip)
+ * BRMS deployable (jboss-brms-6.0.1.GA-redhat-4-deployable-eap6.x.zip)
 
 and copy to this directory for the init.sh script to work.
 
 Ensure that this file is executable by running:
 
 chmod +x <path-to-project>/installs/jboss-eap-6.1.1.zip
-chmod +x <path-to-project>/installs/jboss-brms-6.0.1.GA-redhat-3-deployable-eap6.x.zip
+chmod +x <path-to-project>/installs/jboss-brms-6.0.1.GA-redhat-4-deployable-eap6.x.zip
 

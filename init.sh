@@ -1,5 +1,5 @@
 #!/bin/sh 
-DEMO="JBoss BPM Suite Red Hat Cool Store Demo"
+DEMO="JBoss BRMS Red Hat Cool Store Demo"
 AUTHORS="Jason Milliron, Eric D. Schabell"
 PROJECT="git@github.com:eschabell/brms-coolstore-demo.git"
 PRODUCT=JBoss BRMS
@@ -11,7 +11,7 @@ SUPPORT_DIR=./support
 SRC_DIR=./installs
 PRJ_DIR=./projects/brms-coolstore-demo
 EAP=jboss-eap-6.1.1.zip
-BRMS=jboss-brms-6.0.1.GA-redhat-3-deployable-eap6.x.zip
+BRMS=jboss-brms-6.0.1.GA-redhat-4-deployable-eap6.x.zip
 SUPPORT_LIBS=./support/libs/
 WEB_INF_LIB=./projects/brms-coolstore-demo/src/main/webapp/WEB-INF/lib/
 VERSION=6.0.1.GA
@@ -22,7 +22,7 @@ clear
 echo
 echo "##############################################################"
 echo "##                                                          ##"   
-echo "##  Setting up the ${DEMO}  ##"
+echo "##  Setting up the ${DEMO}       ##"
 echo "##                                                          ##"   
 echo "##                                                          ##"   
 echo "##             ####   ####    #   #    ###                  ##"
