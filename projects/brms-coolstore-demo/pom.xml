@@ -146,7 +146,7 @@
 
 	<repositories>
 		<repository>
-			<id>jboss-eap-6-1-0-maven-repository</id>
+			<id>jboss-eap-6-1-1-maven-repository</id>
 			<name>JBoss EAP Maven Repository</name>
 			<url>http://maven.repository.redhat.com/techpreview/all/</url>
 			<layout>default</layout>
@@ -160,9 +160,9 @@
 			</snapshots>
 		</repository>
 		<repository>
-			<id>jboss-bpm-suite-6-0-0-maven-repository</id>
-			<name>JBoss BPM Suite Maven Repository</name>
-			<url>http://download.devel.redhat.com/brewroot/repos/jb-ip-6-build/latest/maven/</url>
+			<id>jboss-brms-6-0-1-maven-repository</id>
+			<name>JBoss BRMS Maven Repository</name>
+			<url>http://maven.repository.redhat.com/techpreview/brms6/6.0.1/maven-repository/</url>
 			<layout>default</layout>
 			<releases>
 				<enabled>true</enabled>
@@ -177,7 +177,7 @@
 
 	<pluginRepositories>
 		<pluginRepository>
-			<id>jboss-eap-6-1-0-maven-repository</id>
+			<id>jboss-eap-6-1-1-maven-repository</id>
 			<name>JBoss EAP Maven Repository</name>
 			<url>http://maven.repository.redhat.com/techpreview/all/</url>
 			<layout>default</layout>
@@ -191,9 +191,9 @@
 			</snapshots>
 		</pluginRepository>
 		<pluginRepository>
-			<id>jboss-bpm-suite-6-0-0-maven-repository</id>
-			<name>JBoss BPM Suite Maven Repository</name>
-			<url>http://download.devel.redhat.com/brewroot/repos/jb-ip-6-build/latest/maven/</url>
+			<id>jboss-brms-6-0-1-maven-repository</id>
+			<name>JBoss BRMS Maven Repository</name>
+			<url>http://maven.repository.redhat.com/techpreview/brms6/6.0.1/maven-repository/</url>
 			<layout>default</layout>
 			<releases>
 				<enabled>true</enabled>
@@ -296,21 +296,21 @@
 		<dependency>
 			<groupId>org.kie</groupId>
 			<artifactId>kie-internal</artifactId>
-			<version>6.0.2-redhat-4</version>
+			<version>6.0.2-redhat-6</version>
 			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.kie</groupId>
 			<artifactId>kie-ci</artifactId>
-			<version>6.0.2-redhat-4</version>
+			<version>6.0.2-redhat-6</version>
 			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jbpm</groupId>
 			<artifactId>jbpm-bpmn2</artifactId>
-			<version>6.0.2-redhat-4</version>
+			<version>6.0.2-redhat-6</version>
 		</dependency>
 
 		<dependency>
