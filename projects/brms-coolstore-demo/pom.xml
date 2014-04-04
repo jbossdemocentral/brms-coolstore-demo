@@ -146,8 +146,8 @@
 
 	<repositories>
 		<repository>
-			<id>jboss-eap-6-1-1-maven-repository</id>
-			<name>JBoss EAP Maven Repository</name>
+			<id>jboss-maven-repository</id>
+			<name>JBoss Maven Repository</name>
 			<url>http://maven.repository.redhat.com/techpreview/all/</url>
 			<layout>default</layout>
 			<releases>
@@ -156,20 +156,6 @@
 			</releases>
 			<snapshots>
 				<enabled>false</enabled>
-				<updatePolicy>never</updatePolicy>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>jboss-brms-6-0-1-maven-repository</id>
-			<name>JBoss BRMS Maven Repository</name>
-			<url>http://maven.repository.redhat.com/techpreview/brms6/6.0.1/maven-repository/</url>
-			<layout>default</layout>
-			<releases>
-				<enabled>true</enabled>
-				<updatePolicy>never</updatePolicy>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
 				<updatePolicy>never</updatePolicy>
 			</snapshots>
 		</repository>
@@ -177,23 +163,9 @@
 
 	<pluginRepositories>
 		<pluginRepository>
-			<id>jboss-eap-6-1-1-maven-repository</id>
-			<name>JBoss EAP Maven Repository</name>
+			<id>jboss-maven-repository</id>
+			<name>JBoss Maven Repository</name>
 			<url>http://maven.repository.redhat.com/techpreview/all/</url>
-			<layout>default</layout>
-			<releases>
-				<enabled>true</enabled>
-				<updatePolicy>never</updatePolicy>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-				<updatePolicy>never</updatePolicy>
-			</snapshots>
-		</pluginRepository>
-		<pluginRepository>
-			<id>jboss-brms-6-0-1-maven-repository</id>
-			<name>JBoss BRMS Maven Repository</name>
-			<url>http://maven.repository.redhat.com/techpreview/brms6/6.0.1/maven-repository/</url>
 			<layout>default</layout>
 			<releases>
 				<enabled>true</enabled>
