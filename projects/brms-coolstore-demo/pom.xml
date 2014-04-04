@@ -296,21 +296,21 @@
 		<dependency>
 			<groupId>org.kie</groupId>
 			<artifactId>kie-internal</artifactId>
-			<version>6.0.1-redhat-2</version>
+			<version>6.0.2-redhat-4</version>
 			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.kie</groupId>
 			<artifactId>kie-ci</artifactId>
-			<version>6.0.1-redhat-2</version>
+			<version>6.0.2-redhat-4</version>
 			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jbpm</groupId>
 			<artifactId>jbpm-bpmn2</artifactId>
-			<version>6.0.1-redhat-2</version>
+			<version>6.0.2-redhat-4</version>
 		</dependency>
 
 		<dependency>

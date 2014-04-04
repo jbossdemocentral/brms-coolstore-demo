@@ -1,7 +1,8 @@
 #!/bin/sh 
-DEMO="JBoss BPM Suite Red Hat Cool Store Demo"
+DEMO="JBoss BRMS Red Hat Cool Store Demo"
 AUTHORS="Jason Milliron, Eric D. Schabell"
 PROJECT="git@github.com:eschabell/brms-coolstore-demo.git"
+PRODUCT=JBoss BRMS
 JBOSS_HOME=./target/jboss-eap-6.1
 SERVER_DIR=$JBOSS_HOME/standalone/deployments
 SERVER_CONF=$JBOSS_HOME/standalone/configuration
@@ -10,10 +11,10 @@ SUPPORT_DIR=./support
 SRC_DIR=./installs
 PRJ_DIR=./projects/brms-coolstore-demo
 EAP=jboss-eap-6.1.1.zip
-BRMS=jboss-brms-6.0.0.GA-redhat-2-deployable-eap6.x.zip
+BRMS=jboss-brms-6.0.1.GA-redhat-4-deployable-eap6.x.zip
 SUPPORT_LIBS=./support/libs/
 WEB_INF_LIB=./projects/brms-coolstore-demo/src/main/webapp/WEB-INF/lib/
-VERSION=6.0.0.GA
+VERSION=6.0.1.GA
 
 # wipe screen.
 clear 
@@ -21,7 +22,7 @@ clear
 echo
 echo "##############################################################"
 echo "##                                                          ##"   
-echo "##  Setting up the ${DEMO}  ##"
+echo "##  Setting up the ${DEMO}       ##"
 echo "##                                                          ##"   
 echo "##                                                          ##"   
 echo "##             ####   ####    #   #    ###                  ##"
@@ -42,7 +43,7 @@ echo
 command -v mvn -q >/dev/null 2>&1 || { echo >&2 "Maven is required but not installed yet... aborting."; exit 1; }
 
 # make some checks first before proceeding.	
-if [[ -r $SRC_DIR/$EAP || -L $SRC_DIR/$EAP ]]; then
+if [ -r $SRC_DIR/$EAP ] || [-L ${SRC_DIR/$EAP} ]; then
 		echo EAP sources are present...
 		echo
 else
