@@ -31,7 +31,7 @@ See Quick Start Guide in project as ODT and PDF for details on installation. For
 Supporting Articles
 -------------------
 
-[Red Hat JBoss BRMS 6 - Demo Cool Store Dynamic Rule Updates] (http://www.schabell.org/2014/05/redhat-jboss-brms6-demo-coolstore-dynamic-rule-updates.html)
+[Red Hat JBoss BRMS 6 - Demo Cool Store Dynamic Rule Updates (video)] (http://www.schabell.org/2014/05/redhat-jboss-brms6-demo-coolstore-dynamic-rule-updates.html)
 
 [Red Hat JBoss BRMS 6 - The New Cool Store Demo] (http://www.schabell.org/2014/03/redhat-jboss-brms-v6-coolstore-demo.html)
  
