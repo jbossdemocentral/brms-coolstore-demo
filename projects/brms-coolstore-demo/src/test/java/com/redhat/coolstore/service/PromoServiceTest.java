@@ -94,7 +94,7 @@ public class PromoServiceTest {
 		promoService.setPromotions(promotionSet);
 		
 		ShoppingCartItem sci = new ShoppingCartItem();
-		sci.setQuanity(1);
+		sci.setQuantity(1);
 		
 		Product p = new Product();
 		p.setItemId("234");

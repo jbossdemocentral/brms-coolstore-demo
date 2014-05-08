@@ -3,7 +3,7 @@ package com.redhat.coolstore.model;
 public class ShoppingCartItem {
 	
 	private double price;
-	private int quanity;
+	private int quantity;
 	private double promoSavings;
 	private Product product;
 	
@@ -23,12 +23,12 @@ public class ShoppingCartItem {
 		this.product = product;
 	}
 
-	public int getQuanity() {
-		return quanity;
+	public int getQuantity() {
+		return quantity;
 	}
 
-	public void setQuanity(int quanity) {
-		this.quanity = quanity;
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 
 	public double getPromoSavings() {
@@ -41,7 +41,7 @@ public class ShoppingCartItem {
 
 	@Override
 	public String toString() {
-		return "ShoppingCartItem [price=" + price + ", quanity=" + quanity
+		return "ShoppingCartItem [price=" + price + ", quanity=" + quantity
 				+ ", promoSavings=" + promoSavings + ", product=" + product
 				+ "]";
 	}

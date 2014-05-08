@@ -37,6 +37,7 @@ public class ShoppingCart implements Serializable {
 		if ( sci != null ) {
 			
 			shoppingCartItemList.add(sci);
+                        
 			
 		}
 		

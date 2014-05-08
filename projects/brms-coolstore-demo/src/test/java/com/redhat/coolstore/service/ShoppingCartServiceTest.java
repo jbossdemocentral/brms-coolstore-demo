@@ -75,7 +75,7 @@ public class ShoppingCartServiceTest {
 		Product p = new Product();
 		p.setItemId("123");
 		p.setPrice(10.00);
-		sci.setQuanity(2);
+		sci.setQuantity(2);
 		sci.setProduct(p);
 		
 		productService.setProducts(Arrays.asList(p));
@@ -101,21 +101,21 @@ public class ShoppingCartServiceTest {
 		Product p1 = new Product();
 		p1.setItemId("123");
 		p1.setPrice(9.99);
-		sci1.setQuanity(3);
+		sci1.setQuantity(3);
 		sci1.setProduct(p1);
 		
 		ShoppingCartItem sci2 = new ShoppingCartItem();
 		Product p2 = new Product();
 		p2.setItemId("234");
 		p2.setPrice(6.77);
-		sci2.setQuanity(1);
+		sci2.setQuantity(1);
 		sci2.setProduct(p2);
 		
 		ShoppingCartItem sci3 = new ShoppingCartItem();
 		Product p3 = new Product();
 		p3.setItemId("345");
 		p3.setPrice(2.00);		
-		sci3.setQuanity(2);
+		sci3.setQuantity(2);
 		sci3.setProduct(p3);
 		
 		shoppingCart.addShoppingCartItem(sci1);
@@ -143,7 +143,7 @@ public class ShoppingCartServiceTest {
 		Product p = new Product();
 		p.setItemId("123");
 		p.setPrice(10.00);
-		sci.setQuanity(2);
+		sci.setQuantity(2);
 		sci.setProduct(p);
 		
 		shoppingCart.addShoppingCartItem(sci);
@@ -184,7 +184,7 @@ public class ShoppingCartServiceTest {
 		promoService.setPromotions(promotionSet);
 		
 		ShoppingCartItem sci = new ShoppingCartItem();
-		sci.setQuanity(1);
+		sci.setQuantity(1);
 		
 		Product p = new Product();
 		p.setItemId("234");
@@ -223,7 +223,7 @@ public class ShoppingCartServiceTest {
 	public void priceShoppingCartWithShippingPromoTest() {
 				
 		ShoppingCartItem sci = new ShoppingCartItem();
-		sci.setQuanity(1);
+		sci.setQuantity(1);
 		
 		Product p = new Product();
 		p.setItemId("456");

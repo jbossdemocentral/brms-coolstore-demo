@@ -148,7 +148,7 @@ public class CoolStoreApplication extends AbstractCdiApplication implements Clic
 					
 					ShoppingCartItem sci = shoppingCartItemMap.get(p.getItemId());
 					
-					sci.setQuanity(sci.getQuanity() + 1);
+					sci.setQuantity(sci.getQuantity() + 1);
 					
 				} else {
 					
@@ -156,7 +156,7 @@ public class CoolStoreApplication extends AbstractCdiApplication implements Clic
 					
 					sci.setProduct(p);
 					
-					sci.setQuanity(1);
+					sci.setQuantity(1);
 					
 					shoppingCart.addShoppingCartItem(sci);
 					
