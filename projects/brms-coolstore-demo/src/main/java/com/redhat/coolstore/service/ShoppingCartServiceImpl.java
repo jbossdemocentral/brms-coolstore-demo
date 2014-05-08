@@ -35,8 +35,8 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 				
 				for (ShoppingCartItem sci : sc.getShoppingCartItemList()) {
 					
-					sc.setCartItemPromoSavings(sc.getCartItemPromoSavings() + (sci.getPromoSavings() * sci.getQuanity()));
-					sc.setCartItemTotal(sc.getCartItemTotal() + (sci.getPrice() * sci.getQuanity()));
+					sc.setCartItemPromoSavings(sc.getCartItemPromoSavings() + (sci.getPromoSavings() * sci.getQuantity()));
+					sc.setCartItemTotal(sc.getCartItemTotal() + (sci.getPrice() * sci.getQuantity()));
 					
 				}
 				
