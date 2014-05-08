@@ -41,7 +41,7 @@ public class ShoppingCartItem {
 
 	@Override
 	public String toString() {
-		return "ShoppingCartItem [price=" + price + ", quanity=" + quantity
+		return "ShoppingCartItem [price=" + price + ", quantity=" + quantity
 				+ ", promoSavings=" + promoSavings + ", product=" + product
 				+ "]";
 	}
