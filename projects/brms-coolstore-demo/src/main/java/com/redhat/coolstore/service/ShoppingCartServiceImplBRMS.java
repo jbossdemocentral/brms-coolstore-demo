@@ -68,7 +68,7 @@ public class ShoppingCartServiceImplBRMS implements ShoppingCartService, Seriali
 						factShoppingCartItem.setItemId(sci.getProduct().getItemId());
 						factShoppingCartItem.setName(sci.getProduct().getName());
 						factShoppingCartItem.setPrice(sci.getProduct().getPrice());
-						factShoppingCartItem.setQuantity(sci.getQuanity());
+						factShoppingCartItem.setQuantity(sci.getQuantity());
 						factShoppingCartItem.setShoppingCart(factShoppingCart);
 						factShoppingCartItem.setPromoSavings(0d);
 						
