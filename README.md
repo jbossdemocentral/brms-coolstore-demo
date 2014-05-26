@@ -71,3 +71,5 @@ See the tagged releases for the following versions of the product:
 ![Decision Table](https://github.com/eschabell/brms-coolstore-demo/blob/master/docs/demo-images/coolstore-decision-table.png?raw=true)
 
 ![Domain Model](https://github.com/eschabell/brms-coolstore-demo/blob/master/docs/demo-images/coolstore-model.png?raw=true)
+
+![Digital Sign Annoucement](https://github.com/eschabell/brms-coolstore-demo/blob/master/docs/demo-images/announce-sign.png?raw=true)
