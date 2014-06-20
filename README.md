@@ -51,6 +51,8 @@ Released versions
 
 See the tagged releases for the following versions of the product:
 
+- v2.2 JBoss BPM Suite 6.0.2, JBoss EAP 6.1.1, cool store demo installed.
+
 - v2.1 JBoss BPM Suite 6.0.1, JBoss EAP 6.1.1, cool store demo installed.
 
 - v2.0 JBoss BPM Suite 6.0.0, JBoss EAP 6.1.1, cool store demo installed.
