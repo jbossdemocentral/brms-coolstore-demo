@@ -11,10 +11,10 @@ SUPPORT_DIR=./support
 SRC_DIR=./installs
 PRJ_DIR=./projects/brms-coolstore-demo
 EAP=jboss-eap-6.1.1.zip
-BRMS=jboss-brms-6.0.1.GA-redhat-4-deployable-eap6.x.zip
+BRMS=jboss-brms-6.0.2.GA-redhat-5-deployable-eap6.x.zip
 SUPPORT_LIBS=./support/libs/
 WEB_INF_LIB=./projects/brms-coolstore-demo/src/main/webapp/WEB-INF/lib/
-VERSION=6.0.1.GA
+VERSION=6.0.2.GA
 
 # wipe screen.
 clear 
@@ -119,17 +119,11 @@ mvn install:install-file -Dfile=$SUPPORT_LIBS/coolstore-2.0.0.jar -DgroupId=com.
 
 cp $SUPPORT_LIBS/cdiutils-1.0.0.jar $WEB_INF_LIB
 
-#echo
-#echo Copying BPM Suite Cool Store application into the JBoss BPM Suite.
-#echo
-#cp $SUPPORT_DIR/brms-coolstore-demo.war $SERVER_DIR
-
-cd $PRJ_DIR
-mvn clean install
-
 echo
 echo Copying BPM Suite Cool Store application into the JBoss BPM Suite.
 echo
+cd $PRJ_DIR
+mvn clean install
 cp target/brms-coolstore-demo.war ../../$SERVER_DIR
 cd ../..
 
