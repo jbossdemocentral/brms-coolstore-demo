@@ -137,7 +137,7 @@ cd "%PRJ_DIR%"
 call mvn clean install
 
 echo.
-echo Copying BPM Suite Cool Store application into the JBoss BPM Suite.
+echo Deploying the Cool Store web application.
 echo.
 
 xcopy /Y /Q "%PRJ_DIR%\target\brms-coolstore-demo.war" "%SERVER_DIR%"

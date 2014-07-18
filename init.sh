@@ -120,7 +120,7 @@ mvn install:install-file -Dfile=$SUPPORT_LIBS/coolstore-2.0.0.jar -DgroupId=com.
 cp $SUPPORT_LIBS/cdiutils-1.0.0.jar $WEB_INF_LIB
 
 echo
-echo Copying BPM Suite Cool Store application into the JBoss BPM Suite.
+echo Deploying the Cool Store web application. 
 echo
 cd $PRJ_DIR
 mvn clean install
