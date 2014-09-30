@@ -13,19 +13,23 @@ Setup and Configuration
 
 See Quick Start Guide in project as ODT and PDF for details on installation. For those that can't wait:
 
-- see README in 'installs' directory
+1. [Download and unzip.](https://github.com/eschabell/brms-coolstore-demo/archive/master.zip)
 
-- add products 
+2. Add products to installs directory.
 
-- run 'init.sh' & read output
+3. Run 'init.sh' or 'init.bat' file.
 
-- read Quick Start Guide
+4. Start JBoss BRMS Server by running ./target/jboss-eap-6.1/bin/standalone.sh
 
-- start JBoss EAP server, ./target/jboss-eap-6.1/bin/standalone.sh
+5. Login to http://localhost:8080/business-central
 
-- inspect project in BPM Suite, login http://localhost:8080/business central (u:erics / p:bpmsuite)
+```
+  - login for admin and analyst roles (u:erics / p:bpmsuite1!)
+```
 
-- open shopping cart and demo away (http://localhost:8080/brms-coolstore-demo)
+6. Build and deploy project.
+
+6. Open shopping cart and demo away (http://localhost:8080/brms-coolstore-demo)
 
 
 Supporting Articles
@@ -54,6 +58,8 @@ Released versions
 -----------------
 
 See the tagged releases for the following versions of the product:
+
+- v2.3 JBoss BRMS 6.0.3 installer with cool store demo installed.
 
 - v2.2 JBoss BPM Suite 6.0.2, JBoss EAP 6.1.1, cool store demo installed.
 
