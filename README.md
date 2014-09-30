@@ -23,13 +23,13 @@ See Quick Start Guide in project as ODT and PDF for details on installation. For
 
 5. Login to http://localhost:8080/business-central
 
-```
+    ```
   - login for admin and analyst roles (u:erics / p:bpmsuite1!)
-```
+    ```
 
 6. Build and deploy project.
 
-6. Open shopping cart and demo away (http://localhost:8080/brms-coolstore-demo)
+7. Open shopping cart and demo away (http://localhost:8080/brms-coolstore-demo)
 
 
 Supporting Articles
