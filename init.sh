@@ -3,17 +3,17 @@ DEMO="JBoss BRMS Red Hat Cool Store Demo"
 AUTHORS="Jason Milliron, Eric D. Schabell"
 PROJECT="git@github.com:eschabell/brms-coolstore-demo.git"
 PRODUCT=JBoss BRMS
-JBOSS_HOME=./target/jboss-eap-6.1
+JBOSS_HOME=./target/jboss-eap-6.3
 SERVER_DIR=$JBOSS_HOME/standalone/deployments
 SERVER_CONF=$JBOSS_HOME/standalone/configuration
 SERVER_BIN=$JBOSS_HOME/bin
 SUPPORT_DIR=./support
 SRC_DIR=./installs
 PRJ_DIR=./projects/brms-coolstore-demo
-BRMS=jboss-brms-installer-6.0.3.GA-redhat-1.jar
+BRMS=jboss-brms-installer-6.1.0.ER2.jar
 SUPPORT_LIBS=./support/libs/
 WEB_INF_LIB=./projects/brms-coolstore-demo/src/main/webapp/WEB-INF/lib/
-VERSION=6.0.3
+VERSION=6.1.ER2
 
 # wipe screen.
 clear 

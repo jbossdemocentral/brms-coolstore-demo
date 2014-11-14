@@ -6,17 +6,17 @@ set DEMO=JBoss BPM Suite Red Hat Cool Store Demo
 set AUTHORS=Jason Milliron, Eric D. Schabell
 set PROJECT=git@github.com:eschabell/brms-coolstore-demo.git"
 set PRODUCT=JBoss BRMS
-set JBOSS_HOME=%PROJECT_HOME%target\jboss-eap-6.1
+set JBOSS_HOME=%PROJECT_HOME%target\jboss-eap-6.3
 set SERVER_DIR=%JBOSS_HOME%\standalone\deployments
 set SERVER_CONF=%JBOSS_HOME%\standalone\configuration
 set SERVER_BIN=%JBOSS_HOME%\bin
 set SUPPORT_DIR=%PROJECT_HOME%support
 set SRC_DIR=%PROJECT_HOME%installs
 set PRJ_DIR=%PROJECT_HOME%projects\brms-coolstore-demo
-set BRMS=jboss-brms-installer-6.0.3.GA-redhat-1.jar
+set BRMS=jboss-brms-installer-6.1.0.ER2.jar
 set SUPPORT_LIBS=%PROJECT_HOME%support\libs
 set WEB_INF_LIB=%PROJECT_HOME%projects\brms-coolstore-demo\src\main\webapp\WEB-INF\lib\
-set VERSION=6.0.3
+set VERSION=6.1.ER2
 
 REM wipe screen.
 cls

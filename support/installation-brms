@@ -2,7 +2,7 @@
 <AutomatedInstallation langpack="eng">
 <com.izforge.izpack.panels.HTMLLicencePanel id="HTMLLicencePanel"/>
 <com.izforge.izpack.panels.TargetPanel id="DirectoryPanel">
-<installpath>target</installpath>
+	<installpath>target/jboss-eap-6.3</installpath>
 </com.izforge.izpack.panels.TargetPanel>
 <com.izforge.izpack.panels.UserInputPanel id="security">
 <userInput>
@@ -28,15 +28,21 @@
 </com.izforge.izpack.panels.UserInputPanel>
 <com.izforge.izpack.panels.UserInputPanel id="postinstall">
 <userInput>
-<entry key="postinstallServer" value="false"/>
+<entry key="postinstallServer" value="true"/>
+<entry key="installVault" value="false"/>
+<entry key="installSsl" value="false"/>
+<entry key="ldapMgmtConsole" value="false"/>
+<entry key="ldapBusinessCentral" value="false"/>
+<entry key="installSecurityDomain" value="false"/>
 </userInput>
 </com.izforge.izpack.panels.UserInputPanel>
 <com.izforge.izpack.panels.UserInputPanel id="vaultsecurity"/>
 <com.izforge.izpack.panels.UserInputPanel id="vaultsecuritypreexisting"/>
 <com.izforge.izpack.panels.UserInputPanel id="sslsecurity"/>
-<com.izforge.izpack.panels.UserInputPanel id="ldapsecurity"/>
-<com.izforge.izpack.panels.UserInputPanel id="ldapsecurity2"/>
-<com.izforge.izpack.panels.UserInputPanel id="securitydomain"/>
+<com.izforge.izpack.panels.UserInputPanel id="ldapconnection"/>
+<com.izforge.izpack.panels.UserInputPanel id="ldapmgmtconsole"/>
+<com.izforge.izpack.panels.UserInputPanel id="ldapbusinesscentral"/>
+<com.redhat.installer.asconfiguration.securitydomain.panel.SecurityDomainPanel id="securitydomain"/>
 <com.izforge.izpack.panels.UserInputPanel id="jsssecuritydomain"/>
 <com.izforge.izpack.panels.SummaryPanel id="SummaryPanel"/>
 <com.izforge.izpack.panels.InstallPanel id="InstallPanel"/>
