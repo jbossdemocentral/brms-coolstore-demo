@@ -59,6 +59,8 @@ Released versions
 
 See the tagged releases for the following versions of the product:
 
+- v2.4 JBoss BRMS 6.1.ER2 installer with cool store demo installed.
+
 - v2.3 JBoss BRMS 6.0.3 installer with cool store demo installed.
 
 - v2.2 JBoss BPM Suite 6.0.2, JBoss EAP 6.1.1, cool store demo installed.
