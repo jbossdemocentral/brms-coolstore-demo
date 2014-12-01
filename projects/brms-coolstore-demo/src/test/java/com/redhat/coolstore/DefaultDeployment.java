@@ -21,27 +21,28 @@ import java.io.File;
 import org.jboss.shrinkwrap.api.ArchivePaths;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 
 public class DefaultDeployment {
-
+	
     public static WebArchive deployment() {
-    	
-    	String webInf = "src/main/webapp/WEB-INF/lib/";
     	
         return ShrinkWrap.create(WebArchive.class, "test.war")
                  .addPackages(true, "com.redhat.coolstore.factmodel")
                  .addPackages(true, "com.redhat.coolstore.model")
                  .addPackages(true, "com.redhat.coolstore.service")
                  .addPackages(true, "com.redhat.coolstore.util")
-                 .addAsLibraries(new File(webInf + "drools-core-5.3.1.BRMS.jar"))
-                 .addAsLibraries(new File(webInf + "drools-compiler-5.3.1.BRMS.jar"))
-                 .addAsLibraries(new File(webInf + "drools-decisiontables-5.3.1.BRMS.jar"))
-                 .addAsLibraries(new File(webInf + "drools-templates-5.3.1.BRMS.jar"))
-                 .addAsLibraries(new File(webInf + "jbpm-bpmn2-5.3.1.BRMS.jar"))
-                 .addAsLibraries(new File(webInf + "jbpm-flow-5.3.1.BRMS.jar"))
-                 .addAsLibraries(new File(webInf + "jbpm-flow-builder-5.3.1.BRMS.jar"))
-                 .addAsLibraries(new File(webInf + "knowledge-api-5.3.1.BRMS.jar"))
-                 .addAsLibraries(new File(webInf + "mvel2-2.1.3.Final.jar"))
+                 
+                 // This takes a decent amount of memory, would need to increase heap allocation in JBDS...
+                 /*.addAsLibraries(
+                		 Maven.resolver().loadPomFromFile("pom.xml").importRuntimeDependencies().resolve().withTransitivity().asFile()
+                 )*/
+                 
+                 .addAsLibraries(Maven.resolver().loadPomFromFile("pom.xml").resolve("org.kie:kie-internal").withTransitivity().asFile())
+                 .addAsLibraries(Maven.resolver().loadPomFromFile("pom.xml").resolve("org.kie:kie-ci").withTransitivity().asFile())
+                 .addAsLibraries(Maven.resolver().loadPomFromFile("pom.xml").resolve("org.jbpm:jbpm-bpmn2").withTransitivity().asFile())
+                 .addAsLibraries(Maven.resolver().loadPomFromFile("pom.xml").resolve("com.redhat:coolstore").withTransitivity().asFile())
+                 
                  .addAsWebInfResource(new File("src/main/webapp/WEB-INF/beans.xml"), ArchivePaths.create("beans.xml"));
 
     }
