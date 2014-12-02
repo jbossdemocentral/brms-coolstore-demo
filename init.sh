@@ -34,7 +34,7 @@ echo "##                                                          ##"
 echo "##  brought to you by,                                      ##"   
 echo "##             ${AUTHORS}             ##"
 echo "##                                                          ##"   
-echo "##  ${PROJECT}        ##"
+echo "##  ${PROJECT} ##"
 echo "##                                                          ##"   
 echo "##############################################################"
 echo
