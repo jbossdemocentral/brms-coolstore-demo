@@ -1,7 +1,7 @@
 #!/bin/sh 
 DEMO="JBoss BRMS Red Hat Cool Store Demo"
 AUTHORS="Jason Milliron, Eric D. Schabell"
-PROJECT="git@github.com:eschabell/brms-coolstore-demo.git"
+PROJECT="git@github.com:jbossdemocentral/brms-coolstore-demo.git"
 PRODUCT=JBoss BRMS
 JBOSS_HOME=./target/jboss-eap-6.1
 SERVER_DIR=$JBOSS_HOME/standalone/deployments

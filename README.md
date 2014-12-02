@@ -13,7 +13,7 @@ Setup and Configuration
 
 See Quick Start Guide in project as ODT and PDF for details on installation. For those that can't wait:
 
-1. [Download and unzip.](https://github.com/eschabell/brms-coolstore-demo/archive/master.zip)
+1. [Download and unzip.](https://github.com/jbossdemocentral/brms-coolstore-demo/archive/master.zip)
 
 2. Add products to installs directory.
 
@@ -59,6 +59,8 @@ Released versions
 
 See the tagged releases for the following versions of the product:
 
+- v2.3 moved to JBoss Demo Central.
+
 - v2.3 JBoss BRMS 6.0.3 installer with cool store demo installed.
 
 - v2.2 JBoss BPM Suite 6.0.2, JBoss EAP 6.1.1, cool store demo installed.
@@ -79,11 +81,11 @@ See the tagged releases for the following versions of the product:
 - v1.0 is BRMS 5.3.1 deployable, running on JBoss EAP 6.
 
 
-[![Video bpmPaaS CoolStore](https://github.com/eschabell/brms-coolstore-demo/blob/master/docs/demo-images/video-bpmpaas-coolstore.png?raw=true)](http://vimeo.com/ericschabell/bpmpaas-brms-coolstore-demo)
+[![Video bpmPaaS CoolStore](https://github.com/jbossdemocentral/brms-coolstore-demo/blob/master/docs/demo-images/video-bpmpaas-coolstore.png?raw=true)](http://vimeo.com/ericschabell/bpmpaas-brms-coolstore-demo)
 
-![Digital Sign Annoucement](https://github.com/eschabell/brms-coolstore-demo/blob/master/docs/demo-images/announce-sign.jpg?raw=true)
+![Digital Sign Annoucement](https://github.com/jbossdemocentral/brms-coolstore-demo/blob/master/docs/demo-images/announce-sign.jpg?raw=true)
 
-![Decision Table](https://github.com/eschabell/brms-coolstore-demo/blob/master/docs/demo-images/coolstore-decision-table.png?raw=true)
+![Decision Table](https://github.com/jbossdemocentral/brms-coolstore-demo/blob/master/docs/demo-images/coolstore-decision-table.png?raw=true)
 
-![Domain Model](https://github.com/eschabell/brms-coolstore-demo/blob/master/docs/demo-images/coolstore-model.png?raw=true)
+![Domain Model](https://github.com/jbossdemocentral/brms-coolstore-demo/blob/master/docs/demo-images/coolstore-model.png?raw=true)
 
