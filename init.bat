@@ -37,7 +37,7 @@ echo ##                                                             ##
 echo ##  brought to you by,                                         ##   
 echo ##             %AUTHORS%                ##
 echo ##                                                             ##   
-echo ##  %PROJECT%          ##
+echo ##  %PROJECT%   ##
 echo ##                                                             ##   
 echo #################################################################
 echo.
@@ -64,6 +64,12 @@ REM Run BRMS installer.
 echo Product installer running now...
 echo.
 call java -jar %SRC_DIR%\%BRMS% %SUPPORT_DIR%\installation-brms -variablefile %SUPPORT_DIR%\installation-brms.variables
+
+if not "%ERRORLEVEL%" == "0" (
+	echo Error Occurred During %PRODUCT% Installation!
+	echo.
+	GOTO :EOF
+)
 
 echo - enabling demo accounts role setup in application-roles.properties file...
 echo.
