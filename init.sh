@@ -65,6 +65,11 @@ echo Product installer running now...
 echo
 java -jar $SRC_DIR/$BRMS $SUPPORT_DIR/installation-brms -variablefile $SUPPORT_DIR/installation-brms.variables
 
+if [ $? -ne 0 ]; then
+	echo Error occurred during $PRODUCT installation!
+	exit
+fi
+
 echo
 echo "  - enabling demo accounts role setup in application-roles.properties file..."
 echo
