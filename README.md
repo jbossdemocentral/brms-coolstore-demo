@@ -59,7 +59,7 @@ Released versions
 
 See the tagged releases for the following versions of the product:
 
-- v2.3 moved to JBoss Demo Central.
+- v2.4 moved to JBoss Demo Central, with updated windows init.bat support.
 
 - v2.3 JBoss BRMS 6.0.3 installer with cool store demo installed.
 
