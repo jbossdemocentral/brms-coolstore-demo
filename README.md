@@ -17,7 +17,7 @@ See Quick Start Guide in project as ODT and PDF for details on installation. For
 
 2. Add products to installs directory.
 
-3. Run 'init.sh' or 'init.bat' file.
+3. Run 'init.sh' or 'init.bat' file. 'init.bat' must be run with Administrative privileges.
 
 4. Start JBoss BRMS Server by running ./target/jboss-eap-6.1/bin/standalone.sh
 
