@@ -8,11 +8,21 @@ application code while the business analysts can focus on the rules, event, and 
 JBoss BPM Suite product web user interface.
 
 
-Setup and Configuration
+Install with one click in xPaaS (brmsPaaS)
+-----------------------------------------
+After clicking button, ensure `Gear` size is set to `large`:
+
+[![Click to install OpenShift](http://launch-shifter.rhcloud.com/launch/light/Click to  install.svg)](https://openshift.redhat.com/app/console/application_type/custom?&cartridges[]=https://raw.githubusercontent.com/jbossdemocentral/cartridge-bpmPaaS-coolstore-demo/master/metadata/manifest.yml&name=coolstore&gear_profile=large&initial_git_url=)
+
+Once installed you can use the JBoss BRMS logins: 
+
+   * u:erics  p: jbossbrms1!  (admin)
+
+   * u: alan  p: jbossbrms1!  (analyst)
+
+
+Install on your machine
 -----------------------
-
-See Quick Start Guide in project as ODT and PDF for details on installation. For those that can't wait:
-
 1. [Download and unzip.](https://github.com/jbossdemocentral/brms-coolstore-demo/archive/master.zip)
 
 2. Add products to installs directory.
@@ -59,7 +69,7 @@ Released versions
 
 See the tagged releases for the following versions of the product:
 
-- v2.4 moved to JBoss Demo Central, with updated windows init.bat support.
+- v2.4 moved to JBoss Demo Central, with updated windows init.bat support and one click install button.
 
 - v2.3 JBoss BRMS 6.0.3 installer with cool store demo installed.
 
