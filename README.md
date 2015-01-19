@@ -41,8 +41,8 @@ Install on your machine
 
 7. Open shopping cart and demo away (http://localhost:8080/brms-coolstore-demo)
 
-Docker
--------------------------
+Optional Docker Install
+-----------------------
 
 The following steps can be used to configure and run the demo in a docker container
 
@@ -50,17 +50,19 @@ The following steps can be used to configure and run the demo in a docker contai
 
 2. Add products installs directory.
 
-3. Build demo image
+3. Copy contents of support/docker directory to the project root.
+
+4. Build demo image
 
 	```
 	docker build -t jbossdemocentral/brms-coolstore-demo .
 	```
-4. Start demo container
+5. Start demo container
 
 	```
 	docker run --it -p 8080:8080 -p 9990:9990 jbossdemocentral/brms-coolstore-demo
 	```
-5. Login to http://<DOCKER_HOST>:8080/business-central
+6. Login to http://<DOCKER_HOST>:8080/business-central
 
     ```
     - login for admin and analyst roles (u:erics / p:jbossbrms1!)
@@ -97,6 +99,8 @@ Released versions
 -----------------
 
 See the tagged releases for the following versions of the product:
+
+- v2.4 JBoss BRMS 6.0.3 with optional docker installation.
 
 - v2.4 moved to JBoss Demo Central, with updated windows init.bat support and one click install button.
 
