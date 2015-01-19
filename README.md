@@ -34,12 +34,41 @@ Install on your machine
 5. Login to http://localhost:8080/business-central
 
     ```
-  - login for admin and analyst roles (u:erics / p:jbossbrms1!)
+    - login for admin and analyst roles (u:erics / p:jbossbrms1!)
     ```
 
 6. Build and deploy project.
 
 7. Open shopping cart and demo away (http://localhost:8080/brms-coolstore-demo)
+
+Docker
+-------------------------
+
+The following steps can be used to configure and run the demo in a docker container
+
+1. [Download and unzip.](https://github.com/jbossdemocentral/brms-coolstore-demo/archive/master.zip)
+
+2. Add products installs directory.
+
+3. Build demo image
+
+	```
+	docker build -t jbossdemocentral/brms-coolstore-demo .
+	```
+4. Start demo container
+
+	```
+	docker run --it -p 8080:8080 -p 9990:9990 jbossdemocentral/brms-coolstore-demo
+	```
+5. Login to http://<DOCKER_HOST>:8080/business-central
+
+    ```
+    - login for admin and analyst roles (u:erics / p:jbossbrms1!)
+    ```
+
+7. Open shopping cart and demo away (http://<DOCKER_HOST>:8080/brms-coolstore-demo)
+
+Additional information can be found in the jbossdemocentral docker [developer repository](https://github.com/jbossdemocentral/docker-developer)
 
 
 Supporting Articles
