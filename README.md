@@ -100,7 +100,7 @@ Released versions
 
 See the tagged releases for the following versions of the product:
 
-- v2.4 JBoss BRMS 6.0.3 with optional docker installation.
+- v2.5 JBoss BRMS 6.0.3 with optional docker installation.
 
 - v2.4 moved to JBoss Demo Central, with updated windows init.bat support and one click install button.
 
