@@ -1,28 +1,16 @@
 JBoss BPM Suite Cool Store Demo 
 ===============================
-
 This is a retail web store demo where you will find rules, decision tables, events, and a process 
 that is leveraged by a web application. The web application is a WAR built using the JBoss BPM Suite 
 generated kjar as a dependency, providing an example project showing how developers can focus on the 
 application code while the business analysts can focus on the rules, event, and processed in the 
 JBoss BPM Suite product web user interface.
 
-
-Install with one click in xPaaS (brmsPaaS)
------------------------------------------
-After clicking button, ensure `Gear` size is set to `large`:
-
-[![Click to install OpenShift](http://launch-shifter.rhcloud.com/launch/light/Install brmsPaaS.svg)](https://openshift.redhat.com/app/console/application_type/custom?&cartridges[]=https://raw.githubusercontent.com/jbossdemocentral/cartridge-bpmPaaS-coolstore-demo/master/metadata/manifest.yml&name=coolstore&gear_profile=large&initial_git_url=)
-
-Once installed you can use the JBoss BRMS logins: 
-
-   * u:erics  p: jbossbrms1!  (admin)
-
-   * u: alan  p: jbossbrms1!  (analyst)
+There are three options available to you for using this demo; local, Openshift and Docker.
 
 
-Install on your machine
------------------------
+Option 1 - Install on your machine
+----------------------------------
 1. [Download and unzip.](https://github.com/jbossdemocentral/brms-coolstore-demo/archive/master.zip)
 
 2. Add products to installs directory.
@@ -41,9 +29,22 @@ Install on your machine
 
 7. Open shopping cart and demo away (http://localhost:8080/brms-coolstore-demo)
 
-Optional Docker Install
------------------------
 
+Option 2 - Install with one click in xPaaS (brmsPaaS)
+-----------------------------------------------------
+After clicking button, ensure `Gear` size is set to `large`:
+
+[![Click to install OpenShift](http://launch-shifter.rhcloud.com/launch/light/Install brmsPaaS.svg)](https://openshift.redhat.com/app/console/application_type/custom?&cartridges[]=https://raw.githubusercontent.com/jbossdemocentral/cartridge-bpmPaaS-coolstore-demo/master/metadata/manifest.yml&name=coolstore&gear_profile=large&initial_git_url=)
+
+Once installed you can use the JBoss BRMS logins: 
+
+   * u:erics  p: jbossbrms1!  (admin)
+
+   * u: alan  p: jbossbrms1!  (analyst)
+
+
+Option 3 - Generate iocker install
+----------------------------------
 The following steps can be used to configure and run the demo in a docker container
 
 1. [Download and unzip.](https://github.com/jbossdemocentral/brms-coolstore-demo/archive/master.zip)
@@ -75,6 +76,7 @@ Additional information can be found in the jbossdemocentral docker [developer re
 
 Supporting Articles
 -------------------
+[3 shockingly easy ways into JBoss rules, events, planning & BPM](http://www.schabell.org/2015/01/3-shockingly-easy-ways-into-jboss-brms-bpmsuite.html)
 
 [How to Use Rules and Events to Drive JBoss BRMS Cool Store for xPaaS](http://www.schabell.org/2014/08/how-to-use-rules-events-drive-jboss-brms-coolstore-xpaas.html)
 
@@ -97,7 +99,6 @@ Supporting Articles
 
 Released versions
 -----------------
-
 See the tagged releases for the following versions of the product:
 
 - v2.5 JBoss BRMS 6.0.3 with optional docker installation.
