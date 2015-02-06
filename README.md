@@ -1,10 +1,10 @@
-JBoss BPM Suite Cool Store Demo 
-===============================
-This is a retail web store demo where you will find rules, decision tables, events, and a process 
-that is leveraged by a web application. The web application is a WAR built using the JBoss BPM Suite 
-generated kjar as a dependency, providing an example project showing how developers can focus on the 
-application code while the business analysts can focus on the rules, event, and processed in the 
-JBoss BPM Suite product web user interface.
+JBoss BRMS Suite Cool Store Demo 
+=========+======================
+This is a retail web store demo where you will find rules, decision tables, events, and a ruleflow 
+that is leveraged by a web application. The web application is a WAR built using the JBoss BRMS
+generated project as a dependency, providing an example project showing how developers can focus on the 
+application code while the business analysts can focus on rules, events, and ruleflows in the 
+JBoss BRMS product web based dashboard.
 
 There are three options available to you for using this demo; local, Openshift and Docker.
 
@@ -104,6 +104,8 @@ Supporting Articles
 Released versions
 -----------------
 See the tagged releases for the following versions of the product:
+
+- v2.6 JBoss BRMS 6.0.3 installer with cool store updated so that project unit tests running again.
 
 - v2.5 JBoss BRMS 6.0.3 with optional docker installation.
 
