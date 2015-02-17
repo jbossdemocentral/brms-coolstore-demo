@@ -1,0 +1,15 @@
+WINDOWS INSTALLATION:
+====================
+This directory contains a Windows Batch file and a corresponding VBScript file which is used as a
+utility to unzip files (since Windows has no native unzip functionality within Batch files). 
+
+unzip.vsb - utility to unzip files.
+
+Notes and tips:
+- the unzip.vbs file needs to be located in the root of the project.
+- you might run into some issues while extracting some of the BRMS components because the 
+  file path of the extracted file became greater than 255 chars (yet another windows 
+  headache). By putting the project in a higher directory (c:\demo), the issue can be
+  resolved.
+- if you find errors with the installation, please fix and push back to project, we don't have
+  a windows environment to test and keep these scripts updated.

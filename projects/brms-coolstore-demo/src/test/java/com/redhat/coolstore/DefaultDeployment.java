@@ -21,30 +21,49 @@ import java.io.File;
 import org.jboss.shrinkwrap.api.ArchivePaths;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 
 public class DefaultDeployment {
 
     public static WebArchive deployment() {
     	
-    	String webInf = "src/main/webapp/WEB-INF/lib/";
+    	WebArchive war = ShrinkWrap.create(WebArchive.class, "test.war")
+             .addPackages(true, "com.redhat.coolstore.model")
+             .addPackages(true, "com.redhat.coolstore.service")
+             .addPackages(true, "com.redhat.coolstore.util")             
+             .addAsWebInfResource(new File("src/main/webapp/WEB-INF/beans.xml"), ArchivePaths.create("beans.xml"));
     	
-        return ShrinkWrap.create(WebArchive.class, "test.war")
-                 .addPackages(true, "com.redhat.coolstore.factmodel")
-                 .addPackages(true, "com.redhat.coolstore.model")
-                 .addPackages(true, "com.redhat.coolstore.service")
-                 .addPackages(true, "com.redhat.coolstore.util")
-                 .addAsLibraries(new File(webInf + "drools-core-5.3.1.BRMS.jar"))
-                 .addAsLibraries(new File(webInf + "drools-compiler-5.3.1.BRMS.jar"))
-                 .addAsLibraries(new File(webInf + "drools-decisiontables-5.3.1.BRMS.jar"))
-                 .addAsLibraries(new File(webInf + "drools-templates-5.3.1.BRMS.jar"))
-                 .addAsLibraries(new File(webInf + "jbpm-bpmn2-5.3.1.BRMS.jar"))
-                 .addAsLibraries(new File(webInf + "jbpm-flow-5.3.1.BRMS.jar"))
-                 .addAsLibraries(new File(webInf + "jbpm-flow-builder-5.3.1.BRMS.jar"))
-                 .addAsLibraries(new File(webInf + "knowledge-api-5.3.1.BRMS.jar"))
-                 .addAsLibraries(new File(webInf + "mvel2-2.1.3.Final.jar"))
-                 .addAsWebInfResource(new File("src/main/webapp/WEB-INF/beans.xml"), ArchivePaths.create("beans.xml"));
-                 //.addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
-
+    	File[] f = null;
+    	
+    	try {
+    	
+	    	f = Maven.configureResolver()
+		        .workOffline()
+		        .loadPomFromFile("pom.xml")
+		        .resolve(
+		        		"org.vaadin.virkki:cdiutils", 
+		        		"com.google.gwt:gwt-user", 
+		        		"com.google.gwt:gwt-dev",
+		        		"com.vaadin:vaadin",
+		        		"org.kie:kie-internal",
+		        		"org.kie:kie-ci",
+		        		"org.jbpm:jbpm-bpmn2",
+		        		"org.mvel:mvel2",
+		        		"org.jboss.spec.javax.transaction:jboss-transaction-api_1.1_spec",
+		        		"org.jboss.remoting3:jboss-remoting",
+		        		"org.slf4j:slf4j-api",
+		        		"com.redhat:coolstore"
+		        		)
+		        .withTransitivity().asFile();
+    	
+	    	war.addAsLibraries(f);
+    	
+    	} catch (Exception e) {
+    		System.out.println(e.getMessage());
+    	}
+        
+        return war;
+        
     }
 
 }

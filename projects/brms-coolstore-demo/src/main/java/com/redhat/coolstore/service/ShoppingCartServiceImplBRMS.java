@@ -5,10 +5,10 @@ import java.io.Serializable;
 import javax.ejb.Stateful;
 import javax.inject.Inject;
 
-import org.drools.runtime.StatefulKnowledgeSession;
-import org.drools.runtime.rule.WorkingMemoryEntryPoint;
+import org.kie.api.runtime.KieSession;
+import org.kie.api.runtime.rule.EntryPoint;
 
-import com.redhat.coolstore.factmodel.PromoEvent;
+import com.redhat.coolstore.PromoEvent;
 import com.redhat.coolstore.model.Promotion;
 import com.redhat.coolstore.model.ShoppingCart;
 import com.redhat.coolstore.model.ShoppingCartItem;
@@ -20,22 +20,28 @@ public class ShoppingCartServiceImplBRMS implements ShoppingCartService, Seriali
 	private static final long serialVersionUID = 6821952169434330759L;
 
 	@Inject
-	private BRMSUtil brmsUtil; // = new BRMSUtil();
+	private BRMSUtil brmsUtil; 
 	
 	@Inject
-	private PromoService promoService; // = new PromoService();
+	private PromoService promoService; 
 	
 	public ShoppingCartServiceImplBRMS() {
-		//System.out.println("ShoppingCartServiceImplBRMS()");
+		
 	}
 		
 	public void priceShoppingCart(ShoppingCart sc) {
 						
 		if ( sc != null ) {
 						
-			com.redhat.coolstore.factmodel.ShoppingCart factShoppingCart = new com.redhat.coolstore.factmodel.ShoppingCart();
+			com.redhat.coolstore.ShoppingCart factShoppingCart = new com.redhat.coolstore.ShoppingCart();
 			
-			StatefulKnowledgeSession ksession = null;
+			factShoppingCart.setCartItemPromoSavings(0d);
+			factShoppingCart.setCartItemTotal(0d);
+			factShoppingCart.setCartTotal(0d);
+			factShoppingCart.setShippingPromoSavings(0d);
+			factShoppingCart.setShippingTotal(0d);
+			
+			KieSession ksession = null;
 			
 			try {
 			
@@ -44,7 +50,7 @@ public class ShoppingCartServiceImplBRMS implements ShoppingCartService, Seriali
 				
 					ksession = brmsUtil.getStatefulSession();
 					
-					WorkingMemoryEntryPoint promoStream = ksession.getWorkingMemoryEntryPoint("Promo Stream");
+					EntryPoint promoStream = ksession.getEntryPoint("Promo Stream");
 					
 					for (Promotion promo : promoService.getPromotions()) {
 																	
@@ -58,12 +64,13 @@ public class ShoppingCartServiceImplBRMS implements ShoppingCartService, Seriali
 					
 					for (ShoppingCartItem sci : sc.getShoppingCartItemList()) {
 						
-						com.redhat.coolstore.factmodel.ShoppingCartItem factShoppingCartItem = new com.redhat.coolstore.factmodel.ShoppingCartItem();
+						com.redhat.coolstore.ShoppingCartItem factShoppingCartItem = new com.redhat.coolstore.ShoppingCartItem();
 						factShoppingCartItem.setItemId(sci.getProduct().getItemId());
 						factShoppingCartItem.setName(sci.getProduct().getName());
 						factShoppingCartItem.setPrice(sci.getProduct().getPrice());
-						factShoppingCartItem.setQuantity(sci.getQuanity());
+						factShoppingCartItem.setQuantity(sci.getQuantity());
 						factShoppingCartItem.setShoppingCart(factShoppingCart);
+						factShoppingCartItem.setPromoSavings(0d);
 						
 						ksession.insert(factShoppingCartItem);
 						
@@ -80,8 +87,6 @@ public class ShoppingCartServiceImplBRMS implements ShoppingCartService, Seriali
 				sc.setShippingTotal(factShoppingCart.getShippingTotal());
 				sc.setShippingPromoSavings(factShoppingCart.getShippingPromoSavings());
 				sc.setCartTotal(factShoppingCart.getCartTotal());
-				
-				//System.out.println(sc);
 											
 			} finally {
 				
