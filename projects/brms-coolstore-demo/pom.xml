@@ -261,6 +261,8 @@
 			<artifactId>shrinkwrap-resolver-impl-maven-archive</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
+		<!-- Vaadin libs -->
 
 		<dependency>
 			<groupId>com.vaadin</groupId>
@@ -280,7 +282,6 @@
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-dev</artifactId>
 			<version>2.3.0</version>
-			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
@@ -309,41 +310,46 @@
 			<groupId>org.kie</groupId>
 			<artifactId>kie-internal</artifactId>
 			<version>6.0.3-redhat-4</version>
-			<scope>compile</scope>
+			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.kie</groupId>
 			<artifactId>kie-ci</artifactId>
 			<version>6.0.3-redhat-4</version>
-			<scope>compile</scope>
+			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jbpm</groupId>
 			<artifactId>jbpm-bpmn2</artifactId>
 			<version>6.0.3-redhat-4</version>
+			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.mvel</groupId>
 			<artifactId>mvel2</artifactId>
 			<version>2.1.9.Final</version>
+			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jboss.spec.javax.transaction</groupId>
 			<artifactId>jboss-transaction-api_1.1_spec</artifactId>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.jboss.remoting3</groupId>
 			<artifactId>jboss-remoting</artifactId>
 			<version>3.2.16.GA-redhat-1</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<version>1.7.6</version>
+			<scope>provided</scope>
 		</dependency>
 
 		<!-- KJar file from project. -->

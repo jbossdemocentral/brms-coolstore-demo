@@ -31,6 +31,7 @@ public class DefaultDeployment {
              .addPackages(true, "com.redhat.coolstore.model")
              .addPackages(true, "com.redhat.coolstore.service")
              .addPackages(true, "com.redhat.coolstore.util")             
+             .addAsWebInfResource(new File("src/main/webapp/WEB-INF/jboss-deployment-structure.xml"), ArchivePaths.create("jboss-deployment-structure.xml"))
              .addAsWebInfResource(new File("src/main/webapp/WEB-INF/beans.xml"), ArchivePaths.create("beans.xml"));
     	
     	File[] f = null;
@@ -38,20 +39,12 @@ public class DefaultDeployment {
     	try {
     	
 	    	f = Maven.configureResolver()
-		        .workOffline()
 		        .loadPomFromFile("pom.xml")
 		        .resolve(
 		        		"org.vaadin.virkki:cdiutils", 
 		        		"com.google.gwt:gwt-user", 
 		        		"com.google.gwt:gwt-dev",
 		        		"com.vaadin:vaadin",
-		        		"org.kie:kie-internal",
-		        		"org.kie:kie-ci",
-		        		"org.jbpm:jbpm-bpmn2",
-		        		"org.mvel:mvel2",
-		        		"org.jboss.spec.javax.transaction:jboss-transaction-api_1.1_spec",
-		        		"org.jboss.remoting3:jboss-remoting",
-		        		"org.slf4j:slf4j-api",
 		        		"com.redhat:coolstore"
 		        		)
 		        .withTransitivity().asFile();
