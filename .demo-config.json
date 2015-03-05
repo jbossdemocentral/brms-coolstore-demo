@@ -1,0 +1,24 @@
+{
+  "name":"JBoss BRMS Cool Store Demo",
+  "summary":"This is a retail web store demo where you will find rules, decision tables, events, and a ruleflow that is leveraged by a web application. The web application is a WAR built using the JBoss BRMS generated project as a dependency by scanning for business logic updates.
+
+Install options - local, OpenShift and Docker.",
+  "author":"Jason Milliron, Andrew Block, Eric D. Schabell",
+  "categories":["brms"],
+  "level":"Easy Peasy",
+  "published":true,
+  "prerequisites":"Java 1.7",
+  "targetProduct":"JBoss BRMS",
+  "productVersion":"JBoss BRMS 5.3.1 onwards",
+  "technologies": ["JBoss BRMS"],
+  "links": [ 
+    { 
+      "name":"Code",
+      "url":"https://github.com/jbossdemocentral/brms-cool-store-demo"
+    },
+    { 
+      "name":"Install bpmPaaS",
+      "url":"https://openshift.redhat.com/app/console/application_type/custom?&cartridges[]=https://raw.githubusercontent.com/jbossdemocentral/cartridge-bpmPaaS-coolstore-demo/master/metadata/manifest.yml&name=coolstore&gear_profile=large&initial_git_url="
+    }
+  ]
+}
