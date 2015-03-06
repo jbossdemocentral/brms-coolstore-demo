@@ -1,9 +1,6 @@
 {
   "name":"JBoss BRMS Cool Store Demo",
-  "summary":"This is a retail web store demo where you will find rules, decision tables, events, and a ruleflow that is leveraged by a web application. The web application is a WAR built using the JBoss BRMS generated project as a dependency by scanning for business logic updates.
-
-Install options - local, OpenShift and Docker.",
-  "author":"Jason Milliron, Andrew Block, Eric D. Schabell",
+  "summary":"This is a retail web store demo where you will find rules, decision tables, events, and a ruleflow that is leveraged by a web application. The web application is a WAR built using the JBoss BRMS generated project as a dependency by scanning for business logic updates. Install options - local, OpenShift and Docker.",  "author":"Jason Milliron, Andrew Block, Eric D. Schabell",
   "categories":["brms"],
   "level":"Easy Peasy",
   "published":true,
