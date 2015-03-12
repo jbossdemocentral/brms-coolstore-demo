@@ -43,7 +43,7 @@ Once installed you can use the JBoss BRMS logins:
    * u: alan  p: jbossbrms1!  (analyst)
 
 
-Option 3 - Generate iocker install
+Option 3 - Generate docker install
 ----------------------------------
 The following steps can be used to configure and run the demo in a docker container
 
