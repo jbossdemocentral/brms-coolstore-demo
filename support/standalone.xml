@@ -219,7 +219,7 @@
       </subsystem>
       <subsystem xmlns="urn:jboss:domain:jsf:1.0"/>
       <subsystem xmlns="urn:jboss:domain:mail:1.1">
-         <mail-session jndi-name="java:jboss/mail/Default">
+         <mail-session jndi-name="java:jboss/mail/Default" from="info@redhat.com">
             <smtp-server outbound-socket-binding-ref="mail-smtp"/>
          </mail-session>
       </subsystem>
