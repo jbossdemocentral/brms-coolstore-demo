@@ -87,6 +87,10 @@ echo "  - making sure standalone.sh for server is executable..."
 echo
 chmod u+x $JBOSS_HOME/bin/standalone.sh
 
+echo "  - setting up custom maven settings so KieScanner finds repo updates..."
+echo
+cp $SUPPORT_DIR/settings.xml $SERVER_BIN/.settings.xml
+
 # ensure project lib dir exists.
 if [ ! -d $WEB_INF_LIB ]; then
 	echo "  - missing web inf lib directory in project being created..."

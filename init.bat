@@ -86,6 +86,10 @@ echo.
 xcopy /Y /Q "%SUPPORT_DIR%\standalone.xml" "%SERVER_CONF%"
 echo. 
 
+echo   - setting up custom maven settings so KieScanner finds repo updates...
+echo.
+xcopy /Y /Q "%SUPPORT_DIR%\settings.xml" "%SERVER_BIN%\.settings.xml
+
 REM ensure project lib dir exists
 if not exist %WEB_INF_LIB% (
 	echo - missing web inf lib directory in project being created...

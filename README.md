@@ -6,6 +6,9 @@ generated project as a dependency, providing an example project showing how deve
 application code while the business analysts can focus on rules, events, and ruleflows in the 
 JBoss BRMS product web based dashboard.
 
+This demo is self contained, it uses a custom maven settings to deploy all built JBoss BRMS knowledge artifacts
+into an external maven repository (not your local repository), in /tmp/maven-repo.
+
 There are three options available to you for using this demo; local, Openshift and Docker.
 
 
@@ -104,6 +107,8 @@ Supporting Articles
 Released versions
 -----------------
 See the tagged releases for the following versions of the product:
+
+- v2.7 JBoss BRMS 6.0.3 installer with cool store configured to scan external maven repository.
 
 - v2.6 JBoss BRMS 6.0.3 installer with cool store updated so that project unit tests running again.
 
