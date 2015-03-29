@@ -18,16 +18,27 @@ public class BRMSUtil {
     	
     	KieServices kServices = KieServices.Factory.get();
 
-		ReleaseId releaseId = kServices.newReleaseId( "com.redhat", "coolstore", "LATEST" );
+			ReleaseId releaseId = kServices.newReleaseId( "com.redhat", "coolstore", "LATEST" );
 
-		kContainer = kServices.newKieContainer( releaseId );
+			kContainer = kServices.newKieContainer( releaseId );
 
-		KieScanner kScanner = kServices.newKieScanner( kContainer );
+			KieScanner kScanner = kServices.newKieScanner( kContainer );
 
 
-		// Start the KieScanner polling the maven repository every 10 seconds
-
-		kScanner.start( 10000L );
+			// Start the KieScanner polling the maven repository every 10 seconds
+			System.out.println("Starting KieScanner...");
+			System.out.println();
+		
+			try {
+				kScanner.start( 10000L );
+			} catch (Exception e) {
+				System.out.println("Failed to start KieScanner...");
+				System.out.println();
+				System.out.println(e.getMessage());
+			}
+				
+			System.out.println("Started KieScanner sucessfully...");
+			System.out.println();
     }
 
 
