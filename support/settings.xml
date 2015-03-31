@@ -7,38 +7,41 @@
   -->
   <localRepository>/tmp/maven-repo</localRepository>
 
-	<repositories>
-		<repository>
-			<id>jboss-bpm-suite-repo</id>
-			<name>JBoss BPM Suite Maven Repository</name>
-			<url>file:///tmp/maven-repo</url>
-			<layout>default</layout>
-			<releases>
-				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
-			</snapshots>
-		</repository>
-	</repositories>
+	 <profiles>
+		 <profile>
+			 <repositories>
+				<repository>
+					<id>jboss-bpm-suite-repo</id>
+					<name>JBoss BPM Suite Maven Repository</name>
+					<url>file://tmp/maven-repo</url>
+					<layout>default</layout>
+					<releases>
+						<enabled>true</enabled>
+						<updatePolicy>always</updatePolicy>
+					</releases>
+					<snapshots>
+						<enabled>true</enabled>
+						<updatePolicy>always</updatePolicy>
+					</snapshots>
+				</repository>
+			</repositories>
 
-	<pluginRepositories>
-		<pluginRepository>
-			<id>jboss-bpm-suite-repo</id>
-			<name>JBoss BPM Suite Maven Repository</name>
-			<url>file:///tmp/maven-repo</url>
-			<layout>default</layout>
-			<releases>
-				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
-			</snapshots>
-		</pluginRepository>
-	</pluginRepositories>
-
+			<pluginRepositories>
+				<pluginRepository>
+					<id>jboss-bpm-suite-repo</id>
+					<name>JBoss BPM Suite Maven Repository</name>
+					<url>file:///tmp/maven-repo</url>
+					<layout>default</layout>
+					<releases>
+						<enabled>true</enabled>
+						<updatePolicy>always</updatePolicy>
+					</releases>
+					<snapshots>
+						<enabled>true</enabled>
+						<updatePolicy>always</updatePolicy>
+					</snapshots>
+				</pluginRepository>
+			</pluginRepositories>
+		</profile>
+	</profiles>
 </settings>

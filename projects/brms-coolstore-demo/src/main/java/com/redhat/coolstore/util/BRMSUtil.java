@@ -28,15 +28,7 @@ public class BRMSUtil {
 			// Start the KieScanner polling the maven repository every 10 seconds
 			System.out.println("Starting KieScanner...");
 			System.out.println();
-		
-			try {
-				kScanner.start( 10000L );
-			} catch (Exception e) {
-				System.out.println("Failed to start KieScanner...");
-				System.out.println();
-				System.out.println(e.getMessage());
-			}
-				
+			kScanner.start( 10000L );
 			System.out.println("Started KieScanner sucessfully...");
 			System.out.println();
     }
