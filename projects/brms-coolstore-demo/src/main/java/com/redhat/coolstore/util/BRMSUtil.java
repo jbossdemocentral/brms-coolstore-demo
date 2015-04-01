@@ -1,6 +1,8 @@
 package com.redhat.coolstore.util;
 
-import javax.enterprise.context.ApplicationScoped;
+import java.io.Serializable;
+
+import javax.inject.Singleton;
 
 import org.kie.api.KieServices;
 import org.kie.api.builder.KieScanner;
@@ -9,10 +11,12 @@ import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.StatelessKieSession;
 
-@ApplicationScoped
-public class BRMSUtil {
+@Singleton
+public class BRMSUtil implements Serializable {
 
-    private KieContainer kContainer = null;
+	private static final long serialVersionUID = 1562882558996412866L;
+
+	private KieContainer kContainer = null;
     
     public BRMSUtil() {	    
     	
