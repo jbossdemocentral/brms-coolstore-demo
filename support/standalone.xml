@@ -26,13 +26,13 @@
       <extension module="org.jboss.as.messaging"/>
    </extensions>
    <system-properties>
-      <property name="org.kie.demo" value="${org.kie.demo:false}"/>
-      <property name="org.kie.example" value="${org.kie.example:false}"/>
-      <property name="org.jbpm.designer.perspective" value="${org.jbpm.designer.perspective:full}"/>
+      <property name="org.kie.demo" value="false"/>
+      <property name="org.kie.example" value="false"/>
+      <property name="org.jbpm.designer.perspective" value="full"/>
       <property name="org.uberfire.nio.git.dir" value="${jboss.home.dir}/bin"/>
       <property name="org.uberfire.metadata.index.dir" value="${jboss.home.dir}/bin"/>
       <property name="org.guvnor.m2repo.dir" value="${jboss.home.dir}/bin"/>
-			<property name="kie.maven.settings.custom" value="${jboss.home.dir}/bin/.settings.xml"/>
+			<!--  <property name="kie.maven.settings.custom" value="${jboss.home.dir}/bin/.settings.xml"/> -->
    </system-properties>
    <management>
       <security-realms>
@@ -309,10 +309,10 @@
             </acceptors>
             <security-settings>
                <security-setting match="#">
-                  <permission type="send" roles="guest,admin"/>
-                  <permission type="consume" roles="guest,admin"/>
-                  <permission type="createNonDurableQueue" roles="guest,admin"/>
-                  <permission type="deleteNonDurableQueue" roles="guest,admin"/>
+                  <permission type="send" roles="guest"/>
+                  <permission type="consume" roles="guest"/>
+                  <permission type="createNonDurableQueue" roles="guest"/>
+                  <permission type="deleteNonDurableQueue" roles="guest"/>
                </security-setting>
             </security-settings>
             <address-settings>

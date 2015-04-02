@@ -7,6 +7,7 @@
 	<packaging>war</packaging>
 	<name>Red Hat Cool Store</name>
 
+
 	<build>
 		<!-- Maven will append the version to the finalName (which is the name 
 			given to the generated war, and hence the context root) -->
@@ -149,9 +150,26 @@
 		<!-- Define the version of JBoss' Java EE 6 APIs and Tools we want to import. -->
 		<javaee6.with.tools.version>1.0.4.Final-redhat-4</javaee6.with.tools.version>
 
+		<!-- jboss.brms.version>6.0.3-redhat-4</jboss.brms.version -->
+		<jboss.brms.version>6.2.0.Final-redhat-4</jboss.brms.version>
 	</properties>
 
 	<repositories>
+		<repository>
+			<id>jboss-lab-maven-repository</id>
+			<name>JBoss Lab Maven Repository</name>
+			<url>http://download.lab.bos.redhat.com/brewroot/repos/jb-ip-6.1-build/latest/maven/</url>
+			<layout>default</layout>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</snapshots>
+		</repository>
+
 		<repository>
 			<id>jboss-maven-repository</id>
 			<name>JBoss Maven Repository</name>
@@ -169,6 +187,21 @@
 	</repositories>
 
 	<pluginRepositories>
+		<pluginRepository>
+			<id>jboss-lab-maven-repository</id>
+			<name>JBoss Lab Maven Repository</name>
+			<url>http://download.lab.bos.redhat.com/brewroot/repos/jb-ip-6.1-build/latest/maven/</url>
+			<layout>default</layout>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</snapshots>
+		</pluginRepository>
+	
 		<pluginRepository>
 			<id>jboss-maven-repository</id>
 			<name>JBoss Maven Repository</name>
@@ -309,28 +342,29 @@
 		<dependency>
 			<groupId>org.kie</groupId>
 			<artifactId>kie-internal</artifactId>
-			<version>6.0.3-redhat-4</version>
+			<version>${jboss.brms.version}</version>
 			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.kie</groupId>
 			<artifactId>kie-ci</artifactId>
-			<version>6.0.3-redhat-4</version>
+			<version>${jboss.brms.version}</version>
 			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jbpm</groupId>
 			<artifactId>jbpm-bpmn2</artifactId>
-			<version>6.0.3-redhat-4</version>
+			<version>${jboss.brms.version}</version>
 			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.mvel</groupId>
 			<artifactId>mvel2</artifactId>
-			<version>2.1.9.Final</version>
+			<!--			<version>2.1.9.Final</version> -->
+			<version>2.1.9.Final-redhat-9</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -342,13 +376,15 @@
 		<dependency>
 			<groupId>org.jboss.remoting3</groupId>
 			<artifactId>jboss-remoting</artifactId>
-			<version>3.2.16.GA-redhat-1</version>
+			<!--			<version>3.2.16.GA-redhat-1</version> -->
+			<version>3.2.19.GA-redhat-1</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>1.7.6</version>
+			<!-- 		<version>1.7.6</version> -->
+			<version>1.7.10</version>
 			<scope>provided</scope>
 		</dependency>
 
