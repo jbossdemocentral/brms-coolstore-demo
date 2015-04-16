@@ -1,3 +1,4 @@
-# pack-refs with: peeled
-80c9aa9270b4a8087dae7d01cb96d03f579d932d refs/heads/master
-f7903502b79f9abd50f192d81e64b21051d6f3a1 refs/heads/social
+# pack-refs with: peeled fully-peeled 
+5246050b06dc47d5ce5bfae6bc10dd6c36aee6d4 refs/heads/erics-uf-user
+cd225e65b950e4ad7a9416a720372a9d00f2c89f refs/heads/master
+4687c29899e6b2a70cce0dae1195017074737ecd refs/heads/social
