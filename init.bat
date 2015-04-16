@@ -16,7 +16,7 @@ set PRJ_DIR=%PROJECT_HOME%projects\brms-coolstore-demo
 set SUPPORT_LIBS=%PROJECT_HOME%support\libs
 set WEB_INF_LIB=%PROJECT_HOME%projects\brms-coolstore-demo\src\main\webapp\WEB-INF\lib\
 set BRMS=jboss-brms-6.1.0.GA-installer.jar
-set EAP=jboss-eap-6.4.0.CR2-installer.jar
+set EAP=jboss-eap-6.4.0-installer.jar
 set VERSION=6.1
 
 REM wipe screen.

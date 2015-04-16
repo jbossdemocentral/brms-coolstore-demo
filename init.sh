@@ -13,7 +13,7 @@ PRJ_DIR=./projects/brms-coolstore-demo
 SUPPORT_LIBS=./support/libs/
 WEB_INF_LIB=./projects/brms-coolstore-demo/src/main/webapp/WEB-INF/lib/
 BRMS=jboss-brms-6.1.0.GA-installer.jar
-EAP=jboss-eap-6.4.0.CR2-installer.jar
+EAP=jboss-eap-6.4.0-installer.jar
 VERSION=6.1
 
 # wipe screen.
