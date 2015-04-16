@@ -4,9 +4,9 @@
   "categories":["brms"],
   "level":"Easy Peasy",
   "published":true,
-  "prerequisites":"Java 1.7",
+  "prerequisites":"Java 1.7 or 1.8",
   "targetProduct":"JBoss BRMS",
-  "productVersion":"JBoss BRMS 5.3.1 onwards",
+  "productVersion":"JBoss BRMS 6.1",
   "technologies": ["JBoss BRMS"],
   "links": [ 
     { 
