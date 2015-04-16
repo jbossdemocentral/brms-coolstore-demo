@@ -6,17 +6,18 @@ set DEMO=JBoss BPM Suite Red Hat Cool Store Demo
 set AUTHORS=Jason Milliron, Andrew Block, Eric D. Schabell
 set PROJECT=git@github.com:jbossdemocentral/brms-coolstore-demo.git"
 set PRODUCT=JBoss BRMS
-set JBOSS_HOME=%PROJECT_HOME%target\jboss-eap-6.1
+set JBOSS_HOME=%PROJECT_HOME%target\jboss-eap-6.4
 set SERVER_DIR=%JBOSS_HOME%\standalone\deployments
 set SERVER_CONF=%JBOSS_HOME%\standalone\configuration
 set SERVER_BIN=%JBOSS_HOME%\bin
 set SUPPORT_DIR=%PROJECT_HOME%support
 set SRC_DIR=%PROJECT_HOME%installs
 set PRJ_DIR=%PROJECT_HOME%projects\brms-coolstore-demo
-set BRMS=jboss-brms-installer-6.0.3.GA-redhat-1.jar
 set SUPPORT_LIBS=%PROJECT_HOME%support\libs
 set WEB_INF_LIB=%PROJECT_HOME%projects\brms-coolstore-demo\src\main\webapp\WEB-INF\lib\
-set VERSION=6.0.3
+set BRMS=jboss-brms-6.1.0.GA-installer.jar
+set EAP=jboss-eap-6.4.0-installer.jar
+set VERSION=6.1
 
 REM wipe screen.
 cls
@@ -43,6 +44,16 @@ echo #################################################################
 echo.
 
 REM make some checks first before proceeding. 
+if exist %SRC_DIR%\%EAP% (
+        echo Product sources are present...
+        echo.
+) else (
+        echo Need to download %EAP% package from the Customer Support Portal
+        echo and place it in the %SRC_DIR% directory to proceed...
+        echo.
+        GOTO :EOF
+)
+
 if exist %SRC_DIR%\%BRMS% (
 	echo JBoss product sources, %BRMS% present...
 	echo.
@@ -60,8 +71,20 @@ if exist %JBOSS_HOME% (
 	rmdir /s /q "%PROJECT_HOME%\target"
 )
 
-REM Run BRMS installer.
-echo Product installer running now...
+REM Run installers.
+echo EAP installer running now...
+echo.
+call java -jar %SRC_DIR%/%EAP% %SUPPORT_DIR%\installation-eap -variablefile %SUPPORT_DIR%\installation-eap.variables
+
+
+if not "%ERRORLEVEL%" == "0" (
+  echo.
+	echo Error Occurred During JBoss EAP Installation!
+	echo.
+	GOTO :EOF
+)
+
+echo JBoss BRMS installer running now...
 echo.
 call java -jar %SRC_DIR%\%BRMS% %SUPPORT_DIR%\installation-brms -variablefile %SUPPORT_DIR%\installation-brms.variables
 
@@ -85,6 +108,10 @@ echo   - setting up standalone.xml configuration adjustments...
 echo.
 xcopy /Y /Q "%SUPPORT_DIR%\standalone.xml" "%SERVER_CONF%"
 echo. 
+
+echo - setup email task notification users...
+echo.
+xcopy "%SUPPORT_DIR%\userinfo.properties" "%SERVER_DIR%\business-central.war\WEB-INF\classes\"
 
 echo   - setting up custom maven settings so KieScanner finds repo updates...
 echo.

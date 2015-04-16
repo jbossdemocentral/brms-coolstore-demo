@@ -20,7 +20,7 @@ Option 1 - Install on your machine
 
 3. Run 'init.sh' or 'init.bat' file. 'init.bat' must be run with Administrative privileges.
 
-4. Start JBoss BRMS Server by running ./target/jboss-eap-6.1/bin/standalone.sh
+4. Start JBoss BRMS Server by running ./target/jboss-eap-6.4/bin/standalone.sh
 
 5. Login to http://localhost:8080/business-central
 
@@ -44,6 +44,8 @@ Once installed you can use the JBoss BRMS logins:
    * u:erics  p: jbossbrms1!  (admin)
 
    * u: alan  p: jbossbrms1!  (analyst)
+
+Current hosting of brmsPaaS is on JBoss BRMS 6.0.2 in OpenShift Online.
 
 
 Option 3 - Generate docker install
@@ -107,6 +109,8 @@ Supporting Articles
 Released versions
 -----------------
 See the tagged releases for the following versions of the product:
+
+- v2.8 JBoss BRMS 6.1 with cool store installed.
 
 - v2.7 JBoss BRMS 6.0.3 installer with cool store configured to scan external maven repository.
 

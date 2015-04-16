@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<AutomatedInstallation langpack="eng">
+<productName>EAP</productName>
+<productVersion>6.4.0</productVersion>
+<com.izforge.izpack.panels.HTMLLicencePanel id="HTMLLicencePanel"/>
+<com.izforge.izpack.panels.TargetPanel id="DirectoryPanel">
+<installpath>target/jboss-eap-6.4</installpath>
+</com.izforge.izpack.panels.TargetPanel>
+<com.izforge.izpack.panels.TreePacksPanel id="TreePacksPanel">
+<pack index="0" name="Red Hat JBoss Enterprise Application Platform" selected="true"/>
+<pack index="1" name="AppClient" selected="true"/>
+<pack index="2" name="Bin" selected="true"/>
+<pack index="3" name="Bundles" selected="true"/>
+<pack index="4" name="XMLs and XSDs" selected="true"/>
+<pack index="5" name="Domain" selected="true"/>
+<pack index="6" name="Domain Shell Scripts" selected="true"/>
+<pack index="7" name="Modules" selected="true"/>
+<pack index="8" name="Standalone" selected="true"/>
+<pack index="9" name="Standalone Shell Scripts" selected="true"/>
+<pack index="10" name="Welcome Content" selected="true"/>
+<pack index="11" name="Quickstarts" selected="false"/>
+</com.izforge.izpack.panels.TreePacksPanel>
+<com.izforge.izpack.panels.UserInputPanel id="CreateUserPanel">
+<userInput>
+<entry key="adminUser" value="admin"/>
+<entry autoPrompt="true" key="adminPassword"/>
+</userInput>
+</com.izforge.izpack.panels.UserInputPanel>
+<com.izforge.izpack.panels.UserInputPanel id="QuickStartsPanel">
+<userInput>
+<entry key="installQuickStarts" value="false"/>
+</userInput>
+</com.izforge.izpack.panels.UserInputPanel>
+<com.redhat.installer.installation.maven.panel.MavenRepoCheckPanel id="MavenRepoCheckPanel"/>
+<com.izforge.izpack.panels.UserInputPanel id="SocketBindingPanel">
+<userInput>
+<entry key="portDecision" value="false"/>
+<entry key="pureIPv6" value="false"/>
+</userInput>
+</com.izforge.izpack.panels.UserInputPanel>
+<com.izforge.izpack.panels.UserInputPanel id="SocketStandalonePanel"/>
+<com.izforge.izpack.panels.UserInputPanel id="SocketHaStandalonePanel"/>
+<com.izforge.izpack.panels.UserInputPanel id="SocketFullStandalonePanel"/>
+<com.izforge.izpack.panels.UserInputPanel id="SocketFullHaStandalonePanel"/>
+<com.izforge.izpack.panels.UserInputPanel id="HostDomainPanel"/>
+<com.izforge.izpack.panels.UserInputPanel id="SocketDomainPanel"/>
+<com.izforge.izpack.panels.UserInputPanel id="SocketHaDomainPanel"/>
+<com.izforge.izpack.panels.UserInputPanel id="SocketFullDomainPanel"/>
+<com.izforge.izpack.panels.UserInputPanel id="SocketFullHaDomainPanel"/>
+<com.izforge.izpack.panels.UserInputPanel id="ServerLaunchPanel">
+<userInput>
+<entry key="serverStartup" value="none"/>
+</userInput>
+</com.izforge.izpack.panels.UserInputPanel>
+<com.izforge.izpack.panels.UserInputPanel id="LoggingOptionsPanel">
+<userInput>
+<entry key="configureLog" value="false"/>
+</userInput>
+</com.izforge.izpack.panels.UserInputPanel>
+<com.izforge.izpack.panels.UserInputPanel id="postinstall">
+<userInput>
+<entry key="postinstallServer" value="false"/>
+</userInput>
+</com.izforge.izpack.panels.UserInputPanel>
+<com.izforge.izpack.panels.UserInputPanel id="vaultsecurity"/>
+<com.izforge.izpack.panels.UserInputPanel id="sslsecurity"/>
+<com.izforge.izpack.panels.UserInputPanel id="ldapsecurity"/>
+<com.izforge.izpack.panels.UserInputPanel id="ldapsecurity2"/>
+<com.izforge.izpack.panels.UserInputPanel id="infinispan"/>
+<com.redhat.installer.asconfiguration.securitydomain.panel.SecurityDomainPanel id="Security Domain Panel"/>
+<com.izforge.izpack.panels.UserInputPanel id="jsssecuritydomain"/>
+<com.redhat.installer.asconfiguration.jdbc.panel.JBossJDBCDriverSetupPanel id="JDBC Setup Panel"/>
+<com.redhat.installer.asconfiguration.datasource.panel.JBossDatasourceConfigPanel id="Datasource Configuration Panel"/>
+<com.izforge.izpack.panels.SummaryPanel id="SummaryPanel"/>
+<com.izforge.izpack.panels.InstallPanel id="InstallPanel"/>
+<com.izforge.izpack.panels.ProcessPanel id="ProcessPanel"/>
+<com.izforge.izpack.panels.ShortcutPanel id="ShortcutPanel"/>
+<com.izforge.izpack.panels.FinishPanel id="FinishPanel"/>
+</AutomatedInstallation>
