@@ -31,7 +31,6 @@ public class DefaultDeployment {
              .addPackages(true, "com.redhat.coolstore.model")
              .addPackages(true, "com.redhat.coolstore.service")
              .addPackages(true, "com.redhat.coolstore.util")             
-             .addAsWebInfResource(new File("src/main/webapp/WEB-INF/jboss-deployment-structure.xml"), ArchivePaths.create("jboss-deployment-structure.xml"))
              .addAsWebInfResource(new File("src/main/webapp/WEB-INF/beans.xml"), ArchivePaths.create("beans.xml"));
     	
     	File[] f = null;
@@ -41,6 +40,10 @@ public class DefaultDeployment {
 	    	f = Maven.configureResolver()
 		        .loadPomFromFile("pom.xml")
 		        .resolve(
+		        		"org.kie:kie-internal",
+		        		"org.kie:kie-ci",
+		        		"org.jbpm:jbpm-bpmn2",
+		        		"org.mvel:mvel2",
 		        		"org.vaadin.virkki:cdiutils", 
 		        		"com.google.gwt:gwt-user", 
 		        		"com.google.gwt:gwt-dev",
