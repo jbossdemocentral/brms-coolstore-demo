@@ -9,7 +9,7 @@ JBoss BRMS product web based dashboard.
 This demo is self contained, it uses a custom maven settings to deploy all built JBoss BRMS knowledge artifacts
 into an external maven repository (not your local repository), in /tmp/maven-repo.
 
-There are three options available to you for using this demo; local, Openshift and Docker.
+There are three options available to you for using this demo; local, Openshift and Containerized.
 
 
 Option 1 - Install on your machine
@@ -48,9 +48,9 @@ Once installed you can use the JBoss BRMS logins:
 Current hosting of brmsPaaS is on JBoss BRMS 6.0.2 in OpenShift Online.
 
 
-Option 3 - Generate docker install
-----------------------------------
-The following steps can be used to configure and run the demo in a docker container
+Option 3 - Generate containerized install
+-----------------------------------------
+The following steps can be used to configure and run the demo in a container
 
 1. [Download and unzip.](https://github.com/jbossdemocentral/brms-coolstore-demo/archive/master.zip)
 
@@ -116,7 +116,7 @@ See the tagged releases for the following versions of the product:
 
 - v2.6 JBoss BRMS 6.0.3 installer with cool store updated so that project unit tests running again.
 
-- v2.5 JBoss BRMS 6.0.3 with optional docker installation.
+- v2.5 JBoss BRMS 6.0.3 with optional containerized installation.
 
 - v2.4 moved to JBoss Demo Central, with updated windows init.bat support and one click install button.
 
