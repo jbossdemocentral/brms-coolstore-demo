@@ -76,7 +76,7 @@ The following steps can be used to configure and run the demo in a container
 
 7. Open shopping cart and demo away (http://<DOCKER_HOST>:8080/brms-coolstore-demo)
 
-Additional information can be found in the jbossdemocentral docker [developer repository](https://github.com/jbossdemocentral/docker-developer)
+Additional information can be found in the jbossdemocentral container [developer repository](https://github.com/jbossdemocentral/docker-developer)
 
 
 Supporting Articles
