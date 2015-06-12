@@ -10,9 +10,11 @@ SERVER_BIN=$JBOSS_HOME/bin
 SUPPORT_DIR=./support
 SRC_DIR=./installs
 PRJ_DIR=./projects/brms-coolstore-demo
+PATCH_DIR=./target/jboss-brms-6.1.1-patch
 SUPPORT_LIBS=./support/libs/
 WEB_INF_LIB=./projects/brms-coolstore-demo/src/main/webapp/WEB-INF/lib/
 BRMS=jboss-brms-6.1.0.GA-installer.jar
+PATCH=jboss-brms-6.1.1-patch.zip
 EAP=jboss-eap-6.4.0-installer.jar
 VERSION=6.1
 
@@ -54,12 +56,11 @@ else
 fi
 
 if [ -r $SRC_DIR/$BRMS ] || [ -L $SRC_DIR/$BRMS ]; then
-	echo JBoss product sources, $BRMS present...
+	echo JBoss product sources are present...
 	echo
 else
 	echo Need to download $BRMS package from the Customer Portal 
 	echo and place it in the $SRC_DIR directory to proceed...
-	echo
 	exit
 fi
 
@@ -81,14 +82,25 @@ if [ $? -ne 0 ]; then
 	exit
 fi
 
+echo
 echo "JBoss BRMS installer running now..."
 echo
 java -jar $SRC_DIR/$BRMS $SUPPORT_DIR/installation-brms -variablefile $SUPPORT_DIR/installation-brms.variables
 
 if [ $? -ne 0 ]; then
+	echo
 	echo Error occurred during $PRODUCT installation!
 	exit
 fi
+
+echo
+echo "JBoss BRMS patch ($PATCH) installation now..."
+echo
+unzip $SRC_DIR/$PATCH -d ./target
+cd $PATCH_DIR
+./apply-updates.sh $JBOSS_HOME eap6.x
+cd ../..
+rm -rf $PATCH_DIR
 
 echo
 echo "  - enabling demo accounts role setup in application-roles.properties file..."
@@ -134,9 +146,15 @@ mvn clean install
 cp target/brms-coolstore-demo.war ../../$SERVER_DIR
 cd ../..
 
-echo "You can now start the $PRODUCT with $SERVER_BIN/standalone.sh"
 echo
-
-echo "$PRODUCT $VERSION $DEMO Setup Complete."
+echo "*************************************************************************"
+echo "*                                                                       *"
+echo "*   JBoss BRMS Cool Store install completed.                            *"
+echo "*                                                                       *"
+echo "*   You can now start the server with:                                  *"
+echo "*                                                                       *"
+echo "*       $SERVER_BIN/standalone.sh"
+echo "*                                                                       *"
+echo "*************************************************************************"
 echo
 

@@ -110,6 +110,8 @@ Released versions
 -----------------
 See the tagged releases for the following versions of the product:
 
+- v2.9 JBoss BRMS 6.1.1 (patch update applied) with cool store installed.
+
 - v2.8 JBoss BRMS 6.1 with cool store installed.
 
 - v2.7 JBoss BRMS 6.0.3 installer with cool store configured to scan external maven repository.
