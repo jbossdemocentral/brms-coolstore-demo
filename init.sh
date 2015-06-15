@@ -98,7 +98,7 @@ echo "JBoss BRMS patch ($PATCH) installation now..."
 echo
 unzip $SRC_DIR/$PATCH -d ./target
 cd $PATCH_DIR
-./apply-updates.sh ../jboss-eap6.4 eap6.x
+./apply-updates.sh ../jboss-eap-6.4 eap6.x
 cd ../..
 rm -rf $PATCH_DIR
 
