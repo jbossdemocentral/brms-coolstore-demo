@@ -101,7 +101,7 @@ echo JBoss BRMS patch [%PATCH%] installation now...
 echo.
 cscript /nologo %SUPPORT_DIR%\windows\unzip.vbs %SRC_DIR%\%PATCH% %PROJECT_HOME%\target
 cd "%PATCH_DIR%"
-apply-updates.bat "%JBOSS_HOME%" "eap6.x"
+apply-updates.bat "%PROJECT_HOME%\target\jboss-eap-6.4" "eap6.x"
 cd "%PROJECT_HOME%"
 
 echo - enabling demo accounts role setup in application-roles.properties file...
