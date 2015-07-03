@@ -315,21 +315,6 @@
 
 	<repositories>
 		<repository>
-			<id>jboss-lab-maven-repository</id>
-			<name>JBoss Lab Maven Repository</name>
-			<url>http://download.lab.bos.redhat.com/brewroot/repos/jb-ip-6.1-build/latest/maven/</url>
-			<layout>default</layout>
-			<releases>
-				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
-			</snapshots>
-		</repository>
-
-		<repository>
 			<id>jboss-maven-repository</id>
 			<name>JBoss Maven Repository</name>
 			<url>http://maven.repository.redhat.com/techpreview/all/</url>
@@ -346,21 +331,6 @@
 	</repositories>
 
 	<pluginRepositories>
-		<pluginRepository>
-			<id>jboss-lab-maven-repository</id>
-			<name>JBoss Lab Maven Repository</name>
-			<url>http://download.lab.bos.redhat.com/brewroot/repos/jb-ip-6.1-build/latest/maven/</url>
-			<layout>default</layout>
-			<releases>
-				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
-			</snapshots>
-		</pluginRepository>
-	
 		<pluginRepository>
 			<id>jboss-maven-repository</id>
 			<name>JBoss Maven Repository</name>
