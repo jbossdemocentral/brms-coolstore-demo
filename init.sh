@@ -153,7 +153,7 @@ echo "*   JBoss BRMS Cool Store install completed.                            *"
 echo "*                                                                       *"
 echo "*   You can now start the server with:                                  *"
 echo "*                                                                       *"
-echo "*       $SERVER_BIN/standalone.sh"
+echo "*       $SERVER_BIN/standalone.sh                        *"
 echo "*                                                                       *"
 echo "*************************************************************************"
 echo
