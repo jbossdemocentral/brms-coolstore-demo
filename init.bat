@@ -13,13 +13,11 @@ set SERVER_BIN=%JBOSS_HOME%\bin
 set SUPPORT_DIR=%PROJECT_HOME%support
 set SRC_DIR=%PROJECT_HOME%installs
 set PRJ_DIR=%PROJECT_HOME%projects\brms-coolstore-demo
-set PATCH_DIR=%PROJECT_HOME%\target\jboss-brms-6.1.1-patch
 set SUPPORT_LIBS=%PROJECT_HOME%support\libs
 set WEB_INF_LIB=%PROJECT_HOME%projects\brms-coolstore-demo\src\main\webapp\WEB-INF\lib\
-set BRMS=jboss-brms-6.1.0.GA-installer.jar
-set PATCH=jboss-brms-6.1.1-patch.zip
-set EAP=jboss-eap-6.4.0-installer.jar
-set VERSION=6.1
+set BRMS=jboss-brms-6.2.0.GA-installer.jar
+set EAP=jboss-eap-6.4.3-installer.jar
+set VERSION=6.2
 
 REM wipe screen.
 cls
@@ -95,14 +93,6 @@ if not "%ERRORLEVEL%" == "0" (
 	echo.
 	GOTO :EOF
 )
-
-echo.
-echo JBoss BRMS patch [%PATCH%] installation now...
-echo.
-cscript /nologo %SUPPORT_DIR%\windows\unzip.vbs %SRC_DIR%\%PATCH% %PROJECT_HOME%\target
-cd "%PATCH_DIR%"
-apply-updates.bat "%PROJECT_HOME%\target\jboss-eap-6.4" "eap6.x"
-cd "%PROJECT_HOME%"
 
 echo - enabling demo accounts role setup in application-roles.properties file...
 echo.

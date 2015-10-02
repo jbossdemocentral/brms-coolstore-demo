@@ -10,13 +10,11 @@ SERVER_BIN=$JBOSS_HOME/bin
 SUPPORT_DIR=./support
 SRC_DIR=./installs
 PRJ_DIR=./projects/brms-coolstore-demo
-PATCH_DIR=./target/jboss-brms-6.1.1-patch
 SUPPORT_LIBS=./support/libs/
 WEB_INF_LIB=./projects/brms-coolstore-demo/src/main/webapp/WEB-INF/lib/
-BRMS=jboss-brms-6.1.0.GA-installer.jar
-PATCH=jboss-brms-6.1.1-patch.zip
-EAP=jboss-eap-6.4.0-installer.jar
-VERSION=6.1
+BRMS=jboss-brms-6.2.0.GA-installer.jar
+EAP=jboss-eap-6.4.3-installer.jar
+VERSION=6.2
 
 # wipe screen.
 clear 
@@ -92,15 +90,6 @@ if [ $? -ne 0 ]; then
 	echo Error occurred during $PRODUCT installation!
 	exit
 fi
-
-echo
-echo "JBoss BRMS patch ($PATCH) installation now..."
-echo
-unzip $SRC_DIR/$PATCH -d ./target
-cd $PATCH_DIR
-./apply-updates.sh ../jboss-eap-6.4 eap6.x
-cd ../..
-rm -rf $PATCH_DIR
 
 echo
 echo "  - enabling demo accounts role setup in application-roles.properties file..."
