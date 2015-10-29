@@ -1,5 +1,5 @@
 id: jbossdemocentral-brms-coolstore
-title: JBoss BRMS retail web store demo where you will find rules, decision tables, events, and a ruleflow that is leveraged by a web application.
+title: JBoss BRMS Cool Store
 github_repo_url: https://github.com/jbossdemocentral/brms-coolstore-demo
 technologies:
   - RESTful
