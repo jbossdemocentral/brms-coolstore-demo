@@ -112,7 +112,7 @@ Released versions
 -----------------
 See the tagged releases for the following versions of the product:
 
-- v3.1 JBoss BRMS 6.2.0, JBoss EAP 6.4.3 and cool store installed.
+- v3.1 JBoss BRMS 6.2.0, JBoss EAP 6.4.4 and cool store installed.
 
 - v3.0 JBoss BRMS 6.1.1 (patch update applied) with cool store installed and Albert Wong updates for JBDS project importing.
 

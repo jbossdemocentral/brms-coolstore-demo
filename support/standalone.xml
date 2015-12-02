@@ -30,10 +30,9 @@
       <property name="org.kie.example" value="false"/>
       <property name="org.jbpm.designer.perspective" value="full"/>
       <property name="org.uberfire.nio.git.dir" value="${jboss.home.dir}/bin"/>
+			<property name="org.kie.server.repo" value="${jboss.server.data.dir}"/>
       <property name="org.uberfire.metadata.index.dir" value="${jboss.home.dir}/bin"/>
-      <property name="org.guvnor.m2repo.dir" value="${jboss.home.dir}/bin"/>
-      <property name="jboss.as.management.blocking.timeout" value="900"/>
-			<property name="kie.maven.settings.custom" value="${jboss.home.dir}/bin/.settings.xml"/>
+			<property name="org.guvnor.m2repo.dir" value="${jboss.home.dir}/bin"/>
    </system-properties>
    <management>
       <security-realms>
