@@ -310,7 +310,7 @@
 
 		<!-- Define the version of JBoss BRMS product to import. -->
 		<!-- jboss.brms.version>6.0.3-redhat-4</jboss.brms.version -->
-	<jboss.brms.version>6.1.0.GA-redhat-2</jboss.brms.version> 
+		<jboss.brms.version>6.2.0.GA-redhat-1</jboss.brms.version>
 	</properties>
 
 	<repositories>
@@ -460,7 +460,13 @@
 			<groupId>org.jbpm</groupId>
 			<artifactId>jbpm-bpmn2</artifactId>
 		</dependency>
-		
+
+		<!-- Required in BxMS >= 6.2 when using Guided Decision tables -->
+		<dependency>
+			<groupId>org.drools</groupId>
+			<artifactId>drools-workbench-models-guided-dtable</artifactId>
+		</dependency>
+
 		<!-- Test dependencies -->
 		<dependency>
 			<groupId>junit</groupId>
