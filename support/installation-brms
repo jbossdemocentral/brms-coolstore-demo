@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <AutomatedInstallation langpack="eng">
 <productName>BRMS</productName>
-<productVersion>6.1.0</productVersion>
+<productVersion>6.2.0</productVersion>
 <com.izforge.izpack.panels.HTMLLicencePanel id="HTMLLicencePanel"/>
 <com.izforge.izpack.panels.TargetPanel id="DirectoryPanel">
 <installpath>target/jboss-eap-6.4</installpath>
@@ -40,6 +40,9 @@
 <com.izforge.izpack.panels.UserInputPanel id="ldapbusinesscentral"/>
 <com.redhat.installer.asconfiguration.securitydomain.panel.SecurityDomainPanel id="securitydomain"/>
 <com.izforge.izpack.panels.UserInputPanel id="jsssecuritydomain"/>
+<com.redhat.installer.asconfiguration.jdbc.panel.JBossJDBCDriverSetupPanel id="JDBCDriverPanel"/>
+<com.izforge.izpack.panels.UserInputPanel id="QuartzDatabasePanel"/>
+<com.redhat.installer.asconfiguration.datasource.panel.JBossDatasourceConfigPanel id="BusinessCentralDatasource"/>
 <com.izforge.izpack.panels.SummaryPanel id="SummaryPanel"/>
 <com.izforge.izpack.panels.InstallPanel id="InstallPanel"/>
 <com.izforge.izpack.panels.ProcessPanel id="ProcessPanel"/>
