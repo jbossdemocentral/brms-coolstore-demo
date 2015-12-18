@@ -78,6 +78,17 @@ The following steps can be used to configure and run the demo in a container
 
 Additional information can be found in the jbossdemocentral container [developer repository](https://github.com/jbossdemocentral/docker-developer)
 
+Notes
+-----
+The web application (shopping cart) is built during demo installation with a provided coolstore project jar version 2.0.0. When you 
+open the project you will find the version is also set to 2.0.0. You can run the web application as is, but if you build and deploy
+a new version of 2.0.0 to your maven repository it will find duplicate rules. To demo you deploy a new version of the coolstore
+project by bumping the version number on each build and deploy, noting the KieScanner picking up the new version within 10 seconds 
+of a new deployment. For example, initially start project, bump the version to 3.0.0, build and deploy, open web application and
+watch KieScanner in server logs pick up the 3.0.0 version. Now change a shipping rule value in decision table, save, bump project
+version to 4.0.0, build and deploy, watch for KieScanner picking up new 4.0.0 version, now web application on next run will use new
+shipping values.
+
 
 Supporting Articles
 -------------------
