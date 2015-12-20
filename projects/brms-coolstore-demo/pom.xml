@@ -292,6 +292,13 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
+			<dependency>
+				<groupId>com.vaadin</groupId>
+				<artifactId>vaadin-bom</artifactId>
+				<version>${vaadin.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 	<properties>
@@ -311,6 +318,9 @@
 		<!-- Define the version of JBoss BRMS product to import. -->
 		<!-- jboss.brms.version>6.0.3-redhat-4</jboss.brms.version -->
 		<jboss.brms.version>6.2.0.GA-redhat-1</jboss.brms.version>
+
+		<!-- Define the version of Vaadin framework. -->
+		<vaadin.version>7.5.10</vaadin.version>
 	</properties>
 
 	<repositories>
@@ -327,6 +337,10 @@
 				<enabled>true</enabled>
 				<updatePolicy>always</updatePolicy>
 			</snapshots>
+		</repository>
+		<repository>
+   			<id>vaadin-addons</id>
+   			<url>http://maven.vaadin.com/vaadin-addons</url>
 		</repository>
 	</repositories>
 
@@ -375,12 +389,33 @@
 
 		
 		<!-- Vaadin libs -->
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-server</artifactId>
+		</dependency>
+		<!-- <dependency> -->
+		<!-- <groupId>com.vaadin</groupId> -->
+		<!-- <artifactId>vaadin-push</artifactId> -->
+		<!-- </dependency> -->
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-client</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Needed when using the widgetset optimizer (custom ConnectorBundleLoaderFactory). 
+			For widgetset compilation, vaadin-client-compiler is automatically added 
+			on the compilation classpath by vaadin-maven-plugin so normally there is 
+			no need for an explicit dependency. -->
+		<!-- <dependency> -->
+		<!-- <groupId>com.vaadin</groupId> -->
+		<!-- <artifactId>vaadin-client-compiler</artifactId> -->
+		<!-- <scope>provided</scope> -->
+		<!-- </dependency> -->
 
 		<dependency>
 			<groupId>com.vaadin</groupId>
-			<artifactId>vaadin</artifactId>
-			<version>6.8.3</version>
-			<scope>compile</scope>
+			<artifactId>vaadin-themes</artifactId>
 		</dependency>
 
 		<dependency>
@@ -413,8 +448,8 @@
 
 		<dependency>
 			<groupId>org.vaadin.virkki</groupId>
-			<artifactId>cdiutils</artifactId>
-			<version>1.0.0</version>
+			<artifactId>cdi-utils</artifactId>
+			<version>2.1.1</version>
 			<scope>compile</scope>
 		</dependency>
 
