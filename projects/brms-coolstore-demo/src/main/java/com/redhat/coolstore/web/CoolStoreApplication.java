@@ -12,6 +12,7 @@ import com.redhat.coolstore.model.ShoppingCartItem;
 import com.redhat.coolstore.web.ui.ProductsView;
 import com.redhat.coolstore.web.ui.ShoppingCartView;
 import com.vaadin.annotations.Theme;
+import com.vaadin.annotations.Title;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.annotations.Widgetset;
 import com.vaadin.server.ThemeResource;
@@ -20,13 +21,13 @@ import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.Embedded;
-import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.HorizontalSplitPanel;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
 @Theme("coolstoretheme")
+@Title("Red Hat Cool Store")
 @Widgetset("com.redhat.coolstore.web.CoolStoreApplicationWidgetset")
 public class CoolStoreApplication extends UI implements ClickListener {
 
@@ -63,43 +64,27 @@ public class CoolStoreApplication extends UI implements ClickListener {
 
 	@Override
 	public void init(VaadinRequest request) {
-		
-		// Window mainWindow = new Window("Red Hat Cool Store");
 
-		// setTheme(Reindeer.THEME_NAME + "-ext");
-		setSizeFull();
-		
-		// setMainWindow(mainWindow);
-		
-		showView("Red Hat Cool Store");
-								
-	}
-	
-	public void showView(String viewName) {
-		
 		VerticalLayout vl = new VerticalLayout();
 		vl.setHeight("100%");
-		vl.setCaption(viewName);
-						
+		vl.setWidth("80em");
+		vl.setMargin(true);
+		vl.setSpacing(true);
+
 		vl.addComponent(logo);
-		
-		HorizontalLayout barLayout = new HorizontalLayout();
-	
-		vl.addComponent(barLayout);
-		
+
 		HorizontalSplitPanel hsp = new HorizontalSplitPanel();
-		hsp.setSizeFull();
-				
+		hsp.setWidth("100%");
+		hsp.setHeightUndefined();
+
 		hsp.setFirstComponent(productView);
 		hsp.setSplitPosition(76);
-		hsp.setSecondComponent(shoppingCartView);		
-		
+		hsp.setSecondComponent(shoppingCartView);
+
 		vl.addComponent(hsp);
-				
-		vl.setWidth("80em");
-		
+		vl.setExpandRatio(hsp, 1);
+
 		setContent(vl);
-				
 	}
 
 	@Override

@@ -10,7 +10,7 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.themes.Reindeer;
+import com.vaadin.ui.themes.ValoTheme;
 
 public class ShoppingCartView extends Panel {
 
@@ -49,102 +49,25 @@ public class ShoppingCartView extends Panel {
 		this.app = app;
 
 		VerticalLayout vl = new VerticalLayout();
-		
-		vl.setWidth("100%");
-		
+		vl.setMargin(true);
+		vl.setSpacing(true);
+
 		Label inventoryLabel = new Label("Shopping Cart:");
 		
-		inventoryLabel.setStyleName(Reindeer.LABEL_H1);
+		inventoryLabel.addStyleName(ValoTheme.LABEL_H1);
 		
 		vl.addComponent(inventoryLabel);
-						
-		vl.addComponent(new Label("&nbsp;", Label.CONTENT_XHTML));
-		
-		HorizontalLayout hl1 = new HorizontalLayout();
-		hl1.setSizeFull();
-		
-		Label subtotalLabel = new Label("<b>Subtotal:</b>", Label.CONTENT_XHTML);
-		subtotalLabel.setWidth(labelWidth);
-		
-		subtotalValue = new Label();
-		subtotalValue.setValue(df.format(0));
-		subtotalValue.setWidth(labelWidth);
-						
-		hl1.addComponent(subtotalLabel);
-		hl1.addComponent(subtotalValue);
-		hl1.setComponentAlignment(subtotalValue, Alignment.MIDDLE_RIGHT);
-		
-		vl.addComponent(hl1);
-		
-		HorizontalLayout hl2 = new HorizontalLayout();
-		hl2.setSizeFull();
-		
-		Label cartPromoLabel = new Label("  <i>Promotion(s):</i>", Label.CONTENT_XHTML);
-		cartPromoLabel.setWidth(labelWidth);
-		
-		cartPromoValue = new Label();
-		cartPromoValue.setValue(df.format(0));
-		cartPromoValue.setWidth(labelWidth);
-						
-		hl2.addComponent(cartPromoLabel);
-		hl2.addComponent(cartPromoValue);
-		hl2.setComponentAlignment(cartPromoValue, Alignment.MIDDLE_RIGHT);
-		
-		vl.addComponent(hl2);
-		
-		HorizontalLayout hl3 = new HorizontalLayout();
-		hl3.setSizeFull();
-		
-		Label shippingLabel = new Label("<b>Shipping:</b>", Label.CONTENT_XHTML);
-		shippingLabel.setWidth(labelWidth);
-		shippingValue = new Label();
-		shippingValue.setValue(df.format(0));
-		shippingValue.setWidth(labelWidth);
-		
-		hl3.addComponent(shippingLabel);
-		hl3.addComponent(shippingValue);
-		hl3.setComponentAlignment(shippingValue, com.vaadin.ui.Alignment.MIDDLE_RIGHT);
-		
-		vl.addComponent(hl3);
-		
-		HorizontalLayout hl4 = new HorizontalLayout();
-		hl2.setSizeFull();
-		
-		Label shippingPromoLabel = new Label("  <i>Promotion(s):</i>", Label.CONTENT_XHTML);
-		shippingPromoLabel.setWidth(labelWidth);
-		
-		shippingPromoValue = new Label();
-		shippingPromoValue.setValue(df.format(0));
-		shippingPromoValue.setWidth(labelWidth);
-								
-		hl4.addComponent(shippingPromoLabel);
-		hl4.addComponent(shippingPromoValue);
-		hl4.setComponentAlignment(shippingPromoValue, Alignment.MIDDLE_RIGHT);
-		
-		vl.addComponent(hl4);
-		
-		HorizontalLayout hl5 = new HorizontalLayout();
-		hl5.setSizeFull();
-		
-		Label cartTotalLabel = new Label("<b>Cart Total:</b>", Label.CONTENT_XHTML);
-		cartTotalLabel.setWidth(labelWidth);
-		
-		cartTotalValue = new Label();
-		cartTotalValue.setValue(df.format(0));
-		cartTotalValue.setWidth(labelWidth);
-						
-		hl5.addComponent(cartTotalLabel);
-		hl5.addComponent(cartTotalValue);
-		hl5.setComponentAlignment(cartTotalValue, com.vaadin.ui.Alignment.MIDDLE_RIGHT);
-		
-		vl.addComponent(hl5);	
-		
-		vl.addComponent(new Label("&nbsp;", Label.CONTENT_XHTML));
-		
+
+		vl.addComponent(getCartLine("Subtotal:", subtotalValue));
+		vl.addComponent(getCartLine("Promotion:", cartPromoValue, true));
+		vl.addComponent(getCartLine("Shipping:", shippingValue));
+		vl.addComponent(getCartLine("Promotion:", shippingPromoValue, true));
+		vl.addComponent(getCartLine("Cart Total:", cartTotalValue));
+
 		HorizontalLayout hl = new HorizontalLayout();
-		
+		hl.addStyleName(ValoTheme.LAYOUT_HORIZONTAL_WRAPPING);
 		hl.setSpacing(true);
-				
+
 		checkoutButton = new Button("Checkout");
 		checkoutButton.addListener(app);		
 		checkoutButton.setWidth(buttonWidth);
@@ -158,16 +81,35 @@ public class ShoppingCartView extends Panel {
 		
 		vl.addComponent(hl);
 		
-		vl.setSizeFull();
-		
-		vl.setSpacing(true);
-		
 		setContent(vl);
-		
-		setSizeFull();
-		
-		setHeight("100%");
-		
+	}
+
+	private HorizontalLayout getCartLine(String caption, Label value) {
+		return getCartLine(caption, value, false);
+	}
+
+	private HorizontalLayout getCartLine(String caption, Label value,
+			boolean isSecondary) {
+		HorizontalLayout hl = new HorizontalLayout();
+		hl.setWidth("100%");
+
+		Label label = new Label(caption);
+		if (isSecondary) {
+			label.addStyleName(ValoTheme.LABEL_LIGHT);
+		} else {
+			label.addStyleName(ValoTheme.LABEL_BOLD);
+		}
+		label.setWidth(labelWidth);
+
+		value = new Label();
+		value.setValue(df.format(0));
+		value.setWidth(labelWidth);
+
+		hl.addComponent(label);
+		hl.addComponent(value);
+		hl.setComponentAlignment(value, Alignment.MIDDLE_RIGHT);
+
+		return hl;
 	}
 
 	public Button getCheckoutButton() {

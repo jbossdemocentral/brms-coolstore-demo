@@ -18,7 +18,7 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.themes.Reindeer;
+import com.vaadin.ui.themes.ValoTheme;
 
 public class ProductsView extends Panel {
 
@@ -50,16 +50,16 @@ public class ProductsView extends Panel {
 		this.app = app;
 
 		VerticalLayout vl = new VerticalLayout();
+		vl.setMargin(true);
+		vl.setSpacing(true);
 		
 		Label inventoryLabel = new Label("Products:");
 		
-		inventoryLabel.setStyleName(Reindeer.LABEL_H1);
+		inventoryLabel.addStyleName(ValoTheme.LABEL_H1);
 		
 		vl.addComponent(inventoryLabel);
 		
 		for (Product product : productService.getProducts()) {
-			
-			vl.addComponent(new Label("&nbsp;", Label.CONTENT_XHTML));
 			
 			CheckBox cb = new CheckBox(product.getName() + " (" + df.format(product.getPrice()) + ")");
 					
@@ -81,13 +81,11 @@ public class ProductsView extends Panel {
 			checkBoxMap.put(product.getName(), cb);
 			
 		}
-		
-		vl.addComponent(new Label("&nbsp;", Label.CONTENT_XHTML));
-		
+
 		HorizontalLayout hl = new HorizontalLayout();
-		
+		hl.addStyleName(ValoTheme.LAYOUT_HORIZONTAL_WRAPPING);
 		hl.setSpacing(true);
-				
+
 		addToCartButton = new Button("Add To Cart");
 		addToCartButton.addListener(app);		
 		addToCartButton.setClickShortcut(KeyCode.ENTER);
@@ -106,16 +104,9 @@ public class ProductsView extends Panel {
 		
 		vl.addComponent(hl);
 		
-		vl.setSizeFull();
-		
 		vl.setSpacing(true);
-		
+
 		setContent(vl);
-		
-		setSizeFull();
-		
-		setHeight("100%");
-		
 	}
 
 	public Button getAddToCartButton() {
