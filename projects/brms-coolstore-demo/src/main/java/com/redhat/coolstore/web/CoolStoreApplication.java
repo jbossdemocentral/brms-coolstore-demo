@@ -4,35 +4,49 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.inject.Inject;
-import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
-
-import org.vaadin.virkki.cdiutils.application.AbstractCdiApplication;
-import org.vaadin.virkki.cdiutils.application.CdiApplicationServlet;
 
 import com.redhat.coolstore.model.Product;
 import com.redhat.coolstore.model.ShoppingCart;
 import com.redhat.coolstore.model.ShoppingCartItem;
-import com.redhat.coolstore.service.ShoppingCartService;
 import com.redhat.coolstore.web.ui.ProductsView;
 import com.redhat.coolstore.web.ui.ShoppingCartView;
-import com.vaadin.terminal.ThemeResource;
+import com.vaadin.annotations.Theme;
+import com.vaadin.annotations.VaadinServletConfiguration;
+import com.vaadin.annotations.Widgetset;
+import com.vaadin.server.ThemeResource;
+import com.vaadin.server.VaadinRequest;
+import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.Embedded;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.HorizontalSplitPanel;
+import com.vaadin.ui.Notification;
+import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.Window;
-import com.vaadin.ui.themes.Reindeer;
 
-public class CoolStoreApplication extends AbstractCdiApplication implements ClickListener {
+@Theme("coolstoretheme")
+@Widgetset("com.redhat.coolstore.web.CoolStoreApplicationWidgetset")
+public class CoolStoreApplication extends UI implements ClickListener {
+
+	// extends AbstractCdiApplication implements ClickListener {
 		
-	@WebServlet(urlPatterns = "/*", initParams = @WebInitParam(name = "application", value = "com.redhat.coolstore.web.CoolStoreApplication"))
-    public static class CoolStoreApplicationServlet extends
-            CdiApplicationServlet {
-    }
+	// @WebServlet(urlPatterns = "/*", initParams = @WebInitParam(name =
+	// "application", value = "com.redhat.coolstore.web.CoolStoreApplication"))
+	// public static class CoolStoreApplicationServlet extends
+	// CdiApplicationServlet {
+	// }
+
+	@WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
+	@VaadinServletConfiguration(ui = CoolStoreApplication.class, productionMode = false)
+	public static class Servlet extends VaadinServlet {
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = -2364529823031560380L;
+	}
 	
 	private static final long serialVersionUID = 8436561253049378320L;
 
@@ -44,25 +58,28 @@ public class CoolStoreApplication extends AbstractCdiApplication implements Clic
 	
 	private ShoppingCart shoppingCart = new ShoppingCart();
 		
-	@Inject
-	private ShoppingCartService shoppingCartService;
-			
-	@Override
-	public void init() {
-		
-		Window mainWindow = new Window("Red Hat Cool Store");
+	// @Inject
+	// private ShoppingCartService shoppingCartService;
 
-		setTheme(Reindeer.THEME_NAME + "-ext");
+	@Override
+	public void init(VaadinRequest request) {
 		
-		setMainWindow(mainWindow);
+		// Window mainWindow = new Window("Red Hat Cool Store");
+
+		// setTheme(Reindeer.THEME_NAME + "-ext");
+		setSizeFull();
 		
-		showView(null);
+		// setMainWindow(mainWindow);
+		
+		showView("Red Hat Cool Store");
 								
 	}
 	
 	public void showView(String viewName) {
 		
 		VerticalLayout vl = new VerticalLayout();
+		vl.setHeight("100%");
+		vl.setCaption(viewName);
 						
 		vl.addComponent(logo);
 		
@@ -71,6 +88,7 @@ public class CoolStoreApplication extends AbstractCdiApplication implements Clic
 		vl.addComponent(barLayout);
 		
 		HorizontalSplitPanel hsp = new HorizontalSplitPanel();
+		hsp.setSizeFull();
 				
 		hsp.setFirstComponent(productView);
 		hsp.setSplitPosition(76);
@@ -80,8 +98,7 @@ public class CoolStoreApplication extends AbstractCdiApplication implements Clic
 				
 		vl.setWidth("80em");
 		
-		getMainWindow().removeAllComponents();
-		getMainWindow().addComponent(vl);
+		setContent(vl);
 				
 	}
 
@@ -93,11 +110,11 @@ public class CoolStoreApplication extends AbstractCdiApplication implements Clic
 			//TODO: FIX when cart is applying same promo each time cart is calculated.  This is workaround.
 			//if ( productView.getSelectedProducts().size() > 0 ) {
 			
-				getMainWindow().showNotification("Adding item(s) to cart.");
+				Notification.show("Adding item(s) to cart.");
 									
 				addItemsToShoppingCart();
 				
-				shoppingCartService.priceShoppingCart(shoppingCart);
+			// shoppingCartService.priceShoppingCart(shoppingCart);
 				
 				shoppingCartView.updateShoppingCart(shoppingCart);
 				
