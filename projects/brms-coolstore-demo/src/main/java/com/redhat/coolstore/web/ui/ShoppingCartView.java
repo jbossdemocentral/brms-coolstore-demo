@@ -6,7 +6,6 @@ import com.redhat.coolstore.model.ShoppingCart;
 import com.redhat.coolstore.web.CoolStoreApplication;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
-import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Panel;
@@ -147,13 +146,13 @@ public class ShoppingCartView extends Panel {
 		hl.setSpacing(true);
 				
 		checkoutButton = new Button("Checkout");
-		checkoutButton.addListener((ClickListener) app);		
+		checkoutButton.addListener(app);		
 		checkoutButton.setWidth(buttonWidth);
 		checkoutButton.setEnabled(false);
 		hl.addComponent(checkoutButton);
 		
 		clearButton = new Button("Clear");
-		clearButton.addListener((ClickListener) app);
+		clearButton.addListener(app);
 		clearButton.setWidth(buttonWidth);
 		hl.addComponent(clearButton);
 		
@@ -163,7 +162,7 @@ public class ShoppingCartView extends Panel {
 		
 		vl.setSpacing(true);
 		
-		addComponent(vl);		
+		setContent(vl);
 		
 		setSizeFull();
 		

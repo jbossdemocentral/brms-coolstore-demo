@@ -9,10 +9,10 @@ import java.util.Map;
 import com.redhat.coolstore.model.Product;
 import com.redhat.coolstore.service.ProductService;
 import com.redhat.coolstore.web.CoolStoreApplication;
+import com.vaadin.data.Property.ValueChangeEvent;
+import com.vaadin.data.Property.ValueChangeListener;
 import com.vaadin.event.ShortcutAction.KeyCode;
 import com.vaadin.ui.Button;
-import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
@@ -67,16 +67,15 @@ public class ProductsView extends Panel {
 			
 			cb.setImmediate(true);
 			
-			cb.addListener(new ClickListener() {
+			cb.addValueChangeListener(new ValueChangeListener() {
 				
 				@Override
-				public void buttonClick(ClickEvent event) {
+				public void valueChange(ValueChangeEvent event) {
 
 					System.out.println(event);
-					
 				}
 			});
-		
+
 			vl.addComponent(cb);
 			
 			checkBoxMap.put(product.getName(), cb);
@@ -90,18 +89,18 @@ public class ProductsView extends Panel {
 		hl.setSpacing(true);
 				
 		addToCartButton = new Button("Add To Cart");
-		addToCartButton.addListener((ClickListener) app);		
+		addToCartButton.addListener(app);		
 		addToCartButton.setClickShortcut(KeyCode.ENTER);
 		addToCartButton.setWidth(buttonWidth);
 		hl.addComponent(addToCartButton);
 		
 		checkAllButton = new Button("Check All");
-		checkAllButton.addListener((ClickListener) app);
+		checkAllButton.addListener(app);
 		checkAllButton.setWidth(buttonWidth);
 		hl.addComponent(checkAllButton);
 		
 		uncheckAllButton = new Button("Uncheck All");
-		uncheckAllButton.addListener((ClickListener) app);
+		uncheckAllButton.addListener(app);
 		uncheckAllButton.setWidth(buttonWidth);
 		hl.addComponent(uncheckAllButton);
 		
@@ -111,7 +110,7 @@ public class ProductsView extends Panel {
 		
 		vl.setSpacing(true);
 		
-		addComponent(vl);		
+		setContent(vl);
 		
 		setSizeFull();
 		
