@@ -3,16 +3,16 @@ package com.redhat.coolstore.web.ui;
 import java.text.DecimalFormat;
 
 import com.redhat.coolstore.model.ShoppingCart;
-import com.redhat.coolstore.web.CoolStoreApplication;
+import com.vaadin.cdi.UIScoped;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
-import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 
-public class ShoppingCartView extends Panel {
+@UIScoped
+public class ShoppingCartView extends AbstractView {
 
 	private static final String labelWidth = "8em";
 
@@ -40,44 +40,37 @@ public class ShoppingCartView extends Panel {
 	 */
 	private static final long serialVersionUID = 962893447423474540L;
 
-	public ShoppingCartView(CoolStoreApplication app) {
-
-		super();
-		
-		VerticalLayout vl = new VerticalLayout();
-		vl.setMargin(true);
-		vl.setSpacing(true);
+	@Override
+	protected void createLayout(VerticalLayout layout) {
 
 		Label inventoryLabel = new Label("Shopping Cart:");
 		
 		inventoryLabel.addStyleName(ValoTheme.LABEL_H1);
 		
-		vl.addComponent(inventoryLabel);
+		layout.addComponent(inventoryLabel);
 
-		vl.addComponent(getCartLine("Subtotal:", subtotalValue));
-		vl.addComponent(getCartLine("Promotion:", cartPromoValue, true));
-		vl.addComponent(getCartLine("Shipping:", shippingValue));
-		vl.addComponent(getCartLine("Promotion:", shippingPromoValue, true));
-		vl.addComponent(getCartLine("Cart Total:", cartTotalValue));
+		layout.addComponent(getCartLine("Subtotal:", subtotalValue));
+		layout.addComponent(getCartLine("Promotion:", cartPromoValue, true));
+		layout.addComponent(getCartLine("Shipping:", shippingValue));
+		layout.addComponent(getCartLine("Promotion:", shippingPromoValue, true));
+		layout.addComponent(getCartLine("Cart Total:", cartTotalValue));
 
 		HorizontalLayout hl = new HorizontalLayout();
 		hl.addStyleName(ValoTheme.LAYOUT_HORIZONTAL_WRAPPING);
 		hl.setSpacing(true);
 
 		checkoutButton = new Button("Checkout");
-		checkoutButton.addClickListener(app);
+		checkoutButton.addClickListener(this);
 		checkoutButton.setWidth(buttonWidth);
 		checkoutButton.setEnabled(false);
 		hl.addComponent(checkoutButton);
-		
+
 		clearButton = new Button("Clear");
-		clearButton.addClickListener(app);
+		clearButton.addClickListener(this);
 		clearButton.setWidth(buttonWidth);
 		hl.addComponent(clearButton);
-		
-		vl.addComponent(hl);
-		
-		setContent(vl);
+
+		layout.addComponent(hl);
 	}
 
 	private HorizontalLayout getCartLine(String caption, Label value) {
