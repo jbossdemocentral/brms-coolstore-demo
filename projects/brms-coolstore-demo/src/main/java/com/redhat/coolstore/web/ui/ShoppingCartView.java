@@ -20,11 +20,11 @@ public class ShoppingCartView extends AbstractView {
 	private static final String labelWidth = "8em";
 	
 	private DecimalFormat df = new DecimalFormat("'$'0.00");
-	
-	private Button checkoutButton;
-	
-	private Button clearButton;
-		
+
+	private Button checkoutButton = new Button();
+
+	private Button clearButton = new Button();
+
 	private Label subtotalValue;
 	
 	private Label cartPromoValue;
@@ -59,19 +59,11 @@ public class ShoppingCartView extends AbstractView {
 		hl.addStyleName(ValoTheme.LAYOUT_HORIZONTAL_WRAPPING);
 		hl.setSpacing(true);
 
-		checkoutButton = new Button("Checkout");
-		checkoutButton.addClickListener(this);
-		checkoutButton.addStyleName(ValoTheme.BUTTON_PRIMARY);
-		checkoutButton.setIcon(VaadinIcons.FLAG_CHECKERED);
-		checkoutButton.setWidth(buttonWidth);
+		createButton(hl, checkoutButton, "Checkout",
+				VaadinIcons.FLAG_CHECKERED, true);
 		checkoutButton.setEnabled(false);
-		hl.addComponent(checkoutButton);
 
-		clearButton = new Button("Clear");
-		clearButton.addClickListener(this);
-		clearButton.setIcon(VaadinIcons.CLOSE);
-		clearButton.setWidth(buttonWidth);
-		hl.addComponent(clearButton);
+		createButton(hl, clearButton, "Clear", VaadinIcons.CLOSE, false);
 
 		layout.addComponent(hl);
 	}

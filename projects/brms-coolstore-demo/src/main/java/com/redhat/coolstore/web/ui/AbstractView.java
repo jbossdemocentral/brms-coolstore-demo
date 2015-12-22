@@ -3,11 +3,16 @@ package com.redhat.coolstore.web.ui;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
+import org.vaadin.teemu.VaadinIcons;
+
 import com.redhat.coolstore.model.ShoppingCart;
 import com.vaadin.cdi.UIScoped;
+import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.themes.ValoTheme;
 
 @UIScoped
 public abstract class AbstractView extends Panel implements ClickListener {
@@ -22,7 +27,7 @@ public abstract class AbstractView extends Panel implements ClickListener {
 
 	private VerticalLayout layout;
 
-	protected String buttonWidth = "10em";
+	private static final String BUTTON_WIDTH = "10em";
 
 	public AbstractView() {
 		super();
@@ -44,4 +49,19 @@ public abstract class AbstractView extends Panel implements ClickListener {
 	}
 
 	protected abstract void createLayout(VerticalLayout layout);
+
+	protected void createButton(HorizontalLayout layout, Button button,
+			String caption, VaadinIcons icon, boolean isPrimary) {
+
+		button.addClickListener(this);
+		button.setCaption(caption);
+		button.setIcon(icon);
+		button.setWidth(BUTTON_WIDTH);
+
+		if (isPrimary) {
+			button.addStyleName(ValoTheme.BUTTON_PRIMARY);
+		}
+
+		layout.addComponent(button);
+	}
 }

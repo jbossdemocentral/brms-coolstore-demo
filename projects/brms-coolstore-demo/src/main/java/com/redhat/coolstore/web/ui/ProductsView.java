@@ -42,12 +42,12 @@ public class ProductsView extends AbstractView {
 	private DecimalFormat df = new DecimalFormat("'$'0.00");
 
 	private Map<String, CheckBox> checkBoxMap = new HashMap<String, CheckBox>();
-	
-	private Button addToCartButton;
-	
-	private Button checkAllButton;
-	
-	private Button uncheckAllButton;
+
+	private Button addToCartButton = new Button();
+
+	private Button checkAllButton = new Button();
+
+	private Button uncheckAllButton = new Button();
 
 	/**
 	 * 
@@ -95,25 +95,15 @@ public class ProductsView extends AbstractView {
 		hl.addStyleName(ValoTheme.LAYOUT_HORIZONTAL_WRAPPING);
 		hl.setSpacing(true);
 
-		addToCartButton = new Button("Add To Cart");
-		addToCartButton.addClickListener(this);
+		createButton(hl, addToCartButton, "Add To Cart", VaadinIcons.CART_O,
+				true);
 		addToCartButton.setClickShortcut(KeyCode.ENTER);
-		addToCartButton.addStyleName(ValoTheme.BUTTON_PRIMARY);
-		addToCartButton.setIcon(VaadinIcons.CART_O);
-		addToCartButton.setWidth(buttonWidth);
-		hl.addComponent(addToCartButton);
 
-		checkAllButton = new Button("Check All");
-		checkAllButton.addClickListener(this);
-		checkAllButton.setIcon(VaadinIcons.CHECK_SQUARE_O);
-		checkAllButton.setWidth(buttonWidth);
-		hl.addComponent(checkAllButton);
+		createButton(hl, checkAllButton, "Check All",
+				VaadinIcons.CHECK_SQUARE_O, false);
 
-		uncheckAllButton = new Button("Uncheck All");
-		uncheckAllButton.addClickListener(this);
-		uncheckAllButton.setIcon(VaadinIcons.THIN_SQUARE);
-		uncheckAllButton.setWidth(buttonWidth);
-		hl.addComponent(uncheckAllButton);
+		createButton(hl, uncheckAllButton, "Uncheck All",
+				VaadinIcons.THIN_SQUARE, false);
 
 		layout.addComponent(hl);
 	}
@@ -121,11 +111,11 @@ public class ProductsView extends AbstractView {
 	public Button getAddToCartButton() {
 		return addToCartButton;
 	}
-	
+
 	public Button getCheckAllButton() {
 		return checkAllButton;
 	}
-	
+
 	public Button getUncheckAllButton() {
 		return uncheckAllButton;
 	}
