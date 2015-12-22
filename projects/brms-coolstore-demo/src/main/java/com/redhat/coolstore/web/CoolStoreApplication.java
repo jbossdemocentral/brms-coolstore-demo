@@ -14,6 +14,7 @@ import com.vaadin.ui.Embedded;
 import com.vaadin.ui.HorizontalSplitPanel;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.themes.ValoTheme;
 
 @Theme("coolstoretheme")
 @Title("Red Hat Cool Store")
@@ -43,6 +44,7 @@ public class CoolStoreApplication extends UI {
 		vl.addComponent(logo);
 
 		HorizontalSplitPanel hsp = new HorizontalSplitPanel();
+		hsp.addStyleName(ValoTheme.SPLITPANEL_LARGE);
 		hsp.setWidth("100%");
 		hsp.setHeightUndefined();
 
