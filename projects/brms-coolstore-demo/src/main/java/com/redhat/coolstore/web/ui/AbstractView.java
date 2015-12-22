@@ -22,6 +22,8 @@ public abstract class AbstractView extends Panel implements ClickListener {
 
 	private VerticalLayout layout;
 
+	protected String buttonWidth = "10em";
+
 	public AbstractView() {
 		super();
 

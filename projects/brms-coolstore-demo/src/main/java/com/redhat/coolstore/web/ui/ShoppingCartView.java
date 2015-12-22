@@ -2,6 +2,8 @@ package com.redhat.coolstore.web.ui;
 
 import java.text.DecimalFormat;
 
+import org.vaadin.teemu.VaadinIcons;
+
 import com.redhat.coolstore.model.ShoppingCart;
 import com.vaadin.cdi.UIScoped;
 import com.vaadin.ui.Alignment;
@@ -16,8 +18,6 @@ import com.vaadin.ui.themes.ValoTheme;
 public class ShoppingCartView extends AbstractView {
 
 	private static final String labelWidth = "8em";
-
-	private String buttonWidth = "7em";
 	
 	private DecimalFormat df = new DecimalFormat("'$'0.00");
 	
@@ -34,7 +34,6 @@ public class ShoppingCartView extends AbstractView {
 	private Label shippingPromoValue;
 	
 	private Label cartTotalValue;
-	
 
 	/**
 	 * 
@@ -62,12 +61,15 @@ public class ShoppingCartView extends AbstractView {
 
 		checkoutButton = new Button("Checkout");
 		checkoutButton.addClickListener(this);
+		checkoutButton.addStyleName(ValoTheme.BUTTON_PRIMARY);
+		checkoutButton.setIcon(VaadinIcons.FLAG_CHECKERED);
 		checkoutButton.setWidth(buttonWidth);
 		checkoutButton.setEnabled(false);
 		hl.addComponent(checkoutButton);
 
 		clearButton = new Button("Clear");
 		clearButton.addClickListener(this);
+		clearButton.setIcon(VaadinIcons.CLOSE);
 		clearButton.setWidth(buttonWidth);
 		hl.addComponent(clearButton);
 

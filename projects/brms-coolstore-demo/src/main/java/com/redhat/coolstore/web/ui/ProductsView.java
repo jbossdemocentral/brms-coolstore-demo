@@ -8,6 +8,8 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
+import org.vaadin.teemu.VaadinIcons;
+
 import com.redhat.coolstore.model.Product;
 import com.redhat.coolstore.model.ShoppingCartItem;
 import com.redhat.coolstore.service.ProductService;
@@ -37,8 +39,6 @@ public class ProductsView extends AbstractView {
 	@Inject
 	private ShoppingCartView shoppingCartView;
 
-	private String buttonWidth = "8em";
-	
 	private DecimalFormat df = new DecimalFormat("'$'0.00");
 
 	private Map<String, CheckBox> checkBoxMap = new HashMap<String, CheckBox>();
@@ -98,16 +98,20 @@ public class ProductsView extends AbstractView {
 		addToCartButton = new Button("Add To Cart");
 		addToCartButton.addClickListener(this);
 		addToCartButton.setClickShortcut(KeyCode.ENTER);
+		addToCartButton.addStyleName(ValoTheme.BUTTON_PRIMARY);
+		addToCartButton.setIcon(VaadinIcons.CART_O);
 		addToCartButton.setWidth(buttonWidth);
 		hl.addComponent(addToCartButton);
 
 		checkAllButton = new Button("Check All");
 		checkAllButton.addClickListener(this);
+		checkAllButton.setIcon(VaadinIcons.CHECK_SQUARE_O);
 		checkAllButton.setWidth(buttonWidth);
 		hl.addComponent(checkAllButton);
 
 		uncheckAllButton = new Button("Uncheck All");
 		uncheckAllButton.addClickListener(this);
+		uncheckAllButton.setIcon(VaadinIcons.THIN_SQUARE);
 		uncheckAllButton.setWidth(buttonWidth);
 		hl.addComponent(uncheckAllButton);
 

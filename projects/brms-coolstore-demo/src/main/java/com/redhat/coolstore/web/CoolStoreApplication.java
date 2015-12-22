@@ -48,7 +48,7 @@ public class CoolStoreApplication extends UI {
 		hsp.setWidth("100%");
 		hsp.setHeightUndefined();
 		hsp.setFirstComponent(productView);
-		hsp.setSplitPosition(76);
+		hsp.setSplitPosition(65);
 		hsp.setSecondComponent(shoppingCartView);
 
 		vl.addComponent(hsp);
