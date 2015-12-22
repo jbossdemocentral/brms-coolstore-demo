@@ -10,6 +10,7 @@ import com.vaadin.cdi.UIScoped;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Label;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
@@ -42,6 +43,10 @@ public abstract class AbstractView extends Panel implements ClickListener {
 
 	@PostConstruct
 	private void init() {
+		Label headerLabel = new Label(getViewHeader() + ":");
+		headerLabel.addStyleName(ValoTheme.LABEL_H1);
+		layout.addComponent(headerLabel);
+
 		createLayout(layout);
 
 		controllerLayout = new HorizontalLayout();
@@ -56,6 +61,8 @@ public abstract class AbstractView extends Panel implements ClickListener {
 	protected ShoppingCart getShoppingCart() {
 		return shoppingCart;
 	}
+
+	protected abstract String getViewHeader();
 
 	protected abstract void createLayout(VerticalLayout layout);
 

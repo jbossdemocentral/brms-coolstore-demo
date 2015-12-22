@@ -21,10 +21,8 @@ import com.vaadin.event.ShortcutAction.KeyCode;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.CheckBox;
-import com.vaadin.ui.Label;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.themes.ValoTheme;
 
 @UIScoped
 public class ProductsView extends AbstractView {
@@ -55,12 +53,6 @@ public class ProductsView extends AbstractView {
 
 	@Override
 	protected void createLayout(VerticalLayout layout) {
-
-		Label inventoryLabel = new Label("Products:");
-		
-		inventoryLabel.addStyleName(ValoTheme.LABEL_H1);
-		
-		layout.addComponent(inventoryLabel);
 		
 		for (Product product : productService.getProducts()) {
 			
@@ -89,6 +81,11 @@ public class ProductsView extends AbstractView {
 			checkBoxMap.put(product.getName(), cb);
 			
 		}
+	}
+
+	@Override
+	protected String getViewHeader() {
+		return "Products";
 	}
 
 	@Override

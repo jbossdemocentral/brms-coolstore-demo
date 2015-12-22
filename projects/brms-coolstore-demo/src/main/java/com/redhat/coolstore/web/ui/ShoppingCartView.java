@@ -43,17 +43,16 @@ public class ShoppingCartView extends AbstractView {
 	@Override
 	protected void createLayout(VerticalLayout layout) {
 
-		Label inventoryLabel = new Label("Shopping Cart:");
-		
-		inventoryLabel.addStyleName(ValoTheme.LABEL_H1);
-		
-		layout.addComponent(inventoryLabel);
-
 		layout.addComponent(getCartLine("Subtotal:", subtotalValue));
 		layout.addComponent(getCartLine("Promotion:", cartPromoValue, true));
 		layout.addComponent(getCartLine("Shipping:", shippingValue));
 		layout.addComponent(getCartLine("Promotion:", shippingPromoValue, true));
 		layout.addComponent(getCartLine("Cart Total:", cartTotalValue));
+	}
+
+	@Override
+	protected String getViewHeader() {
+		return "Shopping Cart";
 	}
 
 	@Override
