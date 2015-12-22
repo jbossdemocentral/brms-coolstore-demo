@@ -113,17 +113,15 @@ public class ShoppingCartView extends AbstractView {
 	public void updateShoppingCart() {
 
 		ShoppingCart sc = getShoppingCart();
-		
+
 		if ( sc != null ) {
-			
+
 			subtotalValue.setValue(df.format(sc.getCartItemTotal()));
 			cartPromoValue.setValue(df.format(sc.getCartItemPromoSavings()));
 			shippingValue.setValue(df.format(sc.getShippingTotal()));
 			shippingPromoValue.setValue(df.format(sc.getShippingPromoSavings()));
 			cartTotalValue.setValue(df.format(sc.getCartTotal()));
-			
 		}
-		
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package com.redhat.coolstore.web;
 
+import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
 import com.redhat.coolstore.web.ui.ProductsView;
@@ -32,6 +33,8 @@ public class CoolStoreApplication extends UI {
 	@Inject
 	private ShoppingCartView shoppingCartView;
 
+	private HorizontalSplitPanel hsp;
+
 	@Override
 	public void init(VaadinRequest request) {
 
@@ -43,18 +46,21 @@ public class CoolStoreApplication extends UI {
 
 		vl.addComponent(logo);
 
-		HorizontalSplitPanel hsp = new HorizontalSplitPanel();
+		hsp = new HorizontalSplitPanel();
 		hsp.addStyleName(ValoTheme.SPLITPANEL_LARGE);
 		hsp.setWidth("100%");
 		hsp.setHeightUndefined();
-
-		hsp.setFirstComponent(productView);
 		hsp.setSplitPosition(76);
-		hsp.setSecondComponent(shoppingCartView);
 
 		vl.addComponent(hsp);
 		vl.setExpandRatio(hsp, 1);
 
 		setContent(vl);
+	}
+
+	@PostConstruct
+	private void loadViews() {
+		hsp.setFirstComponent(productView);
+		hsp.setSecondComponent(shoppingCartView);
 	}
 }

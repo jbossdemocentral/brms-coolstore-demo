@@ -161,46 +161,6 @@ public class ProductsView extends AbstractView {
 		return selectedProductList;
 		
 	}
-	
-	@Override
-	public void buttonClick(ClickEvent event) {
-
-		if (event.getButton() == getAddToCartButton()) {
-
-			// TODO: FIX when cart is applying same promo each time cart is
-			// calculated. This is workaround.
-			// if ( productView.getSelectedProducts().size() > 0 ) {
-
-			Notification.show("Adding item(s) to cart.");
-
-			addItemsToShoppingCart();
-
-			shoppingCartService.priceShoppingCart(getShoppingCart());
-
-			shoppingCartView.updateShoppingCart();
-
-			checkAllBoxes(false);
-
-			/*
-			 * } else {
-			 * 
-			 * getMainWindow().showNotification("Please select one or more items."
-			 * );
-			 * 
-			 * }
-			 */
-
-		} else if (event.getButton() == getCheckAllButton()) {
-
-			checkAllBoxes(true);
-
-		} else if (event.getButton() == getUncheckAllButton()) {
-
-			checkAllBoxes(false);
-
-		}
-
-	}
 
 	private void addItemsToShoppingCart() {
 
@@ -243,5 +203,41 @@ public class ProductsView extends AbstractView {
 
 		}
 
+	}
+
+	@Override
+	public void buttonClick(ClickEvent event) {
+
+		if (event.getButton() == getAddToCartButton()) {
+
+			// TODO: FIX when cart is applying same promo each time cart is
+			// calculated. This is workaround.
+			// if ( productView.getSelectedProducts().size() > 0 ) {
+
+			Notification.show("Adding item(s) to cart.");
+
+			addItemsToShoppingCart();
+
+			shoppingCartService.priceShoppingCart(getShoppingCart());
+
+			shoppingCartView.updateShoppingCart();
+
+			checkAllBoxes(false);
+
+			/*
+			 * } else {
+			 * 
+			 * getMainWindow().showNotification("Please select one or more items."
+			 * );
+			 * 
+			 * }
+			 */
+		} else if (event.getButton() == getCheckAllButton()) {
+
+			checkAllBoxes(true);
+		} else if (event.getButton() == getUncheckAllButton()) {
+
+			checkAllBoxes(false);
+		}
 	}
 }
