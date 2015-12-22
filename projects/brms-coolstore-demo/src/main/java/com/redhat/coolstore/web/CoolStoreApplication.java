@@ -4,20 +4,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.annotation.WebServlet;
+import javax.inject.Inject;
 
 import com.redhat.coolstore.model.Product;
 import com.redhat.coolstore.model.ShoppingCart;
 import com.redhat.coolstore.model.ShoppingCartItem;
+import com.redhat.coolstore.service.ShoppingCartService;
 import com.redhat.coolstore.web.ui.ProductsView;
 import com.redhat.coolstore.web.ui.ShoppingCartView;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
-import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.annotations.Widgetset;
+import com.vaadin.cdi.CDIUI;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.server.VaadinRequest;
-import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.Embedded;
@@ -29,26 +29,9 @@ import com.vaadin.ui.VerticalLayout;
 @Theme("coolstoretheme")
 @Title("Red Hat Cool Store")
 @Widgetset("com.redhat.coolstore.web.CoolStoreApplicationWidgetset")
+@CDIUI("")
 public class CoolStoreApplication extends UI implements ClickListener {
 
-	// extends AbstractCdiApplication implements ClickListener {
-		
-	// @WebServlet(urlPatterns = "/*", initParams = @WebInitParam(name =
-	// "application", value = "com.redhat.coolstore.web.CoolStoreApplication"))
-	// public static class CoolStoreApplicationServlet extends
-	// CdiApplicationServlet {
-	// }
-
-	@WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
-	@VaadinServletConfiguration(ui = CoolStoreApplication.class, productionMode = false)
-	public static class Servlet extends VaadinServlet {
-
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = -2364529823031560380L;
-	}
-	
 	private static final long serialVersionUID = 8436561253049378320L;
 
 	private static Embedded logo = new Embedded("", new ThemeResource("./images/logo.png"));
@@ -58,9 +41,9 @@ public class CoolStoreApplication extends UI implements ClickListener {
 	private ShoppingCartView shoppingCartView = new ShoppingCartView(this);
 	
 	private ShoppingCart shoppingCart = new ShoppingCart();
-		
-	// @Inject
-	// private ShoppingCartService shoppingCartService;
+
+	@Inject
+	private ShoppingCartService shoppingCartService;
 
 	@Override
 	public void init(VaadinRequest request) {
@@ -99,7 +82,7 @@ public class CoolStoreApplication extends UI implements ClickListener {
 									
 				addItemsToShoppingCart();
 				
-			// shoppingCartService.priceShoppingCart(shoppingCart);
+				shoppingCartService.priceShoppingCart(shoppingCart);
 				
 				shoppingCartView.updateShoppingCart(shoppingCart);
 				

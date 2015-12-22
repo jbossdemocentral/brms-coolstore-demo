@@ -145,9 +145,7 @@ if [ ! -d $WEB_INF_LIB ]; then
 	mkdir -p $WEB_INF_LIB
 fi
 
-mvn install:install-file -Dfile=$SUPPORT_LIBS/cdiutils-1.0.0.jar -DgroupId=org.vaadin.virkki -DartifactId=cdiutils -Dversion=1.0.0 -Dpackaging=jar
 mvn install:install-file -Dfile=$SUPPORT_LIBS/coolstore-2.0.0.jar -DgroupId=com.redhat -DartifactId=coolstore -Dversion=2.0.0 -Dpackaging=jar
-cp $SUPPORT_LIBS/cdiutils-1.0.0.jar $WEB_INF_LIB
 
 echo
 echo Deploying the Cool Store web application. 

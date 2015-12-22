@@ -495,12 +495,17 @@
 		<!--BRMS libs -->
 
 		<dependency>
-			<groupId>org.vaadin.virkki</groupId>
-			<artifactId>cdi-utils</artifactId>
-			<version>2.1.1</version>
-			<scope>compile</scope>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-cdi</artifactId>
+			<version>1.0.3</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.jboss.spec</groupId>
+			<artifactId>jboss-javaee-all-7.0</artifactId>
+			<version>1.0.3.Final</version>
+			<scope>provided</scope>
+		</dependency>
 
 		<dependency>
 			<groupId>org.mvel</groupId>

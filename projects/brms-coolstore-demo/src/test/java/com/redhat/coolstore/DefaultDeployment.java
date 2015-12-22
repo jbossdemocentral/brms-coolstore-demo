@@ -44,7 +44,6 @@ public class DefaultDeployment {
 		        		"org.kie:kie-ci",
 		        		"org.jbpm:jbpm-bpmn2",
 		        		"org.mvel:mvel2",
-		        		"org.vaadin.virkki:cdiutils", 
 		        		"com.google.gwt:gwt-user", 
 		        		"com.google.gwt:gwt-dev",
 		        		"com.vaadin:vaadin",
