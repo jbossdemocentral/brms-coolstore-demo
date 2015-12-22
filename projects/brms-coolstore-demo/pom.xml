@@ -59,14 +59,28 @@
 					<execution>
 						<goals>
 							<goal>update-theme</goal>
-							<goal>update-widgetset</goal>
-							<goal>compile</goal>
+							<!-- using Vaadin WSCDN for widgetset compilation so disable those -->
+							<!-- <goal>update-widgetset</goal> -->
+							<!-- <goal>compile</goal> -->
 							<!-- disabled by default to use on-the-fly theme compilation -->
 							<!-- <goal>compile-theme</goal> -->
 						</goals>
 					</execution>
 				</executions>
 			</plugin>
+		    <plugin>
+		        <groupId>com.vaadin.wscdn</groupId>
+		        <artifactId>wscdn-maven-plugin</artifactId>
+		        <version>0.0.2</version>
+		        <executions>
+		            <execution>
+		                <phase>generate-sources</phase>
+		                <goals>
+		                    <goal>generate</goal>
+		                </goals>
+		            </execution>
+		        </executions>
+		    </plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
@@ -477,6 +491,12 @@
 		<dependency>
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-themes</artifactId>
+		</dependency>
+
+		<dependency>
+		   <groupId>org.vaadin.icons</groupId>
+		   <artifactId>vaadin-icons</artifactId>
+		   <version>1.0.1</version>
 		</dependency>
 
 		<dependency>
