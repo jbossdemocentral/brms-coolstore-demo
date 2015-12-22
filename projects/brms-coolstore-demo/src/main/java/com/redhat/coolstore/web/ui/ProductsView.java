@@ -26,8 +26,6 @@ public class ProductsView extends Panel {
 	
 	private DecimalFormat df = new DecimalFormat("'$'0.00");
 	
-	private CoolStoreApplication app = null;
-	
 	private ProductService productService = new ProductService();
 	
 	private Map<String, CheckBox> checkBoxMap = new HashMap<String, CheckBox>();
@@ -47,8 +45,6 @@ public class ProductsView extends Panel {
 
 		super();
 		
-		this.app = app;
-
 		VerticalLayout vl = new VerticalLayout();
 		vl.setMargin(true);
 		vl.setSpacing(true);
@@ -69,6 +65,11 @@ public class ProductsView extends Panel {
 			
 			cb.addValueChangeListener(new ValueChangeListener() {
 				
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = -9074656668897487720L;
+
 				@Override
 				public void valueChange(ValueChangeEvent event) {
 
@@ -87,18 +88,18 @@ public class ProductsView extends Panel {
 		hl.setSpacing(true);
 
 		addToCartButton = new Button("Add To Cart");
-		addToCartButton.addListener(app);		
+		addToCartButton.addClickListener(app);
 		addToCartButton.setClickShortcut(KeyCode.ENTER);
 		addToCartButton.setWidth(buttonWidth);
 		hl.addComponent(addToCartButton);
 		
 		checkAllButton = new Button("Check All");
-		checkAllButton.addListener(app);
+		checkAllButton.addClickListener(app);
 		checkAllButton.setWidth(buttonWidth);
 		hl.addComponent(checkAllButton);
 		
 		uncheckAllButton = new Button("Uncheck All");
-		uncheckAllButton.addListener(app);
+		uncheckAllButton.addClickListener(app);
 		uncheckAllButton.setWidth(buttonWidth);
 		hl.addComponent(uncheckAllButton);
 		
@@ -143,7 +144,7 @@ public class ProductsView extends Panel {
 			
 			for (CheckBox cb : checkBoxMap.values()) {
 																				
-				if ( cb.booleanValue() ) {
+				if (cb.getValue()) {
 				
 					selectedProductList.add((Product) cb.getData());
 					

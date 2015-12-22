@@ -20,8 +20,6 @@ public class ShoppingCartView extends Panel {
 	
 	private DecimalFormat df = new DecimalFormat("'$'0.00");
 	
-	private CoolStoreApplication app = null;
-			
 	private Button checkoutButton;
 	
 	private Button clearButton;
@@ -46,8 +44,6 @@ public class ShoppingCartView extends Panel {
 
 		super();
 		
-		this.app = app;
-
 		VerticalLayout vl = new VerticalLayout();
 		vl.setMargin(true);
 		vl.setSpacing(true);
@@ -69,13 +65,13 @@ public class ShoppingCartView extends Panel {
 		hl.setSpacing(true);
 
 		checkoutButton = new Button("Checkout");
-		checkoutButton.addListener(app);		
+		checkoutButton.addClickListener(app);
 		checkoutButton.setWidth(buttonWidth);
 		checkoutButton.setEnabled(false);
 		hl.addComponent(checkoutButton);
 		
 		clearButton = new Button("Clear");
-		clearButton.addListener(app);
+		clearButton.addClickListener(app);
 		clearButton.setWidth(buttonWidth);
 		hl.addComponent(clearButton);
 		
