@@ -54,18 +54,16 @@ public class ShoppingCartView extends AbstractView {
 		layout.addComponent(getCartLine("Shipping:", shippingValue));
 		layout.addComponent(getCartLine("Promotion:", shippingPromoValue, true));
 		layout.addComponent(getCartLine("Cart Total:", cartTotalValue));
+	}
 
-		HorizontalLayout hl = new HorizontalLayout();
-		hl.addStyleName(ValoTheme.LAYOUT_HORIZONTAL_WRAPPING);
-		hl.setSpacing(true);
-
-		createButton(hl, checkoutButton, "Checkout",
+	@Override
+	protected void createControllerButtons() {
+		createButton(checkoutButton, "Checkout",
 				VaadinIcons.FLAG_CHECKERED, true);
 		checkoutButton.setEnabled(false);
 
-		createButton(hl, clearButton, "Clear", VaadinIcons.CLOSE, false);
-
-		layout.addComponent(hl);
+		createButton(clearButton, "Clear", VaadinIcons.CLOSE,
+				false);
 	}
 
 	private HorizontalLayout getCartLine(String caption, Label value) {

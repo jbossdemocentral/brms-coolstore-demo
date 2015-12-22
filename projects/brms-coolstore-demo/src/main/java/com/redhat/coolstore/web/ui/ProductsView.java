@@ -21,7 +21,6 @@ import com.vaadin.event.ShortcutAction.KeyCode;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.CheckBox;
-import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.VerticalLayout;
@@ -90,22 +89,20 @@ public class ProductsView extends AbstractView {
 			checkBoxMap.put(product.getName(), cb);
 			
 		}
+	}
 
-		HorizontalLayout hl = new HorizontalLayout();
-		hl.addStyleName(ValoTheme.LAYOUT_HORIZONTAL_WRAPPING);
-		hl.setSpacing(true);
-
-		createButton(hl, addToCartButton, "Add To Cart", VaadinIcons.CART_O,
+	@Override
+	protected void createControllerButtons() {
+		createButton(addToCartButton, "Add To Cart",
+				VaadinIcons.CART_O,
 				true);
 		addToCartButton.setClickShortcut(KeyCode.ENTER);
 
-		createButton(hl, checkAllButton, "Check All",
+		createButton(checkAllButton, "Check All",
 				VaadinIcons.CHECK_SQUARE_O, false);
 
-		createButton(hl, uncheckAllButton, "Uncheck All",
+		createButton(uncheckAllButton, "Uncheck All",
 				VaadinIcons.THIN_SQUARE, false);
-
-		layout.addComponent(hl);
 	}
 
 	public Button getAddToCartButton() {

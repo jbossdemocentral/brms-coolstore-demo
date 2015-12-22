@@ -26,6 +26,7 @@ public abstract class AbstractView extends Panel implements ClickListener {
 	private ShoppingCart shoppingCart;
 
 	private VerticalLayout layout;
+	private HorizontalLayout controllerLayout;
 
 	private static final String BUTTON_WIDTH = "10em";
 
@@ -42,6 +43,14 @@ public abstract class AbstractView extends Panel implements ClickListener {
 	@PostConstruct
 	private void init() {
 		createLayout(layout);
+
+		controllerLayout = new HorizontalLayout();
+		controllerLayout.addStyleName(ValoTheme.LAYOUT_HORIZONTAL_WRAPPING);
+		controllerLayout.setSpacing(true);
+
+		createControllerButtons();
+
+		layout.addComponent(controllerLayout);
 	}
 
 	protected ShoppingCart getShoppingCart() {
@@ -50,7 +59,9 @@ public abstract class AbstractView extends Panel implements ClickListener {
 
 	protected abstract void createLayout(VerticalLayout layout);
 
-	protected void createButton(HorizontalLayout layout, Button button,
+	protected abstract void createControllerButtons();
+
+	protected void createButton(Button button,
 			String caption, VaadinIcons icon, boolean isPrimary) {
 
 		button.addClickListener(this);
@@ -62,6 +73,6 @@ public abstract class AbstractView extends Panel implements ClickListener {
 			button.addStyleName(ValoTheme.BUTTON_PRIMARY);
 		}
 
-		layout.addComponent(button);
+		controllerLayout.addComponent(button);
 	}
 }
