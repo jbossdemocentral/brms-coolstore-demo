@@ -2,6 +2,7 @@ package com.redhat.coolstore.web.ui;
 
 import javax.enterprise.event.Observes;
 
+import org.vaadin.dialogs.ConfirmDialog;
 import org.vaadin.teemu.VaadinIcons;
 import org.vaadin.viritin.fields.LabelField;
 
@@ -17,6 +18,7 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 
@@ -128,9 +130,33 @@ public class ShoppingCartView extends AbstractView {
 	}
 
 	private void clearShoppingCart() {
-		// BUG #4302 - Can not update the bean in BeanItem
-		fieldGroup.setItemDataSource(new BeanItem<ShoppingCart>(
-				new ShoppingCart()));
+		ConfirmDialog d = ConfirmDialog.show(UI.getCurrent(),
+				"Confirm Clearing Shopping Cart",
+				"Are you sure you want to clear the shopping cart?", "Clear",
+				"Keep", new ConfirmDialog.Listener() {
+
+					/**
+					 * 
+					 */
+					private static final long serialVersionUID = 8604235590327706594L;
+
+					@Override
+					public void onClose(ConfirmDialog dialog) {
+						if (dialog.isConfirmed()) {
+							// Confirmed to clear
+
+							// BUG #4302 - Can not update the bean in BeanItem
+							fieldGroup
+									.setItemDataSource(new BeanItem<ShoppingCart>(
+											new ShoppingCart()));
+						} else {
+							// Do nothing
+						}
+					}
+				});
+
+		d.getOkButton().addStyleName(ValoTheme.BUTTON_DANGER);
+		d.getCancelButton().addStyleName(ValoTheme.BUTTON_LINK);
 	}
 
 	@Override
