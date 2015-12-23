@@ -11,7 +11,6 @@ import org.vaadin.teemu.VaadinIcons;
 import com.redhat.coolstore.model.Product;
 import com.redhat.coolstore.model.ShoppingCartItem;
 import com.redhat.coolstore.service.ProductService;
-import com.redhat.coolstore.service.ShoppingCartService;
 import com.redhat.coolstore.web.ui.events.UpdateShopppingCartEvent;
 import com.redhat.coolstore.web.ui.util.Formatter;
 import com.vaadin.cdi.UIScoped;
@@ -32,9 +31,6 @@ public class ProductsView extends AbstractView {
 
 	@Inject
 	private ProductService productService;
-
-	@Inject
-	private ShoppingCartService shoppingCartService;
 
 	@Inject
 	private javax.enterprise.event.Event<UpdateShopppingCartEvent> updateCart;
@@ -180,26 +176,20 @@ public class ProductsView extends AbstractView {
 
 			// TODO: FIX when cart is applying same promo each time cart is
 			// calculated. This is workaround.
-			// if ( productView.getSelectedProducts().size() > 0 ) {
+			if (getSelectedProducts().size() > 0) {
 
-			Notification.show("Adding item(s) to cart.");
+				Notification.show("Adding item(s) to cart.");
 
-			addItemsToShoppingCart();
+				addItemsToShoppingCart();
 
-			shoppingCartService.priceShoppingCart(getShoppingCart());
+				updateCart.fire(new UpdateShopppingCartEvent());
 
-			updateCart.fire(new UpdateShopppingCartEvent());
+				checkAllBoxes(false);
+			} else {
 
-			checkAllBoxes(false);
+				Notification.show("Please select one or more items.");
+			}
 
-			/*
-			 * } else {
-			 * 
-			 * getMainWindow().showNotification("Please select one or more items."
-			 * );
-			 * 
-			 * }
-			 */
 		} else if (event.getButton() == getCheckAllButton()) {
 
 			checkAllBoxes(true);

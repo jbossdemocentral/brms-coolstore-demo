@@ -59,6 +59,15 @@ public abstract class AbstractView extends Panel implements ClickListener {
 		layout.addComponent(controllerLayout);
 	}
 
+	protected void resetShoppingCart() {
+		shoppingCart.setCartItemPromoSavings(0D);
+		shoppingCart.setCartItemTotal(0D);
+		shoppingCart.setCartTotal(0D);
+		shoppingCart.setShippingPromoSavings(0D);
+		shoppingCart.setShippingTotal(0D);
+		shoppingCart.resetShoppingCartItemList();
+	}
+
 	protected ShoppingCart getShoppingCart() {
 		return shoppingCart;
 	}

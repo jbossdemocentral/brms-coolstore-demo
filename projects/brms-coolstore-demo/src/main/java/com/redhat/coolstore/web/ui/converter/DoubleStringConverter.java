@@ -16,7 +16,11 @@ public class DoubleStringConverter implements Converter<String, Double> {
 	public Double convertToModel(String value,
 			Class<? extends Double> targetType, Locale locale)
 			throws com.vaadin.data.util.converter.Converter.ConversionException {
-		return Double.parseDouble(value.substring(1));
+		if (value.charAt(0) == '-') {
+			return -1 * Double.parseDouble(value.substring(2));
+		} else {
+			return Double.parseDouble(value.substring(1));
+		}
 	}
 
 	@Override

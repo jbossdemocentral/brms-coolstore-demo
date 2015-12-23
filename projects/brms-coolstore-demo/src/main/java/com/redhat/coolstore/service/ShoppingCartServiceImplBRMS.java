@@ -28,9 +28,10 @@ public class ShoppingCartServiceImplBRMS implements ShoppingCartService, Seriali
 	public ShoppingCartServiceImplBRMS() {
 		
 	}
-		
+
+	@Override
 	public void priceShoppingCart(ShoppingCart sc) {
-						
+
 		if ( sc != null ) {
 						
 			com.redhat.coolstore.ShoppingCart factShoppingCart = new com.redhat.coolstore.ShoppingCart();

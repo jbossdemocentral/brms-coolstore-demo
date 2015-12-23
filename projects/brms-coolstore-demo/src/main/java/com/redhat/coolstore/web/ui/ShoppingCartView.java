@@ -1,12 +1,14 @@
 package com.redhat.coolstore.web.ui;
 
 import javax.enterprise.event.Observes;
+import javax.inject.Inject;
 
 import org.vaadin.dialogs.ConfirmDialog;
 import org.vaadin.teemu.VaadinIcons;
 import org.vaadin.viritin.fields.LabelField;
 
 import com.redhat.coolstore.model.ShoppingCart;
+import com.redhat.coolstore.service.ShoppingCartService;
 import com.redhat.coolstore.web.ui.converter.DoubleStringConverter;
 import com.redhat.coolstore.web.ui.events.UpdateShopppingCartEvent;
 import com.vaadin.cdi.UIScoped;
@@ -24,6 +26,9 @@ import com.vaadin.ui.themes.ValoTheme;
 
 @UIScoped
 public class ShoppingCartView extends AbstractView {
+
+	@Inject
+	private ShoppingCartService shoppingCartService;
 
 	private static final String LABEL_WIDTH = "8em";
 
@@ -57,8 +62,7 @@ public class ShoppingCartView extends AbstractView {
 	protected void createLayout(VerticalLayout layout) {
 
 		fieldGroup = new FieldGroup();
-		fieldGroup.setItemDataSource(new BeanItem<ShoppingCart>(
-				getShoppingCart()));
+		updateDatasource();
 		fieldGroup.bindMemberFields(this);
 
 		layout.addComponent(getCartLine("Subtotal:", subtotalValue));
@@ -119,18 +123,23 @@ public class ShoppingCartView extends AbstractView {
 		return clearButton;
 	}
 
-	public void updateShoppingCart(@Observes UpdateShopppingCartEvent event) {
-		updateShoppingCart();
+	private void updateDatasource() {
+		ShoppingCart sc = getShoppingCart();
+
+		if (sc.getShoppingCartItemList().size() > 0) {
+			shoppingCartService.priceShoppingCart(sc);
+		}
+
+		// BUG #4302 - Can not update the bean in BeanItem
+		fieldGroup.setItemDataSource(new BeanItem<ShoppingCart>(sc));
 	}
 
-	private void updateShoppingCart() {
-		// BUG #4302 - Can not update the bean in BeanItem
-		fieldGroup.setItemDataSource(new BeanItem<ShoppingCart>(
-				getShoppingCart()));
+	public void updateShoppingCart(@Observes UpdateShopppingCartEvent event) {
+		updateDatasource();
 	}
 
 	private void clearShoppingCart() {
-		ConfirmDialog d = ConfirmDialog.show(UI.getCurrent(),
+		ConfirmDialog dialog = ConfirmDialog.show(UI.getCurrent(),
 				"Confirm Clearing Shopping Cart",
 				"Are you sure you want to clear the shopping cart?", "Clear",
 				"Keep", new ConfirmDialog.Listener() {
@@ -144,19 +153,14 @@ public class ShoppingCartView extends AbstractView {
 					public void onClose(ConfirmDialog dialog) {
 						if (dialog.isConfirmed()) {
 							// Confirmed to clear
-
-							// BUG #4302 - Can not update the bean in BeanItem
-							fieldGroup
-									.setItemDataSource(new BeanItem<ShoppingCart>(
-											new ShoppingCart()));
-						} else {
-							// Do nothing
+							resetShoppingCart();
+							updateDatasource();
 						}
 					}
 				});
 
-		d.getOkButton().addStyleName(ValoTheme.BUTTON_DANGER);
-		d.getCancelButton().addStyleName(ValoTheme.BUTTON_LINK);
+		dialog.getOkButton().addStyleName(ValoTheme.BUTTON_DANGER);
+		dialog.getCancelButton().addStyleName(ValoTheme.BUTTON_LINK);
 	}
 
 	@Override
@@ -164,7 +168,7 @@ public class ShoppingCartView extends AbstractView {
 		if (event.getButton() == getClearButton()) {
 			clearShoppingCart();
 		} else if (event.getButton() == getCheckoutButton()) {
-			updateShoppingCart();
+			updateDatasource();
 		}
 	}
 }

@@ -30,8 +30,11 @@ public class ShoppingCart implements Serializable {
 	public void setShoppingCartItemList(List<ShoppingCartItem> shoppingCartItemList) {
 		this.shoppingCartItemList = shoppingCartItemList;
 	}
-	
-	
+
+	public void resetShoppingCartItemList() {
+		shoppingCartItemList = new ArrayList<ShoppingCartItem>();
+	}
+
 	public void addShoppingCartItem(ShoppingCartItem sci) {
 		
 		if ( sci != null ) {

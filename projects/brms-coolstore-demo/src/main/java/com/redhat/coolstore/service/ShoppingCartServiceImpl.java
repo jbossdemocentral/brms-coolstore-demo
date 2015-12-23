@@ -22,9 +22,10 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	
 	@Inject
 	ProductService pp;
-	
+
+	@Override
 	public void priceShoppingCart(ShoppingCart sc) {
-						
+
 		if ( sc != null ) {
 			
 			initShoppingCartForPricing(sc);
@@ -35,8 +36,8 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 				
 				for (ShoppingCartItem sci : sc.getShoppingCartItemList()) {
 					
-					sc.setCartItemPromoSavings(sc.getCartItemPromoSavings() + (sci.getPromoSavings() * sci.getQuantity()));
-					sc.setCartItemTotal(sc.getCartItemTotal() + (sci.getPrice() * sci.getQuantity()));
+					sc.setCartItemPromoSavings(sc.getCartItemPromoSavings() + sci.getPromoSavings() * sci.getQuantity());
+					sc.setCartItemTotal(sc.getCartItemTotal() + sci.getPrice() * sci.getQuantity());
 					
 				}
 				
