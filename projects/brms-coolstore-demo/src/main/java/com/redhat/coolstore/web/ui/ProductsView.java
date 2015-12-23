@@ -1,7 +1,5 @@
 package com.redhat.coolstore.web.ui;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Set;
 
 import javax.inject.Inject;
@@ -9,7 +7,6 @@ import javax.inject.Inject;
 import org.vaadin.teemu.VaadinIcons;
 
 import com.redhat.coolstore.model.Product;
-import com.redhat.coolstore.model.ShoppingCartItem;
 import com.redhat.coolstore.service.ProductService;
 import com.redhat.coolstore.web.ui.events.UpdateShopppingCartEvent;
 import com.redhat.coolstore.web.ui.util.Formatter;
@@ -152,49 +149,6 @@ public class ProductsView extends AbstractView {
 		return (Set<Product>) options.getValue();
 	}
 
-	private void addItemsToShoppingCart() {
-
-		Set<Product> productsToAddList = getSelectedProducts();
-
-		Map<String, ShoppingCartItem> shoppingCartItemMap = new HashMap<String, ShoppingCartItem>();
-
-		for (ShoppingCartItem sci : getShoppingCart().getShoppingCartItemList()) {
-
-			shoppingCartItemMap.put(sci.getProduct().getItemId(), sci);
-
-		}
-
-		if (productsToAddList != null && productsToAddList.size() > 0) {
-
-			for (Product p : productsToAddList) {
-
-				if (shoppingCartItemMap.containsKey(p.getItemId())) {
-
-					ShoppingCartItem sci = shoppingCartItemMap.get(p
-							.getItemId());
-
-					sci.setQuantity(sci.getQuantity() + 1);
-
-				} else {
-
-					ShoppingCartItem sci = new ShoppingCartItem();
-
-					sci.setProduct(p);
-
-					sci.setQuantity(1);
-
-					getShoppingCart().addShoppingCartItem(sci);
-
-					shoppingCartItemMap.put(p.getItemId(), sci);
-
-				}
-
-			}
-
-		}
-
-	}
-
 	@Override
 	public void buttonClick(ClickEvent event) {
 
@@ -206,9 +160,8 @@ public class ProductsView extends AbstractView {
 
 				Notification.show("Adding item(s) to cart.");
 
-				addItemsToShoppingCart();
-
-				updateCart.fire(new UpdateShopppingCartEvent());
+				updateCart.fire(new UpdateShopppingCartEvent(
+						getSelectedProducts()));
 
 				checkAllBoxes(false);
 			} else {

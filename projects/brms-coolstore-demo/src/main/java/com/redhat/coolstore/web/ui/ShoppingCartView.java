@@ -1,5 +1,9 @@
 package com.redhat.coolstore.web.ui;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 
@@ -7,7 +11,9 @@ import org.vaadin.dialogs.ConfirmDialog;
 import org.vaadin.teemu.VaadinIcons;
 import org.vaadin.viritin.fields.LabelField;
 
+import com.redhat.coolstore.model.Product;
 import com.redhat.coolstore.model.ShoppingCart;
+import com.redhat.coolstore.model.ShoppingCartItem;
 import com.redhat.coolstore.service.ShoppingCartService;
 import com.redhat.coolstore.web.ui.converter.DoubleStringConverter;
 import com.redhat.coolstore.web.ui.events.UpdateShopppingCartEvent;
@@ -141,12 +147,38 @@ public class ShoppingCartView extends AbstractView {
 	}
 
 	public void updateShoppingCart(@Observes UpdateShopppingCartEvent event) {
+		addItemsToShoppingCart(event.getSelectedProducts());
 		updateDatasource();
 	}
 
 	private void clear() {
 		resetShoppingCart();
 		updateDatasource();
+	}
+
+	private void addItemsToShoppingCart(Set<Product> productsToAddList) {
+
+		Map<String, ShoppingCartItem> shoppingCartItemMap = new HashMap<String, ShoppingCartItem>();
+
+		for (ShoppingCartItem sci : getShoppingCart().getShoppingCartItemList()) {
+			shoppingCartItemMap.put(sci.getProduct().getItemId(), sci);
+		}
+
+		if (productsToAddList != null && productsToAddList.size() > 0) {
+			for (Product p : productsToAddList) {
+				if (shoppingCartItemMap.containsKey(p.getItemId())) {
+					ShoppingCartItem sci = shoppingCartItemMap.get(p
+							.getItemId());
+					sci.setQuantity(sci.getQuantity() + 1);
+				} else {
+					ShoppingCartItem sci = new ShoppingCartItem();
+					sci.setProduct(p);
+					sci.setQuantity(1);
+					getShoppingCart().addShoppingCartItem(sci);
+					shoppingCartItemMap.put(p.getItemId(), sci);
+				}
+			}
+		}
 	}
 
 	private void clearShoppingCart() {
