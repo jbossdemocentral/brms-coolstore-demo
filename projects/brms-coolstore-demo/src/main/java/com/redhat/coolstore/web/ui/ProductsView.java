@@ -15,6 +15,8 @@ import com.redhat.coolstore.web.ui.events.UpdateShopppingCartEvent;
 import com.redhat.coolstore.web.ui.util.Formatter;
 import com.vaadin.cdi.UIScoped;
 import com.vaadin.data.Item;
+import com.vaadin.data.Property.ValueChangeEvent;
+import com.vaadin.data.Property.ValueChangeListener;
 import com.vaadin.data.util.GeneratedPropertyContainer;
 import com.vaadin.data.util.IndexedContainer;
 import com.vaadin.data.util.PropertyValueGenerator;
@@ -81,6 +83,29 @@ public class ProductsView extends AbstractView {
 		options.setMultiSelect(true);
 		options.setItemCaptionPropertyId("caption");
 		options.addStyleName(ValoTheme.OPTIONGROUP_LARGE);
+		options.addValueChangeListener(new ValueChangeListener() {
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = -962057120964581840L;
+
+			@Override
+			public void valueChange(ValueChangeEvent event) {
+				@SuppressWarnings("unchecked")
+				int size = ((Set<Product>) options.getValue()).size();
+				if(size==0) {
+					checkAllButton.setEnabled(true);
+					uncheckAllButton.setEnabled(false);
+				}else if(size == options.getItemIds().size()) {
+					checkAllButton.setEnabled(false);
+					uncheckAllButton.setEnabled(true);
+				} else {
+					checkAllButton.setEnabled(true);
+					uncheckAllButton.setEnabled(true);
+				}
+			}
+		});
 
 		layout.addComponent(options);
 	}
@@ -99,6 +124,7 @@ public class ProductsView extends AbstractView {
 		createButton(checkAllButton, "Check All", VaadinIcons.CHECK_SQUARE_O);
 
 		createButton(uncheckAllButton, "Uncheck All", VaadinIcons.THIN_SQUARE);
+		uncheckAllButton.setEnabled(false);
 	}
 
 	private Button getAddToCartButton() {
