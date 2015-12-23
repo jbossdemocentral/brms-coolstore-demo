@@ -1,10 +1,8 @@
 package com.redhat.coolstore.web.ui;
 
-import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.inject.Inject;
 
@@ -15,13 +13,15 @@ import com.redhat.coolstore.model.ShoppingCartItem;
 import com.redhat.coolstore.service.ProductService;
 import com.redhat.coolstore.service.ShoppingCartService;
 import com.vaadin.cdi.UIScoped;
-import com.vaadin.data.Property.ValueChangeEvent;
-import com.vaadin.data.Property.ValueChangeListener;
+import com.vaadin.data.Item;
+import com.vaadin.data.util.GeneratedPropertyContainer;
+import com.vaadin.data.util.IndexedContainer;
+import com.vaadin.data.util.PropertyValueGenerator;
 import com.vaadin.event.ShortcutAction.KeyCode;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.Notification;
+import com.vaadin.ui.OptionGroup;
 import com.vaadin.ui.VerticalLayout;
 
 @UIScoped
@@ -36,15 +36,13 @@ public class ProductsView extends AbstractView {
 	@Inject
 	private ShoppingCartView shoppingCartView;
 
-	private DecimalFormat df = new DecimalFormat("'$'0.00");
-
-	private Map<String, CheckBox> checkBoxMap = new HashMap<String, CheckBox>();
-
 	private Button addToCartButton = new Button();
 
 	private Button checkAllButton = new Button();
 
 	private Button uncheckAllButton = new Button();
+
+	private OptionGroup options = new OptionGroup();
 
 	/**
 	 * 
@@ -53,34 +51,37 @@ public class ProductsView extends AbstractView {
 
 	@Override
 	protected void createLayout(VerticalLayout layout) {
-		
-		for (Product product : productService.getProducts()) {
-			
-			CheckBox cb = new CheckBox(product.getName() + " (" + df.format(product.getPrice()) + ")");
-					
-			cb.setData(product);
-			
-			cb.setImmediate(true);
-			
-			cb.addValueChangeListener(new ValueChangeListener() {
-				
-				/**
-				 * 
-				 */
-				private static final long serialVersionUID = -9074656668897487720L;
 
-				@Override
-				public void valueChange(ValueChangeEvent event) {
+		GeneratedPropertyContainer gContainer = new GeneratedPropertyContainer(
+				new IndexedContainer(productService.getProducts()));
 
-					System.out.println(event);
-				}
-			});
+		gContainer.addGeneratedProperty("caption",
+				new PropertyValueGenerator<String>() {
 
-			layout.addComponent(cb);
-			
-			checkBoxMap.put(product.getName(), cb);
-			
-		}
+					/**
+					 * 
+					 */
+					private static final long serialVersionUID = 1952983658158929968L;
+
+					@Override
+					public String getValue(Item item, Object itemId,
+							Object propertyId) {
+						Product product = (Product) itemId;
+						return product.getName() + " ("
+								+ formatPrice(product.getPrice()) + ")";
+					}
+
+					@Override
+					public Class<String> getType() {
+						return String.class;
+					}
+				});
+
+		options.setContainerDataSource(gContainer);
+		options.setMultiSelect(true);
+		options.setItemCaptionPropertyId("caption");
+
+		layout.addComponent(options);
 	}
 
 	@Override
@@ -115,44 +116,21 @@ public class ProductsView extends AbstractView {
 	}
 
 	public void checkAllBoxes(boolean select) {
-		
-		if ( checkBoxMap != null ) {
-		
-			for (CheckBox cb : checkBoxMap.values()) {
-				
-				cb.setValue(select);
-				
-			}
-			
-		}	
-		
-	}
-	
-	public List<Product> getSelectedProducts() {
-		
-		List<Product> selectedProductList = new ArrayList<Product>();
-		
-		if ( checkBoxMap != null ) {
-			
-			for (CheckBox cb : checkBoxMap.values()) {
-																				
-				if (cb.getValue()) {
-				
-					selectedProductList.add((Product) cb.getData());
-					
-				}
-				
-			}
-			
+		if (select) {
+			options.setValue(options.getItemIds());
+		} else {
+			options.setValue(null);
 		}
-		
-		return selectedProductList;
-		
+	}
+
+	@SuppressWarnings("unchecked")
+	public Set<Product> getSelectedProducts() {
+		return (Set<Product>) options.getValue();
 	}
 
 	private void addItemsToShoppingCart() {
 
-		List<Product> productsToAddList = getSelectedProducts();
+		Set<Product> productsToAddList = getSelectedProducts();
 
 		Map<String, ShoppingCartItem> shoppingCartItemMap = new HashMap<String, ShoppingCartItem>();
 

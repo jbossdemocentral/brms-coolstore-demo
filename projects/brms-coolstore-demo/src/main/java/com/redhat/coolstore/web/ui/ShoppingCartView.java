@@ -1,7 +1,5 @@
 package com.redhat.coolstore.web.ui;
 
-import java.text.DecimalFormat;
-
 import org.vaadin.teemu.VaadinIcons;
 
 import com.redhat.coolstore.model.ShoppingCart;
@@ -18,8 +16,6 @@ import com.vaadin.ui.themes.ValoTheme;
 public class ShoppingCartView extends AbstractView {
 
 	private static final String labelWidth = "8em";
-	
-	private DecimalFormat df = new DecimalFormat("'$'0.00");
 
 	private Button checkoutButton = new Button();
 
@@ -83,7 +79,7 @@ public class ShoppingCartView extends AbstractView {
 		label.setWidth(labelWidth);
 
 		value = new Label();
-		value.setValue(df.format(0));
+		value.setValue(formatPrice(0f));
 		value.setWidth(labelWidth);
 
 		hl.addComponent(label);
@@ -107,11 +103,12 @@ public class ShoppingCartView extends AbstractView {
 
 		if ( sc != null ) {
 
-			subtotalValue.setValue(df.format(sc.getCartItemTotal()));
-			cartPromoValue.setValue(df.format(sc.getCartItemPromoSavings()));
-			shippingValue.setValue(df.format(sc.getShippingTotal()));
-			shippingPromoValue.setValue(df.format(sc.getShippingPromoSavings()));
-			cartTotalValue.setValue(df.format(sc.getCartTotal()));
+			subtotalValue.setValue(formatPrice(sc.getCartItemTotal()));
+			cartPromoValue.setValue(formatPrice(sc.getCartItemPromoSavings()));
+			shippingValue.setValue(formatPrice(sc.getShippingTotal()));
+			shippingPromoValue.setValue(formatPrice(sc
+					.getShippingPromoSavings()));
+			cartTotalValue.setValue(formatPrice(sc.getCartTotal()));
 		}
 	}
 
