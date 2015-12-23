@@ -22,6 +22,9 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.Window;
+import com.vaadin.ui.Window.CloseEvent;
+import com.vaadin.ui.Window.CloseListener;
 import com.vaadin.ui.themes.ValoTheme;
 
 @UIScoped
@@ -80,7 +83,6 @@ public class ShoppingCartView extends AbstractView {
 	@Override
 	protected void createControllerButtons() {
 		createButton(checkoutButton, "Checkout", VaadinIcons.FLAG_CHECKERED);
-		checkoutButton.setEnabled(false);
 		checkoutButton.addStyleName(ValoTheme.BUTTON_PRIMARY);
 
 		createButton(clearButton, "Clear", VaadinIcons.CLOSE);
@@ -128,6 +130,10 @@ public class ShoppingCartView extends AbstractView {
 
 		if (sc.getShoppingCartItemList().size() > 0) {
 			shoppingCartService.priceShoppingCart(sc);
+
+			checkoutButton.setEnabled(true);
+		} else {
+			checkoutButton.setEnabled(false);
 		}
 
 		// BUG #4302 - Can not update the bean in BeanItem
@@ -135,6 +141,11 @@ public class ShoppingCartView extends AbstractView {
 	}
 
 	public void updateShoppingCart(@Observes UpdateShopppingCartEvent event) {
+		updateDatasource();
+	}
+
+	private void clear() {
+		resetShoppingCart();
 		updateDatasource();
 	}
 
@@ -153,8 +164,7 @@ public class ShoppingCartView extends AbstractView {
 					public void onClose(ConfirmDialog dialog) {
 						if (dialog.isConfirmed()) {
 							// Confirmed to clear
-							resetShoppingCart();
-							updateDatasource();
+							clear();
 						}
 					}
 				});
@@ -163,12 +173,31 @@ public class ShoppingCartView extends AbstractView {
 		dialog.getCancelButton().addStyleName(ValoTheme.BUTTON_LINK);
 	}
 
+	private void checkout() {
+		Window checkout = new Window("Thank you for your order!");
+		checkout.setResizable(false);
+		checkout.setSizeFull();
+		checkout.addCloseListener(new CloseListener() {
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = -6352682494377073401L;
+
+			@Override
+			public void windowClose(CloseEvent e) {
+				clear();
+			}
+		});
+		UI.getCurrent().addWindow(checkout);
+	}
+
 	@Override
 	public void buttonClick(ClickEvent event) {
 		if (event.getButton() == getClearButton()) {
 			clearShoppingCart();
 		} else if (event.getButton() == getCheckoutButton()) {
-			updateDatasource();
+			checkout();
 		}
 	}
 }
