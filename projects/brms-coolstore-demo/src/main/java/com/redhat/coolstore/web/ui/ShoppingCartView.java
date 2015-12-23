@@ -1,8 +1,11 @@
 package com.redhat.coolstore.web.ui;
 
+import javax.enterprise.event.Observes;
+
 import org.vaadin.teemu.VaadinIcons;
 
 import com.redhat.coolstore.model.ShoppingCart;
+import com.redhat.coolstore.web.ui.events.UpdateShopppingCartEvent;
 import com.vaadin.cdi.UIScoped;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
@@ -15,21 +18,21 @@ import com.vaadin.ui.themes.ValoTheme;
 @UIScoped
 public class ShoppingCartView extends AbstractView {
 
-	private static final String labelWidth = "8em";
+	private static final String LABEL_WIDTH = "8em";
 
 	private Button checkoutButton = new Button();
 
 	private Button clearButton = new Button();
 
-	private Label subtotalValue;
-	
-	private Label cartPromoValue;
-	
-	private Label shippingValue;
-	
-	private Label shippingPromoValue;
-	
-	private Label cartTotalValue;
+	private Label subtotalValue = new Label();
+
+	private Label cartPromoValue = new Label();
+
+	private Label shippingValue = new Label();
+
+	private Label shippingPromoValue = new Label();
+
+	private Label cartTotalValue = new Label();
 
 	/**
 	 * 
@@ -76,11 +79,10 @@ public class ShoppingCartView extends AbstractView {
 		} else {
 			label.addStyleName(ValoTheme.LABEL_BOLD);
 		}
-		label.setWidth(labelWidth);
+		label.setWidth(LABEL_WIDTH);
 
-		value = new Label();
 		value.setValue(formatPrice(0f));
-		value.setWidth(labelWidth);
+		value.setWidth(LABEL_WIDTH);
 
 		hl.addComponent(label);
 		hl.addComponent(value);
@@ -89,20 +91,23 @@ public class ShoppingCartView extends AbstractView {
 		return hl;
 	}
 
-	public Button getCheckoutButton() {
+	private Button getCheckoutButton() {
 		return checkoutButton;
 	}
 
-	public Button getClearButton() {
+	private Button getClearButton() {
 		return clearButton;
 	}
 
-	public void updateShoppingCart() {
+	public void updateShoppingCart(@Observes UpdateShopppingCartEvent event) {
+		updateShoppingCart();
+	}
+
+	private void updateShoppingCart() {
 
 		ShoppingCart sc = getShoppingCart();
 
-		if ( sc != null ) {
-
+		if (sc != null) {
 			subtotalValue.setValue(formatPrice(sc.getCartItemTotal()));
 			cartPromoValue.setValue(formatPrice(sc.getCartItemPromoSavings()));
 			shippingValue.setValue(formatPrice(sc.getShippingTotal()));
@@ -112,9 +117,22 @@ public class ShoppingCartView extends AbstractView {
 		}
 	}
 
+	private void clearShoppingCart() {
+		String price = formatPrice(0);
+
+		subtotalValue.setValue(price);
+		cartPromoValue.setValue(price);
+		shippingValue.setValue(price);
+		shippingPromoValue.setValue(price);
+		cartTotalValue.setValue(price);
+	}
+
 	@Override
 	public void buttonClick(ClickEvent event) {
-		// if (event.getButton() == shoppingCartView.getClearButton())
-		updateShoppingCart();
+		if (event.getButton() == getClearButton()) {
+			clearShoppingCart();
+		} else if (event.getButton() == getCheckoutButton()) {
+			updateShoppingCart();
+		}
 	}
 }

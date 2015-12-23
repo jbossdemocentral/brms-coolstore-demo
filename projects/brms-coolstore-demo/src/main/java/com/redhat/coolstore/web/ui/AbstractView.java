@@ -37,7 +37,7 @@ public abstract class AbstractView extends Panel implements ClickListener {
 	public AbstractView() {
 		super();
 
-		setHeight("22em");
+		setHeight("23em");
 		layout = new VerticalLayout();
 		layout.setMargin(true);
 		layout.setSpacing(true);

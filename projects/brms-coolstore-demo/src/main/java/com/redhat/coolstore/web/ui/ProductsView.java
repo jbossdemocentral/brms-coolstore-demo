@@ -12,6 +12,7 @@ import com.redhat.coolstore.model.Product;
 import com.redhat.coolstore.model.ShoppingCartItem;
 import com.redhat.coolstore.service.ProductService;
 import com.redhat.coolstore.service.ShoppingCartService;
+import com.redhat.coolstore.web.ui.events.UpdateShopppingCartEvent;
 import com.vaadin.cdi.UIScoped;
 import com.vaadin.data.Item;
 import com.vaadin.data.util.GeneratedPropertyContainer;
@@ -23,6 +24,7 @@ import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.OptionGroup;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.themes.ValoTheme;
 
 @UIScoped
 public class ProductsView extends AbstractView {
@@ -34,7 +36,7 @@ public class ProductsView extends AbstractView {
 	private ShoppingCartService shoppingCartService;
 
 	@Inject
-	private ShoppingCartView shoppingCartView;
+	private javax.enterprise.event.Event<UpdateShopppingCartEvent> updateCart;
 
 	private Button addToCartButton = new Button();
 
@@ -80,6 +82,7 @@ public class ProductsView extends AbstractView {
 		options.setContainerDataSource(gContainer);
 		options.setMultiSelect(true);
 		options.setItemCaptionPropertyId("caption");
+		options.addStyleName(ValoTheme.OPTIONGROUP_LARGE);
 
 		layout.addComponent(options);
 	}
@@ -103,19 +106,19 @@ public class ProductsView extends AbstractView {
 				VaadinIcons.THIN_SQUARE, false);
 	}
 
-	public Button getAddToCartButton() {
+	private Button getAddToCartButton() {
 		return addToCartButton;
 	}
 
-	public Button getCheckAllButton() {
+	private Button getCheckAllButton() {
 		return checkAllButton;
 	}
 
-	public Button getUncheckAllButton() {
+	private Button getUncheckAllButton() {
 		return uncheckAllButton;
 	}
 
-	public void checkAllBoxes(boolean select) {
+	private void checkAllBoxes(boolean select) {
 		if (select) {
 			options.setValue(options.getItemIds());
 		} else {
@@ -124,7 +127,7 @@ public class ProductsView extends AbstractView {
 	}
 
 	@SuppressWarnings("unchecked")
-	public Set<Product> getSelectedProducts() {
+	private Set<Product> getSelectedProducts() {
 		return (Set<Product>) options.getValue();
 	}
 
@@ -186,7 +189,7 @@ public class ProductsView extends AbstractView {
 
 			shoppingCartService.priceShoppingCart(getShoppingCart());
 
-			shoppingCartView.updateShoppingCart();
+			updateCart.fire(new UpdateShopppingCartEvent());
 
 			checkAllBoxes(false);
 
