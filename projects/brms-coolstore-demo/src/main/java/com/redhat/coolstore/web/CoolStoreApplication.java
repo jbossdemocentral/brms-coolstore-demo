@@ -24,7 +24,8 @@ public class CoolStoreApplication extends UI {
 
 	private static final long serialVersionUID = 8436561253049378320L;
 
-	private static Embedded logo = new Embedded("", new ThemeResource("./images/logo.png"));
+	private Embedded logo = new Embedded("", new ThemeResource(
+			"./images/logo.png"));
 
 	@Inject
 	private ProductsView productView;

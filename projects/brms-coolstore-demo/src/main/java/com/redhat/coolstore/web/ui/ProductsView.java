@@ -13,6 +13,7 @@ import com.redhat.coolstore.model.ShoppingCartItem;
 import com.redhat.coolstore.service.ProductService;
 import com.redhat.coolstore.service.ShoppingCartService;
 import com.redhat.coolstore.web.ui.events.UpdateShopppingCartEvent;
+import com.redhat.coolstore.web.ui.util.Formatter;
 import com.vaadin.cdi.UIScoped;
 import com.vaadin.data.Item;
 import com.vaadin.data.util.GeneratedPropertyContainer;
@@ -70,7 +71,8 @@ public class ProductsView extends AbstractView {
 							Object propertyId) {
 						Product product = (Product) itemId;
 						return product.getName() + " ("
-								+ formatPrice(product.getPrice()) + ")";
+								+ Formatter.formatPrice(product.getPrice())
+								+ ")";
 					}
 
 					@Override
@@ -94,16 +96,13 @@ public class ProductsView extends AbstractView {
 
 	@Override
 	protected void createControllerButtons() {
-		createButton(addToCartButton, "Add To Cart",
-				VaadinIcons.CART_O,
-				true);
+		createButton(addToCartButton, "Add To Cart", VaadinIcons.CART_O);
 		addToCartButton.setClickShortcut(KeyCode.ENTER);
+		addToCartButton.addStyleName(ValoTheme.BUTTON_FRIENDLY);
 
-		createButton(checkAllButton, "Check All",
-				VaadinIcons.CHECK_SQUARE_O, false);
+		createButton(checkAllButton, "Check All", VaadinIcons.CHECK_SQUARE_O);
 
-		createButton(uncheckAllButton, "Uncheck All",
-				VaadinIcons.THIN_SQUARE, false);
+		createButton(uncheckAllButton, "Uncheck All", VaadinIcons.THIN_SQUARE);
 	}
 
 	private Button getAddToCartButton() {

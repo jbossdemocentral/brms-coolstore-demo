@@ -500,6 +500,12 @@
 		</dependency>
 
 		<dependency>
+		   <groupId>org.vaadin</groupId>
+		   <artifactId>viritin</artifactId>
+		   <version>1.39</version>
+		</dependency>
+
+		<dependency>
 			<groupId>javax.validation</groupId>
 			<artifactId>validation-api</artifactId>
 			<scope>provided</scope>

@@ -3,10 +3,15 @@ package com.redhat.coolstore.web.ui;
 import javax.enterprise.event.Observes;
 
 import org.vaadin.teemu.VaadinIcons;
+import org.vaadin.viritin.fields.LabelField;
 
 import com.redhat.coolstore.model.ShoppingCart;
+import com.redhat.coolstore.web.ui.converter.DoubleStringConverter;
 import com.redhat.coolstore.web.ui.events.UpdateShopppingCartEvent;
 import com.vaadin.cdi.UIScoped;
+import com.vaadin.data.fieldgroup.FieldGroup;
+import com.vaadin.data.fieldgroup.PropertyId;
+import com.vaadin.data.util.BeanItem;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
@@ -24,15 +29,22 @@ public class ShoppingCartView extends AbstractView {
 
 	private Button clearButton = new Button();
 
-	private Label subtotalValue = new Label();
+	@PropertyId("cartItemTotal")
+	private LabelField<String> subtotalValue = new LabelField<String>();
 
-	private Label cartPromoValue = new Label();
+	@PropertyId("cartItemPromoSavings")
+	private LabelField<String> cartPromoValue = new LabelField<String>();
 
-	private Label shippingValue = new Label();
+	@PropertyId("shippingTotal")
+	private LabelField<String> shippingValue = new LabelField<String>();
 
-	private Label shippingPromoValue = new Label();
+	@PropertyId("shippingPromoSavings")
+	private LabelField<String> shippingPromoValue = new LabelField<String>();
 
-	private Label cartTotalValue = new Label();
+	@PropertyId("cartTotal")
+	private LabelField<String> cartTotalValue = new LabelField<String>();
+
+	private FieldGroup fieldGroup;
 
 	/**
 	 * 
@@ -41,6 +53,11 @@ public class ShoppingCartView extends AbstractView {
 
 	@Override
 	protected void createLayout(VerticalLayout layout) {
+
+		fieldGroup = new FieldGroup();
+		fieldGroup.setItemDataSource(new BeanItem<ShoppingCart>(
+				getShoppingCart()));
+		fieldGroup.bindMemberFields(this);
 
 		layout.addComponent(getCartLine("Subtotal:", subtotalValue));
 		layout.addComponent(getCartLine("Promotion:", cartPromoValue, true));
@@ -56,19 +73,20 @@ public class ShoppingCartView extends AbstractView {
 
 	@Override
 	protected void createControllerButtons() {
-		createButton(checkoutButton, "Checkout",
-				VaadinIcons.FLAG_CHECKERED, true);
+		createButton(checkoutButton, "Checkout", VaadinIcons.FLAG_CHECKERED);
 		checkoutButton.setEnabled(false);
+		checkoutButton.addStyleName(ValoTheme.BUTTON_PRIMARY);
 
-		createButton(clearButton, "Clear", VaadinIcons.CLOSE,
-				false);
+		createButton(clearButton, "Clear", VaadinIcons.CLOSE);
 	}
 
-	private HorizontalLayout getCartLine(String caption, Label value) {
+	private HorizontalLayout getCartLine(String caption,
+			LabelField<String> value) {
 		return getCartLine(caption, value, false);
 	}
 
-	private HorizontalLayout getCartLine(String caption, Label value,
+	private HorizontalLayout getCartLine(String caption,
+			LabelField<String> value,
 			boolean isSecondary) {
 		HorizontalLayout hl = new HorizontalLayout();
 		hl.setWidth("100%");
@@ -81,7 +99,7 @@ public class ShoppingCartView extends AbstractView {
 		}
 		label.setWidth(LABEL_WIDTH);
 
-		value.setValue(formatPrice(0f));
+		value.setConverter(new DoubleStringConverter());
 		value.setWidth(LABEL_WIDTH);
 
 		hl.addComponent(label);
@@ -104,27 +122,15 @@ public class ShoppingCartView extends AbstractView {
 	}
 
 	private void updateShoppingCart() {
-
-		ShoppingCart sc = getShoppingCart();
-
-		if (sc != null) {
-			subtotalValue.setValue(formatPrice(sc.getCartItemTotal()));
-			cartPromoValue.setValue(formatPrice(sc.getCartItemPromoSavings()));
-			shippingValue.setValue(formatPrice(sc.getShippingTotal()));
-			shippingPromoValue.setValue(formatPrice(sc
-					.getShippingPromoSavings()));
-			cartTotalValue.setValue(formatPrice(sc.getCartTotal()));
-		}
+		// BUG #4302 - Can not update the bean in BeanItem
+		fieldGroup.setItemDataSource(new BeanItem<ShoppingCart>(
+				getShoppingCart()));
 	}
 
 	private void clearShoppingCart() {
-		String price = formatPrice(0);
-
-		subtotalValue.setValue(price);
-		cartPromoValue.setValue(price);
-		shippingValue.setValue(price);
-		shippingPromoValue.setValue(price);
-		cartTotalValue.setValue(price);
+		// BUG #4302 - Can not update the bean in BeanItem
+		fieldGroup.setItemDataSource(new BeanItem<ShoppingCart>(
+				new ShoppingCart()));
 	}
 
 	@Override

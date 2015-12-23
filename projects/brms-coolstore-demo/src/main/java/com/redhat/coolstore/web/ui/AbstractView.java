@@ -1,7 +1,5 @@
 package com.redhat.coolstore.web.ui;
 
-import java.text.DecimalFormat;
-
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
@@ -32,7 +30,6 @@ public abstract class AbstractView extends Panel implements ClickListener {
 	private HorizontalLayout controllerLayout;
 
 	private static final String BUTTON_WIDTH = "10em";
-	private DecimalFormat df = new DecimalFormat("'$'0.00");
 
 	public AbstractView() {
 		super();
@@ -72,21 +69,12 @@ public abstract class AbstractView extends Panel implements ClickListener {
 
 	protected abstract void createControllerButtons();
 
-	protected String formatPrice(double value) {
-		return df.format(value);
-	}
-
-	protected void createButton(Button button,
-			String caption, VaadinIcons icon, boolean isPrimary) {
+	protected void createButton(Button button, String caption, VaadinIcons icon) {
 
 		button.addClickListener(this);
 		button.setCaption(caption);
 		button.setIcon(icon);
 		button.setWidth(BUTTON_WIDTH);
-
-		if (isPrimary) {
-			button.addStyleName(ValoTheme.BUTTON_PRIMARY);
-		}
 
 		controllerLayout.addComponent(button);
 	}
