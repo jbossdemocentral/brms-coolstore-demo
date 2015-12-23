@@ -2,7 +2,7 @@
 DEMO="JBoss BRMS Red Hat Cool Store Demo"
 AUTHORS="Jason Milliron, Andrew Block, Eric D. Schabell"
 PROJECT="git@github.com:jbossdemocentral/brms-coolstore-demo.git"
-PRODUCT=JBoss BRMS
+PRODUCT="JBoss BRMS"
 JBOSS_HOME=./target/jboss-eap-6.4
 SERVER_DIR=$JBOSS_HOME/standalone/deployments
 SERVER_CONF=$JBOSS_HOME/standalone/configuration
