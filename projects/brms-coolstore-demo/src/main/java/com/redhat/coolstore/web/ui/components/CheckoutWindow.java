@@ -3,11 +3,11 @@ package com.redhat.coolstore.web.ui.components;
 import java.util.List;
 
 import com.redhat.coolstore.model.ShoppingCartItem;
+import com.redhat.coolstore.web.ui.converter.StringPropertyValueGenerator;
 import com.redhat.coolstore.web.ui.util.Formatter;
 import com.vaadin.data.Item;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.data.util.GeneratedPropertyContainer;
-import com.vaadin.data.util.PropertyValueGenerator;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.Grid.FooterCell;
 import com.vaadin.ui.Grid.FooterRow;
@@ -15,24 +15,6 @@ import com.vaadin.ui.UI;
 import com.vaadin.ui.Window;
 
 public class CheckoutWindow extends Window {
-
-	abstract class StringPropertyValueGenerator extends
-			PropertyValueGenerator<String> {
-
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = 7989493360502526841L;
-
-		@Override
-		abstract public String getValue(Item item, Object itemId,
-				Object propertyId);
-
-		@Override
-		public Class<String> getType() {
-			return String.class;
-		}
-	}
 
 	/**
 	 * 

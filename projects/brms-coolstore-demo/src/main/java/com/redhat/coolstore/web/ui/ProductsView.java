@@ -8,6 +8,7 @@ import org.vaadin.teemu.VaadinIcons;
 
 import com.redhat.coolstore.model.Product;
 import com.redhat.coolstore.service.ProductService;
+import com.redhat.coolstore.web.ui.converter.StringPropertyValueGenerator;
 import com.redhat.coolstore.web.ui.events.UpdateShopppingCartEvent;
 import com.redhat.coolstore.web.ui.util.Formatter;
 import com.vaadin.cdi.UIScoped;
@@ -16,7 +17,6 @@ import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.Property.ValueChangeListener;
 import com.vaadin.data.util.GeneratedPropertyContainer;
 import com.vaadin.data.util.IndexedContainer;
-import com.vaadin.data.util.PropertyValueGenerator;
 import com.vaadin.event.ShortcutAction.KeyCode;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
@@ -54,12 +54,12 @@ public class ProductsView extends AbstractView {
 				new IndexedContainer(productService.getProducts()));
 
 		gContainer.addGeneratedProperty("caption",
-				new PropertyValueGenerator<String>() {
+				new StringPropertyValueGenerator() {
 
 					/**
 					 * 
 					 */
-					private static final long serialVersionUID = 1952983658158929968L;
+					private static final long serialVersionUID = -4215128943792053652L;
 
 					@Override
 					public String getValue(Item item, Object itemId,
@@ -68,11 +68,6 @@ public class ProductsView extends AbstractView {
 						return product.getName() + " ("
 								+ Formatter.formatPrice(product.getPrice())
 								+ ")";
-					}
-
-					@Override
-					public Class<String> getType() {
-						return String.class;
 					}
 				});
 
