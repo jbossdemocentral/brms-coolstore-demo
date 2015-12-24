@@ -1,7 +1,6 @@
 package com.redhat.coolstore.web.ui.components;
 
-import java.util.List;
-
+import com.redhat.coolstore.model.ShoppingCart;
 import com.redhat.coolstore.model.ShoppingCartItem;
 import com.redhat.coolstore.web.ui.converter.StringPropertyValueGenerator;
 import com.redhat.coolstore.web.ui.util.Formatter;
@@ -9,7 +8,6 @@ import com.vaadin.data.Item;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.data.util.GeneratedPropertyContainer;
 import com.vaadin.ui.Grid;
-import com.vaadin.ui.Grid.FooterCell;
 import com.vaadin.ui.Grid.FooterRow;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.Window;
@@ -22,24 +20,14 @@ public class CheckoutWindow extends Window {
 	private static final long serialVersionUID = -8504668339755922310L;
 
 	private static final String PROPERTY_PRODUCT_NAME = "productName";
-	private static final String PROPERTY_PRODUCT_PRICE = "productPrice";
+	private static final String PROPERTY_UNIT_PRICE = "unitPrice";
 	private static final String PROPERTY_QUANTITY = "quantity";
 	private static final String PROPERTY_PRODUCT_TOTAL = "productTotal";
 
-	private static Double totalPrice;
-	private FooterCell gridFooterTotal;
-
-	private void updateGridFooterTotal(Double price) {
-		totalPrice += price;
-		gridFooterTotal.setText(Formatter.formatPrice(totalPrice));
-	}
-
-	public CheckoutWindow(List<ShoppingCartItem> shoppingCartItems) {
-
-		totalPrice = 0D;
+	public CheckoutWindow(ShoppingCart shoppingCart) {
 
 		BeanItemContainer<ShoppingCartItem> container = new BeanItemContainer<ShoppingCartItem>(
-				ShoppingCartItem.class, shoppingCartItems);
+				ShoppingCartItem.class, shoppingCart.getShoppingCartItemList());
 		GeneratedPropertyContainer gContainer = new GeneratedPropertyContainer(
 				container);
 		gContainer.addGeneratedProperty(PROPERTY_PRODUCT_NAME,
@@ -57,7 +45,7 @@ public class CheckoutWindow extends Window {
 								.getName();
 					}
 				});
-		gContainer.addGeneratedProperty(PROPERTY_PRODUCT_PRICE,
+		gContainer.addGeneratedProperty(PROPERTY_UNIT_PRICE,
 				new StringPropertyValueGenerator() {
 
 					/**
@@ -85,10 +73,8 @@ public class CheckoutWindow extends Window {
 					public String getValue(Item item, Object itemId,
 							Object propertyId) {
 						ShoppingCartItem scItem = (ShoppingCartItem) itemId;
-						Double currentPrice = scItem.getProduct().getPrice()
-								* scItem.getQuantity();
-						updateGridFooterTotal(currentPrice);
-						return Formatter.formatPrice(currentPrice);
+						return Formatter.formatPrice(scItem.getProduct()
+								.getPrice() * scItem.getQuantity());
 					}
 				});
 
@@ -97,17 +83,33 @@ public class CheckoutWindow extends Window {
 
 		grid.removeAllColumns();
 		grid.addColumn(PROPERTY_PRODUCT_NAME);
-		grid.addColumn(PROPERTY_PRODUCT_PRICE);
+		grid.addColumn(PROPERTY_UNIT_PRICE);
 		grid.addColumn(PROPERTY_QUANTITY);
-		grid.getColumn(PROPERTY_QUANTITY).setSortable(false);
 		grid.addColumn(PROPERTY_PRODUCT_TOTAL);
 
 		FooterRow gridFooter = grid.appendFooterRow();
+		gridFooter.join(PROPERTY_PRODUCT_NAME, PROPERTY_UNIT_PRICE,
+				PROPERTY_QUANTITY).setText(
+				"Shipping Total: "
+						+ Formatter.formatPrice(shoppingCart
+								.getShippingPromoSavings()));
+		gridFooter.getCell(PROPERTY_PRODUCT_TOTAL).setText(
+				Formatter.formatPrice(shoppingCart.getShippingTotal()));
 
-		gridFooter.join(PROPERTY_PRODUCT_NAME, PROPERTY_PRODUCT_PRICE,
+		gridFooter = grid.appendFooterRow();
+		gridFooter.join(PROPERTY_PRODUCT_NAME, PROPERTY_UNIT_PRICE,
+				PROPERTY_QUANTITY).setText(
+				"Promo Total: "
+						+ Formatter.formatPrice(shoppingCart
+								.getCartItemPromoSavings()));
+		gridFooter.getCell(PROPERTY_PRODUCT_TOTAL).setText(
+				Formatter.formatPrice(shoppingCart.getCartItemTotal()));
+
+		gridFooter = grid.appendFooterRow();
+		gridFooter.join(PROPERTY_PRODUCT_NAME, PROPERTY_UNIT_PRICE,
 				PROPERTY_QUANTITY).setText("Order Total:");
-
-		gridFooterTotal = gridFooter.getCell(PROPERTY_PRODUCT_TOTAL);
+		gridFooter.getCell(PROPERTY_PRODUCT_TOTAL).setText(
+				Formatter.formatPrice(shoppingCart.getCartTotal()));
 
 		setCaption("<h2>Thank you for your order!</h2>");
 		setCaptionAsHtml(true);

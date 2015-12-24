@@ -175,8 +175,7 @@ public class ShoppingCartView extends AbstractView {
 
 	private void checkout() {
 
-		CheckoutWindow window = new CheckoutWindow(getShoppingCart()
-				.getShoppingCartItemList());
+		CheckoutWindow window = new CheckoutWindow(getShoppingCart());
 		window.addCloseListener(new CloseListener() {
 
 			/**
