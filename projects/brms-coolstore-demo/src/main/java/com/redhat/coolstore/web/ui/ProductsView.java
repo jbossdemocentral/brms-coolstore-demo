@@ -89,18 +89,7 @@ public class ProductsView extends AbstractView {
 
 			@Override
 			public void valueChange(ValueChangeEvent event) {
-				@SuppressWarnings("unchecked")
-				int size = ((Set<Product>) options.getValue()).size();
-				if(size==0) {
-					checkAllButton.setEnabled(true);
-					uncheckAllButton.setEnabled(false);
-				}else if(size == options.getItemIds().size()) {
-					checkAllButton.setEnabled(false);
-					uncheckAllButton.setEnabled(true);
-				} else {
-					checkAllButton.setEnabled(true);
-					uncheckAllButton.setEnabled(true);
-				}
+				updateControlButtons();
 			}
 		});
 
@@ -121,7 +110,8 @@ public class ProductsView extends AbstractView {
 		createButton(checkAllButton, "Check All", VaadinIcons.CHECK_SQUARE_O);
 
 		createButton(uncheckAllButton, "Uncheck All", VaadinIcons.THIN_SQUARE);
-		uncheckAllButton.setEnabled(false);
+
+		updateControlButtons();
 	}
 
 	private Button getAddToCartButton() {
@@ -149,26 +139,38 @@ public class ProductsView extends AbstractView {
 		return (Set<Product>) options.getValue();
 	}
 
+	private void updateControlButtons() {
+		@SuppressWarnings("unchecked")
+		int size = ((Set<Product>) options.getValue()).size();
+		if (size == 0) {
+			checkAllButton.setEnabled(true);
+			uncheckAllButton.setEnabled(false);
+
+			addToCartButton.setEnabled(false);
+		} else if (size == options.getItemIds().size()) {
+			checkAllButton.setEnabled(false);
+			uncheckAllButton.setEnabled(true);
+
+			addToCartButton.setEnabled(true);
+		} else {
+			checkAllButton.setEnabled(true);
+			uncheckAllButton.setEnabled(true);
+
+			addToCartButton.setEnabled(true);
+		}
+	}
+
 	@Override
 	public void buttonClick(ClickEvent event) {
 
 		if (event.getButton() == getAddToCartButton()) {
 
-			// TODO: FIX when cart is applying same promo each time cart is
-			// calculated. This is workaround.
-			if (getSelectedProducts().size() > 0) {
+			Notification.show("Adding item(s) to cart.");
 
-				Notification.show("Adding item(s) to cart.");
+			updateCart
+					.fire(new UpdateShopppingCartEvent(getSelectedProducts()));
 
-				updateCart.fire(new UpdateShopppingCartEvent(
-						getSelectedProducts()));
-
-				checkAllBoxes(false);
-			} else {
-
-				Notification.show("Please select one or more items.");
-			}
-
+			checkAllBoxes(false);
 		} else if (event.getButton() == getCheckAllButton()) {
 
 			checkAllBoxes(true);

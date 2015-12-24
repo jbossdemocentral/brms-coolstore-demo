@@ -15,6 +15,7 @@ import com.redhat.coolstore.model.Product;
 import com.redhat.coolstore.model.ShoppingCart;
 import com.redhat.coolstore.model.ShoppingCartItem;
 import com.redhat.coolstore.service.ShoppingCartService;
+import com.redhat.coolstore.web.ui.components.CheckoutWindow;
 import com.redhat.coolstore.web.ui.converter.DoubleStringConverter;
 import com.redhat.coolstore.web.ui.events.UpdateShopppingCartEvent;
 import com.vaadin.cdi.UIScoped;
@@ -28,7 +29,6 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.Window;
 import com.vaadin.ui.Window.CloseEvent;
 import com.vaadin.ui.Window.CloseListener;
 import com.vaadin.ui.themes.ValoTheme;
@@ -206,10 +206,10 @@ public class ShoppingCartView extends AbstractView {
 	}
 
 	private void checkout() {
-		Window checkout = new Window("Thank you for your order!");
-		checkout.setResizable(false);
-		checkout.setSizeFull();
-		checkout.addCloseListener(new CloseListener() {
+
+		CheckoutWindow window = new CheckoutWindow(getShoppingCart()
+				.getShoppingCartItemList());
+		window.addCloseListener(new CloseListener() {
 
 			/**
 			 * 
@@ -221,7 +221,8 @@ public class ShoppingCartView extends AbstractView {
 				clear();
 			}
 		});
-		UI.getCurrent().addWindow(checkout);
+
+		UI.getCurrent().addWindow(window);
 	}
 
 	@Override
