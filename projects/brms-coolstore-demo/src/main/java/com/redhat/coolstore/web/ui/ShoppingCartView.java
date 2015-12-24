@@ -16,17 +16,14 @@ import com.redhat.coolstore.model.ShoppingCart;
 import com.redhat.coolstore.model.ShoppingCartItem;
 import com.redhat.coolstore.service.ShoppingCartService;
 import com.redhat.coolstore.web.ui.components.CheckoutWindow;
-import com.redhat.coolstore.web.ui.converter.DoubleStringConverter;
+import com.redhat.coolstore.web.ui.components.ShoppingCartLine;
 import com.redhat.coolstore.web.ui.events.UpdateShopppingCartEvent;
 import com.vaadin.cdi.UIScoped;
 import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.data.fieldgroup.PropertyId;
 import com.vaadin.data.util.BeanItem;
-import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Label;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window.CloseEvent;
@@ -38,8 +35,6 @@ public class ShoppingCartView extends AbstractView {
 
 	@Inject
 	private ShoppingCartService shoppingCartService;
-
-	private static final String LABEL_WIDTH = "8em";
 
 	private Button checkoutButton = new Button();
 
@@ -74,11 +69,13 @@ public class ShoppingCartView extends AbstractView {
 		updateDatasource();
 		fieldGroup.bindMemberFields(this);
 
-		layout.addComponent(getCartLine("Subtotal:", subtotalValue));
-		layout.addComponent(getCartLine("Promotion:", cartPromoValue, true));
-		layout.addComponent(getCartLine("Shipping:", shippingValue));
-		layout.addComponent(getCartLine("Promotion:", shippingPromoValue, true));
-		layout.addComponent(getCartLine("Cart Total:", cartTotalValue));
+		layout.addComponent(new ShoppingCartLine("Subtotal:", subtotalValue));
+		layout.addComponent(new ShoppingCartLine("Promotion:", cartPromoValue,
+				true));
+		layout.addComponent(new ShoppingCartLine("Shipping:", shippingValue));
+		layout.addComponent(new ShoppingCartLine("Promotion:",
+				shippingPromoValue, true));
+		layout.addComponent(new ShoppingCartLine("Cart Total:", cartTotalValue));
 	}
 
 	@Override
@@ -92,35 +89,6 @@ public class ShoppingCartView extends AbstractView {
 		checkoutButton.addStyleName(ValoTheme.BUTTON_PRIMARY);
 
 		createButton(clearButton, "Clear", VaadinIcons.CLOSE);
-	}
-
-	private HorizontalLayout getCartLine(String caption,
-			LabelField<String> value) {
-		return getCartLine(caption, value, false);
-	}
-
-	private HorizontalLayout getCartLine(String caption,
-			LabelField<String> value,
-			boolean isSecondary) {
-		HorizontalLayout hl = new HorizontalLayout();
-		hl.setWidth("100%");
-
-		Label label = new Label(caption);
-		if (isSecondary) {
-			label.addStyleName(ValoTheme.LABEL_LIGHT);
-		} else {
-			label.addStyleName(ValoTheme.LABEL_BOLD);
-		}
-		label.setWidth(LABEL_WIDTH);
-
-		value.setConverter(new DoubleStringConverter());
-		value.setWidth(LABEL_WIDTH);
-
-		hl.addComponent(label);
-		hl.addComponent(value);
-		hl.setComponentAlignment(value, Alignment.MIDDLE_RIGHT);
-
-		return hl;
 	}
 
 	private Button getCheckoutButton() {
