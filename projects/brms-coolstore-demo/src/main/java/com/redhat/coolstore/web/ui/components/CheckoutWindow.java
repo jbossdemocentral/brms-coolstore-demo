@@ -42,7 +42,7 @@ public class CheckoutWindow extends Window {
 				ShoppingCartItem.class, shoppingCartItems);
 		GeneratedPropertyContainer gContainer = new GeneratedPropertyContainer(
 				container);
-		gContainer.addGeneratedProperty("productName",
+		gContainer.addGeneratedProperty(PROPERTY_PRODUCT_NAME,
 				new StringPropertyValueGenerator() {
 
 					/**
@@ -57,7 +57,7 @@ public class CheckoutWindow extends Window {
 								.getName();
 					}
 				});
-		gContainer.addGeneratedProperty("productPrice",
+		gContainer.addGeneratedProperty(PROPERTY_PRODUCT_PRICE,
 				new StringPropertyValueGenerator() {
 
 					/**
@@ -73,7 +73,7 @@ public class CheckoutWindow extends Window {
 										.getProduct().getPrice());
 					}
 				});
-		gContainer.addGeneratedProperty("productTotal",
+		gContainer.addGeneratedProperty(PROPERTY_PRODUCT_TOTAL,
 				new StringPropertyValueGenerator() {
 
 					/**
