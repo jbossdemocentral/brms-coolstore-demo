@@ -1,196 +1,203 @@
 package com.redhat.coolstore.web.ui;
 
-import java.text.DecimalFormat;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
+import javax.enterprise.event.Observes;
+import javax.inject.Inject;
+
+import org.vaadin.dialogs.ConfirmDialog;
+import org.vaadin.teemu.VaadinIcons;
+import org.vaadin.viritin.fields.LabelField;
+
+import com.redhat.coolstore.model.Product;
 import com.redhat.coolstore.model.ShoppingCart;
-import com.redhat.coolstore.web.CoolStoreApplication;
-import com.vaadin.ui.Alignment;
+import com.redhat.coolstore.model.ShoppingCartItem;
+import com.redhat.coolstore.service.ShoppingCartService;
+import com.redhat.coolstore.web.ui.components.CheckoutWindow;
+import com.redhat.coolstore.web.ui.components.ShoppingCartLine;
+import com.redhat.coolstore.web.ui.events.UpdateShopppingCartEvent;
+import com.vaadin.cdi.UIScoped;
+import com.vaadin.data.fieldgroup.FieldGroup;
+import com.vaadin.data.fieldgroup.PropertyId;
+import com.vaadin.data.util.BeanItem;
 import com.vaadin.ui.Button;
-import com.vaadin.ui.Button.ClickListener;
-import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.Panel;
+import com.vaadin.ui.Button.ClickEvent;
+import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.themes.Reindeer;
+import com.vaadin.ui.Window.CloseEvent;
+import com.vaadin.ui.Window.CloseListener;
+import com.vaadin.ui.themes.ValoTheme;
 
-public class ShoppingCartView extends Panel {
+@UIScoped
+public class ShoppingCartView extends AbstractView {
 
-	private static final String labelWidth = "8em";
+	@Inject
+	private ShoppingCartService shoppingCartService;
 
-	private String buttonWidth = "7em";
-	
-	private DecimalFormat df = new DecimalFormat("'$'0.00");
-	
-	private CoolStoreApplication app = null;
-			
-	private Button checkoutButton;
-	
-	private Button clearButton;
-		
-	private Label subtotalValue;
-	
-	private Label cartPromoValue;
-	
-	private Label shippingValue;
-	
-	private Label shippingPromoValue;
-	
-	private Label cartTotalValue;
-	
+	private Button checkoutButton = new Button();
+
+	private Button clearButton = new Button();
+
+	@PropertyId("cartItemTotal")
+	private LabelField<String> subtotalValue = new LabelField<String>();
+
+	@PropertyId("cartItemPromoSavings")
+	private LabelField<String> cartPromoValue = new LabelField<String>();
+
+	@PropertyId("shippingTotal")
+	private LabelField<String> shippingValue = new LabelField<String>();
+
+	@PropertyId("shippingPromoSavings")
+	private LabelField<String> shippingPromoValue = new LabelField<String>();
+
+	@PropertyId("cartTotal")
+	private LabelField<String> cartTotalValue = new LabelField<String>();
+
+	private FieldGroup fieldGroup;
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 962893447423474540L;
 
-	public ShoppingCartView(CoolStoreApplication app) {
+	@Override
+	protected void createLayout(VerticalLayout layout) {
 
-		super();
-		
-		this.app = app;
+		fieldGroup = new FieldGroup();
+		updateDatasource();
+		fieldGroup.bindMemberFields(this);
 
-		VerticalLayout vl = new VerticalLayout();
-		
-		vl.setWidth("100%");
-		
-		Label inventoryLabel = new Label("Shopping Cart:");
-		
-		inventoryLabel.setStyleName(Reindeer.LABEL_H1);
-		
-		vl.addComponent(inventoryLabel);
-						
-		vl.addComponent(new Label("&nbsp;", Label.CONTENT_XHTML));
-		
-		HorizontalLayout hl1 = new HorizontalLayout();
-		hl1.setSizeFull();
-		
-		Label subtotalLabel = new Label("<b>Subtotal:</b>", Label.CONTENT_XHTML);
-		subtotalLabel.setWidth(labelWidth);
-		
-		subtotalValue = new Label();
-		subtotalValue.setValue(df.format(0));
-		subtotalValue.setWidth(labelWidth);
-						
-		hl1.addComponent(subtotalLabel);
-		hl1.addComponent(subtotalValue);
-		hl1.setComponentAlignment(subtotalValue, Alignment.MIDDLE_RIGHT);
-		
-		vl.addComponent(hl1);
-		
-		HorizontalLayout hl2 = new HorizontalLayout();
-		hl2.setSizeFull();
-		
-		Label cartPromoLabel = new Label("  <i>Promotion(s):</i>", Label.CONTENT_XHTML);
-		cartPromoLabel.setWidth(labelWidth);
-		
-		cartPromoValue = new Label();
-		cartPromoValue.setValue(df.format(0));
-		cartPromoValue.setWidth(labelWidth);
-						
-		hl2.addComponent(cartPromoLabel);
-		hl2.addComponent(cartPromoValue);
-		hl2.setComponentAlignment(cartPromoValue, Alignment.MIDDLE_RIGHT);
-		
-		vl.addComponent(hl2);
-		
-		HorizontalLayout hl3 = new HorizontalLayout();
-		hl3.setSizeFull();
-		
-		Label shippingLabel = new Label("<b>Shipping:</b>", Label.CONTENT_XHTML);
-		shippingLabel.setWidth(labelWidth);
-		shippingValue = new Label();
-		shippingValue.setValue(df.format(0));
-		shippingValue.setWidth(labelWidth);
-		
-		hl3.addComponent(shippingLabel);
-		hl3.addComponent(shippingValue);
-		hl3.setComponentAlignment(shippingValue, com.vaadin.ui.Alignment.MIDDLE_RIGHT);
-		
-		vl.addComponent(hl3);
-		
-		HorizontalLayout hl4 = new HorizontalLayout();
-		hl2.setSizeFull();
-		
-		Label shippingPromoLabel = new Label("  <i>Promotion(s):</i>", Label.CONTENT_XHTML);
-		shippingPromoLabel.setWidth(labelWidth);
-		
-		shippingPromoValue = new Label();
-		shippingPromoValue.setValue(df.format(0));
-		shippingPromoValue.setWidth(labelWidth);
-								
-		hl4.addComponent(shippingPromoLabel);
-		hl4.addComponent(shippingPromoValue);
-		hl4.setComponentAlignment(shippingPromoValue, Alignment.MIDDLE_RIGHT);
-		
-		vl.addComponent(hl4);
-		
-		HorizontalLayout hl5 = new HorizontalLayout();
-		hl5.setSizeFull();
-		
-		Label cartTotalLabel = new Label("<b>Cart Total:</b>", Label.CONTENT_XHTML);
-		cartTotalLabel.setWidth(labelWidth);
-		
-		cartTotalValue = new Label();
-		cartTotalValue.setValue(df.format(0));
-		cartTotalValue.setWidth(labelWidth);
-						
-		hl5.addComponent(cartTotalLabel);
-		hl5.addComponent(cartTotalValue);
-		hl5.setComponentAlignment(cartTotalValue, com.vaadin.ui.Alignment.MIDDLE_RIGHT);
-		
-		vl.addComponent(hl5);	
-		
-		vl.addComponent(new Label("&nbsp;", Label.CONTENT_XHTML));
-		
-		HorizontalLayout hl = new HorizontalLayout();
-		
-		hl.setSpacing(true);
-				
-		checkoutButton = new Button("Checkout");
-		checkoutButton.addListener((ClickListener) app);		
-		checkoutButton.setWidth(buttonWidth);
-		checkoutButton.setEnabled(false);
-		hl.addComponent(checkoutButton);
-		
-		clearButton = new Button("Clear");
-		clearButton.addListener((ClickListener) app);
-		clearButton.setWidth(buttonWidth);
-		hl.addComponent(clearButton);
-		
-		vl.addComponent(hl);
-		
-		vl.setSizeFull();
-		
-		vl.setSpacing(true);
-		
-		addComponent(vl);		
-		
-		setSizeFull();
-		
-		setHeight("100%");
-		
+		layout.addComponent(new ShoppingCartLine("Subtotal:", subtotalValue));
+		layout.addComponent(new ShoppingCartLine("Promotion:", cartPromoValue,
+				true));
+		layout.addComponent(new ShoppingCartLine("Shipping:", shippingValue));
+		layout.addComponent(new ShoppingCartLine("Promotion:",
+				shippingPromoValue, true));
+		layout.addComponent(new ShoppingCartLine("Cart Total:", cartTotalValue));
 	}
 
-	public Button getCheckoutButton() {
+	@Override
+	protected String getViewHeader() {
+		return "Shopping Cart";
+	}
+
+	@Override
+	protected void createControllerButtons() {
+		createButton(checkoutButton, "Checkout", VaadinIcons.FLAG_CHECKERED);
+		checkoutButton.addStyleName(ValoTheme.BUTTON_PRIMARY);
+
+		createButton(clearButton, "Clear", VaadinIcons.CLOSE);
+	}
+
+	private Button getCheckoutButton() {
 		return checkoutButton;
 	}
 
-	public Button getClearButton() {
+	private Button getClearButton() {
 		return clearButton;
 	}
 
-	public void updateShoppingCart(ShoppingCart sc) {
-		
-		if ( sc != null ) {
-			
-			subtotalValue.setValue(df.format(sc.getCartItemTotal()));
-			cartPromoValue.setValue(df.format(sc.getCartItemPromoSavings()));
-			shippingValue.setValue(df.format(sc.getShippingTotal()));
-			shippingPromoValue.setValue(df.format(sc.getShippingPromoSavings()));
-			cartTotalValue.setValue(df.format(sc.getCartTotal()));
-			
+	private void updateDatasource() {
+		ShoppingCart sc = getShoppingCart();
+
+		if (sc.getShoppingCartItemList().size() > 0) {
+			shoppingCartService.priceShoppingCart(sc);
+
+			checkoutButton.setEnabled(true);
+		} else {
+			checkoutButton.setEnabled(false);
 		}
-		
+
+		// BUG #4302 - Can not update the bean in BeanItem
+		fieldGroup.setItemDataSource(new BeanItem<ShoppingCart>(sc));
 	}
-	
+
+	public void updateShoppingCart(@Observes UpdateShopppingCartEvent event) {
+		addItemsToShoppingCart(event.getSelectedProducts());
+		updateDatasource();
+	}
+
+	private void clear() {
+		resetShoppingCart();
+		updateDatasource();
+	}
+
+	private void addItemsToShoppingCart(Set<Product> productsToAddList) {
+
+		Map<String, ShoppingCartItem> shoppingCartItemMap = new HashMap<String, ShoppingCartItem>();
+
+		for (ShoppingCartItem sci : getShoppingCart().getShoppingCartItemList()) {
+			shoppingCartItemMap.put(sci.getProduct().getItemId(), sci);
+		}
+
+		if (productsToAddList != null && productsToAddList.size() > 0) {
+			for (Product p : productsToAddList) {
+				if (shoppingCartItemMap.containsKey(p.getItemId())) {
+					ShoppingCartItem sci = shoppingCartItemMap.get(p
+							.getItemId());
+					sci.setQuantity(sci.getQuantity() + 1);
+				} else {
+					ShoppingCartItem sci = new ShoppingCartItem();
+					sci.setProduct(p);
+					sci.setQuantity(1);
+					getShoppingCart().addShoppingCartItem(sci);
+					shoppingCartItemMap.put(p.getItemId(), sci);
+				}
+			}
+		}
+	}
+
+	private void clearShoppingCart() {
+		ConfirmDialog dialog = ConfirmDialog.show(UI.getCurrent(),
+				"Confirm Clearing Shopping Cart",
+				"Are you sure you want to clear the shopping cart?", "Clear",
+				"Keep", new ConfirmDialog.Listener() {
+
+					/**
+					 * 
+					 */
+					private static final long serialVersionUID = 8604235590327706594L;
+
+					@Override
+					public void onClose(ConfirmDialog dialog) {
+						if (dialog.isConfirmed()) {
+							// Confirmed to clear
+							clear();
+						}
+					}
+				});
+
+		dialog.getOkButton().addStyleName(ValoTheme.BUTTON_DANGER);
+		dialog.getCancelButton().addStyleName(ValoTheme.BUTTON_LINK);
+	}
+
+	private void checkout() {
+
+		CheckoutWindow window = new CheckoutWindow(getShoppingCart());
+		window.addCloseListener(new CloseListener() {
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = -6352682494377073401L;
+
+			@Override
+			public void windowClose(CloseEvent e) {
+				clear();
+			}
+		});
+
+		UI.getCurrent().addWindow(window);
+	}
+
+	@Override
+	public void buttonClick(ClickEvent event) {
+		if (event.getButton() == getClearButton()) {
+			clearShoppingCart();
+		} else if (event.getButton() == getCheckoutButton()) {
+			checkout();
+		}
+	}
 }

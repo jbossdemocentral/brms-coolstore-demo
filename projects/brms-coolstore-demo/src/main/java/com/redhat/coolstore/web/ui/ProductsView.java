@@ -1,170 +1,177 @@
 package com.redhat.coolstore.web.ui;
 
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.Set;
+
+import javax.inject.Inject;
+
+import org.vaadin.teemu.VaadinIcons;
 
 import com.redhat.coolstore.model.Product;
 import com.redhat.coolstore.service.ProductService;
-import com.redhat.coolstore.web.CoolStoreApplication;
+import com.redhat.coolstore.web.ui.converter.StringPropertyValueGenerator;
+import com.redhat.coolstore.web.ui.events.UpdateShopppingCartEvent;
+import com.redhat.coolstore.web.ui.util.Formatter;
+import com.vaadin.cdi.UIScoped;
+import com.vaadin.data.Item;
+import com.vaadin.data.Property.ValueChangeEvent;
+import com.vaadin.data.Property.ValueChangeListener;
+import com.vaadin.data.util.GeneratedPropertyContainer;
+import com.vaadin.data.util.IndexedContainer;
 import com.vaadin.event.ShortcutAction.KeyCode;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.Button.ClickListener;
-import com.vaadin.ui.CheckBox;
-import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.Panel;
+import com.vaadin.ui.Notification;
+import com.vaadin.ui.OptionGroup;
 import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.themes.Reindeer;
+import com.vaadin.ui.themes.ValoTheme;
 
-public class ProductsView extends Panel {
+@UIScoped
+public class ProductsView extends AbstractView {
 
-	private String buttonWidth = "8em";
-	
-	private DecimalFormat df = new DecimalFormat("'$'0.00");
-	
-	private CoolStoreApplication app = null;
-	
-	private ProductService productService = new ProductService();
-	
-	private Map<String, CheckBox> checkBoxMap = new HashMap<String, CheckBox>();
-	
-	private Button addToCartButton;
-	
-	private Button checkAllButton;
-	
-	private Button uncheckAllButton;
-	
+	@Inject
+	private ProductService productService;
+
+	@Inject
+	private javax.enterprise.event.Event<UpdateShopppingCartEvent> updateCart;
+
+	private Button addToCartButton = new Button();
+
+	private Button checkAllButton = new Button();
+
+	private Button uncheckAllButton = new Button();
+
+	private OptionGroup options = new OptionGroup();
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 962893447423474540L;
 
-	public ProductsView(CoolStoreApplication app) {
+	@Override
+	protected void createLayout(VerticalLayout layout) {
 
-		super();
-		
-		this.app = app;
+		GeneratedPropertyContainer gContainer = new GeneratedPropertyContainer(
+				new IndexedContainer(productService.getProducts()));
 
-		VerticalLayout vl = new VerticalLayout();
-		
-		Label inventoryLabel = new Label("Products:");
-		
-		inventoryLabel.setStyleName(Reindeer.LABEL_H1);
-		
-		vl.addComponent(inventoryLabel);
-		
-		for (Product product : productService.getProducts()) {
-			
-			vl.addComponent(new Label("&nbsp;", Label.CONTENT_XHTML));
-			
-			CheckBox cb = new CheckBox(product.getName() + " (" + df.format(product.getPrice()) + ")");
-					
-			cb.setData(product);
-			
-			cb.setImmediate(true);
-			
-			cb.addListener(new ClickListener() {
-				
-				@Override
-				public void buttonClick(ClickEvent event) {
+		gContainer.addGeneratedProperty("caption",
+				new StringPropertyValueGenerator() {
 
-					System.out.println(event);
-					
-				}
-			});
-		
-			vl.addComponent(cb);
-			
-			checkBoxMap.put(product.getName(), cb);
-			
-		}
-		
-		vl.addComponent(new Label("&nbsp;", Label.CONTENT_XHTML));
-		
-		HorizontalLayout hl = new HorizontalLayout();
-		
-		hl.setSpacing(true);
-				
-		addToCartButton = new Button("Add To Cart");
-		addToCartButton.addListener((ClickListener) app);		
-		addToCartButton.setClickShortcut(KeyCode.ENTER);
-		addToCartButton.setWidth(buttonWidth);
-		hl.addComponent(addToCartButton);
-		
-		checkAllButton = new Button("Check All");
-		checkAllButton.addListener((ClickListener) app);
-		checkAllButton.setWidth(buttonWidth);
-		hl.addComponent(checkAllButton);
-		
-		uncheckAllButton = new Button("Uncheck All");
-		uncheckAllButton.addListener((ClickListener) app);
-		uncheckAllButton.setWidth(buttonWidth);
-		hl.addComponent(uncheckAllButton);
-		
-		vl.addComponent(hl);
-		
-		vl.setSizeFull();
-		
-		vl.setSpacing(true);
-		
-		addComponent(vl);		
-		
-		setSizeFull();
-		
-		setHeight("100%");
-		
+					/**
+					 * 
+					 */
+					private static final long serialVersionUID = -4215128943792053652L;
+
+					@Override
+					public String getValue(Item item, Object itemId,
+							Object propertyId) {
+						Product product = (Product) itemId;
+						return product.getName() + " ("
+								+ Formatter.formatPrice(product.getPrice())
+								+ ")";
+					}
+				});
+
+		options.setContainerDataSource(gContainer);
+		options.setMultiSelect(true);
+		options.setItemCaptionPropertyId("caption");
+		options.addStyleName(ValoTheme.OPTIONGROUP_LARGE);
+		options.addValueChangeListener(new ValueChangeListener() {
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = -962057120964581840L;
+
+			@Override
+			public void valueChange(ValueChangeEvent event) {
+				updateControlButtons();
+			}
+		});
+
+		layout.addComponent(options);
 	}
 
-	public Button getAddToCartButton() {
+	@Override
+	protected String getViewHeader() {
+		return "Products";
+	}
+
+	@Override
+	protected void createControllerButtons() {
+		createButton(addToCartButton, "Add To Cart", VaadinIcons.CART_O);
+		addToCartButton.setClickShortcut(KeyCode.ENTER);
+		addToCartButton.addStyleName(ValoTheme.BUTTON_FRIENDLY);
+
+		createButton(checkAllButton, "Check All", VaadinIcons.CHECK_SQUARE_O);
+
+		createButton(uncheckAllButton, "Uncheck All", VaadinIcons.THIN_SQUARE);
+
+		updateControlButtons();
+	}
+
+	private Button getAddToCartButton() {
 		return addToCartButton;
 	}
-	
-	public Button getCheckAllButton() {
+
+	private Button getCheckAllButton() {
 		return checkAllButton;
 	}
-	
-	public Button getUncheckAllButton() {
+
+	private Button getUncheckAllButton() {
 		return uncheckAllButton;
 	}
 
-	public void checkAllBoxes(boolean select) {
-		
-		if ( checkBoxMap != null ) {
-		
-			for (CheckBox cb : checkBoxMap.values()) {
-				
-				cb.setValue(select);
-				
-			}
-			
-		}	
-		
-	}
-	
-	public List<Product> getSelectedProducts() {
-		
-		List<Product> selectedProductList = new ArrayList<Product>();
-		
-		if ( checkBoxMap != null ) {
-			
-			for (CheckBox cb : checkBoxMap.values()) {
-																				
-				if ( cb.booleanValue() ) {
-				
-					selectedProductList.add((Product) cb.getData());
-					
-				}
-				
-			}
-			
+	private void checkAllBoxes(boolean select) {
+		if (select) {
+			options.setValue(options.getItemIds());
+		} else {
+			options.setValue(null);
 		}
-		
-		return selectedProductList;
-		
 	}
-	
+
+	@SuppressWarnings("unchecked")
+	private Set<Product> getSelectedProducts() {
+		return (Set<Product>) options.getValue();
+	}
+
+	private void updateControlButtons() {
+		@SuppressWarnings("unchecked")
+		int size = ((Set<Product>) options.getValue()).size();
+		if (size == 0) {
+			checkAllButton.setEnabled(true);
+			uncheckAllButton.setEnabled(false);
+
+			addToCartButton.setEnabled(false);
+		} else if (size == options.getItemIds().size()) {
+			checkAllButton.setEnabled(false);
+			uncheckAllButton.setEnabled(true);
+
+			addToCartButton.setEnabled(true);
+		} else {
+			checkAllButton.setEnabled(true);
+			uncheckAllButton.setEnabled(true);
+
+			addToCartButton.setEnabled(true);
+		}
+	}
+
+	@Override
+	public void buttonClick(ClickEvent event) {
+
+		if (event.getButton() == getAddToCartButton()) {
+
+			Notification.show("Adding item(s) to cart.");
+
+			updateCart
+					.fire(new UpdateShopppingCartEvent(getSelectedProducts()));
+
+			checkAllBoxes(false);
+		} else if (event.getButton() == getCheckAllButton()) {
+
+			checkAllBoxes(true);
+		} else if (event.getButton() == getUncheckAllButton()) {
+
+			checkAllBoxes(false);
+		}
+	}
 }

@@ -151,10 +151,7 @@ if not exist %WEB_INF_LIB% (
 	mkdir %WEB_INF_LIB%
 )
 
-call mvn install:install-file -Dfile=%SUPPORT_LIBS%\cdiutils-1.0.0.jar -DgroupId=org.vaadin.virkki -DartifactId=cdiutils -Dversion=1.0.0 -Dpackaging=jar
 call mvn install:install-file -Dfile=%SUPPORT_LIBS%\coolstore-2.0.0.jar -DgroupId=com.redhat -DartifactId=coolstore -Dversion=2.0.0 -Dpackaging=jar
-
-xcopy /Y /Q "%SUPPORT_LIBS%\cdiutils-1.0.0.jar" "%WEB_INF_LIB%"
 
 cd "%PRJ_DIR%"
 call mvn clean install
