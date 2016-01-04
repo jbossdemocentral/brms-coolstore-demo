@@ -1,6 +1,7 @@
 #!/bin/sh 
 DEMO="JBoss BRMS Red Hat Cool Store Demo"
-AUTHORS="Jason Milliron, Andrew Block, Eric D. Schabell"
+AUTHORS="Jason Milliron, Andrew Block,"
+AUTHORS2="AMahdy AbdElAziz, Eric D. Schabell"
 PROJECT="git@github.com:jbossdemocentral/brms-coolstore-demo.git"
 PRODUCT="JBoss BRMS"
 JBOSS_HOME=./target/jboss-eap-6.4
@@ -34,7 +35,8 @@ echo "##             ####   #   #  #     #  ###                   ##"
 echo "##                                                          ##"   
 echo "##                                                          ##"   
 echo "##  brought to you by,                                      ##"   
-echo "##        ${AUTHORS}    ##"
+echo "##                     ${AUTHORS}        ##"
+echo "##                     ${AUTHORS2}   ##"
 echo "##                                                          ##"   
 echo "##  ${PROJECT} ##"
 echo "##                                                          ##"   
