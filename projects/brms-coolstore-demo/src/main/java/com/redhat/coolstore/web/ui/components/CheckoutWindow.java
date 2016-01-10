@@ -90,20 +90,20 @@ public class CheckoutWindow extends Window {
 		FooterRow gridFooter = grid.appendFooterRow();
 		gridFooter.join(PROPERTY_PRODUCT_NAME, PROPERTY_UNIT_PRICE,
 				PROPERTY_QUANTITY).setText(
-				"Shipping Total: "
+				"Total: [Promotion(s) "
 						+ Formatter.formatPrice(shoppingCart
-								.getShippingPromoSavings()));
+								.getCartItemPromoSavings()) + "]");
 		gridFooter.getCell(PROPERTY_PRODUCT_TOTAL).setText(
-				Formatter.formatPrice(shoppingCart.getShippingTotal()));
+				Formatter.formatPrice(shoppingCart.getCartItemTotal()));
 
 		gridFooter = grid.appendFooterRow();
 		gridFooter.join(PROPERTY_PRODUCT_NAME, PROPERTY_UNIT_PRICE,
 				PROPERTY_QUANTITY).setText(
-				"Promo Total: "
+				"Shipping Total: [Promotion(s) "
 						+ Formatter.formatPrice(shoppingCart
-								.getCartItemPromoSavings()));
+								.getShippingPromoSavings()) + "]");
 		gridFooter.getCell(PROPERTY_PRODUCT_TOTAL).setText(
-				Formatter.formatPrice(shoppingCart.getCartItemTotal()));
+				Formatter.formatPrice(shoppingCart.getShippingTotal()));
 
 		gridFooter = grid.appendFooterRow();
 		gridFooter.join(PROPERTY_PRODUCT_NAME, PROPERTY_UNIT_PRICE,

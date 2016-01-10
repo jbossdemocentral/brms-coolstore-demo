@@ -70,10 +70,11 @@ public class ShoppingCartView extends AbstractView {
 		fieldGroup.bindMemberFields(this);
 
 		layout.addComponent(new ShoppingCartLine("Subtotal:", subtotalValue));
-		layout.addComponent(new ShoppingCartLine("Promotion:", cartPromoValue,
+		layout.addComponent(new ShoppingCartLine("Promotion(s):",
+				cartPromoValue,
 				true));
 		layout.addComponent(new ShoppingCartLine("Shipping:", shippingValue));
-		layout.addComponent(new ShoppingCartLine("Promotion:",
+		layout.addComponent(new ShoppingCartLine("Promotion(s):",
 				shippingPromoValue, true));
 		layout.addComponent(new ShoppingCartLine("Cart Total:", cartTotalValue));
 	}
