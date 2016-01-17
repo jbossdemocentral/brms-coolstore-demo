@@ -392,8 +392,8 @@
 		<jboss.brms.version>6.2.0.GA-redhat-1</jboss.brms.version>
 
 		<!-- Define the version of Vaadin framework. -->
-		<vaadin.version>7.5.10</vaadin.version>
-		<vaadin.plugin.version>7.5.10</vaadin.plugin.version>
+		<vaadin.version>7.6.0</vaadin.version>
+		<vaadin.plugin.version>7.6.0</vaadin.plugin.version>
 
 		<project.encoding>UTF-8</project.encoding>
 	</properties>

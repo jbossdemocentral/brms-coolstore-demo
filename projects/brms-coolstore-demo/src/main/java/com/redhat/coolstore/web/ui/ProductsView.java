@@ -50,10 +50,12 @@ public class ProductsView extends AbstractView {
 	@Override
 	protected void createLayout(VerticalLayout layout) {
 
+		final String CAPTION_PROPERTY = "caption";
+
 		GeneratedPropertyContainer gContainer = new GeneratedPropertyContainer(
 				new IndexedContainer(productService.getProducts()));
 
-		gContainer.addGeneratedProperty("caption",
+		gContainer.addGeneratedProperty(CAPTION_PROPERTY,
 				new StringPropertyValueGenerator() {
 
 					/**
@@ -73,7 +75,7 @@ public class ProductsView extends AbstractView {
 
 		options.setContainerDataSource(gContainer);
 		options.setMultiSelect(true);
-		options.setItemCaptionPropertyId("caption");
+		options.setItemCaptionPropertyId(CAPTION_PROPERTY);
 		options.addStyleName(ValoTheme.OPTIONGROUP_LARGE);
 		options.addValueChangeListener(new ValueChangeListener() {
 
