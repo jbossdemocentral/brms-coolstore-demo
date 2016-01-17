@@ -92,6 +92,8 @@ shipping values.
 
 Supporting Articles
 -------------------
+- [JBoss BRMS Cool Store UI gets Vaadin facelift](http://www.schabell.org/2016/01/jboss-brms-coolstore-ui-vaadin-facelift.html)
+
 - [7 Steps to Your First Rules with JBoss BRMS Starter Kit](http://www.schabell.org/2015/08/7-steps-first-rules-jboss-brms-starter-kit.html)
 
 - [3 shockingly easy ways into JBoss rules, events, planning & BPM](http://www.schabell.org/2015/01/3-shockingly-easy-ways-into-jboss-brms-bpmsuite.html)
@@ -122,6 +124,8 @@ Supporting Articles
 Released versions
 -----------------
 See the tagged releases for the following versions of the product:
+
+- v3.3 JBoss BRMS 6.2.0, JBoss EAP 6.4.4 and cool store installed, UI updated to Vaadin 7.6.0.
 
 - v3.2 JBoss BRMS 6.2.0, JBoss EAP 6.4.4 and cool store installed, UI updated to Vaadin 7.
 
