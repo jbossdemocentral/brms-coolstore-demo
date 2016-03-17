@@ -56,25 +56,23 @@ The following steps can be used to configure and run the demo in a container
 
 2. Add products installs directory.
 
-3. Copy contents of support/docker directory to the project root.
-
-4. Build demo image
+3. Build demo image
 
 	```
 	docker build -t jbossdemocentral/brms-coolstore-demo .
 	```
-5. Start demo container
+4. Start demo container
 
 	```
 	docker run -it -p 8080:8080 -p 9990:9990 jbossdemocentral/brms-coolstore-demo
 	```
-6. Login to http://&lt;DOCKER_HOST&gt;:8080/business-central
+5. Login to http://&lt;DOCKER_HOST&gt;:8080/business-central
 
     ```
     - login for admin and analyst roles (u:erics / p:jbossbrms1!)
     ```
 
-7. Open shopping cart and demo away (http://<DOCKER_HOST>:8080/brms-coolstore-demo)
+6. Open shopping cart and demo away (http://&lt;DOCKER_HOST&gt;:8080/brms-coolstore-demo)
 
 Additional information can be found in the jbossdemocentral container [developer repository](https://github.com/jbossdemocentral/docker-developer)
 
