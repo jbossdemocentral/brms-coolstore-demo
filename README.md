@@ -126,6 +126,8 @@ Released versions
 -----------------
 See the tagged releases for the following versions of the product:
 
+- v3.4 JBoss BRMS 6.2.0, JBoss EAP 6.4.4 and OSE aligned containerization.
+
 - v3.3 JBoss BRMS 6.2.0, JBoss EAP 6.4.4 and cool store installed, UI updated to Vaadin 7.6.0.
 
 - v3.2 JBoss BRMS 6.2.0, JBoss EAP 6.4.4 and cool store installed, UI updated to Vaadin 7.
