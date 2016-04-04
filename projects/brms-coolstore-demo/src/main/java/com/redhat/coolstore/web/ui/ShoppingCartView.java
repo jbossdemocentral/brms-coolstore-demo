@@ -19,9 +19,8 @@ import com.redhat.coolstore.web.ui.components.CheckoutWindow;
 import com.redhat.coolstore.web.ui.components.ShoppingCartLine;
 import com.redhat.coolstore.web.ui.events.UpdateShopppingCartEvent;
 import com.vaadin.cdi.UIScoped;
-import com.vaadin.data.fieldgroup.FieldGroup;
+import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.data.fieldgroup.PropertyId;
-import com.vaadin.data.util.BeanItem;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.UI;
@@ -55,8 +54,6 @@ public class ShoppingCartView extends AbstractView {
 	@PropertyId("cartTotal")
 	private LabelField<String> cartTotalValue = new LabelField<String>();
 
-	private FieldGroup fieldGroup;
-
 	/**
 	 * 
 	 */
@@ -65,9 +62,7 @@ public class ShoppingCartView extends AbstractView {
 	@Override
 	protected void createLayout(VerticalLayout layout) {
 
-		fieldGroup = new FieldGroup();
 		updateDatasource();
-		fieldGroup.bindMemberFields(this);
 
 		layout.addComponent(new ShoppingCartLine("Subtotal:", subtotalValue));
 		layout.addComponent(new ShoppingCartLine("Promotion(s):",
@@ -111,8 +106,7 @@ public class ShoppingCartView extends AbstractView {
 			checkoutButton.setEnabled(false);
 		}
 
-		// BUG #4302 - Can not update the bean in BeanItem
-		fieldGroup.setItemDataSource(new BeanItem<ShoppingCart>(sc));
+		BeanFieldGroup.bindFieldsUnbuffered(sc, this);
 	}
 
 	public void updateShoppingCart(@Observes UpdateShopppingCartEvent event) {
