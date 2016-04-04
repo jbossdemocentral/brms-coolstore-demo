@@ -81,11 +81,8 @@ public class CheckoutWindow extends Window {
 		Grid grid = new Grid(gContainer);
 		grid.setSizeFull();
 
-		grid.removeAllColumns();
-		grid.addColumn(PROPERTY_PRODUCT_NAME);
-		grid.addColumn(PROPERTY_UNIT_PRICE);
-		grid.addColumn(PROPERTY_QUANTITY);
-		grid.addColumn(PROPERTY_PRODUCT_TOTAL);
+		grid.setColumns(PROPERTY_PRODUCT_NAME, PROPERTY_UNIT_PRICE,
+				PROPERTY_QUANTITY, PROPERTY_PRODUCT_TOTAL);
 
 		FooterRow gridFooter = grid.appendFooterRow();
 		gridFooter.join(PROPERTY_PRODUCT_NAME, PROPERTY_UNIT_PRICE,
