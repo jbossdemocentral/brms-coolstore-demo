@@ -9,7 +9,7 @@ JBoss BRMS product web based dashboard.
 This demo is self contained, it uses a custom maven settings to deploy all built JBoss BRMS knowledge artifacts
 into an external maven repository (not your local repository), in /tmp/maven-repo.
 
-There are three options available to you for using this demo; local, Openshift and Containerized.
+There are four options available to you for using this demo; local, Openshift Online, Red Hat CDK OpenShift Enterprise and Containerized.
 
 
 Option 1 - Install on your machine
