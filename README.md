@@ -48,7 +48,17 @@ Once installed you can use the JBoss BRMS logins:
 Current hosting of brmsPaaS is on JBoss BRMS 6.0.2 in OpenShift Online.
 
 
-Option 3 - Generate containerized install
+Option 3 - Install on Red Hat CDK OpenShift Enterprise image
+------------------------------------------------------------
+The following steps can be used to install this demo on OpenShift Enterprise using the
+Red Hat Container Development Kit (CDK)
+
+1. [App Dev Cloud with JBoss Cool Store Demo](https://github.com/redhatdemocentral/rhcs-coolstore-demo)
+
+2. [App Dev Cloud with JBoss Cool Store Persistence Demo](https://github.com/redhatdemocentral/rhcs-coolstore-persistence-demo)
+
+
+Option 4 - Generate containerized install
 -----------------------------------------
 The following steps can be used to configure and run the demo in a container
 
