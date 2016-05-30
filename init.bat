@@ -47,7 +47,7 @@ echo #################################################################
 echo.
 
 REM make some checks first before proceeding. 
-if exist %SRC_DIR%\%EAP% (
+if exist "%SRC_DIR%\%EAP%" (
         echo Product sources are present...
         echo.
 ) else (
@@ -57,7 +57,7 @@ if exist %SRC_DIR%\%EAP% (
         GOTO :EOF
 )
 
-if exist %SRC_DIR%\%EAP_PATCH% (
+if exist "%SRC_DIR%\%EAP_PATCH%" (
         echo Product patches are present...
         echo.
 ) else (
@@ -67,7 +67,7 @@ if exist %SRC_DIR%\%EAP_PATCH% (
         GOTO :EOF
 )
 
-if exist %SRC_DIR%\%BRMS% (
+if exist "%SRC_DIR%\%BRMS%" (
 	echo JBoss product sources, %BRMS% present...
 	echo.
 ) else (
@@ -87,7 +87,7 @@ if exist %JBOSS_HOME% (
 REM Run installers.
 echo EAP installer running now...
 echo.
-call java -jar %SRC_DIR%/%EAP% %SUPPORT_DIR%\installation-eap -variablefile %SUPPORT_DIR%\installation-eap.variables
+call java -jar "%SRC_DIR%/%EAP%" "%SUPPORT_DIR%\installation-eap" -variablefile "%SUPPORT_DIR%\installation-eap.variables"
 
 
 if not "%ERRORLEVEL%" == "0" (
@@ -102,7 +102,7 @@ call set NOPAUSE=true
 echo.
 echo Applying JBoss EAP patch now...
 echo.
-call %JBOSS_HOME%/bin/jboss-cli.bat --command="patch apply %SRC_DIR%/%EAP_PATCH% --override-all"
+call "%JBOSS_HOME%/bin/jboss-cli.bat" --command="patch apply %SRC_DIR%/%EAP_PATCH% --override-all"
 
 if not "%ERRORLEVEL%" == "0" (
   echo.
@@ -114,7 +114,7 @@ if not "%ERRORLEVEL%" == "0" (
 echo.
 echo JBoss BRMS installer running now...
 echo.
-call java -jar %SRC_DIR%\%BRMS% %SUPPORT_DIR%\installation-brms -variablefile %SUPPORT_DIR%\installation-brms.variables
+call java -jar "%SRC_DIR%\%BRMS%" "%SUPPORT_DIR%\installation-brms" -variablefile "%SUPPORT_DIR%\installation-brms.variables"
 
 if not "%ERRORLEVEL%" == "0" (
 	echo Error Occurred During %PRODUCT% Installation!
@@ -144,7 +144,7 @@ xcopy /Y /Q "%SUPPORT_DIR%\userinfo.properties" "%SERVER_DIR%\business-central.w
 
 echo   - setting up custom maven settings so KieScanner finds repo updates...
 echo.
-xcopy /Y /Q "%SUPPORT_DIR%\settings.xml" "%SERVER_BIN%\.settings.xml
+xcopy /Y /Q "%SUPPORT_DIR%\settings.xml" "%SERVER_BIN%\.settings.xml"
 
 REM ensure project lib dir exists
 if not exist %WEB_INF_LIB% (
@@ -153,7 +153,7 @@ if not exist %WEB_INF_LIB% (
 	mkdir %WEB_INF_LIB%
 )
 
-call mvn install:install-file -Dfile=%SUPPORT_LIBS%\coolstore-2.0.0.jar -DgroupId=com.redhat -DartifactId=coolstore -Dversion=2.0.0 -Dpackaging=jar
+call mvn install:install-file -Dfile="%SUPPORT_LIBS%\coolstore-2.0.0.jar" -DgroupId=com.redhat -DartifactId=coolstore -Dversion=2.0.0 -Dpackaging=jar
 
 cd "%PRJ_DIR%"
 call mvn clean install
