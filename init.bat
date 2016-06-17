@@ -2,9 +2,10 @@
 setlocal
 
 set PROJECT_HOME=%~dp0
-set DEMO=JBoss BPM Suite Red Hat Cool Store Demo
-set AUTHORS=Jason Milliron, Andrew Block,
+set DEMO=JBoss BRMS Red Hat Cool Store Demo
+set AUTHORS1=Jason Milliron, Andrew Block,
 set AUTHORS2=AMahdy AbdElAziz, Eric D. Schabell
+set AUTHORS3=Duncan Doyle, Jaen Swart
 set PROJECT=git@github.com:jbossdemocentral/brms-coolstore-demo.git"
 set PRODUCT=JBoss BRMS
 set JBOSS_HOME=%PROJECT_HOME%target\jboss-eap-6.4
@@ -16,37 +17,38 @@ set SRC_DIR=%PROJECT_HOME%installs
 set PRJ_DIR=%PROJECT_HOME%projects\brms-coolstore-demo
 set SUPPORT_LIBS=%PROJECT_HOME%support\libs
 set WEB_INF_LIB=%PROJECT_HOME%projects\brms-coolstore-demo\src\main\webapp\WEB-INF\lib\
-set BRMS=jboss-brms-installer-6.2.0.BZ-1299002.jar
+set BRMS=jboss-brms-6.3.0.GA-installer.jar
 set EAP=jboss-eap-6.4.0-installer.jar
-set EAP_PATCH=jboss-eap-6.4.4-patch.zip
-set VERSION=6.2
+set EAP_PATCH=jboss-eap-6.4.7-patch.zip
+set VERSION=6.3
 
 REM wipe screen.
 cls
 
 echo.
 echo #################################################################
-echo ##                                                             ##   
+echo ##                                                             ##
 echo ##  Setting up the %DEMO%     ##
-echo ##                                                             ##   
-echo ##                                                             ##   
+echo ##                                                             ##
+echo ##                                                             ##
 echo ##     ####  ####   #   #   ###    #####                       ##
 echo ##     #   # #   # # # # # #       #                           ##
 echo ##     ####  ####  #  #  #  ##     #####                       ##
 echo ##     #   # # #   #     #    #    #   #                       ##
 echo ##     ####  #  #  #     # ###     #####                       ##
-echo ##                                                             ##   
-echo ##                                                             ##   
-echo ##  brought to you by,                                         ##   
-echo ##                     %AUTHORS%   ##
+echo ##                                                             ##
+echo ##                                                             ##
+echo ##  brought to you by,                                         ##
+echo ##                     %AUTHORS1%   ##
 echo ##                     %AUTHORS2%   ##
-echo ##                                                             ##   
+echo ##                     %AUTHORS3%             ##
+echo ##                                                             ##
 echo ##  %PROJECT%   ##
-echo ##                                                             ##   
+echo ##                                                             ##
 echo #################################################################
 echo.
 
-REM make some checks first before proceeding. 
+REM make some checks first before proceeding.
 if exist "%SRC_DIR%\%EAP%" (
         echo Product sources are present...
         echo.
@@ -126,17 +128,17 @@ echo.
 echo - enabling demo accounts role setup in application-roles.properties file...
 echo.
 xcopy /Y /Q "%SUPPORT_DIR%\application-roles.properties" "%SERVER_CONF%"
-echo. 
+echo.
 
 echo - setting up demo projects...
 echo.
-xcopy /Y /Q /S "%SUPPORT_DIR%\brms-demo-niogit" "%SERVER_BIN%\.niogit\" 
-echo. 
+xcopy /Y /Q /S "%SUPPORT_DIR%\brms-demo-niogit" "%SERVER_BIN%\.niogit\"
+echo.
 
 echo   - setting up standalone.xml configuration adjustments...
 echo.
 xcopy /Y /Q "%SUPPORT_DIR%\standalone.xml" "%SERVER_CONF%"
-echo. 
+echo.
 
 echo - setup email task notification users...
 echo.

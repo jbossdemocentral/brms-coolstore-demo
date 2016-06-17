@@ -1,9 +1,9 @@
-JBoss BRMS Suite Cool Store Demo 
+JBoss BRMS Suite Cool Store Demo
 ================================
-This is a retail web store demo where you will find rules, decision tables, events, and a ruleflow 
+This is a retail web store demo where you will find rules, decision tables, events, and a ruleflow
 that is leveraged by a web application. The web application is a WAR built using the JBoss BRMS
-generated project as a dependency, providing an example project showing how developers can focus on the 
-application code while the business analysts can focus on rules, events, and ruleflows in the 
+generated project as a dependency, providing an example project showing how developers can focus on the
+application code while the business analysts can focus on rules, events, and ruleflows in the
 JBoss BRMS product web based dashboard.
 
 This demo is self contained, it uses a custom maven settings to deploy all built JBoss BRMS knowledge artifacts
@@ -39,7 +39,7 @@ After clicking button, ensure `Gear` size is set to `large`:
 
 [![Click to install OpenShift](http://launch-shifter.rhcloud.com/launch/light/Install brmsPaaS.svg)](https://openshift.redhat.com/app/console/application_type/custom?&cartridges[]=https://raw.githubusercontent.com/jbossdemocentral/cartridge-bpmPaaS-coolstore-demo/master/metadata/manifest.yml&name=coolstore&gear_profile=large&initial_git_url=)
 
-Once installed you can use the JBoss BRMS logins: 
+Once installed you can use the JBoss BRMS logins:
 
    * u:erics  p: jbossbrms1!  (admin)
 
@@ -91,10 +91,10 @@ Additional information can be found in the jbossdemocentral container [developer
 
 Notes
 -----
-The web application (shopping cart) is built during demo installation with a provided coolstore project jar version 2.0.0. When you 
+The web application (shopping cart) is built during demo installation with a provided coolstore project jar version 2.0.0. When you
 open the project you will find the version is also set to 2.0.0. You can run the web application as is, but if you build and deploy
 a new version of 2.0.0 to your maven repository it will find duplicate rules. To demo you deploy a new version of the coolstore
-project by bumping the version number on each build and deploy, noting the KieScanner picking up the new version within 10 seconds 
+project by bumping the version number on each build and deploy, noting the KieScanner picking up the new version within 10 seconds
 of a new deployment. For example, initially start project, bump the version to 3.0.0, build and deploy, open web application and
 watch KieScanner in server logs pick up the 3.0.0 version. Now change a shipping rule value in decision table, save, bump project
 version to 4.0.0, build and deploy, watch for KieScanner picking up new 4.0.0 version, now web application on next run will use new
@@ -120,7 +120,7 @@ Supporting Articles
 - [Red Hat JBoss BRMS 6 - Demo Cool Store Dynamic Rule Updates (video)] (http://www.schabell.org/2014/05/redhat-jboss-brms6-demo-coolstore-dynamic-rule-updates.html)
 
 - [Red Hat JBoss BRMS 6 - The New Cool Store Demo] (http://www.schabell.org/2014/03/redhat-jboss-brms-v6-coolstore-demo.html)
- 
+
 - [JBoss BRMS Cool Store Demo updated with EAP 6.1.1] (http://www.schabell.org/2013/09/jboss-brms-coolstore-demo-updated-eap-611.html)
 
 - [A shopping cart example in the Cool Store Demo] (http://www.schabell.org/2013/04/jboss-brms-coolstore-demo.html)
@@ -175,7 +175,7 @@ See the tagged releases for the following versions of the product:
 
 - v1.3 is BRMS 5.3.1 deployable, running on JBoss EAP 6.1.1, and added Forge Laptop Sticker to store.
 
-- v1.2 is BRMS 5.3.1 deployable, running on JBoss EAP 6.1, mavenized using JBoss repo. 
+- v1.2 is BRMS 5.3.1 deployable, running on JBoss EAP 6.1, mavenized using JBoss repo.
 
 - v1.1 new welcome screen and doc fixes.
 
@@ -190,4 +190,3 @@ See the tagged releases for the following versions of the product:
 ![Decision Table](https://github.com/jbossdemocentral/brms-coolstore-demo/blob/master/docs/demo-images/coolstore-decision-table.png?raw=true)
 
 ![Domain Model](https://github.com/jbossdemocentral/brms-coolstore-demo/blob/master/docs/demo-images/coolstore-model.png?raw=true)
-
