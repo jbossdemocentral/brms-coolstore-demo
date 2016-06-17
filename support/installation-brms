@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <AutomatedInstallation langpack="eng">
 <productName>BRMS</productName>
-<productVersion>6.2.0</productVersion>
+<productVersion>6.3.0</productVersion>
 <com.izforge.izpack.panels.HTMLLicencePanel id="HTMLLicencePanel"/>
 <com.izforge.izpack.panels.TargetPanel id="DirectoryPanel">
 <installpath>target/jboss-eap-6.4</installpath>
