@@ -1,7 +1,8 @@
-#!/bin/sh 
+#!/bin/sh
 DEMO="JBoss BRMS Red Hat Cool Store Demo"
-AUTHORS="Jason Milliron, Andrew Block,"
+AUTHORS1="Jason Milliron, Andrew Block,"
 AUTHORS2="AMahdy AbdElAziz, Eric D. Schabell"
+AUTHORS3="Duncan Doylle, Jaen Swart"
 PROJECT="git@github.com:jbossdemocentral/brms-coolstore-demo.git"
 PRODUCT="JBoss BRMS"
 JBOSS_HOME=./target/jboss-eap-6.4
@@ -13,44 +14,45 @@ SRC_DIR=./installs
 PRJ_DIR=./projects/brms-coolstore-demo
 SUPPORT_LIBS=./support/libs/
 WEB_INF_LIB=./projects/brms-coolstore-demo/src/main/webapp/WEB-INF/lib/
-BRMS=jboss-brms-installer-6.2.0.BZ-1299002.jar
+BRMS=jboss-brms-6.3.0.GA-installer.jar
 EAP=jboss-eap-6.4.0-installer.jar
-EAP_PATCH=jboss-eap-6.4.4-patch.zip
-VERSION=6.2
+EAP_PATCH=jboss-eap-6.4.7-patch.zip
+VERSION=6.3
 
 # wipe screen.
-clear 
+clear
 
 echo
 echo "##############################################################"
-echo "##                                                          ##"   
+echo "##                                                          ##"
 echo "##  Setting up the ${DEMO}       ##"
-echo "##                                                          ##"   
-echo "##                                                          ##"   
+echo "##                                                          ##"
+echo "##                                                          ##"
 echo "##             ####   ####    #   #    ###                  ##"
 echo "##             #   #  #   #  # # # #  #                     ##"
 echo "##             ####   ####   #  #  #   ##                   ##"
 echo "##             #   #  #  #   #     #     #                  ##"
 echo "##             ####   #   #  #     #  ###                   ##"
-echo "##                                                          ##"   
-echo "##                                                          ##"   
-echo "##  brought to you by,                                      ##"   
-echo "##                     ${AUTHORS}        ##"
+echo "##                                                          ##"
+echo "##                                                          ##"
+echo "##  brought to you by,                                      ##"
+echo "##                     ${AUTHORS1}        ##"
 echo "##                     ${AUTHORS2}   ##"
-echo "##                                                          ##"   
+echo "##                     ${AUTHORS3}            ##"
+echo "##                                                          ##"
 echo "##  ${PROJECT} ##"
-echo "##                                                          ##"   
+echo "##                                                          ##"
 echo "##############################################################"
 echo
 
 command -v mvn -q >/dev/null 2>&1 || { echo >&2 "Maven is required but not installed yet... aborting."; exit 1; }
 
-# make some checks first before proceeding.	
+# make some checks first before proceeding.
 if [ -r $SRC_DIR/$EAP ] || [ -L $SRC_DIR/$EAP ]; then
 	echo Product sources are present...
 	echo
 else
-	echo Need to download $EAP package from the Customer Portal 
+	echo Need to download $EAP package from the Customer Portal
 	echo and place it in the $SRC_DIR directory to proceed...
 	echo
 	exit
@@ -60,7 +62,7 @@ if [ -r $SRC_DIR/$EAP_PATCH ] || [ -L $SRC_DIR/$EAP_PATCH ]; then
 	echo Product patches are present...
 	echo
 else
-	echo Need to download $EAP_PATCH package from the Customer Portal 
+	echo Need to download $EAP_PATCH package from the Customer Portal
 	echo and place it in the $SRC_DIR directory to proceed...
 	echo
 	exit
@@ -70,7 +72,7 @@ if [ -r $SRC_DIR/$BRMS ] || [ -L $SRC_DIR/$BRMS ]; then
 	echo JBoss product sources are present...
 	echo
 else
-	echo Need to download $BRMS package from the Customer Portal 
+	echo Need to download $BRMS package from the Customer Portal
 	echo and place it in the $SRC_DIR directory to proceed...
 	exit
 fi
@@ -94,7 +96,7 @@ if [ $? -ne 0 ]; then
 fi
 
 echo
-echo "Applying JBoss EAP 6.4.4 patch now..."
+echo "Applying JBoss EAP 6.4.7 patch now..."
 echo
 $JBOSS_HOME/bin/jboss-cli.sh --command="patch apply $SRC_DIR/$EAP_PATCH"
 
@@ -103,7 +105,7 @@ if [ $? -ne 0 ]; then
 	echo Error occurred during JBoss EAP patching!
 	exit
 fi
-			
+
 echo
 echo "JBoss BRMS installer running now..."
 echo
@@ -150,7 +152,7 @@ fi
 mvn install:install-file -Dfile=$SUPPORT_LIBS/coolstore-2.0.0.jar -DgroupId=com.redhat -DartifactId=coolstore -Dversion=2.0.0 -Dpackaging=jar
 
 echo
-echo Deploying the Cool Store web application. 
+echo Deploying the Cool Store web application.
 echo
 cd $PRJ_DIR
 mvn clean install
@@ -168,4 +170,3 @@ echo "*       $SERVER_BIN/standalone.sh                        *"
 echo "*                                                                       *"
 echo "*************************************************************************"
 echo
-
