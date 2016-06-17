@@ -1,4 +1,4 @@
-JBoss BRMS Suite Cool Store Demo 
+JBoss BRMS Suite Cool Store Demo
 ================================
 This is a retail web store demo where you will find rules, decision tables, events, and a ruleflow
 that is leveraged by a web application. The web application is a WAR built using the JBoss BRMS

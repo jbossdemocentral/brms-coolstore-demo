@@ -5,7 +5,7 @@ set PROJECT_HOME=%~dp0
 set DEMO=JBoss BRMS Red Hat Cool Store Demo
 set AUTHORS1=Jason Milliron, Andrew Block,
 set AUTHORS2=AMahdy AbdElAziz, Eric D. Schabell
-set AUTHORS3=Duncan Doylle, Jaen Swart
+set AUTHORS3=Duncan Doyle, Jaen Swart
 set PROJECT=git@github.com:jbossdemocentral/brms-coolstore-demo.git"
 set PRODUCT=JBoss BRMS
 set JBOSS_HOME=%PROJECT_HOME%target\jboss-eap-6.4
@@ -41,7 +41,7 @@ echo ##                                                             ##
 echo ##  brought to you by,                                         ##
 echo ##                     %AUTHORS1%   ##
 echo ##                     %AUTHORS2%   ##
-echo ##                     %AUTHORS3%            ##
+echo ##                     %AUTHORS3%             ##
 echo ##                                                             ##
 echo ##  %PROJECT%   ##
 echo ##                                                             ##
