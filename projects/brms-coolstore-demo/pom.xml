@@ -166,7 +166,7 @@
 				<plugins>
 					<plugin>
 						<artifactId>maven-surefire-plugin</artifactId>
-						<version>2.4.3</version>
+						<version>2.19.1</version>
 						<configuration>
 							<skip>true</skip>
 						</configuration>
@@ -292,7 +292,7 @@
 				<plugins>
 					<plugin>
 						<artifactId>maven-war-plugin</artifactId>
-						<version>2.1.1</version>
+						<version>2.6</version>
 						<configuration>
 							<outputDirectory>deployments</outputDirectory>
 							<warName>ROOT</warName>
@@ -360,7 +360,7 @@
 			<dependency>
 				<groupId>org.jboss.shrinkwrap.resolver</groupId>
 				<artifactId>shrinkwrap-resolver-bom</artifactId>
-				<version>2.1.1</version>
+				<version>2.2.2</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -389,7 +389,7 @@
 
 		<!-- Define the version of JBoss BRMS product to import. -->
 		<!-- jboss.brms.version>6.0.3-redhat-4</jboss.brms.version -->
-		<jboss.brms.version>6.2.0.GA-redhat-1</jboss.brms.version>
+		<jboss.brms.version>6.3.0.GA-redhat-3</jboss.brms.version>
 
 		<!-- Define the version of Vaadin framework. -->
 		<vaadin.version>7.6.0</vaadin.version>
