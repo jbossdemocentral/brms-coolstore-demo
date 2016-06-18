@@ -136,6 +136,8 @@ Released versions
 -----------------
 See the tagged releases for the following versions of the product:
 
+- v3.7 JBoss BRMS 6.3.0 on JBoss EAP 6.4.7 with cool store installed and RH CDK on OSE Cloud install option.
+
 - v3.6 JBoss BRMS 6.2.0-BZ-1299002 on JBoss EAP 6.4.4 with cool store installed and RH CDK on OSE Cloud install option.
 
 - v3.5 JBoss BRMS 6.2.0-BZ-1299002 on JBoss EAP 6.4.4 with cool store installed.
