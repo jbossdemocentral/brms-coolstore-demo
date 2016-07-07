@@ -122,6 +122,11 @@ echo "  - enabling demo accounts role setup in application-roles.properties file
 echo
 cp $SUPPORT_DIR/application-roles.properties $SERVER_CONF
 
+echo
+echo "  - creating additional users..."
+echo
+$SERVER_BIN/add-user.sh -a -r ApplicationRealm -u brmsAdmin -p jbossbrms1! -ro analyst,admin,manager,user,kie-server,rest-all --silent
+ 
 echo "  - setting up demo projects..."
 echo
 cp -r $SUPPORT_DIR/brms-demo-niogit $SERVER_BIN/.niogit
