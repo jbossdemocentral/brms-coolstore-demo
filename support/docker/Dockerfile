@@ -1,5 +1,5 @@
 # Use jbossdemocentral/developer as the base
-FROM jbossdemocentral/developer
+FROM jbossdemocentral/developer:jdk8-uid
 
 # Maintainer details
 MAINTAINER Andrew Block, Eric D. Schabell, Duncan Doylle, Jaen Swart
@@ -38,6 +38,12 @@ COPY projects /opt/jboss/brms-projects
 COPY support/libs /opt/jboss/brms-projects/libs
 COPY support/userinfo.properties $BRMS_HOME/standalone/deployments/business-central.war/WEB-INF/classes/
 COPY support/application-roles.properties support/standalone.xml $BRMS_HOME/standalone/configuration/
+# Need to switch to root user to be able to set correct ownership on 'application-roles.properties' so we can add additional users using the JBoss 'add-user' script.
+USER root
+RUN chown 1000:1000 $BRMS_HOME/standalone/configuration/application-roles.properties 
+USER 1000
+# Create an additional user.
+RUN $BRMS_HOME/bin/add-user.sh -a -r ApplicationRealm -u brmsAdmin -p jbossbrms1! -ro analyst,admin,manager,user,kie-server,rest-all --silent
 
 # Switch back to root user to perform build and cleanup
 USER root
