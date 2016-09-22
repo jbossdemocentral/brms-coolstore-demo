@@ -7,6 +7,22 @@
   -->
   <localRepository>/tmp/maven-repo</localRepository>
 
+        <servers>
+                <server>
+                        <id>guvnor-m2-repo</id>
+                        <username>erics</username>
+                        <password>jbossbrms1!</password>
+                        <configuration>
+                                <wagonProvider>httpclient</wagonProvider>
+                                <httpConfiguration>
+                                        <all>
+                                                <usePreemptive>true</usePreemptive>
+                                        </all>
+                                </httpConfiguration>
+                        </configuration>
+                </server>
+        </servers>
+
 	 <profiles>
 		 <profile>
 			 <repositories>
@@ -42,6 +58,37 @@
 					</snapshots>
 				</pluginRepository>
 			</pluginRepositories>
+                        <id>tmp-repository</id>
 		</profile>
+                <profile>
+			 <repositories>
+				<repository>
+					<releases>
+						<updatePolicy>never</updatePolicy>
+ 					</releases>
+ 					<snapshots>
+						<updatePolicy>always</updatePolicy>
+ 					</snapshots>
+					<id>jboss-public-repository-group</id>
+					<name>JBoss Public Maven Repository Group</name>
+					<url>https://repository.jboss.org/nexus/content/groups/public</url>
+				</repository>
+			</repositories>
+			<pluginRepositories>
+				<pluginRepository>
+					<releases />
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+					<id>jboss-public-plugin-repository-group</id>
+					<url>https://repository.jboss.org/nexus/content/groups/public</url>
+				</pluginRepository>
+			</pluginRepositories>
+			<id>jboss-public-repository</id>
+                </profile>
 	</profiles>
+        <activeProfiles>
+     		<activeProfile>tmp-repository</activeProfile>
+		<activeProfile>jboss-public-repository</activeProfile>
+        </activeProfiles>
 </settings>
