@@ -34,6 +34,11 @@ RUN sed -i "s:<installpath>.*</installpath>:<installpath>$BRMS_HOME</installpath
 
 # Copy demo and support files
 COPY support/brms-demo-niogit $BRMS_HOME/bin/.niogit
+# Clone the brms-coolstore-repo repository
+USER root
+RUN rm -rf $BRMS_HOME/bin/.niogit/coolstore-demo.git && git clone --bare https://github.com/jbossdemocentral/brms-coolstore-repo.git $BRMS_HOME/bin/.niogit/coolstore-demo.git
+USER 1000
+
 COPY projects /opt/jboss/brms-projects
 COPY support/libs /opt/jboss/brms-projects/libs
 COPY support/userinfo.properties $BRMS_HOME/standalone/deployments/business-central.war/WEB-INF/classes/
