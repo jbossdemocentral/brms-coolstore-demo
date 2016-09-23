@@ -18,9 +18,40 @@ BRMS=jboss-brms-6.3.0.GA-installer.jar
 EAP=jboss-eap-6.4.0-installer.jar
 EAP_PATCH=jboss-eap-6.4.7-patch.zip
 VERSION=6.3
+PROJECT_GIT_REPO=https://github.com/jbossdemocentral/brms-coolstore-repo
+PROJECT_GIT_DIR=./support/demo_project_git
+OFFLINE_MODE=false
 
 # wipe screen.
 clear
+
+function usage {
+      echo "Usage: init.sh [args...]"
+      echo "where args include:"
+      echo "    -o              run this script in offline mode. The project's Git repo will not be downloaded. Instead a cached version will be used if available."
+      echo "    -h              prints this help."
+}
+
+#Parse the params
+while getopts "oh" opt; do
+  case $opt in
+    o)
+      OFFLINE_MODE=true
+      ;;
+    h)
+      usage
+      exit 0
+      ;;
+    \?)
+      echo "Invalid option: -$OPTARG" >&2
+      exit 1
+      ;;
+    :)
+      echo "Option -$OPTARG requires an argument." >&2
+      exit 1
+      ;;
+  esac
+done
 
 echo
 echo "##############################################################"
@@ -129,7 +160,32 @@ $SERVER_BIN/add-user.sh -a -r ApplicationRealm -u brmsAdmin -p jbossbrms1! -ro a
  
 echo "  - setting up demo projects..."
 echo
+# Copy the default (internal) BPMSuite repo's.
 cp -r $SUPPORT_DIR/brms-demo-niogit $SERVER_BIN/.niogit
+# Copy the demo project repo.
+if ! $OFFLINE_MODE
+then
+  # Not in offline mode, so downloading the latest repo. We first download the repo in a temp dir and we only delete the old, cached repo, when the download is succesful.
+  echo "  - cloning the project's Git repo from: $PROJECT_GIT_REPO"
+  echo
+  rm -rf ./target/temp && git clone --bare $PROJECT_GIT_REPO ./target/temp/brms-coolstore-repo.git || { echo; echo >&2 "Error cloning the project's Git repo. If there is no Internet connection available, please run this script in 'offline-mode' ('-o') to use a previously downloaded and cached version of the project's Git repo... Aborting"; echo; exit 1; }
+
+  echo "  - replacing cached project git repo: $PROJECT_GIT_DIR/brms-coolstore-repo.git"
+  echo
+  rm -rf $PROJECT_GIT_DIR/brms-coolstore-repo.git && mkdir -p $PROJECT_GIT_DIR && cp -R target/temp/brms-coolstore-repo.git $PROJECT_GIT_DIR/brms-coolstore-repo.git && rm -rf ./target/temp
+else
+  echo "  - running in offline-mode, using cached project's Git repo."
+  echo
+  if [ ! -d "$PROJECT_GIT_DIR" ]
+  then
+    echo "No project Git repo found. Please run the script without the 'offline' ('-o') option to automatically download the required Git repository!"
+    echo
+    exit 1
+  fi
+fi
+# Copy the repo to the JBoss BPMSuite installation directory.
+rm -rf $JBOSS_HOME/bin/.niogit/coolstore-demo.git && cp -R $PROJECT_GIT_DIR/brms-coolstore-repo.git $SERVER_BIN/.niogit/coolstore-demo.git
+
 
 echo "  - setting up standalone.xml configuration adjustments..."
 echo
