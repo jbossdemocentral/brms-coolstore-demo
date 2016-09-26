@@ -6,7 +6,6 @@ import com.redhat.coolstore.web.ui.ProductsView;
 import com.redhat.coolstore.web.ui.ShoppingCartView;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
-import com.vaadin.annotations.Widgetset;
 import com.vaadin.cdi.CDIUI;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.server.VaadinRequest;
@@ -18,7 +17,6 @@ import com.vaadin.ui.themes.ValoTheme;
 
 @Theme("coolstoretheme")
 @Title("Red Hat Cool Store")
-@Widgetset("com.redhat.coolstore.web.CoolStoreApplicationWidgetset")
 @CDIUI("")
 public class CoolStoreApplication extends UI {
 

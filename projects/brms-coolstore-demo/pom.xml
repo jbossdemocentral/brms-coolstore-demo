@@ -47,40 +47,18 @@
 				<groupId>com.vaadin</groupId>
 				<artifactId>vaadin-maven-plugin</artifactId>
 				<version>${vaadin.plugin.version}</version>
-				<configuration>
-					<extraJvmArgs>-Xmx512M -Xss1024k</extraJvmArgs>
-					<webappDirectory>${basedir}/target/classes/VAADIN/widgetsets</webappDirectory>
-					<draftCompile>false</draftCompile>
-					<compileReport>false</compileReport>
-					<style>OBF</style>
-					<strict>true</strict>
-				</configuration>
 				<executions>
 					<execution>
 						<goals>
 							<goal>update-theme</goal>
-							<!-- using Vaadin WSCDN for widgetset compilation so disable those -->
-							<!-- <goal>update-widgetset</goal> -->
-							<!-- <goal>compile</goal> -->
+							 <goal>update-widgetset</goal> 
+							 <goal>compile</goal> 
 							<!-- disabled by default to use on-the-fly theme compilation -->
-							<!-- <goal>compile-theme</goal> -->
+							 <goal>compile-theme</goal> 
 						</goals>
 					</execution>
 				</executions>
 			</plugin>
-		    <plugin>
-		        <groupId>com.vaadin.wscdn</groupId>
-		        <artifactId>wscdn-maven-plugin</artifactId>
-		        <version>0.0.2</version>
-		        <executions>
-		            <execution>
-		                <phase>generate-sources</phase>
-		                <goals>
-		                    <goal>generate</goal>
-		                </goals>
-		            </execution>
-		        </executions>
-		    </plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
@@ -392,8 +370,8 @@
 		<jboss.brms.version>6.3.0.GA-redhat-3</jboss.brms.version>
 
 		<!-- Define the version of Vaadin framework. -->
-		<vaadin.version>7.6.0</vaadin.version>
-		<vaadin.plugin.version>7.6.0</vaadin.plugin.version>
+		<vaadin.version>7.7.2</vaadin.version>
+		<vaadin.plugin.version>7.7.2</vaadin.plugin.version>
 
 		<project.encoding>UTF-8</project.encoding>
 	</properties>
@@ -468,29 +446,15 @@
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-server</artifactId>
 		</dependency>
-		<!-- <dependency> -->
-		<!-- <groupId>com.vaadin</groupId> -->
-		<!-- <artifactId>vaadin-push</artifactId> -->
-		<!-- </dependency> -->
-		<dependency>
-			<groupId>com.vaadin</groupId>
-			<artifactId>vaadin-client</artifactId>
-			<scope>provided</scope>
-		</dependency>
-
-		<!-- Needed when using the widgetset optimizer (custom ConnectorBundleLoaderFactory). 
-			For widgetset compilation, vaadin-client-compiler is automatically added 
-			on the compilation classpath by vaadin-maven-plugin so normally there is 
-			no need for an explicit dependency. -->
-		<!-- <dependency> -->
-		<!-- <groupId>com.vaadin</groupId> -->
-		<!-- <artifactId>vaadin-client-compiler</artifactId> -->
-		<!-- <scope>provided</scope> -->
-		<!-- </dependency> -->
 
 		<dependency>
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-themes</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-client-compiled</artifactId>
 		</dependency>
 
 		<dependency>
@@ -502,13 +466,7 @@
 		<dependency>
 		   <groupId>org.vaadin</groupId>
 		   <artifactId>viritin</artifactId>
-		   <version>1.39</version>
-		</dependency>
-
-		<dependency>
-		   <groupId>org.vaadin.addon</groupId>
-		   <artifactId>confirmdialog</artifactId>
-		   <version>2.1.3</version>
+		   <version>1.57</version>
 		</dependency>
 
 		<dependency>
