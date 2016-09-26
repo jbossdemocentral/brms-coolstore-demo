@@ -28,7 +28,7 @@ Option 1 - Install on your machine
     - login for admin and analyst roles (u:erics / p:jbossbrms1!)
     ```
 
-6. Build and deploy project.
+6. Build and deploy project. To do this, click on 'Authoring -> Project Authoring', this will open the 'Project Authoring' view. Click on the 'Open Project Editor' button, which opens the project editor. Now, click on the 'Build -> Build & Deploy' button, which can be found on the right-hand side of the project editor window.
 
 7. Open shopping cart and demo away (http://localhost:8080/brms-coolstore-demo)
 
