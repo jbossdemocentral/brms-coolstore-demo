@@ -86,9 +86,36 @@
 			</pluginRepositories>
 			<id>jboss-public-repository</id>
                 </profile>
+                <profile>
+			 <repositories>
+				<repository>
+					<releases>
+						<updatePolicy>never</updatePolicy>
+ 					</releases>
+ 					<snapshots>
+						<updatePolicy>always</updatePolicy>
+ 					</snapshots>
+					<id>redhat-ga-repository-group</id>
+					<name>JBoss Public Maven Repository Group</name>
+					<url>https://maven.repository.redhat.com/ga</url>
+				</repository>
+			</repositories>
+			<pluginRepositories>
+				<pluginRepository>
+					<releases />
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+					<id>rehdhat-ga-plugin-repository-group</id>
+					<url>https://maven.repository.redhat.com/ga</url>
+				</pluginRepository>
+			</pluginRepositories>
+			<id>redhat-ga-repository</id>
+                </profile>
 	</profiles>
         <activeProfiles>
      		<activeProfile>tmp-repository</activeProfile>
 		<activeProfile>jboss-public-repository</activeProfile>
+		<activeProfile>redhat-ga-repository</activeProfile>
         </activeProfiles>
 </settings>
