@@ -6,8 +6,6 @@
 	<version>2.0.0-Final</version>
 	<packaging>war</packaging>
 	<name>Red Hat Cool Store</name>
-
-
 	<build>
 		<!-- Maven will append the version to the finalName (which is the name 
 			given to the generated war, and hence the context root) -->
@@ -107,6 +105,15 @@
 					<groupId>org.kie</groupId>
 					<artifactId>kie-ci</artifactId>
 				</dependency>
+
+				<!-- Guice-servlet dependency. See: https://issues.jboss.org/browse/DROOLS-1091 -->
+				<dependency>
+					<groupId>com.google.inject.extensions</groupId>
+					<artifactId>guice-servlet</artifactId>
+					<version>${version.com.google.inject.extensions.guice-servlet}</version>
+					<scope>compile</scope>
+				</dependency>
+
 				<!-- shrinkwrap dependencies -->
 				<dependency>
 					<groupId>org.jboss.shrinkwrap.resolver</groupId>
@@ -372,6 +379,9 @@
 		<!-- Define the version of Vaadin framework. -->
 		<vaadin.version>7.7.2</vaadin.version>
 		<vaadin.plugin.version>7.7.2</vaadin.plugin.version>
+		
+		<!-- Guice servlet dependency. See: https://issues.jboss.org/browse/DROOLS-1091 -->
+		<version.com.google.inject.extensions.guice-servlet>3.0</version.com.google.inject.extensions.guice-servlet>
 
 		<project.encoding>UTF-8</project.encoding>
 	</properties>
