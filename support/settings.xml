@@ -76,9 +76,12 @@
 			</repositories>
 			<pluginRepositories>
 				<pluginRepository>
-					<releases />
+					<releases>
+						<updatePolicy>never</updatePolicy>
+					</releases>
 					<snapshots>
 						<enabled>false</enabled>
+						<updatePolicy>always</updatePolicy>
 					</snapshots>
 					<id>jboss-public-plugin-repository-group</id>
 					<url>https://repository.jboss.org/nexus/content/groups/public</url>
@@ -102,9 +105,12 @@
 			</repositories>
 			<pluginRepositories>
 				<pluginRepository>
-					<releases />
+					<releases>
+						<updatePolicy>never</updatePolicy>
+					</releases>
 					<snapshots>
 						<enabled>false</enabled>
+						<updatePolicy>always</updatePolicy>
 					</snapshots>
 					<id>rehdhat-ga-plugin-repository-group</id>
 					<url>https://maven.repository.redhat.com/ga</url>
