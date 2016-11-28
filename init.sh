@@ -5,7 +5,8 @@ AUTHORS2="AMahdy AbdElAziz, Eric D. Schabell"
 AUTHORS3="Duncan Doyle, Jaen Swart"
 PROJECT="git@github.com:jbossdemocentral/brms-coolstore-demo.git"
 PRODUCT="JBoss BRMS"
-JBOSS_HOME=./target/jboss-eap-6.4
+TARGET=./target
+JBOSS_HOME=$TARGET/jboss-eap-7.0
 SERVER_DIR=$JBOSS_HOME/standalone/deployments
 SERVER_CONF=$JBOSS_HOME/standalone/configuration
 SERVER_BIN=$JBOSS_HOME/bin
@@ -14,10 +15,10 @@ SRC_DIR=./installs
 PRJ_DIR=./projects/brms-coolstore-demo
 SUPPORT_LIBS=./support/libs/
 WEB_INF_LIB=./projects/brms-coolstore-demo/src/main/webapp/WEB-INF/lib/
-BRMS=jboss-brms-6.3.0.GA-installer.jar
-EAP=jboss-eap-6.4.0-installer.jar
-EAP_PATCH=jboss-eap-6.4.7-patch.zip
-VERSION=6.3
+BRMS=jboss-brms-6.4.0.GA-deployable-eap7.x.zip
+EAP=jboss-eap-7.0.0-installer.jar
+#EAP_PATCH=jboss-eap-6.4.7-patch.zip
+VERSION=6.4
 PROJECT_GIT_REPO=https://github.com/jbossdemocentral/brms-coolstore-repo
 PROJECT_GIT_DIR=./support/demo_project_git
 OFFLINE_MODE=false
@@ -89,15 +90,15 @@ else
 	exit
 fi
 
-if [ -r $SRC_DIR/$EAP_PATCH ] || [ -L $SRC_DIR/$EAP_PATCH ]; then
-	echo Product patches are present...
-	echo
-else
-	echo Need to download $EAP_PATCH package from the Customer Portal
-	echo and place it in the $SRC_DIR directory to proceed...
-	echo
-	exit
-fi
+#if [ -r $SRC_DIR/$EAP_PATCH ] || [ -L $SRC_DIR/$EAP_PATCH ]; then
+#	echo Product patches are present...
+#	echo
+#else
+#	echo Need to download $EAP_PATCH package from the Customer Portal
+#	echo and place it in the $SRC_DIR directory to proceed...
+#	echo
+#	exit
+#fi
 
 if [ -r $SRC_DIR/$BRMS ] || [ -L $SRC_DIR/$BRMS ]; then
 	echo JBoss product sources are present...
@@ -126,21 +127,21 @@ if [ $? -ne 0 ]; then
 	exit
 fi
 
-echo
-echo "Applying JBoss EAP 6.4.7 patch now..."
-echo
-$JBOSS_HOME/bin/jboss-cli.sh --command="patch apply $SRC_DIR/$EAP_PATCH"
+#echo
+#echo "Applying JBoss EAP 6.4.7 patch now..."
+#echo
+#$JBOSS_HOME/bin/jboss-cli.sh --command="patch apply $SRC_DIR/$EAP_PATCH"
 
-if [ $? -ne 0 ]; then
-	echo
-	echo Error occurred during JBoss EAP patching!
-	exit
-fi
+#if [ $? -ne 0 ]; then
+#	echo
+#	echo Error occurred during JBoss EAP patching!
+#	exit
+#fi
 
 echo
-echo "JBoss BRMS installer running now..."
+echo "Deploying JBoss BRMS now..."
 echo
-java -jar $SRC_DIR/$BRMS $SUPPORT_DIR/installation-brms -variablefile $SUPPORT_DIR/installation-brms.variables
+unzip -qo $SRC_DIR/$BRMS -d $TARGET
 
 if [ $? -ne 0 ]; then
 	echo
@@ -149,15 +150,11 @@ if [ $? -ne 0 ]; then
 fi
 
 echo
-echo "  - enabling demo accounts role setup in application-roles.properties file..."
+echo "  - enabling demo accounts setup..."
 echo
-cp $SUPPORT_DIR/application-roles.properties $SERVER_CONF
+$JBOSS_HOME/bin/add-user.sh -a -r ApplicationRealm -u brmsAdmin -p jbossbrms1! -ro analyst,admin,manager,user,kie-server,kiemgmt,rest-all --silent
+$JBOSS_HOME/bin/add-user.sh -a -r ApplicationRealm -u erics -p jbossbrms1! -ro analyst,admin,manager,user,kie-server,kiemgmt,rest-all --silent
 
-echo
-echo "  - creating additional users..."
-echo
-$SERVER_BIN/add-user.sh -a -r ApplicationRealm -u brmsAdmin -p jbossbrms1! -ro analyst,admin,manager,user,kie-server,rest-all --silent
- 
 echo "  - setting up demo projects..."
 echo
 # Copy the default (internal) BPMSuite repo's.
@@ -221,13 +218,22 @@ cp target/brms-coolstore-demo.war ../../$SERVER_DIR
 cd ../..
 
 echo
-echo "*************************************************************************"
-echo "*                                                                       *"
-echo "*   JBoss BRMS Cool Store install completed.                            *"
-echo "*                                                                       *"
-echo "*   You can now start the server with:                                  *"
-echo "*                                                                       *"
-echo "*       $SERVER_BIN/standalone.sh                        *"
-echo "*                                                                       *"
-echo "*************************************************************************"
-echo
+echo "============================================================================"
+echo "=                                                                          ="
+echo "=  You can now start the $PRODUCT with:                                 ="
+echo "=                                                                          ="
+echo "=   $SERVER_BIN/standalone.sh                               ="
+echo "=                                                                          ="
+echo "=  Login into business central at:                                         ="
+echo "=                                                                          ="
+echo "=    http://localhost:8080/business-central  (u:brmsAdmin / p:jbossbrms1!) ="
+echo "=                                                                          ="
+echo "=  Login into the Coostore application at:                                 ="
+echo "=                                                                          ="
+echo "=    http://localhost:8080/brms-coolstore-demo                             ="
+echo "=                                                                          ="
+echo "=  See README.md for general details to run the various demo cases.        ="
+echo "=                                                                          ="
+echo "=  $PRODUCT $VERSION $DEMO Setup Complete.        ="
+echo "=                                                                          ="
+echo "============================================================================"
