@@ -1,13 +1,10 @@
-Download the following from the JBoss Customer Portal
+Download the following from http://developers.redhat.com
 
- * EAP installer (jboss-eap-6.4.0-installer.jar)
- * EAP patch (jboss-eap-6.4.7-patch.zip)
- * BRMS installer (jboss-brms-6.3.0.GA-installer.jar)
+ * EAP installer (jboss-eap-7.0.0-installer.jar)
+ * BRMS deployable (jboss-brms-6.4.0.GA-deployable-eap7.x.zip)
 
-and copy to this directory for the init.sh script to work.
+and copy to this directory for the init.sh and init.ps1 scripts to work.
 
 Ensure that this file is executable by running:
 
-chmod +x <path-to-project>/installs/jboss-eap-6.4.0-installer.jar
-chmod +x <path-to-project>/installs/jboss-eap-6.4.7-patch.zip
-chmod +x <path-to-project>/installs/jboss-brms-6.3.0.GA-installer.jar
+chmod +x <path-to-project>/installs/jboss-eap-7.0.0-installer.jar
