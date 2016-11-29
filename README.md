@@ -14,11 +14,11 @@ There are four options available to you for using this demo; local, Docker, Open
 Software
 --------
 The following software is required to run this demo:
-- JBoss EAP 7.0 installer: https://developers.redhat.com/download-manager/file/jboss-eap-7.0.0-installer.jar
-- JBoss BRMS 6.4.0.GA deployable for EAP 7:
+- [JBoss EAP 7.0 installer](https://developers.redhat.com/download-manager/file/jboss-eap-7.0.0-installer.jar)
+- [JBoss BRMS 6.4.0.GA deployable for EAP 7](https://developers.redhat.com/download-manager/content/origin/files/sha256/14/148eb9be40833d5da00bb6108cbed1852924135d25ceb6c601c62ba43f99f372/jboss-brms-6.4.0.GA-deployable-eap7.x.zip)
 - Git client
 - Maven 3.2+
-- 7-Zip (Windows only): to overcome the Windows 260 character path length limit, we need 7-Zip to unzip the BPM Suite deployable: http://www.7-zip.org/download.html
+- [7-Zip](http://www.7-zip.org/download.html) (Windows only): to overcome the Windows 260 character path length limit, we need 7-Zip to unzip the BRMS deployable.
 
 
 Option 1 - Install on your machine
