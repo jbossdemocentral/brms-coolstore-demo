@@ -9,17 +9,17 @@ import com.redhat.coolstore.web.ui.components.ShoppingCartLine;
 import com.redhat.coolstore.web.ui.events.UpdateShopppingCartEvent;
 import com.vaadin.annotations.PropertyId;
 import com.vaadin.cdi.UIScoped;
+import com.vaadin.data.Binder;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.UI;
+import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window.CloseEvent;
 import com.vaadin.ui.Window.CloseListener;
 import com.vaadin.ui.themes.ValoTheme;
-import com.vaadin.v7.data.fieldgroup.BeanFieldGroup;
-import com.vaadin.ui.VerticalLayout;
 import org.vaadin.dialogs.ConfirmDialog;
-import org.vaadin.viritin.v7.fields.LabelField;
+import org.vaadin.viritin.fields.LabelField;
 
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
@@ -52,6 +52,8 @@ public class ShoppingCartView extends AbstractView {
 	@PropertyId("cartTotal")
 	private LabelField<String> cartTotalValue = new LabelField<String>();
 
+	private Binder<ShoppingCart> binder = new Binder<>();;
+
 	/**
 	 * 
 	 */
@@ -62,14 +64,13 @@ public class ShoppingCartView extends AbstractView {
 
 		updateDatasource();
 
-		layout.addComponent(new ShoppingCartLine("Subtotal:", subtotalValue));
+		layout.addComponent(new ShoppingCartLine("Subtotal:", subtotalValue, binder));
 		layout.addComponent(new ShoppingCartLine("Promotion(s):",
-				cartPromoValue,
-				true));
-		layout.addComponent(new ShoppingCartLine("Shipping:", shippingValue));
+				cartPromoValue, binder, true));
+		layout.addComponent(new ShoppingCartLine("Shipping:", shippingValue, binder));
 		layout.addComponent(new ShoppingCartLine("Promotion(s):",
-				shippingPromoValue, true));
-		layout.addComponent(new ShoppingCartLine("Cart Total:", cartTotalValue));
+				shippingPromoValue, binder, true));
+		layout.addComponent(new ShoppingCartLine("Cart Total:", cartTotalValue, binder));
 	}
 
 	@Override
@@ -104,7 +105,7 @@ public class ShoppingCartView extends AbstractView {
 			checkoutButton.setEnabled(false);
 		}
 
-		BeanFieldGroup.bindFieldsUnbuffered(sc, this);
+		binder.bindInstanceFields(this);
 	}
 
 	public void updateShoppingCart(@Observes UpdateShopppingCartEvent event) {
