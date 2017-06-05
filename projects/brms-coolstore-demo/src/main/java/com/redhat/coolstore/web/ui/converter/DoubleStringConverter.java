@@ -1,9 +1,9 @@
 package com.redhat.coolstore.web.ui.converter;
 
-import java.util.Locale;
-
 import com.redhat.coolstore.web.ui.util.Formatter;
-import com.vaadin.data.util.converter.Converter;
+import com.vaadin.v7.data.util.converter.Converter;
+
+import java.util.Locale;
 
 public class DoubleStringConverter implements Converter<String, Double> {
 
@@ -15,7 +15,7 @@ public class DoubleStringConverter implements Converter<String, Double> {
 	@Override
 	public Double convertToModel(String value,
 			Class<? extends Double> targetType, Locale locale)
-			throws com.vaadin.data.util.converter.Converter.ConversionException {
+			throws com.vaadin.v7.data.util.converter.Converter.ConversionException {
 		if (value.charAt(0) == '-') {
 			return -1 * Double.parseDouble(value.substring(2));
 		} else {
@@ -26,7 +26,7 @@ public class DoubleStringConverter implements Converter<String, Double> {
 	@Override
 	public String convertToPresentation(Double value,
 			Class<? extends String> targetType, Locale locale)
-			throws com.vaadin.data.util.converter.Converter.ConversionException {
+			throws com.vaadin.v7.data.util.converter.Converter.ConversionException {
 		return Formatter.formatPrice(value);
 	}
 

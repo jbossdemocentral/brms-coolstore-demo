@@ -1,7 +1,7 @@
 package com.redhat.coolstore.web.ui.converter;
 
-import com.vaadin.data.Item;
-import com.vaadin.data.util.PropertyValueGenerator;
+import com.vaadin.v7.data.Item;
+import com.vaadin.v7.data.util.PropertyValueGenerator;
 
 public abstract class StringPropertyValueGenerator extends
 		PropertyValueGenerator<String> {

@@ -1,16 +1,5 @@
 package com.redhat.coolstore.web.ui;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-
-import javax.enterprise.event.Observes;
-import javax.inject.Inject;
-
-import org.vaadin.dialogs.ConfirmDialog;
-import org.vaadin.teemu.VaadinIcons;
-import org.vaadin.viritin.fields.LabelField;
-
 import com.redhat.coolstore.model.Product;
 import com.redhat.coolstore.model.ShoppingCart;
 import com.redhat.coolstore.model.ShoppingCartItem;
@@ -18,16 +7,25 @@ import com.redhat.coolstore.service.ShoppingCartService;
 import com.redhat.coolstore.web.ui.components.CheckoutWindow;
 import com.redhat.coolstore.web.ui.components.ShoppingCartLine;
 import com.redhat.coolstore.web.ui.events.UpdateShopppingCartEvent;
+import com.vaadin.annotations.PropertyId;
 import com.vaadin.cdi.UIScoped;
-import com.vaadin.data.fieldgroup.BeanFieldGroup;
-import com.vaadin.data.fieldgroup.PropertyId;
+import com.vaadin.icons.VaadinIcons;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.UI;
-import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window.CloseEvent;
 import com.vaadin.ui.Window.CloseListener;
 import com.vaadin.ui.themes.ValoTheme;
+import com.vaadin.v7.data.fieldgroup.BeanFieldGroup;
+import com.vaadin.v7.ui.VerticalLayout;
+import org.vaadin.dialogs.ConfirmDialog;
+import org.vaadin.viritin.v7.fields.LabelField;
+
+import javax.enterprise.event.Observes;
+import javax.inject.Inject;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 @UIScoped
 public class ShoppingCartView extends AbstractView {

@@ -379,7 +379,7 @@
 		<vaadin.version>8.0.6</vaadin.version>
 		<vaadin.plugin.version>8.0.6</vaadin.plugin.version>
 		<!-- If there are no local customisations, this can also be "fetch" or "cdn" -->
-		<vaadin.widgetset.mode>local</vaadin.widgetset.mode>
+		<vaadin.widgetset.mode>cdn</vaadin.widgetset.mode>
 
 		<!-- Guice servlet dependency. See: https://issues.jboss.org/browse/DROOLS-1091 -->
 		<version.com.google.inject.extensions.guice-servlet>3.0</version.com.google.inject.extensions.guice-servlet>
@@ -455,7 +455,12 @@
 		<!-- Vaadin libs -->
 		<dependency>
 			<groupId>com.vaadin</groupId>
-			<artifactId>vaadin-server</artifactId>
+			<artifactId>vaadin-compatibility-server</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-compatibility-themes</artifactId>
 		</dependency>
 
 		<dependency>
@@ -465,19 +470,13 @@
 
 		<dependency>
 			<groupId>com.vaadin</groupId>
-			<artifactId>vaadin-client-compiled</artifactId>
+			<artifactId>vaadin-compatibility-client</artifactId>
 		</dependency>
 
 		<dependency>
-		   <groupId>org.vaadin.icons</groupId>
-		   <artifactId>vaadin-icons</artifactId>
-		   <version>1.0.1</version>
-		</dependency>
-
-		<dependency>
-		   <groupId>org.vaadin</groupId>
-		   <artifactId>viritin</artifactId>
-		   <version>1.57</version>
+			<groupId>org.vaadin</groupId>
+			<artifactId>viritin</artifactId>
+			<version>2.0.beta2</version>
 		</dependency>
 
 		<dependency>
@@ -498,7 +497,6 @@
 		<dependency>
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-cdi</artifactId>
-			<version>1.0.3</version>
 		</dependency>
 
 		<dependency>

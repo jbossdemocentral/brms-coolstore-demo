@@ -1,11 +1,11 @@
 package com.redhat.coolstore.web.ui.components;
 
-import org.vaadin.viritin.fields.LabelField;
+import org.vaadin.viritin.v7.fields.LabelField;
 
 import com.redhat.coolstore.web.ui.converter.DoubleStringConverter;
 import com.vaadin.ui.Alignment;
-import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Label;
+import com.vaadin.v7.ui.HorizontalLayout;
+import com.vaadin.v7.ui.Label;
 import com.vaadin.ui.themes.ValoTheme;
 
 public class ShoppingCartLine extends HorizontalLayout {

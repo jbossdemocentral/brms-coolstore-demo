@@ -1,19 +1,18 @@
 package com.redhat.coolstore.web.ui;
 
-import javax.annotation.PostConstruct;
-import javax.inject.Inject;
-
-import org.vaadin.teemu.VaadinIcons;
-
 import com.redhat.coolstore.model.ShoppingCart;
 import com.vaadin.cdi.UIScoped;
+import com.vaadin.icons.VaadinIcons;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickListener;
-import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Label;
 import com.vaadin.ui.Panel;
-import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
+import com.vaadin.v7.ui.HorizontalLayout;
+import com.vaadin.v7.ui.Label;
+import com.vaadin.v7.ui.VerticalLayout;
+
+import javax.annotation.PostConstruct;
+import javax.inject.Inject;
 
 @UIScoped
 public abstract class AbstractView extends Panel implements ClickListener {
