@@ -11,7 +11,7 @@ import com.vaadin.ui.Embedded;
 import com.vaadin.ui.HorizontalSplitPanel;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.themes.ValoTheme;
-import com.vaadin.v7.ui.VerticalLayout;
+import com.vaadin.ui.VerticalLayout;
 
 import javax.inject.Inject;
 
@@ -37,8 +37,6 @@ public class CoolStoreApplication extends UI {
 		VerticalLayout vl = new VerticalLayout();
 		vl.setHeight("100%");
 		vl.setWidth("80em");
-		vl.setMargin(true);
-		vl.setSpacing(true);
 
 		vl.addComponent(logo);
 

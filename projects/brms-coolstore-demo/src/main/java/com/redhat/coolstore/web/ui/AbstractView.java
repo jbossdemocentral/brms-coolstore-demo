@@ -7,9 +7,9 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.themes.ValoTheme;
-import com.vaadin.v7.ui.HorizontalLayout;
-import com.vaadin.v7.ui.Label;
-import com.vaadin.v7.ui.VerticalLayout;
+import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Label;
+import com.vaadin.ui.VerticalLayout;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -35,8 +35,6 @@ public abstract class AbstractView extends Panel implements ClickListener {
 
 		setHeight("23em");
 		layout = new VerticalLayout();
-		layout.setMargin(true);
-		layout.setSpacing(true);
 
 		setContent(layout);
 	}
@@ -51,7 +49,7 @@ public abstract class AbstractView extends Panel implements ClickListener {
 
 		controllerLayout = new HorizontalLayout();
 		controllerLayout.addStyleName(ValoTheme.LAYOUT_HORIZONTAL_WRAPPING);
-		controllerLayout.setSpacing(true);
+		controllerLayout.setMargin(false);
 
 		createControllerButtons();
 
