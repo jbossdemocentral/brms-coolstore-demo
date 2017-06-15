@@ -376,7 +376,7 @@
 		<jboss.brms.version>6.3.0.GA-redhat-3</jboss.brms.version>
 
 		<!-- Define the version of Vaadin framework. -->
-		<vaadin.version>8.0.6</vaadin.version>
+		<vaadin.version>8.1-SNAPSHOT</vaadin.version>
 		<vaadin.plugin.version>8.0.6</vaadin.plugin.version>
 		<!-- If there are no local customisations, this can also be "fetch" or "cdn" -->
 		<vaadin.widgetset.mode>cdn</vaadin.widgetset.mode>
@@ -405,6 +405,13 @@
 		<repository>
    			<id>vaadin-addons</id>
    			<url>http://maven.vaadin.com/vaadin-addons</url>
+		</repository>
+		<repository>
+			<id>vaadin-snapshots</id>
+			<url>https://oss.sonatype.org/content/repositories/vaadin-snapshots/</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
 		</repository>
 	</repositories>
 
@@ -455,12 +462,7 @@
 		<!-- Vaadin libs -->
 		<dependency>
 			<groupId>com.vaadin</groupId>
-			<artifactId>vaadin-compatibility-server</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>com.vaadin</groupId>
-			<artifactId>vaadin-compatibility-themes</artifactId>
+			<artifactId>vaadin-server</artifactId>
 		</dependency>
 
 		<dependency>
@@ -470,7 +472,7 @@
 
 		<dependency>
 			<groupId>com.vaadin</groupId>
-			<artifactId>vaadin-compatibility-client</artifactId>
+			<artifactId>vaadin-client</artifactId>
 		</dependency>
 
 		<dependency>
