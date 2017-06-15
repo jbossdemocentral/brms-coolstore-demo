@@ -33,9 +33,9 @@ public class ProductsView extends AbstractView {
 
 	private Button uncheckAllButton = new Button();
 
-	private CheckBoxGroup<Product> options = new CheckBoxGroup();
+	private CheckBoxGroup<Product> options = new CheckBoxGroup<>();
 
-	private List<Product> prodcuts;
+	private List<Product> products;
 
 	/**
 	 * 
@@ -45,9 +45,9 @@ public class ProductsView extends AbstractView {
 	@Override
 	protected void createLayout(VerticalLayout layout) {
 
-		prodcuts = productService.getProducts();
+		products = productService.getProducts();
 
-		options.setItems(prodcuts);
+		options.setItems(products);
 		options.setItemCaptionGenerator(product -> product.getName() + " ("
 				+ Formatter.formatPrice(product.getPrice())
 				+ ")");
@@ -89,26 +89,25 @@ public class ProductsView extends AbstractView {
 
 	private void checkAllBoxes(boolean select) {
 		if (select) {
-			prodcuts.forEach(options::select);
+			products.forEach(options::select);
 		} else {
 			options.deselectAll();
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	private Set<Product> getSelectedProducts() {
-		return (Set<Product>) options.getValue();
+		return options.getValue();
 	}
 
 	private void updateControlButtons() {
-		@SuppressWarnings("unchecked")
+
 		int size = options.getValue().size();
 		if (size == 0) {
 			checkAllButton.setEnabled(true);
 			uncheckAllButton.setEnabled(false);
 
 			addToCartButton.setEnabled(false);
-		} else if (size == prodcuts.size()) {
+		} else if (size == products.size()) {
 			checkAllButton.setEnabled(false);
 			uncheckAllButton.setEnabled(true);
 
