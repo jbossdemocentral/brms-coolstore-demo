@@ -52,7 +52,7 @@ public class ShoppingCartView extends AbstractView {
 	@PropertyId("cartTotal")
 	private LabelField<String> cartTotalValue = new LabelField<String>();
 
-	private Binder<ShoppingCart> binder = new Binder<>();;
+	private Binder<ShoppingCart> binder = new Binder<>(ShoppingCart.class);
 
 	/**
 	 * 
@@ -62,8 +62,6 @@ public class ShoppingCartView extends AbstractView {
 	@Override
 	protected void createLayout(VerticalLayout layout) {
 
-		updateDatasource();
-
 		layout.addComponent(new ShoppingCartLine("Subtotal:", subtotalValue, binder));
 		layout.addComponent(new ShoppingCartLine("Promotion(s):",
 				cartPromoValue, binder, true));
@@ -71,6 +69,10 @@ public class ShoppingCartView extends AbstractView {
 		layout.addComponent(new ShoppingCartLine("Promotion(s):",
 				shippingPromoValue, binder, true));
 		layout.addComponent(new ShoppingCartLine("Cart Total:", cartTotalValue, binder));
+
+		binder.bindInstanceFields(this);
+
+		updateDatasource();
 	}
 
 	@Override
@@ -105,7 +107,7 @@ public class ShoppingCartView extends AbstractView {
 			checkoutButton.setEnabled(false);
 		}
 
-		binder.bindInstanceFields(this);
+		binder.setBean(sc);
 	}
 
 	public void updateShoppingCart(@Observes UpdateShopppingCartEvent event) {
