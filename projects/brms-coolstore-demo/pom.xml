@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.redhat</groupId>
 	<artifactId>brms-coolstore-demo</artifactId>
-	<version>3.0.0-SNAPSHOT</version>
+	<version>3.0.0-FINAL</version>
 	<packaging>war</packaging>
 	<name>Red Hat Cool Store</name>
 	<build>
@@ -376,8 +376,8 @@
 		<jboss.brms.version>6.3.0.GA-redhat-3</jboss.brms.version>
 
 		<!-- Define the version of Vaadin framework. -->
-		<vaadin.version>8.1-SNAPSHOT</vaadin.version>
-		<vaadin.plugin.version>8.0.6</vaadin.plugin.version>
+		<vaadin.version>8.1.0</vaadin.version>
+		<vaadin.plugin.version>8.1.0</vaadin.plugin.version>
 		<!-- If there are no local customisations, this can also be "fetch" or "cdn" -->
 		<vaadin.widgetset.mode>cdn</vaadin.widgetset.mode>
 
@@ -458,7 +458,6 @@
 			<scope>provided</scope>
 		</dependency>
 
-		
 		<!-- Vaadin libs -->
 		<dependency>
 			<groupId>com.vaadin</groupId>
@@ -473,6 +472,11 @@
 		<dependency>
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-client</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-cdi</artifactId>
 		</dependency>
 
 		<dependency>
@@ -495,11 +499,6 @@
 		</dependency>
 
 		<!--BRMS libs -->
-
-		<dependency>
-			<groupId>com.vaadin</groupId>
-			<artifactId>vaadin-cdi</artifactId>
-		</dependency>
 
 		<dependency>
 			<groupId>org.mvel</groupId>
