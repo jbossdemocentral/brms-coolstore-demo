@@ -1,16 +1,5 @@
 package com.redhat.coolstore.web.ui;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-
-import javax.enterprise.event.Observes;
-import javax.inject.Inject;
-
-import org.vaadin.dialogs.ConfirmDialog;
-import org.vaadin.teemu.VaadinIcons;
-import org.vaadin.viritin.fields.LabelField;
-
 import com.redhat.coolstore.model.Product;
 import com.redhat.coolstore.model.ShoppingCart;
 import com.redhat.coolstore.model.ShoppingCartItem;
@@ -18,9 +7,10 @@ import com.redhat.coolstore.service.ShoppingCartService;
 import com.redhat.coolstore.web.ui.components.CheckoutWindow;
 import com.redhat.coolstore.web.ui.components.ShoppingCartLine;
 import com.redhat.coolstore.web.ui.events.UpdateShopppingCartEvent;
+import com.vaadin.annotations.PropertyId;
 import com.vaadin.cdi.UIScoped;
-import com.vaadin.data.fieldgroup.BeanFieldGroup;
-import com.vaadin.data.fieldgroup.PropertyId;
+import com.vaadin.data.Binder;
+import com.vaadin.icons.VaadinIcons;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.UI;
@@ -28,6 +18,14 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window.CloseEvent;
 import com.vaadin.ui.Window.CloseListener;
 import com.vaadin.ui.themes.ValoTheme;
+import org.vaadin.dialogs.ConfirmDialog;
+import org.vaadin.viritin.fields.LabelField;
+
+import javax.enterprise.event.Observes;
+import javax.inject.Inject;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 @UIScoped
 public class ShoppingCartView extends AbstractView {
@@ -54,6 +52,8 @@ public class ShoppingCartView extends AbstractView {
 	@PropertyId("cartTotal")
 	private LabelField<String> cartTotalValue = new LabelField<String>();
 
+	private Binder<ShoppingCart> binder = new Binder<>(ShoppingCart.class);
+
 	/**
 	 * 
 	 */
@@ -62,16 +62,17 @@ public class ShoppingCartView extends AbstractView {
 	@Override
 	protected void createLayout(VerticalLayout layout) {
 
-		updateDatasource();
+		layout.addComponent(new ShoppingCartLine("Subtotal:", subtotalValue, binder));
+		layout.addComponent(new ShoppingCartLine("Promotion(s):",
+				cartPromoValue, binder, true));
+		layout.addComponent(new ShoppingCartLine("Shipping:", shippingValue, binder));
+		layout.addComponent(new ShoppingCartLine("Promotion(s):",
+				shippingPromoValue, binder, true));
+		layout.addComponent(new ShoppingCartLine("Cart Total:", cartTotalValue, binder));
 
-		layout.addComponent(new ShoppingCartLine("Subtotal:", subtotalValue));
-		layout.addComponent(new ShoppingCartLine("Promotion(s):",
-				cartPromoValue,
-				true));
-		layout.addComponent(new ShoppingCartLine("Shipping:", shippingValue));
-		layout.addComponent(new ShoppingCartLine("Promotion(s):",
-				shippingPromoValue, true));
-		layout.addComponent(new ShoppingCartLine("Cart Total:", cartTotalValue));
+		binder.bindInstanceFields(this);
+
+		updateDatasource();
 	}
 
 	@Override
@@ -106,7 +107,7 @@ public class ShoppingCartView extends AbstractView {
 			checkoutButton.setEnabled(false);
 		}
 
-		BeanFieldGroup.bindFieldsUnbuffered(sc, this);
+		binder.setBean(sc);
 	}
 
 	public void updateShoppingCart(@Observes UpdateShopppingCartEvent event) {

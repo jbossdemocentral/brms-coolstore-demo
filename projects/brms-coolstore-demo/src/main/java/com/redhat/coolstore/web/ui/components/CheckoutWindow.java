@@ -2,15 +2,11 @@ package com.redhat.coolstore.web.ui.components;
 
 import com.redhat.coolstore.model.ShoppingCart;
 import com.redhat.coolstore.model.ShoppingCartItem;
-import com.redhat.coolstore.web.ui.converter.StringPropertyValueGenerator;
 import com.redhat.coolstore.web.ui.util.Formatter;
-import com.vaadin.data.Item;
-import com.vaadin.data.util.BeanItemContainer;
-import com.vaadin.data.util.GeneratedPropertyContainer;
 import com.vaadin.ui.Grid;
-import com.vaadin.ui.Grid.FooterRow;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.Window;
+import com.vaadin.ui.components.grid.FooterRow;
 
 public class CheckoutWindow extends Window {
 
@@ -26,63 +22,14 @@ public class CheckoutWindow extends Window {
 
 	public CheckoutWindow(ShoppingCart shoppingCart) {
 
-		BeanItemContainer<ShoppingCartItem> container = new BeanItemContainer<ShoppingCartItem>(
-				ShoppingCartItem.class, shoppingCart.getShoppingCartItemList());
-		GeneratedPropertyContainer gContainer = new GeneratedPropertyContainer(
-				container);
-		gContainer.addGeneratedProperty(PROPERTY_PRODUCT_NAME,
-				new StringPropertyValueGenerator() {
-
-					/**
-					 * 
-					 */
-					private static final long serialVersionUID = 5244484082955210867L;
-
-					@Override
-					public String getValue(Item item, Object itemId,
-							Object propertyId) {
-						return ((ShoppingCartItem) itemId).getProduct()
-								.getName();
-					}
-				});
-		gContainer.addGeneratedProperty(PROPERTY_UNIT_PRICE,
-				new StringPropertyValueGenerator() {
-
-					/**
-					 * 
-					 */
-					private static final long serialVersionUID = 6259100641253129452L;
-
-					@Override
-					public String getValue(Item item, Object itemId,
-							Object propertyId) {
-						return Formatter
-								.formatPrice(((ShoppingCartItem) itemId)
-										.getProduct().getPrice());
-					}
-				});
-		gContainer.addGeneratedProperty(PROPERTY_PRODUCT_TOTAL,
-				new StringPropertyValueGenerator() {
-
-					/**
-					 * 
-					 */
-					private static final long serialVersionUID = 1033121306154164199L;
-
-					@Override
-					public String getValue(Item item, Object itemId,
-							Object propertyId) {
-						ShoppingCartItem scItem = (ShoppingCartItem) itemId;
-						return Formatter.formatPrice(scItem.getProduct()
-								.getPrice() * scItem.getQuantity());
-					}
-				});
-
-		Grid grid = new Grid(gContainer);
+		Grid<ShoppingCartItem> grid = new Grid<>();
+		grid.setItems(shoppingCart.getShoppingCartItemList());
+		grid.addColumn(item -> item.getProduct().getName()).setCaption("Product Name").setId(PROPERTY_PRODUCT_NAME);
+		grid.addColumn(item -> item.getProduct().getPrice()).setCaption("Unit Price").setId(PROPERTY_UNIT_PRICE);
+		grid.addColumn(ShoppingCartItem::getQuantity).setCaption("Quantity").setId(PROPERTY_QUANTITY);
+		grid.addColumn(item -> Formatter.formatPrice(item.getProduct().getPrice() * item.getQuantity()))
+				.setCaption("Product Total").setId(PROPERTY_PRODUCT_TOTAL);
 		grid.setSizeFull();
-
-		grid.setColumns(PROPERTY_PRODUCT_NAME, PROPERTY_UNIT_PRICE,
-				PROPERTY_QUANTITY, PROPERTY_PRODUCT_TOTAL);
 
 		FooterRow gridFooter = grid.appendFooterRow();
 		gridFooter.join(PROPERTY_PRODUCT_NAME, PROPERTY_UNIT_PRICE,
