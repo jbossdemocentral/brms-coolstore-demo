@@ -42,7 +42,12 @@ Option 1 - Install on your machine
 7. Open shopping cart and demo away (http://localhost:8080/brms-coolstore-demo)
 
 
-Option 2 - Run in Docker
+Option 2 - Install on OpenShift
+-------------------------------
+Running this demo in a container on any OpenShift Container Platform is [available at Red Hat Demo Central](https://github.com/redhatdemocentral/rhcs-coolstore-demo).
+
+
+Option 3 - Run in Docker
 -----------------------------------------
 The following steps can be used to configure and run the demo in a container
 
@@ -64,30 +69,6 @@ The following steps can be used to configure and run the demo in a container
 
 Additional information can be found in the jbossdemocentral container [developer repository](https://github.com/jbossdemocentral/docker-developer)
 
-
-Option 3 - Install with one click in xPaaS (brmsPaaS)
------------------------------------------------------
-After clicking button, ensure `Gear` size is set to `large`:
-
-[![Click to install OpenShift](http://launch-shifter.rhcloud.com/launch/light/Install brmsPaaS.svg)](https://openshift.redhat.com/app/console/application_type/custom?&cartridges[]=https://raw.githubusercontent.com/jbossdemocentral/cartridge-bpmPaaS-coolstore-demo/master/metadata/manifest.yml&name=coolstore&gear_profile=large&initial_git_url=)
-
-Once installed you can use the JBoss BRMS logins:
-
-   * u:erics  p: jbossbrms1!  (admin)
-
-   * u: alan  p: jbossbrms1!  (analyst)
-
-Current hosting of brmsPaaS is on JBoss BRMS 6.0.2 in OpenShift Online.
-
-
-Option 4 - Install on Red Hat CDK OpenShift Enterprise image
-------------------------------------------------------------
-The following steps can be used to install this demo on OpenShift Enterprise using the
-Red Hat Container Development Kit (CDK)
-
-1. [App Dev Cloud with JBoss Cool Store Demo](https://github.com/redhatdemocentral/rhcs-coolstore-demo)
-
-2. [App Dev Cloud with JBoss Cool Store Persistence Demo](https://github.com/redhatdemocentral/rhcs-coolstore-persistence-demo)
 
 
 Notes
